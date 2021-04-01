@@ -14,22 +14,22 @@ class RoutineRunPage extends StatefulWidget {
 class _RoutineRunPageState extends State<RoutineRunPage> {
   static List<MotionTime> motions = [
     MotionTime.fromMap({
-      "motionTime": 1,
+      "motionTime": 6,
       "motionUrl": "https://buddhayana2018504915002.files.wordpress.com/2018/11/417.jpg?w=500",
       "motionName": "산에서 명상"
     }),
     MotionTime.fromMap({
-      "motionTime": 2,
+      "motionTime": 4,
       "motionUrl": "https://t1.daumcdn.net/cfile/tistory/252D9B3F549283D10D",
       "motionName": "흑백에서 명상"
     }),
     MotionTime.fromMap({
-      "motionTime": 1,
+      "motionTime": 5,
       "motionUrl": "https://i.ytimg.com/vi/uPOarntFwCA/hqdefault.jpg",
       "motionName": "일어서서 명상"
     }),
     MotionTime.fromMap({
-      "motionTime": 2,
+      "motionTime": 7,
       "motionUrl": "https://t1.daumcdn.net/cfile/blog/223DA54A55AD1B9B39",
       "motionName": "나무 등지고 명상"
     })
@@ -145,23 +145,35 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 ),
               ),
             ),
-            Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                SizedBox(
-                  height: 0.06 * height,
-                  width: 0.6 * width,
-                  child: LinearProgressIndicator(
-                    value: 1 - currentTime/motions[currentPart - 1].motionTime,
+            GestureDetector(
+              onTap: (){
+                print("다음으로 넘어가기!");
+                timer.cancel();
+                setState(() {
+                  currentPart = currentPart < allPart? currentPart+1 : currentPart;
+                  currentTime = motions[currentPart - 1].motionTime;
+                  motionUrl = motions[currentPart - 1].motionUrl;
+                });
+                _motionTimer();
+              },
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  SizedBox(
+                    height: 0.06 * height,
+                    width: 0.6 * width,
+                    child: LinearProgressIndicator(
+                      value: 1 - currentTime/motions[currentPart - 1].motionTime,
+                    ),
                   ),
-                ),
-                Text(
-                  "다음으로 넘어가기",
-                  style: TextStyle(
-                      fontSize: 18,
+                  Text(
+                    "다음으로 넘어가기",
+                    style: TextStyle(
+                        fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
