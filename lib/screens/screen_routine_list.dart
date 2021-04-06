@@ -30,12 +30,24 @@ class RoutineListPage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    Text("Share your routine with people"),
                   ],
                 ),
                 color: Colors.lightBlue,
               ),
             ),
-            Text("ㅎㅎ"),
+            ListView.separated(
+                itemBuilder: (BuildContext context, int index){
+                  return ListTile(
+                    title: Text(index.toString()),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  if (index == 0) return SizedBox.shrink();
+                  return const Divider();
+                },
+                itemCount: 2,
+            )
           ],
         ),
       ),
