@@ -20,17 +20,32 @@ class RoutineListPage extends StatelessWidget {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    Icon(Icons.keyboard_backspace),
+                    Icon(
+                      Icons.keyboard_backspace,
+                      color: Colors.white,
+                    ),
                     Row(
                       children: <Widget>[
-                        Text("Routine"),
+                        Text(
+                          "Routine",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 0.08 * width
+                          ),
+                        ),
                         ElevatedButton(
                             onPressed: () => print("누름"),
                             child: Text("내 루틴 등록하기")
                         ),
                       ],
                     ),
-                    Text("Share your routine with people"),
+                    Text(
+                      "Share your routine with people",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 0.04 * width
+                      ),
+                    ),
                   ],
                 ),
                 color: Colors.lightBlue,
