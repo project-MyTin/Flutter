@@ -12,32 +12,39 @@ class RoutineRunPage extends StatefulWidget {
 }
 
 class _RoutineRunPageState extends State<RoutineRunPage> {
+
+  // 더미 데이터
   static List<MotionTime> motions = [
     MotionTime.fromMap({
-      "motionTime": 6,
+      "motionTime": 2,
       "motionUrl": "https://buddhayana2018504915002.files.wordpress.com/2018/11/417.jpg?w=500",
-      "motionName": "산에서 명상"
+      "motionName": "산에서 명상",
+      "motionCount": 3
     }),
     MotionTime.fromMap({
       "motionTime": 4,
       "motionUrl": "https://t1.daumcdn.net/cfile/tistory/252D9B3F549283D10D",
-      "motionName": "흑백에서 명상"
+      "motionName": "흑백에서 명상",
+      "motionCount": 2
     }),
     MotionTime.fromMap({
-      "motionTime": 5,
+      "motionTime": 3,
       "motionUrl": "https://i.ytimg.com/vi/uPOarntFwCA/hqdefault.jpg",
-      "motionName": "일어서서 명상"
+      "motionName": "일어서서 명상",
+      "motionCount": 2
     }),
     MotionTime.fromMap({
-      "motionTime": 7,
+      "motionTime": 3,
       "motionUrl": "https://t1.daumcdn.net/cfile/blog/223DA54A55AD1B9B39",
-      "motionName": "나무 등지고 명상"
+      "motionName": "나무 등지고 명상",
+      "motionCount": 3
     })
   ];
-  int currentPart = 1,
-      allPart = motions.length,
-      currentTime = motions[0].motionTime;
-  String motionUrl = "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F99EF554E5AEE774505";
+
+  int currentPart = 1;
+  int allPart = motions.length;
+  int currentTime = motions[0].motionTime * motions[0].motionCount;
+  String motionUrl = "https://www.korea.kr/newsWeb/resources/attaches/namo/2010.10/26/8216/PYH2010101603890001300.jpg";
   Timer timer;
 
   void _motionTimer() {
@@ -54,7 +61,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           currentPart++;
         }
         setState(() {
-          currentTime = motions[currentPart - 1].motionTime;
+          currentTime = motions[currentPart - 1].motionTime * motions[currentPart - 1].motionCount;
           motionUrl = motions[currentPart - 1].motionUrl;
         });
       }else {
