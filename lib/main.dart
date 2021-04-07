@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mytin/screens/screen_routine_list.dart';
 import 'package:mytin/screens/screen_routine_run.dart';
 
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RoutineRunPage(),
+      // home: RoutineRunPage(),
+      home: RoutineListPage(),
     );
   }
 }
