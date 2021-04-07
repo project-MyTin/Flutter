@@ -170,7 +170,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     height: 0.06 * height,
                     width: 0.6 * width,
                     child: LinearProgressIndicator(
-                      value: 1 - currentTime/motions[currentPart - 1].motionTime,
+                      value: 1 - currentTime
+                          / (motions[currentPart - 1].motionTime * motions[currentPart - 1].motionCount),
                     ),
                   ),
                   Text(
