@@ -136,23 +136,45 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    child: Image.network(motionUrl),
                     alignment: Alignment.topCenter,
+                    child: Image.network(motionUrl),
                   ),
-                  Container(
-                    child: CircularProgressIndicator(
-                      value:  1 - currentTime
-                          / (motions[currentPart - 1].motionTime * motions[currentPart - 1].motionCount),
-                      strokeWidth: 16,
-                    ),
-                    width: 0.4 * width,
-                    height: 0.4 * width,
+                  Align(
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white
+                    child: Container(
+                      child: SizedBox(
+                        child: CircularProgressIndicator(
+                          value:  1 - currentTime
+                              / (motions[currentPart - 1].motionTime * motions[currentPart - 1].motionCount),
+                          strokeWidth: 16,
+                        ),
+                        width: 0.4 * width,
+                        height: 0.4 * width,
+                      ),
+                      width: 0.4 * width,
+                      height: 0.4 * width,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white
+                      ),
                     ),
-                  )
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                            "time",
+                          style: TextStyle(
+                          ),
+                        ),
+                        Text(
+                            currentTime.toString()
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
               width: width,
