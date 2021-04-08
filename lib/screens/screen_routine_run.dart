@@ -92,33 +92,39 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0.005 * width, 0.005 * height, 0.07 * height),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: ElevatedButton(
-                  onPressed: () => print("페이지 나가기 함수"),
-                  child: Text(
-                    '루틴 종료하기',
-                    style: TextStyle(
-                        fontSize: 0.035 * width,
-                        color: Colors.black
-                    ),
-                  ),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed))
-                          return Colors.lightBlue;
-                        return Colors.white;
-                      },
-                    ),
-                  ),
-                ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(0.07 * height),
+          child: AppBar(
+            title: Text(
+              motions[currentPart - 1].motionName,
+              style: TextStyle(
+                fontSize: 0.024 * height,
+                color: Colors.white
               ),
             ),
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(0.014 * height),
+                child: TextButton(
+                  onPressed: () => print("종료하기"),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0.03 * width, 0, 0.03 * width, 0),
+                    child: Text(
+                      "종료하기",
+                      style: TextStyle(
+                        fontSize: 0.015 * height,
+                        color: Colors.white
+                      ),
+                    ),
+                  ),
+
+                ),
+              ),
+            ],
+          ),
+        ),
+        body: Column(
+          children: <Widget>[
             Container(
               child: Text(
                 '$currentPart번째 동작 / 총 $allPart개',
