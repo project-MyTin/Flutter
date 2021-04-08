@@ -34,7 +34,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     }),
     MotionTime.fromMap({
       "motionTime": 3,
-      "motionUrl": "https://t1.daumcdn.net/cfile/blog/223DA54A55AD1B9B39",
+      "motionUrl": "https://www.sglba.org.au/wp-content/uploads/2017/05/PLACEHOLDER-Blog-600-x700-pixels.png",
       "motionName": "나무 등지고 명상",
       "motionCount": 3
     })
@@ -107,15 +107,11 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 padding: EdgeInsets.all(0.014 * height),
                 child: TextButton(
                   onPressed: () => print("종료하기"),
-                  child: Padding(
-                    padding:
-                    EdgeInsets.fromLTRB(0.03 * width, 0, 0.03 * width, 0),
-                    child: Text(
-                      "종료하기",
-                      style: TextStyle(
-                          fontSize: 0.015 * height, color: Colors.white),
+                  child: Text(
+                    "   종료하기    ",
+                    style: TextStyle(
+                        fontSize: 0.015 * height, color: Colors.white),
                     ),
-                  ),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.resolveWith((states) {
                       return RoundedRectangleBorder(
@@ -137,6 +133,9 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                   Container(
                     alignment: Alignment.topCenter,
                     child: Image.network(motionUrl),
+                    // width: width,
+                    // height: width * 66/60,
+                    // color: Colors.blueGrey,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -165,16 +164,30 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                       children: <Widget>[
                         Text(
                           "time",
-                          style: TextStyle(),
+                          style: TextStyle(
+                            fontSize: 0.024 * height
+                          ),
                         ),
-                        Text(currentTime.toString()),
+                        Text(
+                          currentTime.toString(),
+                          style: TextStyle(
+                            fontSize: 0.06 * height,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        SizedBox(
+                          height: 0.1 * width,
+                        )
                       ],
                     ),
                   ),
                 ],
               ),
               width: width,
-              height: 0.5 * height,
+              height: 0.64 * height,
+            ),
+            SizedBox(
+              height: 0.03 * height,
             ),
             Text(
               motions[currentPart - 1].motionName,
