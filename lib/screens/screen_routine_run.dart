@@ -132,20 +132,31 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
         ),
         body: Column(
           children: <Widget>[
-            Container(
-              child: Text(
-                '$currentPart번째 동작 / 총 $allPart개',
-                style: TextStyle(
-                  fontSize: 0.06 * width,
-                  fontWeight: FontWeight.bold,
-                ),
+            SizedBox(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    child: Image.network(motionUrl),
+                    alignment: Alignment.topCenter,
+                  ),
+                  Container(
+                    child: CircularProgressIndicator(
+                      value:  1 - currentTime
+                          / (motions[currentPart - 1].motionTime * motions[currentPart - 1].motionCount),
+                      strokeWidth: 16,
+                    ),
+                    width: 0.4 * width,
+                    height: 0.4 * width,
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white
+                    ),
+                  )
+                ],
               ),
-              padding: EdgeInsets.fromLTRB(0, 0 * height, 0, 0.02 * height),
-            ),
-            Container(
-              child: Image.network(motionUrl),
-              width: 0.95 * width,
-              height: 0.35 * height,
+              width: width,
+              height: 0.5 * height,
             ),
             Container(
               child: Text(
@@ -195,6 +206,10 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                   ),
                 ],
               ),
+            ),
+            Container(
+              child: Text(currentPart.toString() + '/' + allPart.toString()),
+              alignment: Alignment.center,
             ),
           ],
         ),
