@@ -117,7 +117,14 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                       ),
                     ),
                   ),
-
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.resolveWith((states) {
+                      return RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(color: Colors.white),
+                      );
+                    }),
+                  ),
                 ),
               ),
             ],
