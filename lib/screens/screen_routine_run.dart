@@ -16,7 +16,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     MotionTime.fromMap({
       "motionTime": 2,
       "motionUrl":
-      "https://buddhayana2018504915002.files.wordpress.com/2018/11/417.jpg?w=500",
+          "https://buddhayana2018504915002.files.wordpress.com/2018/11/417.jpg?w=500",
       "motionName": "산에서 명상",
       "motionCount": 3
     }),
@@ -34,7 +34,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     }),
     MotionTime.fromMap({
       "motionTime": 3,
-      "motionUrl": "https://www.sglba.org.au/wp-content/uploads/2017/05/PLACEHOLDER-Blog-600-x700-pixels.png",
+      "motionUrl":
+          "https://www.sglba.org.au/wp-content/uploads/2017/05/PLACEHOLDER-Blog-600-x700-pixels.png",
       "motionName": "나무 등지고 명상",
       "motionCount": 3
     })
@@ -87,11 +88,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery
-        .of(context)
-        .size;
-    double width = screenSize.width,
-        height = screenSize.height;
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width, height = screenSize.height;
 
     return SafeArea(
       child: Scaffold(
@@ -111,7 +109,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     "   종료하기    ",
                     style: TextStyle(
                         fontSize: 0.015 * height, color: Colors.white),
-                    ),
+                  ),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.resolveWith((states) {
                       return RoundedRectangleBorder(
@@ -164,16 +162,14 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                       children: <Widget>[
                         Text(
                           "time",
-                          style: TextStyle(
-                            fontSize: 0.024 * height
-                          ),
+                          style: TextStyle(fontSize: 0.024 * height),
                         ),
                         Text(
                           currentTime.toString(),
                           style: TextStyle(
-                            fontSize: 0.06 * height,
-                            fontWeight: FontWeight.bold
-                          ),
+                              fontSize: 0.06 * height,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 100, 100, 100)),
                         ),
                         SizedBox(
                           height: 0.1 * width,
@@ -195,7 +191,9 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
             ),
             Text(
               motions[currentPart - 1].motionCount.toString() + "회",
-              style: TextStyle(fontSize: 0.05 * width),
+              style: TextStyle(
+                  fontSize: 0.05 * width,
+                  color: Color.fromARGB(255, 100, 100, 100)),
             ),
           ],
         ),
@@ -203,15 +201,15 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           color: Colors.grey,
           child: Row(
             children: <Widget>[
-              Spacer(flex: 39),
+              Spacer(flex: 4),
               Text(
                 currentPart.toString() + "/" + allPart.toString(),
                 textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 0.023 * height),
               ),
-              Spacer(flex: 30),
+              Spacer(flex: 3),
               IconButton(
-                onPressed: () =>
-                    print("넘어가보자 가다가 힘들면 쉬었다 가더라도 손잡고 가보자 같이 가보자"),
+                onPressed: () => print("넘어가보자 가다가 힘들면 쉬었다 가더라도 손잡고 가보자 같이 가보자"),
                 icon: Icon(
                   Icons.arrow_forward_ios_outlined,
                   size: 0.06 * width,
