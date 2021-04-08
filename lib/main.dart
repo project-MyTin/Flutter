@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: '마이틴 데모',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      // home: RoutineRunPage(),
-      home: RoutineListPage(),
+      home: RoutineRunPage(),
+      // home: RoutineListPage(),
     );
   }
 }
