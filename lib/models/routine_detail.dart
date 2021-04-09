@@ -6,7 +6,7 @@ enum Difficulty {
   easy, medium, hard
 }
 
-class Routine {
+class RoutineDetail {
   int id;  // 루틴 아이디
   String name; // 루틴 이름
   String description;  // 루틴 설명
@@ -17,7 +17,7 @@ class Routine {
   Authority authority;  // 루틴 권한
   Difficulty difficulty; // 루틴 난이도
   String type; // 루틴 유형
-  DateTime createdTime;  // 생성 시간
-  DateTime updatedTime;  // 수정 시간
+  // DateTime createdTime;  // 생성 시간
+  // DateTime updatedTime;  // 수정 시간
   String imageUrl;  // 루틴 이미지 링크
 }
