@@ -113,27 +113,31 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 buildRoutineRunBottomAppBar(height, width),
               ],
             ),
-            Container(
-              color: Color.fromARGB(isBreakTime ? 230 : 0, 40, 40, 40),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Break Time",
-                      style: TextStyle(
-                          fontSize: 0.06 * width,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            buildBreakTimeBody(width),
           ],
         ),
       ),
     );
+  }
+
+  Container buildBreakTimeBody(double width) {
+    return Container(
+            color: Color.fromARGB(isBreakTime ? 230 : 0, 40, 40, 40),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Break Time",
+                    style: TextStyle(
+                        fontSize: 0.06 * width,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
+                  ),
+                ],
+              ),
+            ),
+          );
   }
 
   Container buildRoutineRunBottomAppBar(double height, double width) {
