@@ -43,7 +43,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           // 휴식 시간은 안 끝난 경우
           setState(() {
             isBreakTime = true;
-            print(currentBreakTime--);
+            // print(currentBreakTime--);
           });
         }
       } else {
@@ -85,9 +85,6 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                       Container(
                         alignment: Alignment.topCenter,
                         child: Image.network(motionUrl),
-                        // width: width,
-                        // height: width * 66/60,
-                        // color: Colors.blueGrey,
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -113,31 +110,75 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 buildRoutineRunBottomAppBar(height, width),
               ],
             ),
-            buildBreakTimeBody(width),
+            buildBreakTimeBody(isBreakTime, height, width),
           ],
         ),
       ),
     );
   }
 
-  Container buildBreakTimeBody(double width) {
-    return Container(
-            color: Color.fromARGB(isBreakTime ? 230 : 0, 40, 40, 40),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Break Time",
-                    style: TextStyle(
-                        fontSize: 0.06 * width,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
-                  ),
-                ],
+  Container buildBreakTimeBody(bool isBreakTime, double height, double width) {
+    if (isBreakTime) {
+      return Container(
+        color: Color.fromARGB(230, 40, 40, 40),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Break Time",
+                style: TextStyle(
+                    fontSize: 0.06 * width,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
               ),
-            ),
-          );
+              Container(
+                child: Stack(
+                  children: [
+                    SizedBox(
+                      child: CircularProgressIndicator(
+                        value: 1 -
+                            currentTime /
+                                (motions[currentPart - 1].motionTime *
+                                    motions[currentPart - 1].motionCount),
+                        strokeWidth: 18,
+                      ),
+                      width: 0.4 * width,
+                      height: 0.4 * width,
+                    ),
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "time",
+                            style: TextStyle(
+                                fontSize: 0.024 * height, color: Colors.white),
+                          ),
+                          Text(
+                            currentTime.toString(),
+                            style: TextStyle(
+                              fontSize: 0.06 * height,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                width: 0.4 * width,
+                height: 0.4 * width,
+                decoration: BoxDecoration(shape: BoxShape.circle),
+              ),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 
   Container buildRoutineRunBottomAppBar(double height, double width) {
@@ -175,7 +216,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                   currentTime /
                       (motions[currentPart - 1].motionTime *
                           motions[currentPart - 1].motionCount),
-              strokeWidth: 16,
+              strokeWidth: 18,
             ),
             width: 0.4 * width,
             height: 0.4 * width,
