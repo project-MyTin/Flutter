@@ -14,7 +14,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
   int currentPart = 1;
   int allPart = motions.length;
   int currentTime = motions[0].motionTime * motions[0].motionCount;
-  int breakTime = 10;
+  int breakTime = 10 + 1;
   int currentBreakTime = 10;
   bool isBreakTime = false;
   String motionUrl =
@@ -43,7 +43,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           // 휴식 시간은 안 끝난 경우
           setState(() {
             isBreakTime = true;
-            // print(currentBreakTime--);
+            print(currentBreakTime--);
           });
         }
       } else {
@@ -120,7 +120,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
   Container buildBreakTimeBody(bool isBreakTime, double height, double width) {
     if (isBreakTime) {
       return Container(
-        color: Color.fromARGB(230, 40, 40, 40),
+        color: Color.fromARGB(240, 40, 40, 40),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -132,15 +132,13 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     fontWeight: FontWeight.bold,
                     color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
               ),
+              SizedBox(height: 0.04 * height),
               Container(
                 child: Stack(
                   children: [
                     SizedBox(
                       child: CircularProgressIndicator(
-                        value: 1 -
-                            currentTime /
-                                (motions[currentPart - 1].motionTime *
-                                    motions[currentPart - 1].motionCount),
+                        value: 1 - currentBreakTime / breakTime,
                         strokeWidth: 18,
                       ),
                       width: 0.4 * width,
@@ -156,7 +154,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                                 fontSize: 0.024 * height, color: Colors.white),
                           ),
                           Text(
-                            currentTime.toString(),
+                            currentBreakTime.toString(),
                             style: TextStyle(
                               fontSize: 0.06 * height,
                               fontWeight: FontWeight.bold,
