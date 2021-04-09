@@ -88,7 +88,14 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
-                        child: buildTimeProgressIndicator(width, height),
+                        child: buildTimeProgressIndicator(
+                            width,
+                            height,
+                            currentTime,
+                            (motions[currentPart - 1].motionTime *
+                                motions[currentPart - 1].motionCount),
+                            Color.fromARGB(255, 100, 100, 100),
+                            Colors.white),
                       ),
                     ],
                   ),
@@ -133,43 +140,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
               ),
               SizedBox(height: 0.04 * height),
-              Container(
-                child: Stack(
-                  children: [
-                    SizedBox(
-                      child: CircularProgressIndicator(
-                        value: 1 - currentBreakTime / breakTime,
-                        strokeWidth: 18,
-                      ),
-                      width: 0.4 * width,
-                      height: 0.4 * width,
-                    ),
-                    Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "time",
-                            style: TextStyle(
-                                fontSize: 0.024 * height, color: Colors.white),
-                          ),
-                          Text(
-                            currentBreakTime.toString(),
-                            style: TextStyle(
-                              fontSize: 0.06 * height,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                width: 0.4 * width,
-                height: 0.4 * width,
-                decoration: BoxDecoration(shape: BoxShape.circle),
-              ),
+              buildTimeProgressIndicator(width, height, currentBreakTime,
+                  breakTime, Colors.white, Color.fromARGB(255, 40, 40, 40)),
             ],
           ),
         ),
@@ -204,16 +176,14 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  Container buildTimeProgressIndicator(double width, double height) {
+  Container buildTimeProgressIndicator(double width, double height,
+      int currentTime, int allTime, Color textColor, Color backgroundColor) {
     return Container(
       child: Stack(
         children: [
           SizedBox(
             child: CircularProgressIndicator(
-              value: 1 -
-                  currentTime /
-                      (motions[currentPart - 1].motionTime *
-                          motions[currentPart - 1].motionCount),
+              value: 1 - currentTime / allTime,
               strokeWidth: 18,
             ),
             width: 0.4 * width,
@@ -225,14 +195,15 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
               children: <Widget>[
                 Text(
                   "time",
-                  style: TextStyle(fontSize: 0.024 * height),
+                  style: TextStyle(fontSize: 0.024 * height, color: textColor),
                 ),
                 Text(
                   currentTime.toString(),
                   style: TextStyle(
-                      fontSize: 0.06 * height,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 100, 100, 100)),
+                    fontSize: 0.06 * height,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
                 ),
               ],
             ),
@@ -241,7 +212,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
       ),
       width: 0.4 * width,
       height: 0.4 * width,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
     );
   }
 
