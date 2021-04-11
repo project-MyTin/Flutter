@@ -3,9 +3,16 @@ enum Authority { admin, user }
 enum Difficulty { easy, medium, hard }
 
 class MotionElement {
-  String name;  // 동작 이름
-  String part;  // 동작 부위
-  int count;  // 동작 횟수
+  String name; // 동작 이름
+  String part; // 동작 부위
+  int count; // 동작 횟수
+
+  MotionElement(this.name, this.part, this.count);
+
+  MotionElement.fromMap(Map<String, dynamic> map)
+      : name = map['name'],
+        part = map['part'],
+        count = map['count'];
 }
 
 class RoutineDetail {
@@ -13,7 +20,7 @@ class RoutineDetail {
   String name; // 루틴 이름
   String description; // 루틴 설명
   String publisher; // 작성자
-  String materials; // 준비물
+  List<String> materials; // 준비물
   List<MotionElement> motions; // 동작 간단한 정보 리스트
   int time; // 총 소요 시간
   Authority authority; // 루틴 권한
