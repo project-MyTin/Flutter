@@ -1,7 +1,5 @@
 enum Authority { admin, user }
 
-enum Difficulty { easy, medium, hard }
-
 class MotionElement {
   String name; // 동작 이름
   String part; // 동작 부위
@@ -24,7 +22,7 @@ class RoutineDetail {
   List<MotionElement> motions; // 동작 간단한 정보 리스트
   int time; // 총 소요 시간
   Authority authority; // 루틴 권한
-  Difficulty difficulty; // 루틴 난이도
+  String difficulty; // 루틴 난이도
   String type; // 루틴 유형
   // DateTime createdTime;  // 생성 시간
   // DateTime updatedTime;  // 수정 시간

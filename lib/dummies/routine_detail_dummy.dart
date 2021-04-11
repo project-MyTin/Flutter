@@ -32,7 +32,7 @@ RoutineDetail routine = RoutineDetail.fromMap({
   ],
   "time": 108,
   "authority": Authority.admin,
-  "difficulty": Difficulty.medium,
+  "difficulty": "상",
   "type": "홈트레이닝",
   "imageUrl": "",
 });
