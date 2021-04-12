@@ -147,16 +147,23 @@ class MotionTile extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
 
-    return ListTile(
-      leading: Image.network(
-        motion.imageUrl,
-        fit: BoxFit.cover,
-        width: 0.12 * width,
-        height: 0.12 * width,
+    return Container(
+      margin: EdgeInsets.all(0.005 * height),
+      decoration: BoxDecoration(
+          border:
+          Border.all(color: Color.fromARGB(255, 220, 220, 220)),
+          borderRadius: BorderRadius.all(Radius.circular(15))),
+      child: ListTile(
+        leading: Image.network(
+          motion.imageUrl,
+          fit: BoxFit.cover,
+          width: 0.12 * width,
+          height: 0.12 * width,
+        ),
+        title: Text(motion.name),
+        subtitle: Text(motion.part),
+        trailing: Text(motion.count.toString() + "회"),
       ),
-      title: Text(motion.name),
-      subtitle: Text(motion.part),
-      trailing: Text(motion.count.toString() + "회"),
     );
   }
 }
