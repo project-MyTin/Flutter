@@ -52,21 +52,7 @@ class RoutineDetailPage extends StatelessWidget {
                   // TODO : 준비물에서 넘치는 글자 해결해주기!
                 ],
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Color.fromARGB(255, 200, 200, 200)),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                height: 0.2 * height,
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    for (MotionElement motion in routine.motions)
-                      MotionTile(motion) // 위젯에서 반복문 쓰기!
-                  ],
-                ),
-              ),
+              buildMotionList(height),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -89,6 +75,24 @@ class RoutineDetailPage extends StatelessWidget {
       ),
       bottomNavigationBar: buildRoutineDetailBottomBar(),
     ));
+  }
+
+  Container buildMotionList(double height) {
+    return Container(
+              margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+              decoration: BoxDecoration(
+                  border:
+                      Border.all(color: Color.fromARGB(255, 200, 200, 200)),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              height: 0.2 * height,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  for (MotionElement motion in routine.motions)
+                    MotionTile(motion) // 위젯에서 반복문 쓰기!
+                ],
+              ),
+            );
   }
 
   Container buildRoutineDetailBottomBar() {
