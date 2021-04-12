@@ -11,7 +11,8 @@ class MotionElement {
   MotionElement.fromMap(Map<String, dynamic> map)
       : name = map['name'],
         part = map['part'],
-        count = map['count'];
+        count = map['count'],
+        imageUrl = map['imageUrl'];
 }
 
 class RoutineDetail {

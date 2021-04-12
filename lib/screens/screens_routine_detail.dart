@@ -51,8 +51,16 @@ class RoutineDetailPage extends StatelessWidget {
                   // TODO : 준비물에서 넘치는 글자 해결해주기!
                 ],
               ),
-              // ListView(
-              // ),
+              Container(
+                decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+                height: 0.2 * height,
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    for(MotionElement motion in routine.motions) MotionTile(motion)   // 위젯에서 반복문 쓰기!
+                  ],
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,22 +95,26 @@ class RoutineDetailPage extends StatelessWidget {
         ),
         onPressed: () => print("시작좀 하자!"),
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith((Set states) => Colors.grey)
-        ),
+            backgroundColor:
+                MaterialStateProperty.resolveWith((Set states) => Colors.grey)),
       ),
     );
   }
 
   AppBar buildRoutineDetailAppBar() {
     return AppBar(
-      title: Text(routine.name),
+      title: Text(routine.name, style: TextStyle(color: Colors.white)),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_outlined),
+        icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
         onPressed: () => print("나 나갈래!"),
       ),
       actions: [
-        IconButton(icon: Icon(Icons.delete), onPressed: () => print("지울래!")),
-        IconButton(icon: Icon(Icons.edit), onPressed: () => print("수정할래!"))
+        IconButton(
+            icon: Icon(Icons.delete, color: Colors.white),
+            onPressed: () => print("지울래!")),
+        IconButton(
+            icon: Icon(Icons.edit, color: Colors.white),
+            onPressed: () => print("수정할래!"))
       ],
     );
   }
@@ -111,6 +123,30 @@ class RoutineDetailPage extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(color: textColor, fontSize: size),
+    );
+  }
+}
+
+class MotionTile extends StatelessWidget {
+  MotionTile(this.motion);
+
+  final MotionElement motion;
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width, height = screenSize.height;
+
+    return ListTile(
+      leading: Image.network(
+        motion.imageUrl,
+        fit: BoxFit.cover,
+        width: 0.12 * width,
+        height: 0.12 * width,
+      ),
+      title: Text(motion.name),
+      subtitle: Text(motion.part),
+      trailing: Text(motion.count.toString() + "회"),
     );
   }
 }
