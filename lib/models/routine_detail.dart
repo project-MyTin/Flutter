@@ -4,6 +4,7 @@ class MotionElement {
   String name; // 동작 이름
   String part; // 동작 부위
   int count; // 동작 횟수
+  String imageUrl;  // 동작 이미지
 
   MotionElement(this.name, this.part, this.count);
 

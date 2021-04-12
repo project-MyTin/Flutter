@@ -27,7 +27,11 @@ class RoutineDetailPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.network(routine.imageUrl),
+              Container(
+                child: Image.network(routine.imageUrl, fit: BoxFit.cover),
+                height: 0.2 * height,
+                width: 1 * width,
+              ),
               buildTextWithStyle(routine.publisher, Colors.grey, 0.02 * height),
               buildTextWithStyle(routine.name, Colors.black, 0.04 * height),
               buildTextWithStyle("루틴 난이도 : " + routine.difficulty, Colors.black,
@@ -35,8 +39,12 @@ class RoutineDetailPage extends StatelessWidget {
               Padding(
                 padding:
                     EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
-                child: buildTextWithStyle(
-                    routine.description, Colors.grey, 0.02 * height),
+                child: Text(
+                  routine.description,
+                  style: TextStyle(color: Colors.grey, fontSize: 0.018 * height),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Row(
                 children: [
@@ -45,7 +53,7 @@ class RoutineDetailPage extends StatelessWidget {
                       0.018 * height),
                   SizedBox(width: 0.05 * width),
                   buildTextWithStyle(
-                      "준비물 : " + routine.materials[0].toString() + "등",
+                      "준비물 : " + routine.materials[0].toString() + " 등",
                       Colors.grey,
                       0.018 * height),
                   // TODO : 준비물에서 넘치는 글자 해결해주기!
@@ -58,11 +66,15 @@ class RoutineDetailPage extends StatelessWidget {
                 children: [
                   buildTextWithStyle(
                       "루틴 유형 : " + routine.type, Colors.black, 0.018 * height),
-                  buildTextWithStyle(
-                      (routine.authority == Authority.admin ? "공식" : "비공식") +
-                          "루틴",
-                      Colors.grey,
-                      0.018 * height)
+                  Row(
+                    children: [
+                      buildTextWithStyle(
+                          (routine.authority == Authority.admin ? "공식" : "비공식"),
+                          Colors.blue,
+                          0.018 * height),
+                      buildTextWithStyle(" 루틴", Colors.grey, 0.018 * height)
+                    ],
+                  ),
                 ],
               )
             ],
@@ -72,7 +84,10 @@ class RoutineDetailPage extends StatelessWidget {
       bottomNavigationBar: Container(
         color: Colors.grey,
         child: TextButton(
-          child: Text("시작하기", style: TextStyle(color: Colors.white),),
+          child: Text(
+            "시작하기",
+            style: TextStyle(color: Colors.white),
+          ),
           onPressed: () => print("시작좀 하자!"),
           // style: ButtonStyle(
           //   backgroundColor: MaterialStateProperty.resolveWith((Set states) => Colors.grey)
