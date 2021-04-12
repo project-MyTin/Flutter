@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_detail.dart';
@@ -40,24 +41,29 @@ class RoutineDetailPage extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Icon(Icons.access_time),
+                  Icon(Icons.access_time, size: 0.016 * height),
                   buildTextWithStyle(routine.time.toString() + "분", Colors.grey,
-                      0.018 * height),
+                      0.016 * height),
                   SizedBox(width: 0.05 * width),
                   buildTextWithStyle(
                       "준비물 : " + routine.materials[0].toString() + " 등",
                       Colors.grey,
-                      0.018 * height),
+                      0.016 * height),
                   // TODO : 준비물에서 넘치는 글자 해결해주기!
                 ],
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+                margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+                decoration: BoxDecoration(
+                    border:
+                        Border.all(color: Color.fromARGB(255, 200, 200, 200)),
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
                 height: 0.2 * height,
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    for(MotionElement motion in routine.motions) MotionTile(motion)   // 위젯에서 반복문 쓰기!
+                    for (MotionElement motion in routine.motions)
+                      MotionTile(motion) // 위젯에서 반복문 쓰기!
                   ],
                 ),
               ),
@@ -65,14 +71,14 @@ class RoutineDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildTextWithStyle(
-                      "루틴 유형 : " + routine.type, Colors.black, 0.018 * height),
+                      "루틴 유형 : " + routine.type, Colors.black, 0.016 * height),
                   Row(
                     children: [
                       buildTextWithStyle(
                           (routine.authority == Authority.admin ? "공식" : "비공식"),
                           Colors.blue,
-                          0.018 * height),
-                      buildTextWithStyle(" 루틴", Colors.grey, 0.018 * height)
+                          0.016 * height),
+                      buildTextWithStyle(" 루틴", Colors.grey, 0.016 * height)
                     ],
                   ),
                 ],

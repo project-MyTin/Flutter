@@ -18,10 +18,15 @@ RoutineDetail routine = RoutineDetail.fromMap({
     MotionElement.fromMap({
       "name": "구글링 하기",
       "part": "눈",
-      "count": 10,
+      "count": 15,
       "imageUrl": "https://user-images.githubusercontent.com/48408417/114371626-a7b86000-9bbb-11eb-81e8-ef8b717798a3.png"
     }),
-
+    MotionElement.fromMap({
+      "name": "기도 하기",
+      "part": "손",
+      "count": 99,
+      "imageUrl": "https://www.light-of-truth.org/wp-content/uploads/2018/09/%E1%84%8B%E1%85%AB-%E1%84%8C%E1%85%A6-%E1%84%80%E1%85%B5%E1%84%83%E1%85%A9%E1%84%82%E1%85%B3%E1%86%AB-%E1%84%8C%E1%85%AE%E1%84%82%E1%85%B5%E1%86%B7%E1%84%8B%E1%85%B4-%E1%84%8B%E1%85%B3%E1%86%BC%E1%84%83%E1%85%A1%E1%86%B8%E1%84%8B%E1%85%B3%E1%86%AF-%E1%84%87%E1%85%A1%E1%86%AE%E1%84%8C%E1%85%B5-%E1%84%86%E1%85%A9%E1%86%BA%E1%84%92%E1%85%A1%E1%86%AF%E1%84%81%E1%85%A1%E1%84%8B%E1%85%AD.jpg"
+    }),
   ],
   "time": 108,
   "authority": Authority.admin,
