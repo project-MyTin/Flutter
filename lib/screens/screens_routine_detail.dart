@@ -10,17 +10,7 @@ class RoutineDetailPage extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: Text(routine.name),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined),
-          onPressed: () => print("나 나갈래!"),
-        ),
-        actions: [
-          IconButton(icon: Icon(Icons.delete), onPressed: () => print("지울래!")),
-          IconButton(icon: Icon(Icons.edit), onPressed: () => print("수정할래!"))
-        ],
-      ),
+      appBar: buildRoutineDetailAppBar(),
       body: Center(
         child: SizedBox(
           width: 0.8 * width,
@@ -31,6 +21,7 @@ class RoutineDetailPage extends StatelessWidget {
                 child: Image.network(routine.imageUrl, fit: BoxFit.cover),
                 height: 0.2 * height,
                 width: 1 * width,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0.01 * height),
               ),
               buildTextWithStyle(routine.publisher, Colors.grey, 0.02 * height),
               buildTextWithStyle(routine.name, Colors.black, 0.04 * height),
@@ -41,7 +32,8 @@ class RoutineDetailPage extends StatelessWidget {
                     EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
                 child: Text(
                   routine.description,
-                  style: TextStyle(color: Colors.grey, fontSize: 0.018 * height),
+                  style:
+                      TextStyle(color: Colors.grey, fontSize: 0.018 * height),
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -81,20 +73,38 @@ class RoutineDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        color: Colors.grey,
-        child: TextButton(
-          child: Text(
-            "시작하기",
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print("시작좀 하자!"),
-          // style: ButtonStyle(
-          //   backgroundColor: MaterialStateProperty.resolveWith((Set states) => Colors.grey)
-          // ),
+      bottomNavigationBar: buildRoutineDetailBottomBar(),
+    ));
+  }
+
+  Container buildRoutineDetailBottomBar() {
+    return Container(
+      color: Colors.grey,
+      child: TextButton(
+        child: Text(
+          "시작하기",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () => print("시작좀 하자!"),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((Set states) => Colors.grey)
         ),
       ),
-    ));
+    );
+  }
+
+  AppBar buildRoutineDetailAppBar() {
+    return AppBar(
+      title: Text(routine.name),
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios_outlined),
+        onPressed: () => print("나 나갈래!"),
+      ),
+      actions: [
+        IconButton(icon: Icon(Icons.delete), onPressed: () => print("지울래!")),
+        IconButton(icon: Icon(Icons.edit), onPressed: () => print("수정할래!"))
+      ],
+    );
   }
 
   Text buildTextWithStyle(String text, Color textColor, double size) {
