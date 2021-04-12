@@ -73,35 +73,34 @@ class RoutineDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: buildRoutineDetailBottomBar(),
+      bottomNavigationBar: buildRoutineDetailBottomBar(height),
     ));
   }
 
   Container buildMotionList(double height) {
     return Container(
-              margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Color.fromARGB(255, 200, 200, 200)),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              height: 0.2 * height,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  for (MotionElement motion in routine.motions)
-                    MotionTile(motion) // 위젯에서 반복문 쓰기!
-                ],
-              ),
-            );
+      margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+      decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 200, 200, 200)),
+          borderRadius: BorderRadius.all(Radius.circular(20))),
+      height: 0.2 * height,
+      child: ListView(
+        scrollDirection: Axis.vertical,
+        children: [
+          for (MotionElement motion in routine.motions)
+            MotionTile(motion) // 위젯에서 반복문 쓰기!
+        ],
+      ),
+    );
   }
 
-  Container buildRoutineDetailBottomBar() {
+  Container buildRoutineDetailBottomBar(double height) {
     return Container(
       color: Colors.grey,
       child: TextButton(
         child: Text(
           "시작하기",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 0.023 * height),
         ),
         onPressed: () => print("시작좀 하자!"),
         style: ButtonStyle(
@@ -150,8 +149,7 @@ class MotionTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(0.005 * height),
       decoration: BoxDecoration(
-          border:
-          Border.all(color: Color.fromARGB(255, 220, 220, 220)),
+          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: ListTile(
         leading: Image.network(
