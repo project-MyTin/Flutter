@@ -84,7 +84,10 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     children: <Widget>[
                       Container(
                         alignment: Alignment.topCenter,
-                        child: Image.network(motionUrl),
+                        child: Image.network(motionUrl,
+                            fit: BoxFit.cover,
+                            width: 1 * width,
+                            height: 0.55 * height),
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
@@ -159,11 +162,13 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     },
                     child: Text("5초 연장하기"),
                     style: ButtonStyle(
-                      shadowColor: MaterialStateProperty.resolveWith((states) => Color.fromARGB(255, 40, 40, 40)),
+                      shadowColor: MaterialStateProperty.resolveWith(
+                          (states) => Color.fromARGB(255, 40, 40, 40)),
                       shape: MaterialStateProperty.resolveWith((states) {
                         return RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(color: Color.fromARGB(255, 40, 40, 40)),
+                          side: BorderSide(
+                              color: Color.fromARGB(255, 40, 40, 40)),
                         );
                       }),
                     ),
