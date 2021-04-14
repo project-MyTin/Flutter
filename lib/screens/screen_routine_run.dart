@@ -1,69 +1,28 @@
 import 'dart:async';
+import 'package:get/get.dart';
+import 'package:mytin/controllers/countdown_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
 
 class RoutineRunPage extends StatefulWidget {
-  RoutineRunPage({Key key}) : super(key: key);
-
   @override
   _RoutineRunPageState createState() => _RoutineRunPageState();
 }
 
 class _RoutineRunPageState extends State<RoutineRunPage> {
-  int currentPart = 1;
-  int allPart = routine.motions.length;
-  int currentTime = routine.motions[0].time * routine.motions[0].count;
-  int breakTime = 10 + 1;
-  int currentBreakTime = 10;
-  bool isBreakTime = false;
-  String motionUrl =
-      "https://www.korea.kr/newsWeb/resources/attaches/namo/2010.10/26/8216/PYH2010101603890001300.jpg";
-  Timer timer;
-
-  void _motionTimer() {
-    const oneSec = Duration(seconds: 1);
-    timer = Timer.periodic(oneSec, (Timer t) {
-      if (currentTime < 1) {
-        // 루틴 시간이 끝났을 경우(남은 휴식 시간이 0 이하 && 남은 루틴 시간이 0 이하)
-        if (currentPart == allPart) {
-          // 루틴 시간이 끝난 것이 마지막 파트인 경우 => 종료
-          t.cancel();
-        } else if (currentBreakTime < 1) {
-          // 휴식 시간도 끝난 경우 => 다음 파트로
-          setState(() {
-            currentPart++;
-            isBreakTime = false;
-            motionUrl = routine.motions[currentPart - 1].imageUrl;
-            currentTime = routine.motions[currentPart - 1].time *
-                routine.motions[currentPart - 1].count;
-            currentBreakTime = breakTime;
-          });
-        } else {
-          // 휴식 시간은 안 끝난 경우
-          setState(() {
-            isBreakTime = true;
-            print(currentBreakTime--);
-          });
-        }
-      } else {
-        // 루틴 시간이 안 끝난 경우
-        setState(() {
-          print(currentTime--);
-        });
-      }
-    });
-  }
+  CountdownController _controller;
 
   @override
   void initState() {
     super.initState();
-    _motionTimer();
+    _controller =
+        Get.put(CountdownController(routine.motions, routine.breakTime));
   }
 
   @override
   void dispose() {
     super.dispose();
-    timer.cancel();
+    _controller.shutdownCountdown();
   }
 
   @override
@@ -72,55 +31,59 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     double width = screenSize.width, height = screenSize.height;
 
     return SafeArea(
-      child: Scaffold(
-        appBar: buildRoutineRunAppBar(height),
-        body: Stack(
-          children: [
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        child: Image.network(motionUrl,
-                            fit: BoxFit.cover,
-                            width: 1 * width,
-                            height: 0.55 * height),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: buildTimeProgressIndicator(
+      child: GetBuilder<CountdownController>(
+        builder: (controller) => Scaffold(
+          appBar: buildRoutineRunAppBar(height),
+          body: Stack(
+            children: [
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.topCenter,
+                          child: Image.network(
+                              controller.motionList[controller.index].imageUrl,
+                              fit: BoxFit.cover,
+                              width: 1 * width,
+                              height: 0.55 * height),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: buildTimeProgressIndicator(
                             width,
                             height,
-                            currentTime,
-                            (routine.motions[currentPart - 1].time *
-                                routine.motions[currentPart - 1].count),
+                            controller.currentTime,
+                            controller.motionList[controller.index].count *
+                                controller.motionList[controller.index].time,
                             Color.fromARGB(255, 100, 100, 100),
-                            Colors.white),
-                      ),
-                    ],
+                            Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    width: width,
+                    height: 0.64 * height,
                   ),
-                  width: width,
-                  height: 0.64 * height,
-                ),
-                SizedBox(height: 0.03 * height),
-                Text(
-                  routine.motions[currentPart - 1].name,
-                  style: TextStyle(fontSize: 0.06 * width),
-                ),
-                Text(
-                  routine.motions[currentPart - 1].count.toString() + "회",
-                  style: TextStyle(
-                      fontSize: 0.05 * width,
-                      color: Color.fromARGB(255, 100, 100, 100)),
-                ),
-                Spacer(),
-                buildRoutineRunBottomAppBar(height, width),
-              ],
-            ),
-            buildBreakTimeBody(isBreakTime, height, width),
-          ],
+                  SizedBox(height: 0.03 * height),
+                  Text(
+                    controller.motionList[controller.index].name,
+                    style: TextStyle(fontSize: 0.06 * width),
+                  ),
+                  Text(
+                    controller.motionList[controller.index].count.toString() + "회",
+                    style: TextStyle(
+                        fontSize: 0.05 * width,
+                        color: Color.fromARGB(255, 100, 100, 100)),
+                  ),
+                  Spacer(),
+                  buildRoutineRunBottomAppBar(height, width),
+                ],
+              ),
+              buildBreakTimeBody(controller.isBreakTime, height, width),
+            ],
+          ),
         ),
       ),
     );
