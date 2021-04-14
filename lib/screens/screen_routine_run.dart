@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'package:mytin/dummies/motion_time_dummy.dart';
+import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
-// import 'package:mytin/models/motion_time.dart';
 
 class RoutineRunPage extends StatefulWidget {
   RoutineRunPage({Key key}) : super(key: key);
@@ -12,8 +11,8 @@ class RoutineRunPage extends StatefulWidget {
 
 class _RoutineRunPageState extends State<RoutineRunPage> {
   int currentPart = 1;
-  int allPart = motions.length;
-  int currentTime = motions[0].motionTime * motions[0].motionCount;
+  int allPart = routine.motions.length;
+  int currentTime = routine.motions[0].time * routine.motions[0].count;
   int breakTime = 10 + 1;
   int currentBreakTime = 10;
   bool isBreakTime = false;
@@ -34,9 +33,9 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           setState(() {
             currentPart++;
             isBreakTime = false;
-            motionUrl = motions[currentPart - 1].motionUrl;
-            currentTime = motions[currentPart - 1].motionTime *
-                motions[currentPart - 1].motionCount;
+            motionUrl = routine.motions[currentPart - 1].imageUrl;
+            currentTime = routine.motions[currentPart - 1].time *
+                routine.motions[currentPart - 1].count;
             currentBreakTime = breakTime;
           });
         } else {
@@ -95,8 +94,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                             width,
                             height,
                             currentTime,
-                            (motions[currentPart - 1].motionTime *
-                                motions[currentPart - 1].motionCount),
+                            (routine.motions[currentPart - 1].time *
+                                routine.motions[currentPart - 1].count),
                             Color.fromARGB(255, 100, 100, 100),
                             Colors.white),
                       ),
@@ -107,11 +106,11 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 ),
                 SizedBox(height: 0.03 * height),
                 Text(
-                  motions[currentPart - 1].motionName,
+                  routine.motions[currentPart - 1].name,
                   style: TextStyle(fontSize: 0.06 * width),
                 ),
                 Text(
-                  motions[currentPart - 1].motionCount.toString() + "회",
+                  routine.motions[currentPart - 1].count.toString() + "회",
                   style: TextStyle(
                       fontSize: 0.05 * width,
                       color: Color.fromARGB(255, 100, 100, 100)),
@@ -271,7 +270,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
       preferredSize: Size.fromHeight(0.07 * height),
       child: AppBar(
         title: Text(
-          motions[currentPart - 1].motionName,
+          routine.motions[currentPart - 1].name,
           style: TextStyle(fontSize: 0.024 * height, color: Colors.white),
         ),
         actions: <Widget>[
