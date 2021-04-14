@@ -43,6 +43,16 @@ class CountdownController extends GetxController {
     });
   }
 
+  void passBreakTime() {
+    currentBreakTime = 0;
+    update();
+  }
+
+  void addBreakTime(int time) {
+    currentBreakTime += time;
+    update();
+  }
+
   void shutdownCountdown() {
     timer.cancel();
   }

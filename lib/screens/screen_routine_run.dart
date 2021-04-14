@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/countdown_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
@@ -33,7 +32,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     return SafeArea(
       child: GetBuilder<CountdownController>(
         builder: (controller) => Scaffold(
-          appBar: buildRoutineRunAppBar(height),
+          appBar: buildRoutineRunAppBar(
+              controller.motionList[controller.index].name, height),
           body: Stack(
             children: [
               Column(
@@ -72,16 +72,19 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     style: TextStyle(fontSize: 0.06 * width),
                   ),
                   Text(
-                    controller.motionList[controller.index].count.toString() + "회",
+                    controller.motionList[controller.index].count.toString() +
+                        "회",
                     style: TextStyle(
                         fontSize: 0.05 * width,
                         color: Color.fromARGB(255, 100, 100, 100)),
                   ),
                   Spacer(),
-                  buildRoutineRunBottomAppBar(height, width),
+                  buildRoutineRunBottomAppBar(controller.index + 1,
+                      controller.motionCount, height, width),
                 ],
               ),
-              buildBreakTimeBody(controller.isBreakTime, height, width),
+              buildBreakTimeBody(controller.currentBreakTime,
+                  controller.breakTime, controller.isBreakTime, height, width),
             ],
           ),
         ),
@@ -89,7 +92,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  Container buildBreakTimeBody(bool isBreakTime, double height, double width) {
+  Container buildBreakTimeBody(int currentBreakTime, int breakTime,
+      bool isBreakTime, double height, double width) {
     if (isBreakTime) {
       return Container(
         color: Color.fromARGB(240, 40, 40, 40),
@@ -117,11 +121,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        currentBreakTime += 5;
-                      });
-                    },
+                    onPressed: () => _controller.addBreakTime(5),
                     child: Text("5초 연장하기"),
                     style: ButtonStyle(
                       shadowColor: MaterialStateProperty.resolveWith(
@@ -137,11 +137,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                   ),
                   SizedBox(width: 0.08 * width),
                   TextButton(
-                    onPressed: () {
-                      setState(() {
-                        currentBreakTime = 0;
-                      });
-                    },
+                    onPressed: () => _controller.passBreakTime(),
                     child: Text("넘어가기"),
                     style: ButtonStyle(
                       shape: MaterialStateProperty.resolveWith((states) {
@@ -163,7 +159,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     }
   }
 
-  Container buildRoutineRunBottomAppBar(double height, double width) {
+  Container buildRoutineRunBottomAppBar(
+      int currentPart, int allPart, double height, double width) {
     return Container(
       color: Colors.grey,
       height: 0.06 * height,
@@ -228,12 +225,12 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  PreferredSize buildRoutineRunAppBar(double height) {
+  PreferredSize buildRoutineRunAppBar(String title, double height) {
     return PreferredSize(
       preferredSize: Size.fromHeight(0.07 * height),
       child: AppBar(
         title: Text(
-          routine.motions[currentPart - 1].name,
+          title,
           style: TextStyle(fontSize: 0.024 * height, color: Colors.white),
         ),
         actions: <Widget>[
