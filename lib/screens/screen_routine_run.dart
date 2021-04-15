@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/countdown_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
+import 'package:mytin/widgets/break_time_body.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class RoutineRunPage extends StatefulWidget {
@@ -39,55 +40,14 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
             children: [
               Column(
                 children: <Widget>[
-                  SizedBox(
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                          alignment: Alignment.topCenter,
-                          child: Image.network(
-                              controller.motionList[controller.index].imageUrl,
-                              fit: BoxFit.cover,
-                              width: 1 * width,
-                              height: 0.55 * height),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: TimeProgressIndicator(
-                            width: width,
-                            height: height,
-                            currentTime: controller.currentTime,
-                            allTime: controller
-                                    .motionList[controller.index].time *
-                                controller.motionList[controller.index].count,
-                            textColor: Color.fromARGB(255, 100, 100, 100),
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    width: width,
-                    height: 0.64 * height,
-                  ),
+                  buildRoutineRunBody(controller, width, height),
                   SizedBox(height: 0.03 * height),
-                  Text(
-                    controller.motionList[controller.index].name,
-                    style: TextStyle(fontSize: 0.06 * width),
-                  ),
-                  Text(
-                    controller.motionList[controller.index].count.toString() +
-                        "회",
-                    style: TextStyle(
-                        fontSize: 0.05 * width,
-                        color: Color.fromARGB(255, 100, 100, 100)),
-                  ),
+                  buildMotionInformation(controller, width),
                   Spacer(),
-                  buildRoutineRunBottomAppBar(controller.index + 1,
-                      controller.motionCount, height, width),
+                  buildRoutineRunBottomAppBar(controller, height, width),
                 ],
               ),
-              if (controller.isBreakTime)
-                buildBreakTimeBody(controller.currentBreakTime,
-                    controller.breakTime, height, width),
+              if (controller.isBreakTime) BreakTimeBody(),
             ],
           ),
         ),
@@ -95,75 +55,57 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  Container buildBreakTimeBody(
-      int currentBreakTime, int breakTime, double height, double width) {
-    return Container(
-      color: Color.fromARGB(240, 40, 40, 40),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Break Time",
-              style: TextStyle(
-                fontSize: 0.06 * width,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 0.03 * height),
-            GetBuilder<CountdownController>(
-              builder: (controller) => TimeProgressIndicator(
-                width: width * 1.1,
-                height: height * 1.1,
-                currentTime: controller.currentBreakTime,
-                allTime: controller.breakTime,
-                textColor: Colors.white,
-                backgroundColor: Color.fromARGB(255, 40, 40, 40),
-              ),
-            ),
-            SizedBox(height: 0.04 * height),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () => _controller.addBreakTime(5),
-                  child: Text("5초 연장하기"),
-                  style: ButtonStyle(
-                    shadowColor: MaterialStateProperty.resolveWith(
-                        (states) => Color.fromARGB(255, 40, 40, 40)),
-                    shape: MaterialStateProperty.resolveWith((states) {
-                      return RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side:
-                            BorderSide(color: Color.fromARGB(255, 40, 40, 40)),
-                      );
-                    }),
-                  ),
-                ),
-                SizedBox(width: 0.08 * width),
-                TextButton(
-                  onPressed: () => _controller.passBreakTime(),
-                  child: Text("넘어가기"),
-                  style: ButtonStyle(
-                    shape: MaterialStateProperty.resolveWith((states) {
-                      return RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(color: Colors.grey),
-                      );
-                    }),
-                  ),
-                ),
-              ],
-            ),
-          ],
+  Column buildMotionInformation(CountdownController controller, double width) {
+    return Column(
+      children: [
+        Text(
+          controller.motionList[controller.index].name,
+          style: TextStyle(fontSize: 0.06 * width),
         ),
+        Text(
+          controller.motionList[controller.index].count.toString() + "회",
+          style: TextStyle(
+              fontSize: 0.05 * width,
+              color: Color.fromARGB(255, 100, 100, 100)),
+        ),
+      ],
+    );
+  }
+
+  SizedBox buildRoutineRunBody(
+      CountdownController controller, double width, double height) {
+    return SizedBox(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.topCenter,
+            child: Image.network(
+                controller.motionList[controller.index].imageUrl,
+                fit: BoxFit.cover,
+                width: 1 * width,
+                height: 0.55 * height),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: TimeProgressIndicator(
+              width: width,
+              height: height,
+              currentTime: controller.currentTime,
+              allTime: controller.motionList[controller.index].time *
+                  controller.motionList[controller.index].count,
+              textColor: Color.fromARGB(255, 100, 100, 100),
+              backgroundColor: Colors.white,
+            ),
+          ),
+        ],
       ),
+      width: width,
+      height: 0.64 * height,
     );
   }
 
   Container buildRoutineRunBottomAppBar(
-      int currentPart, int allPart, double height, double width) {
+      CountdownController controller, double height, double width) {
     return Container(
       color: Colors.grey,
       height: 0.06 * height,
@@ -171,7 +113,9 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
         children: <Widget>[
           Spacer(flex: 4),
           Text(
-            currentPart.toString() + "/" + allPart.toString(),
+            (controller.index + 1).toString() +
+                "/" +
+                controller.motionList.length.toString(),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 0.023 * height),
           ),
