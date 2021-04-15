@@ -7,4 +7,9 @@ class RoutineAddController extends GetxController{
     part++;
     update();
   }
+
+  void submit() {
+    part = 1;
+    update();
+  }
 }

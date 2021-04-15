@@ -7,16 +7,47 @@ class RoutineAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
-    Get.put(RoutineAddController());
+    RoutineAddController _controller = Get.put(RoutineAddController());
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            buildRoutineAddHeader(height),
-            RoutineAddBody(height: height, width: width),
-          ],
+        body: GetBuilder<RoutineAddController>(
+          builder: (controller) => Column(
+            children: [
+              buildRoutineAddHeader(height),
+              RoutineAddBody(height: height, width: width),
+              if (controller.part >= 3) Spacer(),
+              if (controller.part >= 3) buildRoutineAddBottomAppBar(width),
+              if (controller.part < 3) buildRoutineAddNextPageButton(height, width),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Container buildRoutineAddNextPageButton(double height, double width) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0.1 * height, 0.08 * width, 0),
+      alignment: Alignment.bottomRight,
+      child: FloatingActionButton(
+        onPressed: () => Get.find<RoutineAddController>().next(),
+        child: Icon(Icons.arrow_forward_ios),
+        foregroundColor: Colors.white,
+      ),
+    );
+  }
+
+  Container buildRoutineAddBottomAppBar(double width) {
+    return Container(
+      width: width,
+      color: Colors.grey,
+      child: TextButton(
+        child: Text(
+          "등록 하기",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () => Get.find<RoutineAddController>().submit(),
       ),
     );
   }
@@ -53,13 +84,17 @@ class RoutineAddBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          0.1 * width, 0.05 * height, 0.1 * width, 0.05 * height),
+          0.1 * width, 0.05 * height, 0.1 * width, 0.01 * height),
       child: GetBuilder<RoutineAddController>(builder: (controller) {
         switch (controller.part) {
-          case 1: return buildFirstBody();
-          case 2: return buildSecondBody();
-          case 3: return buildThirdBody();
-          default: return Container();
+          case 1:
+            return buildFirstBody();
+          case 2:
+            return buildSecondBody();
+          case 3:
+            return buildThirdBody();
+          default:
+            return Container();
         }
       }),
     );
@@ -70,9 +105,11 @@ class RoutineAddBody extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.topRight,
-          child: OutlinedButton(onPressed: () {
-            Get.find<RoutineAddController>().next();
-          }, child: Text("동작 추가하기")),
+          child: OutlinedButton(
+              onPressed: () {
+                Get.find<RoutineAddController>().next();
+              },
+              child: Text("동작 추가하기")),
         )
       ],
     );
@@ -83,7 +120,11 @@ class RoutineAddBody extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.topRight,
-          child: OutlinedButton(onPressed: () {Get.find<RoutineAddController>().next();}, child: Text("동작 추가ㅋㅋ")),
+          child: OutlinedButton(
+              onPressed: () {
+                Get.find<RoutineAddController>().next();
+              },
+              child: Text("동작 추가ㅋㅋ")),
         )
       ],
     );
@@ -94,7 +135,11 @@ class RoutineAddBody extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.topRight,
-          child: OutlinedButton(onPressed: () {Get.find<RoutineAddController>().next();}, child: Text("스콰트")),
+          child: OutlinedButton(
+              onPressed: () {
+                Get.find<RoutineAddController>().next();
+              },
+              child: Text("스콰트")),
         )
       ],
     );
