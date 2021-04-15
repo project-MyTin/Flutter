@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/countdown_controller.dart';
+import 'package:mytin/controllers/routine_run_controller.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class BreakTimeBody extends StatefulWidget {
