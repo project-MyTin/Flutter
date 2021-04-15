@@ -30,7 +30,7 @@ class RoutineAddPage extends StatelessWidget {
 
   Container buildRoutineAddNextPageButton(double height, double width) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 0.1 * height, 0.08 * width, 0),
+      padding: EdgeInsets.fromLTRB(0, 0.05 * height, 0.08 * width, 0),
       alignment: Alignment.bottomRight,
       child: FloatingActionButton(
         onPressed: () => Get.find<RoutineAddController>().next(),
@@ -67,11 +67,14 @@ class RoutineAddPage extends StatelessWidget {
         ),
         Text(
           "루틴 등록하기",
-          style: TextStyle(fontSize: 0.04 * height),
+          style: TextStyle(fontSize: 0.045 * height),
         ),
         Text(
           "원하는 동작을 추가해주세요",
-          style: TextStyle(fontSize: 0.018 * height),
+          style: TextStyle(
+            fontSize: 0.018 * height,
+            color: Colors.grey,
+          ),
         ),
       ],
     );
@@ -86,12 +89,11 @@ class RoutineAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-          0.1 * width, 0.05 * height, 0.1 * width, 0.01 * height),
+      padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
       child: GetBuilder<RoutineAddController>(builder: (controller) {
         switch (controller.part) {
           case 1:
-            return buildFirstBody();
+            return buildFirstBody(height, width);
           case 2:
             return buildSecondBody();
           case 3:
@@ -107,17 +109,31 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildFirstBody() {
+  Column buildFirstBody(double height, double width) {
     return Column(
       children: [
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () {
-                Get.find<RoutineAddController>().next();
-              },
-              child: Text("동작 추가하기")),
-        )
+            onPressed: () {
+              Get.find<RoutineAddController>().next();
+            },
+            child: Text("동작 추가하기"),
+          ),
+        ),
+        SizedBox(
+          height: 0.4 * height,
+          child: ReorderableListView(
+            children: [
+              for (int i in [1, 2, 3, 4, 5, 6, 7, 8, 9])
+                ListTile(
+                  key: ValueKey(i),
+                  title: Text(i.toString()),
+                )
+            ],
+            onReorder: (oldIndex, newIndex) {},
+          ),
+        ),
       ],
     );
   }
