@@ -7,7 +7,7 @@ class RoutineAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
-    RoutineAddController _controller = Get.put(RoutineAddController());
+    Get.put(RoutineAddController());
 
     return SafeArea(
       child: Scaffold(
@@ -16,9 +16,11 @@ class RoutineAddPage extends StatelessWidget {
             children: [
               buildRoutineAddHeader(height),
               RoutineAddBody(height: height, width: width),
-              if (controller.part >= 3) Spacer(),
-              if (controller.part >= 3) buildRoutineAddBottomAppBar(width),
-              if (controller.part < 3) buildRoutineAddNextPageButton(height, width),
+              if (controller.part > 4) Spacer(),
+              if (controller.part > 4)
+                buildRoutineAddBottomAppBar(height, width),
+              if (controller.part < 5)
+                buildRoutineAddNextPageButton(height, width),
             ],
           ),
         ),
@@ -38,9 +40,10 @@ class RoutineAddPage extends StatelessWidget {
     );
   }
 
-  Container buildRoutineAddBottomAppBar(double width) {
+  Container buildRoutineAddBottomAppBar(double height, double width) {
     return Container(
       width: width,
+      height: 0.065 * height,
       color: Colors.grey,
       child: TextButton(
         child: Text(
@@ -93,6 +96,10 @@ class RoutineAddBody extends StatelessWidget {
             return buildSecondBody();
           case 3:
             return buildThirdBody();
+          case 4:
+            return buildFourthBody();
+          case 5:
+            return buildFifthBody();
           default:
             return Container();
         }
@@ -140,6 +147,36 @@ class RoutineAddBody extends StatelessWidget {
                 Get.find<RoutineAddController>().next();
               },
               child: Text("스콰트")),
+        )
+      ],
+    );
+  }
+
+  Column buildFourthBody() {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: OutlinedButton(
+              onPressed: () {
+                Get.find<RoutineAddController>().next();
+              },
+              child: Text("헛")),
+        )
+      ],
+    );
+  }
+
+  Column buildFifthBody() {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: OutlinedButton(
+              onPressed: () {
+                Get.find<RoutineAddController>().next();
+              },
+              child: Text("둘")),
         )
       ],
     );
