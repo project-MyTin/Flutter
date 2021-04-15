@@ -10,23 +10,14 @@ class RoutineAddPage extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            RoutineAddHeader(height),
-
+            buildRoutineAddHeader(height),
           ],
         ),
       ),
     );
   }
-}
 
-
-class RoutineAddHeader extends StatelessWidget {
-  final double height;
-
-  RoutineAddHeader(this.height);
-
-  @override
-  Widget build(BuildContext context) {
+  Column buildRoutineAddHeader(double height) {
     return Column(
       children: [
         Align(
