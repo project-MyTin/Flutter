@@ -1,70 +1,28 @@
-import 'dart:async';
-import 'package:mytin/dummies/motion_time_dummy.dart';
+import 'package:get/get.dart';
+import 'package:mytin/controllers/countdown_controller.dart';
+import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
-// import 'package:mytin/models/motion_time.dart';
+import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class RoutineRunPage extends StatefulWidget {
-  RoutineRunPage({Key key}) : super(key: key);
-
   @override
   _RoutineRunPageState createState() => _RoutineRunPageState();
 }
 
 class _RoutineRunPageState extends State<RoutineRunPage> {
-  int currentPart = 1;
-  int allPart = motions.length;
-  int currentTime = motions[0].motionTime * motions[0].motionCount;
-  int breakTime = 10 + 1;
-  int currentBreakTime = 10;
-  bool isBreakTime = false;
-  String motionUrl =
-      "https://www.korea.kr/newsWeb/resources/attaches/namo/2010.10/26/8216/PYH2010101603890001300.jpg";
-  Timer timer;
-
-  void _motionTimer() {
-    const oneSec = Duration(seconds: 1);
-    timer = Timer.periodic(oneSec, (Timer t) {
-      if (currentTime < 1) {
-        // 루틴 시간이 끝났을 경우(남은 휴식 시간이 0 이하 && 남은 루틴 시간이 0 이하)
-        if (currentPart == allPart) {
-          // 루틴 시간이 끝난 것이 마지막 파트인 경우 => 종료
-          t.cancel();
-        } else if (currentBreakTime < 1) {
-          // 휴식 시간도 끝난 경우 => 다음 파트로
-          setState(() {
-            currentPart++;
-            isBreakTime = false;
-            motionUrl = motions[currentPart - 1].motionUrl;
-            currentTime = motions[currentPart - 1].motionTime *
-                motions[currentPart - 1].motionCount;
-            currentBreakTime = breakTime;
-          });
-        } else {
-          // 휴식 시간은 안 끝난 경우
-          setState(() {
-            isBreakTime = true;
-            print(currentBreakTime--);
-          });
-        }
-      } else {
-        // 루틴 시간이 안 끝난 경우
-        setState(() {
-          print(currentTime--);
-        });
-      }
-    });
-  }
+  CountdownController _controller;
 
   @override
   void initState() {
     super.initState();
-    _motionTimer();
+    _controller =
+        Get.put(CountdownController(routine.motions, routine.breakTime));
   }
 
   @override
   void dispose() {
     super.dispose();
-    timer.cancel();
+    _controller.shutdownCountdown();
   }
 
   @override
@@ -73,135 +31,139 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     double width = screenSize.width, height = screenSize.height;
 
     return SafeArea(
-      child: Scaffold(
-        appBar: buildRoutineRunAppBar(height),
-        body: Stack(
-          children: [
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  child: Stack(
-                    children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        child: Image.network(motionUrl,
-                            fit: BoxFit.cover,
-                            width: 1 * width,
-                            height: 0.55 * height),
-                      ),
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: buildTimeProgressIndicator(
-                            width,
-                            height,
-                            currentTime,
-                            (motions[currentPart - 1].motionTime *
-                                motions[currentPart - 1].motionCount),
-                            Color.fromARGB(255, 100, 100, 100),
-                            Colors.white),
-                      ),
-                    ],
+      child: GetBuilder<CountdownController>(
+        builder: (controller) => Scaffold(
+          appBar: buildRoutineRunAppBar(
+              controller.motionList[controller.index].name, height),
+          body: Stack(
+            children: [
+              Column(
+                children: <Widget>[
+                  SizedBox(
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          alignment: Alignment.topCenter,
+                          child: Image.network(
+                              controller.motionList[controller.index].imageUrl,
+                              fit: BoxFit.cover,
+                              width: 1 * width,
+                              height: 0.55 * height),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: TimeProgressIndicator(
+                            width: width,
+                            height: height,
+                            currentTime: controller.currentTime,
+                            allTime: controller
+                                    .motionList[controller.index].time *
+                                controller.motionList[controller.index].count,
+                            textColor: Color.fromARGB(255, 100, 100, 100),
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    width: width,
+                    height: 0.64 * height,
                   ),
-                  width: width,
-                  height: 0.64 * height,
+                  SizedBox(height: 0.03 * height),
+                  Text(
+                    controller.motionList[controller.index].name,
+                    style: TextStyle(fontSize: 0.06 * width),
+                  ),
+                  Text(
+                    controller.motionList[controller.index].count.toString() +
+                        "회",
+                    style: TextStyle(
+                        fontSize: 0.05 * width,
+                        color: Color.fromARGB(255, 100, 100, 100)),
+                  ),
+                  Spacer(),
+                  buildRoutineRunBottomAppBar(controller.index + 1,
+                      controller.motionCount, height, width),
+                ],
+              ),
+              if (controller.isBreakTime)
+                buildBreakTimeBody(controller.currentBreakTime,
+                    controller.breakTime, height, width),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container buildBreakTimeBody(
+      int currentBreakTime, int breakTime, double height, double width) {
+    return Container(
+      color: Color.fromARGB(240, 40, 40, 40),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Break Time",
+              style: TextStyle(
+                fontSize: 0.06 * width,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(height: 0.03 * height),
+            GetBuilder<CountdownController>(
+              builder: (controller) => TimeProgressIndicator(
+                width: width * 1.1,
+                height: height * 1.1,
+                currentTime: controller.currentBreakTime,
+                allTime: controller.breakTime,
+                textColor: Colors.white,
+                backgroundColor: Color.fromARGB(255, 40, 40, 40),
+              ),
+            ),
+            SizedBox(height: 0.04 * height),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _controller.addBreakTime(5),
+                  child: Text("5초 연장하기"),
+                  style: ButtonStyle(
+                    shadowColor: MaterialStateProperty.resolveWith(
+                        (states) => Color.fromARGB(255, 40, 40, 40)),
+                    shape: MaterialStateProperty.resolveWith((states) {
+                      return RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side:
+                            BorderSide(color: Color.fromARGB(255, 40, 40, 40)),
+                      );
+                    }),
+                  ),
                 ),
-                SizedBox(height: 0.03 * height),
-                Text(
-                  motions[currentPart - 1].motionName,
-                  style: TextStyle(fontSize: 0.06 * width),
+                SizedBox(width: 0.08 * width),
+                TextButton(
+                  onPressed: () => _controller.passBreakTime(),
+                  child: Text("넘어가기"),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.resolveWith((states) {
+                      return RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(color: Colors.grey),
+                      );
+                    }),
+                  ),
                 ),
-                Text(
-                  motions[currentPart - 1].motionCount.toString() + "회",
-                  style: TextStyle(
-                      fontSize: 0.05 * width,
-                      color: Color.fromARGB(255, 100, 100, 100)),
-                ),
-                Spacer(),
-                buildRoutineRunBottomAppBar(height, width),
               ],
             ),
-            buildBreakTimeBody(isBreakTime, height, width),
           ],
         ),
       ),
     );
   }
 
-  Container buildBreakTimeBody(bool isBreakTime, double height, double width) {
-    if (isBreakTime) {
-      return Container(
-        color: Color.fromARGB(240, 40, 40, 40),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Break Time",
-                style: TextStyle(
-                    fontSize: 0.06 * width,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
-              ),
-              SizedBox(height: 0.03 * height),
-              buildTimeProgressIndicator(
-                  width * 1.1,
-                  height * 1.1,
-                  currentBreakTime,
-                  breakTime,
-                  Colors.white,
-                  Color.fromARGB(255, 40, 40, 40)),
-              SizedBox(height: 0.04 * height),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        currentBreakTime += 5;
-                      });
-                    },
-                    child: Text("5초 연장하기"),
-                    style: ButtonStyle(
-                      shadowColor: MaterialStateProperty.resolveWith(
-                          (states) => Color.fromARGB(255, 40, 40, 40)),
-                      shape: MaterialStateProperty.resolveWith((states) {
-                        return RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(
-                              color: Color.fromARGB(255, 40, 40, 40)),
-                        );
-                      }),
-                    ),
-                  ),
-                  SizedBox(width: 0.08 * width),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        currentBreakTime = 0;
-                      });
-                    },
-                    child: Text("넘어가기"),
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.resolveWith((states) {
-                        return RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(color: Colors.grey),
-                        );
-                      }),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      );
-    } else {
-      return Container();
-    }
-  }
-
-  Container buildRoutineRunBottomAppBar(double height, double width) {
+  Container buildRoutineRunBottomAppBar(
+      int currentPart, int allPart, double height, double width) {
     return Container(
       color: Colors.grey,
       height: 0.06 * height,
@@ -226,52 +188,12 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  Container buildTimeProgressIndicator(double width, double height,
-      int currentTime, int allTime, Color textColor, Color backgroundColor) {
-    return Container(
-      child: Stack(
-        children: [
-          SizedBox(
-            child: CircularProgressIndicator(
-              value: 1 - currentTime / allTime,
-              strokeWidth: 18,
-            ),
-            width: 0.4 * width,
-            height: 0.4 * width,
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "time",
-                  style: TextStyle(fontSize: 0.024 * height, color: textColor),
-                ),
-                Text(
-                  currentTime.toString(),
-                  style: TextStyle(
-                    fontSize: 0.06 * height,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      width: 0.4 * width,
-      height: 0.4 * width,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
-    );
-  }
-
-  PreferredSize buildRoutineRunAppBar(double height) {
+  PreferredSize buildRoutineRunAppBar(String title, double height) {
     return PreferredSize(
       preferredSize: Size.fromHeight(0.07 * height),
       child: AppBar(
         title: Text(
-          motions[currentPart - 1].motionName,
+          title,
           style: TextStyle(fontSize: 0.024 * height, color: Colors.white),
         ),
         actions: <Widget>[

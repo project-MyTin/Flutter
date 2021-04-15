@@ -4,13 +4,15 @@ class MotionElement {
   String name; // 동작 이름
   String part; // 동작 부위
   int count; // 동작 횟수
+  int time; // 동작 하나당 시간
   String imageUrl;  // 동작 이미지
 
-  MotionElement(this.name, this.part, this.count);
+  MotionElement(this.name, this.part, this.count, this.time, this.imageUrl);
 
   MotionElement.fromMap(Map<String, dynamic> map)
       : name = map['name'],
         part = map['part'],
+        time = map['time'],
         count = map['count'],
         imageUrl = map['imageUrl'];
 }
@@ -28,6 +30,7 @@ class RoutineDetail {
   String type; // 루틴 유형
   // DateTime createdTime;  // 생성 시간
   // DateTime updatedTime;  // 수정 시간
+  int breakTime; // 휴식 시간
   String imageUrl; // 루틴 이미지 링크
 
   RoutineDetail(
@@ -41,6 +44,7 @@ class RoutineDetail {
       this.authority,
       this.difficulty,
       this.type,
+      this.breakTime,
       this.imageUrl);
 
   RoutineDetail.fromMap(Map<String, dynamic> map)
@@ -54,5 +58,6 @@ class RoutineDetail {
         authority = map["authority"],
         difficulty = map["difficulty"],
         type = map["type"],
+        breakTime= map["breakTime"],
         imageUrl = map["imageUrl"];
 }
