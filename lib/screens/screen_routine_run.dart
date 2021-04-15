@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/countdown_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
+import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class RoutineRunPage extends StatefulWidget {
   @override
@@ -51,14 +52,15 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: buildTimeProgressIndicator(
-                            width,
-                            height,
-                            controller.currentTime,
-                            controller.motionList[controller.index].count *
-                                controller.motionList[controller.index].time,
-                            Color.fromARGB(255, 100, 100, 100),
-                            Colors.white,
+                          child: TimeProgressIndicator(
+                            width: width,
+                            height: height,
+                            currentTime: controller.currentTime,
+                            allTime: controller
+                                    .motionList[controller.index].time *
+                                controller.motionList[controller.index].count,
+                            textColor: Color.fromARGB(255, 100, 100, 100),
+                            backgroundColor: Colors.white,
                           ),
                         ),
                       ],
@@ -109,13 +111,16 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                     color: Colors.white.withOpacity(isBreakTime ? 1 : 0)),
               ),
               SizedBox(height: 0.03 * height),
-              buildTimeProgressIndicator(
-                  width * 1.1,
-                  height * 1.1,
-                  currentBreakTime,
-                  breakTime,
-                  Colors.white,
-                  Color.fromARGB(255, 40, 40, 40)),
+              GetBuilder<CountdownController>(
+                builder: (controller) => TimeProgressIndicator(
+                  width: width * 1.1,
+                  height: height * 1.1,
+                  currentTime: controller.currentBreakTime,
+                  allTime: controller.breakTime,
+                  textColor: Colors.white,
+                  backgroundColor: Color.fromARGB(255, 40, 40, 40),
+                ),
+              ),
               SizedBox(height: 0.04 * height),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -182,46 +187,6 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Container buildTimeProgressIndicator(double width, double height,
-      int currentTime, int allTime, Color textColor, Color backgroundColor) {
-    return Container(
-      child: Stack(
-        children: [
-          SizedBox(
-            child: CircularProgressIndicator(
-              value: 1 - currentTime / allTime,
-              strokeWidth: 18,
-            ),
-            width: 0.4 * width,
-            height: 0.4 * width,
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "time",
-                  style: TextStyle(fontSize: 0.024 * height, color: textColor),
-                ),
-                Text(
-                  currentTime.toString(),
-                  style: TextStyle(
-                    fontSize: 0.06 * height,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      width: 0.4 * width,
-      height: 0.4 * width,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
     );
   }
 
