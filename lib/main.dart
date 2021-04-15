@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
-      home: RoutineRunPage(),
-      // home: RoutineDetailPage(),
+      // home: RoutineRunPage(),
+      home: RoutineDetailPage(),
       // home: RoutineListPage(),
       // home: RoutineAddPage(),
     );
