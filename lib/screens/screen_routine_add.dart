@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
+import 'package:mytin/models/routine_detail.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override
@@ -126,22 +127,29 @@ class RoutineAddBody extends StatelessWidget {
 
   SizedBox buildReorderAbleListBox(double height) {
     return SizedBox(
-        height: 0.4 * height,
-        child: ReorderableListView(
-          children: [
-            for (int i in [1, 2, 3, 4, 5, 6, 7, 8, 9])
-              ListTile(
-                key: ValueKey(i),
-                title: Text(i.toString()),
-              )
-          ],
-          onReorder: (oldIndex, newIndex) {
-            int tempIndex = oldIndex;
-            oldIndex = newIndex;
-            newIndex = tempIndex;
-          },
-        ),
-      );
+      height: 0.4 * height,
+      child: GetBuilder<RoutineAddController>(builder: (controller) {
+        List<MotionElement> motions = controller.motionList;
+        return ReorderableListView(
+            children: [
+              for (int i = 0; i < controller.motionList.length; i++)
+                ListTile(
+                  key: ValueKey(i),
+                  leading: Image.network(
+                    motions[i].imageUrl,
+                    fit: BoxFit.cover,
+                    width: 0.12 * width,
+                    height: 0.12 * width,
+                  ),
+                  title: Text(motions[i].name),
+                  subtitle: Text(motions[i].part),
+                  trailing: Text(motions[i].count.toString() + "회"),
+                ),
+            ],
+            onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
+        );
+      }),
+    );
   }
 
   Column buildSecondBody() {
