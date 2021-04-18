@@ -115,27 +115,33 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-            onPressed: () {
-              Get.find<RoutineAddController>().next();
-            },
-            child: Text("동작 추가하기"),
+            onPressed: () => Get.find<RoutineAddController>().moveTo(2),
+            child: Text("1"),
           ),
         ),
-        SizedBox(
-          height: 0.4 * height,
-          child: ReorderableListView(
-            children: [
-              for (int i in [1, 2, 3, 4, 5, 6, 7, 8, 9])
-                ListTile(
-                  key: ValueKey(i),
-                  title: Text(i.toString()),
-                )
-            ],
-            onReorder: (oldIndex, newIndex) {},
-          ),
-        ),
+        buildReorderAbleListBox(height),
       ],
     );
+  }
+
+  SizedBox buildReorderAbleListBox(double height) {
+    return SizedBox(
+        height: 0.4 * height,
+        child: ReorderableListView(
+          children: [
+            for (int i in [1, 2, 3, 4, 5, 6, 7, 8, 9])
+              ListTile(
+                key: ValueKey(i),
+                title: Text(i.toString()),
+              )
+          ],
+          onReorder: (oldIndex, newIndex) {
+            int tempIndex = oldIndex;
+            oldIndex = newIndex;
+            newIndex = tempIndex;
+          },
+        ),
+      );
   }
 
   Column buildSecondBody() {
@@ -144,10 +150,8 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () {
-                Get.find<RoutineAddController>().next();
-              },
-              child: Text("동작 추가ㅋㅋ")),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(3),
+              child: Text("2")),
         )
       ],
     );
@@ -159,10 +163,8 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () {
-                Get.find<RoutineAddController>().next();
-              },
-              child: Text("스콰트")),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(4),
+              child: Text("3")),
         )
       ],
     );
@@ -174,10 +176,8 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () {
-                Get.find<RoutineAddController>().next();
-              },
-              child: Text("헛")),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(5),
+              child: Text("4")),
         )
       ],
     );
@@ -189,10 +189,8 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () {
-                Get.find<RoutineAddController>().next();
-              },
-              child: Text("둘")),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(1),
+              child: Text("5")),
         )
       ],
     );
