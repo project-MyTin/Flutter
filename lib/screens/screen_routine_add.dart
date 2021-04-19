@@ -128,27 +128,37 @@ class RoutineAddBody extends StatelessWidget {
   SizedBox buildReorderAbleListBox(double height) {
     return SizedBox(
       height: 0.4 * height,
-      child: GetBuilder<RoutineAddController>(builder: (controller) {
-        List<MotionElement> motions = controller.motionList;
-        return ReorderableListView(
-            children: [
-              for (int i = 0; i < controller.motionList.length; i++)
-                ListTile(
-                  key: ValueKey(i),
-                  leading: Image.network(
-                    motions[i].imageUrl,
-                    fit: BoxFit.cover,
-                    width: 0.12 * width,
-                    height: 0.12 * width,
-                  ),
-                  title: Text(motions[i].name),
-                  subtitle: Text(motions[i].part),
-                  trailing: Text(motions[i].count.toString() + "회"),
-                ),
-            ],
-            onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
-        );
-      }),
+      child: GetBuilder<RoutineAddController>(
+        builder: (controller) => ReorderableListView(
+          children: [
+            for (int i = 0; i < controller.motionList.length; i++)
+              buildMotionTile(i, controller.motionList[i]),
+          ],
+          onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
+        ),
+      ),
+    );
+  }
+
+  Container buildMotionTile(int i, MotionElement motion) {
+    return Container(
+      key: ValueKey(i),
+      child: ListTile(
+        leading: Image.network(
+          motion.imageUrl,
+          fit: BoxFit.cover,
+          width: 0.12 * width,
+          height: 0.12 * width,
+        ),
+        title: Text(motion.name),
+        subtitle: Text(motion.part),
+        trailing: Text(motion.count.toString() + "회"),
+      ),
+      margin: EdgeInsets.all(0.005 * height),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
+          borderRadius: BorderRadius.all(Radius.circular(15))),
     );
   }
 

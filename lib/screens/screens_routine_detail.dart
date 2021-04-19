@@ -91,8 +91,8 @@ class RoutineDetailPage extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.vertical,
         children: [
-          for (MotionElement motion in routine.motions)
-            MotionTile(motion) // 위젯에서 반복문 쓰기!
+          for (int i = 0; i < routine.motions.length; i++)
+            MotionTile(i, routine.motions[i]) // 위젯에서 반복문 쓰기!
         ],
       ),
     );
@@ -141,8 +141,9 @@ class RoutineDetailPage extends StatelessWidget {
 }
 
 class MotionTile extends StatelessWidget {
-  MotionTile(this.motion);
+  MotionTile(this.index, this.motion);
 
+  final int index;
   final MotionElement motion;
 
   @override
@@ -151,6 +152,7 @@ class MotionTile extends StatelessWidget {
     double width = screenSize.width, height = screenSize.height;
 
     return Container(
+      key: ValueKey(index),
       margin: EdgeInsets.all(0.005 * height),
       decoration: BoxDecoration(
           border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
