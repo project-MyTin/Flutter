@@ -13,17 +13,19 @@ class RoutineAddPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: GetBuilder<RoutineAddController>(
-          builder: (controller) => Column(
-            children: [
-              buildRoutineAddHeader(height),
-              RoutineAddBody(height: height, width: width),
-              if (controller.part > 4) Spacer(),
-              if (controller.part > 4)
-                buildRoutineAddBottomAppBar(height, width),
-              if (controller.part < 5)
-                buildRoutineAddNextPageButton(height, width),
-            ],
+        body: SingleChildScrollView(    // SingleChildScrollView 로 키보드 열 때 overflow 제거!
+          child: GetBuilder<RoutineAddController>(
+            builder: (controller) => Column(
+              children: [
+                buildRoutineAddHeader(height),
+                RoutineAddBody(height: height, width: width),
+                if (controller.part > 4) Spacer(),
+                if (controller.part > 4)
+                  buildRoutineAddBottomAppBar(height, width),
+                if (controller.part < 5)
+                  buildRoutineAddNextPageButton(height, width),
+              ],
+            ),
           ),
         ),
       ),
