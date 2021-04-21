@@ -31,7 +31,7 @@ class RoutineAddPage extends StatelessWidget {
 
   Container buildRoutineAddNextPageButton(double height, double width) {
     return Container(
-      padding: EdgeInsets.fromLTRB(0, 0.05 * height, 0.08 * width, 0),
+      padding: EdgeInsets.fromLTRB(0, 0.035 * height, 0.08 * width, 0),
       alignment: Alignment.bottomRight,
       child: FloatingActionButton(
         onPressed: () => Get.find<RoutineAddController>().next(),
@@ -113,30 +113,45 @@ class RoutineAddBody extends StatelessWidget {
   Column buildFirstBody(double height, double width) {
     return Column(
       children: [
-        Align(
+        Container(
           alignment: Alignment.topRight,
           child: OutlinedButton(
             onPressed: () => Get.find<RoutineAddController>().moveTo(2),
-            child: Text("1"),
+            child: Text(
+              "  동작 추가하기  ",
+              style: TextStyle(fontSize: 0.015 * height),
+            ),
+            style: ButtonStyle(
+              shape: MaterialStateProperty.resolveWith((states) {
+                return RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20));
+              }),
+            ),
           ),
+          margin: EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.02 * height),
         ),
         buildReorderAbleListBox(height),
       ],
     );
   }
 
-  SizedBox buildReorderAbleListBox(double height) {
-    return SizedBox(
-      height: 0.4 * height,
-      child: GetBuilder<RoutineAddController>(
-        builder: (controller) => ReorderableListView(
-          children: [
-            for (int i = 0; i < controller.motionList.length; i++)
-              buildMotionTile(i, controller.motionList[i]),
-          ],
-          onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
+  Container buildReorderAbleListBox(double height) {
+    return Container(
+      child: SizedBox(
+        height: 0.4 * height,
+        child: GetBuilder<RoutineAddController>(
+          builder: (controller) => ReorderableListView(
+            children: [
+              for (int i = 0; i < controller.motionList.length; i++)
+                buildMotionTile(i, controller.motionList[i]),
+            ],
+            onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
+          ),
         ),
       ),
+      padding: EdgeInsets.all(0.01 * height),
+      decoration: BoxDecoration(
+          border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
     );
   }
 
