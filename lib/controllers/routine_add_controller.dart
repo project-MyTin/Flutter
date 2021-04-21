@@ -16,7 +16,7 @@ class RoutineAddController extends GetxController {
 
   void next() {
     if (part == 1) {
-      part += 2;
+      part += 3;
     } else {
       part++;
     }

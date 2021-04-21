@@ -20,7 +20,7 @@ class RoutineAddPage extends StatelessWidget {
               children: [
                 buildRoutineAddHeader(height),
                 RoutineAddBody(height: height, width: width),
-                if (controller.part > 4) Spacer(),
+                // if (controller.part > 4) Spacer(),
                 if (controller.part > 4)
                   buildRoutineAddBottomAppBar(height, width),
                 if (controller.part < 5)
@@ -207,9 +207,12 @@ class RoutineAddBody extends StatelessWidget {
             url: controller.newMotion.imageUrl,
             diameter: 0.24 * height,
           ),
-          Text(
-            controller.newMotion.name,
-            style: TextStyle(fontSize: 0.033 * height),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
+            child: Text(
+              controller.newMotion.name,
+              style: TextStyle(fontSize: 0.033 * height),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -218,13 +221,15 @@ class RoutineAddBody extends StatelessWidget {
               Text("동작 횟수", style: TextStyle(fontSize: 0.02 * height)),
             ],
           ),
+          SizedBox(height: 0.01 * height),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               buildTimeInputBox("10", "초"),
               buildTimeInputBox("5", "회"),
             ],
-          )
+          ),
+          SizedBox(height: 0.05 * height)
         ],
       ),
     );
@@ -240,8 +245,9 @@ class RoutineAddBody extends StatelessWidget {
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: text,
-                hintStyle: TextStyle(fontSize: 0.02 * height)),
-                textAlignVertical: TextAlignVertical.bottom,
+                hintStyle:
+                    TextStyle(fontSize: 0.026 * height, color: Colors.grey)),
+            textAlignVertical: TextAlignVertical.bottom,
           ),
           height: 0.05 * height,
           width: 0.2 * width,
