@@ -4,8 +4,10 @@ import 'package:mytin/models/routine_detail.dart';
 
 class RoutineAddController extends GetxController {
   int part = 1;
+
   // List<MotionElement> motionList = [];
   List<MotionElement> motionList = routine.motions;
+
   // MotionElement newMotion;
   MotionElement newMotion = routine.motions[0];
 
@@ -15,11 +17,13 @@ class RoutineAddController extends GetxController {
   }
 
   void next() {
-    if (part == 1) {
+    if (part == 1)
       part += 3;
-    } else {
+    else if (part == 3)
+      part = 1;
+    else
       part++;
-    }
+
     update();
   }
 

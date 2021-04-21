@@ -20,9 +20,6 @@ class RoutineAddPage extends StatelessWidget {
               children: [
                 buildRoutineAddHeader(height),
                 RoutineAddBody(height: height, width: width),
-                // if (controller.part > 4) Spacer(),
-                if (controller.part > 4)
-                  buildRoutineAddBottomAppBar(height, width),
                 if (controller.part < 5)
                   buildRoutineAddNextPageButton(height, width),
               ],
@@ -41,21 +38,6 @@ class RoutineAddPage extends StatelessWidget {
         onPressed: () => Get.find<RoutineAddController>().next(),
         child: Icon(Icons.arrow_forward_ios),
         foregroundColor: Colors.white,
-      ),
-    );
-  }
-
-  Container buildRoutineAddBottomAppBar(double height, double width) {
-    return Container(
-      width: width,
-      height: 0.065 * height,
-      color: Colors.grey,
-      child: TextButton(
-        child: Text(
-          "등록 하기",
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () => Get.find<RoutineAddController>().submit(),
       ),
     );
   }
@@ -278,8 +260,25 @@ class RoutineAddBody extends StatelessWidget {
           child: OutlinedButton(
               onPressed: () => Get.find<RoutineAddController>().moveTo(1),
               child: Text("5")),
-        )
+        ),
+        SizedBox(height: 0.3 * height),
+        buildRoutineAddBottomAppBar(height, width)
       ],
+    );
+  }
+
+  Container buildRoutineAddBottomAppBar(double height, double width) {
+    return Container(
+      width: width,
+      height: 0.065 * height,
+      color: Colors.grey,
+      child: TextButton(
+        child: Text(
+          "등록 하기",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () => Get.find<RoutineAddController>().submit(),
+      ),
     );
   }
 }
