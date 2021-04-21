@@ -199,11 +199,19 @@ class RoutineAddBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("동작 시간", style: TextStyle(fontSize: 0.02 * height)),
-              Text("동작 횟수", style: TextStyle(fontSize: 0.02 * height)),
+              Text(
+                "동작 시간",
+                style:
+                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+              ),
+              Text(
+                "동작 횟수",
+                style:
+                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+              ),
             ],
           ),
-          SizedBox(height: 0.01 * height),
+          SizedBox(height: 0.008 * height),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -228,13 +236,16 @@ class RoutineAddBody extends StatelessWidget {
                 border: OutlineInputBorder(),
                 hintText: text,
                 hintStyle:
-                    TextStyle(fontSize: 0.026 * height, color: Colors.grey)),
+                    TextStyle(fontSize: 0.026 * height, color: Colors.black26)),
             textAlignVertical: TextAlignVertical.bottom,
           ),
           height: 0.05 * height,
           width: 0.2 * width,
         ),
-        Text(" ($unit)"),
+        Text(
+          " ($unit)",
+          style: TextStyle(color: Colors.black54),
+        ),
       ],
     );
   }
