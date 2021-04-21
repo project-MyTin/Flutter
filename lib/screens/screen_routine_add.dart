@@ -196,16 +196,52 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildThirdBody() {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: OutlinedButton(
-              onPressed: () => Get.find<RoutineAddController>().moveTo(4),
-              child: Text("3")),
-        )
-      ],
+  GetBuilder buildThirdBody() {
+    return GetBuilder<RoutineAddController>(
+      builder: (controller) => Column(
+        children: [
+          ImageCircular(
+            url: controller.newMotion.imageUrl,
+            diameter: 0.24 * height,
+          ),
+          Text(
+            controller.newMotion.name,
+            style: TextStyle(fontSize: 0.03 * height),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text("동작 시간 (필수)"),
+              Text("동작 횟수"),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SizedBox(
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'P',
+                  ),
+                ),
+                height: 0.1 * height,
+                width: 0.3 * width,
+              ),
+              SizedBox(
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'P',
+                  ),
+                ),
+                height: 0.1 * height,
+                width: 0.3 * width,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

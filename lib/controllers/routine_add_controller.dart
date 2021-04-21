@@ -4,9 +4,10 @@ import 'package:mytin/models/routine_detail.dart';
 
 class RoutineAddController extends GetxController {
   int part = 1;
-
   // List<MotionElement> motionList = [];
   List<MotionElement> motionList = routine.motions;
+  // MotionElement newMotion;
+  MotionElement newMotion = routine.motions[0];
 
   void moveTo(int page) {
     part = page;
