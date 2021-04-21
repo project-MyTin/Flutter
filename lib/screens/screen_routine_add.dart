@@ -13,7 +13,8 @@ class RoutineAddPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(    // SingleChildScrollView 로 키보드 열 때 overflow 제거!
+        body: SingleChildScrollView(
+          // SingleChildScrollView 로 키보드 열 때 overflow 제거!
           child: GetBuilder<RoutineAddController>(
             builder: (controller) => Column(
               children: [
@@ -85,7 +86,7 @@ class RoutineAddPage extends StatelessWidget {
           return Text(
             messageList[controller.part - 1],
             style: TextStyle(
-              fontSize: 0.018 * height,
+              fontSize: 0.019 * height,
               color: Colors.grey,
             ),
           );
@@ -208,42 +209,45 @@ class RoutineAddBody extends StatelessWidget {
           ),
           Text(
             controller.newMotion.name,
-            style: TextStyle(fontSize: 0.03 * height),
+            style: TextStyle(fontSize: 0.033 * height),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text("동작 시간 (필수)"),
-              Text("동작 횟수"),
+              Text("동작 시간", style: TextStyle(fontSize: 0.02 * height)),
+              Text("동작 횟수", style: TextStyle(fontSize: 0.02 * height)),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SizedBox(
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'P',
-                  ),
-                ),
-                height: 0.1 * height,
-                width: 0.3 * width,
-              ),
-              SizedBox(
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'P',
-                  ),
-                ),
-                height: 0.1 * height,
-                width: 0.3 * width,
-              ),
+              buildTimeInputBox("10", "초"),
+              buildTimeInputBox("5", "회"),
             ],
           )
         ],
       ),
+    );
+  }
+
+  Row buildTimeInputBox(String text, String unit) {
+    return Row(
+      children: [
+        SizedBox(
+          child: TextField(
+            keyboardType: TextInputType.number,
+            textAlign: TextAlign.end,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: text,
+                hintStyle: TextStyle(fontSize: 0.02 * height)),
+                textAlignVertical: TextAlignVertical.bottom,
+          ),
+          height: 0.05 * height,
+          width: 0.2 * width,
+        ),
+        Text(" ($unit)"),
+      ],
     );
   }
 
