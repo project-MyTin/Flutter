@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/widgets/image_circular.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override
@@ -169,12 +170,7 @@ class RoutineAddBody extends StatelessWidget {
     return Container(
       key: ValueKey(i),
       child: ListTile(
-        leading: Image.network(
-          motion.imageUrl,
-          fit: BoxFit.cover,
-          width: 0.12 * width,
-          height: 0.12 * width,
-        ),
+        leading: ImageCircular(url: motion.imageUrl, diameter: 0.06 * height),
         title: Text(motion.name),
         subtitle: Text(motion.part),
         trailing: Text(motion.count.toString() + "회"),
