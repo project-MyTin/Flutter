@@ -328,6 +328,7 @@ class RoutineAddBody extends StatelessWidget {
           Wrap(
             children: [
               for (String name in controller.type) buildMotionTypeBox(name),
+              // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
             ],
           ),
           SizedBox(height: 0.05 * height),

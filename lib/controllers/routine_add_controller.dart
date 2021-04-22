@@ -4,7 +4,7 @@ import 'package:mytin/models/routine_detail.dart';
 
 class RoutineAddController extends GetxController {
   List<String> difficulty = ["초급", "중급", "고급"];
-  List<String> type = [];
+  List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
 
   // List<MotionElement> motionList = [];
