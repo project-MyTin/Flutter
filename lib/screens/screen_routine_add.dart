@@ -61,7 +61,7 @@ class RoutineAddPage extends StatelessWidget {
     );
   }
 
-    GetBuilder buildRoutineAddHeader(double height) {
+  GetBuilder buildRoutineAddHeader(double height) {
     return GetBuilder<RoutineAddController>(builder: (controller) {
       List<String> messageList = [
         "원하는 동작을 추가해주세요",
@@ -76,7 +76,10 @@ class RoutineAddPage extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, color: Colors.grey,),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.grey,
+              ),
               onPressed: () => controller.back(),
             ),
           ),
@@ -321,7 +324,13 @@ class RoutineAddBody extends StatelessWidget {
       children: [
         Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
         SizedBox(height: 0.01 * height),
-        SizedBox(height: 0.03 * height),
+        Wrap(
+          children: [
+            for (String name in ["다이어트", "건강", "헬스", "홈 트레이닝"])
+              buildMotionTypeBox(name),
+          ],
+        ),
+        SizedBox(height: 0.05 * height),
         Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
         SizedBox(height: 0.01 * height),
         Row(
@@ -332,9 +341,30 @@ class RoutineAddBody extends StatelessWidget {
             buildDifficultyBox("어려움"),
           ],
         ),
-        SizedBox(height: 0.045 * height),
+        SizedBox(height: 0.05 * height),
         buildBreakTimeInputBox(),
       ],
+    );
+  }
+
+  Container buildMotionTypeBox(String name) {
+    return Container(
+      margin: EdgeInsets.all(0.01 * width),
+      padding: EdgeInsets.fromLTRB(
+          0.05 * width, 0.02 * width, 0.05 * width, 0.02 * width),
+      child: Text(name),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0.6,
+            blurRadius: 1,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
     );
   }
 
