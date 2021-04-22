@@ -6,6 +6,7 @@ import 'package:mytin/widgets/button_box.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
 import 'package:mytin/widgets/progress_page_icon.dart';
+import 'package:mytin/widgets/text_input_box.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override
@@ -283,39 +284,11 @@ class RoutineAddBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("루틴 명", style: TextStyle(fontSize: 0.02 * height)),
-        buildInfoInputBox("ex) 키크기 운동", 1),
+        TextInputBox("ex) 키크기 운동", 1),
         Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * height)),
-        buildInfoInputBox("ex) 고무밴드, 우유", 1),
+        TextInputBox("ex) 고무밴드, 우유", 1),
         Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),
-        buildInfoInputBox("ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴", 5),
-      ],
-    );
-  }
-
-  Column buildInfoInputBox(String text, int line) {
-    return Column(
-      children: [
-        SizedBox(height: 0.01 * height),
-        SizedBox(
-          child: TextField(
-            maxLines: line,
-            decoration: InputDecoration(
-              hintText: text,
-              fillColor: Colors.white,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: Colors.grey, width: 0.0),
-              ),
-              hintStyle:
-                  TextStyle(fontSize: 0.02 * height, color: Colors.black26),
-            ),
-            textAlignVertical: TextAlignVertical.center,
-          ),
-          height: 0.06 * height + 0.025 * (line - 1) * height,
-          width: 0.8 * width,
-        ),
-        SizedBox(height: 0.025 * height),
+        TextInputBox("ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴", 5),
       ],
     );
   }
