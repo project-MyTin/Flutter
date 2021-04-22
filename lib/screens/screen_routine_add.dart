@@ -61,7 +61,7 @@ class RoutineAddPage extends StatelessWidget {
     );
   }
 
-  GetBuilder buildRoutineAddHeader(double height) {
+    GetBuilder buildRoutineAddHeader(double height) {
     return GetBuilder<RoutineAddController>(builder: (controller) {
       List<String> messageList = [
         "원하는 동작을 추가해주세요",
@@ -76,8 +76,8 @@ class RoutineAddPage extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios, color: Colors.grey,),
+              onPressed: () => controller.back(),
             ),
           ),
           ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.38),

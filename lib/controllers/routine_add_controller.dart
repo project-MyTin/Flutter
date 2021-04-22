@@ -27,6 +27,17 @@ class RoutineAddController extends GetxController {
     update();
   }
 
+  void back() {
+    if (part == 1)
+      return;
+    else if (part == 4)
+      part = 1;
+    else
+      part--;
+
+    update();
+  }
+
   void submit() {
     // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
     update();
@@ -38,5 +49,9 @@ class RoutineAddController extends GetxController {
     final MotionElement item = motionList.removeAt(oldIndex);
     motionList.insert(newIndex, item);
     update();
+  }
+
+  void printObject() {
+    print(this);
   }
 }
