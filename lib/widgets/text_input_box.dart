@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextInputBox extends StatelessWidget {
-  final String text;
+  final String hint, text, type;
   final int line;
+  final Function function;
 
-  TextInputBox(this.text, this.line);
+  TextInputBox(this.hint, this.text, this.line, this.function, this.type);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,10 @@ class TextInputBox extends StatelessWidget {
       children: [
         SizedBox(height: 0.01 * height),
         SizedBox(
-          child: TextField(
+          child: TextFormField(
             maxLines: line,
             decoration: InputDecoration(
-              hintText: text,
+              hintText: hint,
               fillColor: Colors.white,
               filled: true,
               enabledBorder: OutlineInputBorder(
@@ -28,7 +29,9 @@ class TextInputBox extends StatelessWidget {
               hintStyle:
               TextStyle(fontSize: 0.02 * height, color: Colors.black26),
             ),
+            initialValue: text,   // 처음 채우는 값
             textAlignVertical: TextAlignVertical.center,
+            onChanged: (newText) => function(type, newText),
           ),
           height: 0.06 * height + 0.025 * (line - 1) * height,
           width: 0.8 * width,

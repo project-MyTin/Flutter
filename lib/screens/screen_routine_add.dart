@@ -280,15 +280,34 @@ class RoutineAddBody extends StatelessWidget {
   }
 
   Column buildFourthBody() {
+    RoutineAddController controller = Get.find<RoutineAddController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("루틴 명", style: TextStyle(fontSize: 0.02 * height)),
-        TextInputBox("ex) 키크기 운동", 1),
+        TextInputBox(
+          "ex) 키크기 운동",
+          controller.routineName,
+          1,
+          controller.textChangeHandler,
+          "name",
+        ),
         Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * height)),
-        TextInputBox("ex) 고무밴드, 우유", 1),
+        TextInputBox(
+          "ex) 고무밴드, 우유",
+          controller.routineMaterials,
+          1,
+          controller.textChangeHandler,
+          "materials",
+        ),
         Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),
-        TextInputBox("ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴", 5),
+        TextInputBox(
+          "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
+          controller.routineDescription,
+          5,
+          controller.textChangeHandler,
+          "description",
+        ),
       ],
     );
   }
