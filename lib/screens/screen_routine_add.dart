@@ -61,42 +61,43 @@ class RoutineAddPage extends StatelessWidget {
     );
   }
 
-  Column buildRoutineAddHeader(double height) {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
-            onPressed: () {},
-          ),
-        ),
-        GetBuilder<RoutineAddController>(
-            builder: (controller) =>
-                ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.38)),
-        Text(
-          "루틴 등록하기",
-          style: TextStyle(fontSize: 0.045 * height),
-        ),
-        GetBuilder<RoutineAddController>(builder: (controller) {
-          List<String> messageList = [
-            "원하는 동작을 추가해주세요",
-            "원하는 동작을 선택해주세요",
-            "동작과 관련된 세부정보를 입력해주세요",
-            "루틴명과 준비물, 설명을 입력해주세요",
-            "루틴의 유형과 난이도, 쉬는 시간을 입력해주세요",
-          ];
+  GetBuilder buildRoutineAddHeader(double height) {
+    return GetBuilder<RoutineAddController>(builder: (controller) {
+      List<String> messageList = [
+        "원하는 동작을 추가해주세요",
+        "원하는 동작을 선택해주세요",
+        "동작과 관련된 세부정보를 입력해주세요",
+        "루틴명과 준비물, 설명을 입력해주세요",
+        "루틴의 유형과 난이도, 쉬는 시간을 입력해주세요",
+      ];
 
-          return Text(
+      return Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {},
+            ),
+          ),
+          ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.38),
+          Text(
+            "루틴 등록하기",
+            style: TextStyle(
+                fontSize: 0.045 * height, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 0.007 * height),
+          Text(
             messageList[controller.part - 1],
             style: TextStyle(
-              fontSize: 0.019 * height,
+              fontSize: 0.018 * height,
               color: Colors.grey,
+              fontWeight: FontWeight.w500,
             ),
-          );
-        }),
-      ],
-    );
+          ),
+        ],
+      );
+    });
   }
 }
 
