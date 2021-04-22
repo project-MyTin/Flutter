@@ -3,6 +3,8 @@ import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_detail.dart';
 
 class RoutineAddController extends GetxController {
+  List<String> difficulty = ["초급", "중급", "고급"];
+  List<String> type = [];
   int part = 1;
 
   // List<MotionElement> motionList = [];

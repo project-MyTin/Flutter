@@ -318,32 +318,32 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildFifthBody() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.01 * height),
-        Wrap(
-          children: [
-            for (String name in ["다이어트", "건강", "헬스", "홈 트레이닝"])
-              buildMotionTypeBox(name),
-          ],
-        ),
-        SizedBox(height: 0.05 * height),
-        Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.01 * height),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            buildDifficultyBox("쉬움"),
-            buildDifficultyBox("보통"),
-            buildDifficultyBox("어려움"),
-          ],
-        ),
-        SizedBox(height: 0.05 * height),
-        buildBreakTimeInputBox(),
-      ],
+  GetBuilder buildFifthBody() {
+    return GetBuilder<RoutineAddController>(
+      builder: (controller) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
+          SizedBox(height: 0.01 * height),
+          Wrap(
+            children: [
+              for (String name in controller.type) buildMotionTypeBox(name),
+            ],
+          ),
+          SizedBox(height: 0.05 * height),
+          Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
+          SizedBox(height: 0.01 * height),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              for (String difficulty in controller.difficulty)
+                buildDifficultyBox(difficulty),
+            ],
+          ),
+          SizedBox(height: 0.05 * height),
+          buildBreakTimeInputBox(),
+        ],
+      ),
     );
   }
 
