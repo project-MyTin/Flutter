@@ -6,6 +6,7 @@ class RoutineAddController extends GetxController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
+  String currentDifficulty = "";
 
   // List<MotionElement> motionList = [];
   List<MotionElement> motionList = routine.motions;
@@ -55,5 +56,10 @@ class RoutineAddController extends GetxController {
 
   void printObject() {
     print(this);
+  }
+
+  void difficultyToggle(String difficulty) {
+    currentDifficulty = difficulty;
+    update();
   }
 }

@@ -313,7 +313,10 @@ class RoutineAddBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               for (String difficulty in controller.difficulty)
-                CircleButtonBox(difficulty),
+                CircleButtonBox(
+                    difficulty,
+                    difficulty == controller.currentDifficulty,
+                    controller.difficultyToggle),
             ],
           ),
           SizedBox(height: 0.05 * height),
