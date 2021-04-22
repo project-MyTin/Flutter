@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/countdown_controller.dart';
+import 'package:mytin/controllers/routine_run_controller.dart';
 
 class TimeProgressIndicator extends StatefulWidget {
   final double width, height;
