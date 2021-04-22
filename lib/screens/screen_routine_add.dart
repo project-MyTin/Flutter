@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/widgets/button_box.dart';
+import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
 import 'package:mytin/widgets/progress_page_icon.dart';
 
@@ -327,7 +329,7 @@ class RoutineAddBody extends StatelessWidget {
           SizedBox(height: 0.01 * height),
           Wrap(
             children: [
-              for (String name in controller.type) buildMotionTypeBox(name),
+              for (String name in controller.type) ButtonBox(name),
               // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
             ],
           ),
@@ -338,47 +340,13 @@ class RoutineAddBody extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               for (String difficulty in controller.difficulty)
-                buildDifficultyBox(difficulty),
+                CircleButtonBox(difficulty),
             ],
           ),
           SizedBox(height: 0.05 * height),
           buildBreakTimeInputBox(),
         ],
       ),
-    );
-  }
-
-  Container buildMotionTypeBox(String name) {
-    return Container(
-      margin: EdgeInsets.all(0.01 * width),
-      padding: EdgeInsets.fromLTRB(
-          0.05 * width, 0.02 * width, 0.05 * width, 0.02 * width),
-      child: Text(name),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 0.6,
-            blurRadius: 1,
-            offset: Offset(0, 1),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container buildDifficultyBox(String text) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 0.022 * height),
-      ),
-      width: 0.24 * width,
-      height: 0.24 * width,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black12),
     );
   }
 
