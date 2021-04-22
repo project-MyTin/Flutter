@@ -11,7 +11,12 @@ class ButtonBox extends StatefulWidget {
 }
 
 class _ButtonBoxState extends State<ButtonBox> {
-  bool isClicked = false;
+  bool isSelected = false;
+  void toggle() {
+    setState(() {
+      isSelected = !isSelected;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +30,13 @@ class _ButtonBoxState extends State<ButtonBox> {
             0.05 * width, 0.02 * width, 0.05 * width, 0.02 * width),
         child: Text(
           widget.name,
-          style: TextStyle(color: isClicked ? Colors.white : Colors.black87),
+          style: TextStyle(color: isSelected ? Colors.white : Colors.black87),
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: isClicked ? Colors.black54 : Colors.white,
+          color: isSelected ? Colors.black54 : Colors.white,
           boxShadow: [
-            if (!isClicked)
+            if (!isSelected)
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 0.6,
@@ -41,11 +46,7 @@ class _ButtonBoxState extends State<ButtonBox> {
           ],
         ),
       ),
-      onTap: () {
-        setState(() {
-          isClicked = !isClicked;
-        });
-      },
+      onTap: toggle
     );
   }
 }
