@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/image_circular.dart';
+import 'package:mytin/widgets/progress_page_icon.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override
@@ -21,7 +22,7 @@ class RoutineAddPage extends StatelessWidget {
                 buildRoutineAddHeader(height),
                 RoutineAddBody(height: height, width: width),
                 if (controller.part < 5)
-                  buildRoutineAddNextPageButton(height, width)
+                  buildRoutineAddNextPageButton(height, width),
               ],
             ),
           ),
@@ -70,6 +71,9 @@ class RoutineAddPage extends StatelessWidget {
             onPressed: () {},
           ),
         ),
+        GetBuilder<RoutineAddController>(
+            builder: (controller) =>
+                ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.38)),
         Text(
           "루틴 등록하기",
           style: TextStyle(fontSize: 0.045 * height),
@@ -316,7 +320,6 @@ class RoutineAddBody extends StatelessWidget {
       children: [
         Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
         SizedBox(height: 0.01 * height),
-
         SizedBox(height: 0.03 * height),
         Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
         SizedBox(height: 0.01 * height),
