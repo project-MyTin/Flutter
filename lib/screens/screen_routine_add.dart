@@ -12,20 +12,38 @@ class RoutineAddPage extends StatelessWidget {
     Get.put(RoutineAddController());
 
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          // SingleChildScrollView 로 키보드 열 때 overflow 제거!
-          child: GetBuilder<RoutineAddController>(
-            builder: (controller) => Column(
+      child: GetBuilder<RoutineAddController>(
+        builder: (controller) => Scaffold(
+          body: SingleChildScrollView(
+            // SingleChildScrollView 로 키보드 열 때 overflow 제거!
+            child: Column(
               children: [
                 buildRoutineAddHeader(height),
                 RoutineAddBody(height: height, width: width),
                 if (controller.part < 5)
-                  buildRoutineAddNextPageButton(height, width),
+                  buildRoutineAddNextPageButton(height, width)
               ],
             ),
           ),
+          bottomNavigationBar: (controller.part > 4)
+              ? buildRoutineAddBottomAppBar(height, width)
+              : buildRoutineAddBottomAppBar(0, 0),
         ),
+      ),
+    );
+  }
+
+  Container buildRoutineAddBottomAppBar(double height, double width) {
+    return Container(
+      width: width,
+      height: 0.065 * height,
+      color: Colors.grey,
+      child: TextButton(
+        child: Text(
+          "등록 하기",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () => Get.find<RoutineAddController>().submit(),
       ),
     );
   }
@@ -284,41 +302,39 @@ class RoutineAddBody extends StatelessWidget {
             ),
             textAlignVertical: TextAlignVertical.center,
           ),
-          height: 0.06 * height + 0.025 * (line-1) * height,
+          height: 0.06 * height + 0.025 * (line - 1) * height,
           width: 0.8 * width,
         ),
-        SizedBox(height: 0.04 * height),
+        SizedBox(height: 0.025 * height),
       ],
     );
   }
 
   Column buildFifthBody() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: OutlinedButton(
-              onPressed: () => Get.find<RoutineAddController>().moveTo(1),
-              child: Text("5")),
+        Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.03 * height),
+        Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.03 * height),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("동작 쉬는 시간", style: TextStyle(fontSize: 0.02 * height)),
+                Text("동작 사이마다 쉬는 시간을 입력하세요",
+                    style: TextStyle(fontSize: 0.015 * height, color: Colors.grey)),
+              ],
+            ),
+            buildTimeInputBox("10", "초"),
+          ],
         ),
-        SizedBox(height: 0.3 * height),
-        buildRoutineAddBottomAppBar(height, width)
-      ],
-    );
-  }
+        SizedBox(height: 0.01 * height),
 
-  Container buildRoutineAddBottomAppBar(double height, double width) {
-    return Container(
-      width: width,
-      height: 0.065 * height,
-      color: Colors.grey,
-      child: TextButton(
-        child: Text(
-          "등록 하기",
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () => Get.find<RoutineAddController>().submit(),
-      ),
+      ],
     );
   }
 }

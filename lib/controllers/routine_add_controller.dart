@@ -30,6 +30,7 @@ class RoutineAddController extends GetxController {
   void submit() {
     // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
     update();
+    moveTo(1);
   }
 
   void changeSequence(oldIndex, newIndex) {
