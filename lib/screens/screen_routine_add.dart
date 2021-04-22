@@ -302,7 +302,12 @@ class RoutineAddBody extends StatelessWidget {
           SizedBox(height: 0.01 * height),
           Wrap(
             children: [
-              for (String name in controller.type) ButtonBox(name),
+              for (String name in controller.type)
+                ButtonBox(
+                  name,
+                  controller.currentType.contains(name),
+                  controller.typeToggle,
+                ),
               // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
             ],
           ),
