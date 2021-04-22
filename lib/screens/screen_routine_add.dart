@@ -315,25 +315,53 @@ class RoutineAddBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.01 * height),
+
         SizedBox(height: 0.03 * height),
         Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.03 * height),
+        SizedBox(height: 0.01 * height),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("동작 쉬는 시간", style: TextStyle(fontSize: 0.02 * height)),
-                Text("동작 사이마다 쉬는 시간을 입력하세요",
-                    style: TextStyle(fontSize: 0.015 * height, color: Colors.grey)),
-              ],
-            ),
-            buildTimeInputBox("10", "초"),
+            buildDifficultyBox("쉬움"),
+            buildDifficultyBox("보통"),
+            buildDifficultyBox("어려움"),
           ],
         ),
-        SizedBox(height: 0.01 * height),
+        SizedBox(height: 0.045 * height),
+        buildBreakTimeInputBox(),
+      ],
+    );
+  }
 
+  Container buildDifficultyBox(String text) {
+    return Container(
+      alignment: Alignment.center,
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 0.022 * height),
+      ),
+      width: 0.24 * width,
+      height: 0.24 * width,
+      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black12),
+    );
+  }
+
+  Row buildBreakTimeInputBox() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("동작 쉬는 시간", style: TextStyle(fontSize: 0.02 * height)),
+            Text(
+              "동작 사이마다 쉬는 시간을 입력하세요",
+              style: TextStyle(fontSize: 0.015 * height, color: Colors.grey),
+            ),
+          ],
+        ),
+        buildTimeInputBox("10", "초"),
       ],
     );
   }
