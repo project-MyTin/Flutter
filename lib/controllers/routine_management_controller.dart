@@ -11,6 +11,9 @@ class RoutineManagementController extends GetxController {
   String routineName = "";
   String routineMaterials = "";
   String routineDescription = "";
+  int breakTime;
+  int motionTime;
+  int motionCount;
 
   // List<MotionElement> motionList = [];
   List<MotionElement> motionList = routine.motions;
@@ -85,6 +88,13 @@ class RoutineManagementController extends GetxController {
       routineMaterials = text;
     else if (type == "description")
       routineDescription = text;
+    else if (type == "time")
+      motionTime = int.parse(text);
+    else if (type == "count")
+      motionTime = int.parse(text);
+    else if (type == "breakTime")
+      motionTime = int.parse(text);
+
 
     update();
     printObject();

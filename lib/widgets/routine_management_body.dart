@@ -104,8 +104,8 @@ class RoutineManagementBody extends StatelessWidget {
               Row(
                 children: [
                   TextInputBox(
-                    hint: "6",
-                    text: "",
+                    hint: "4",
+                    text: controller.motionTime?.toString(),
                     function: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
@@ -117,8 +117,8 @@ class RoutineManagementBody extends StatelessWidget {
               Row(
                 children: [
                   TextInputBox(
-                    hint: "6",
-                    text: "",
+                    hint: "5",
+                    text: controller.motionCount?.toString(),
                     function: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
@@ -211,6 +211,7 @@ class RoutineManagementBody extends StatelessWidget {
   }
 
   Row buildBreakTimeInputBox() {
+    RoutineManagementController controller = Get.find<RoutineManagementController>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -227,10 +228,10 @@ class RoutineManagementBody extends StatelessWidget {
         Row(
           children: [
             TextInputBox(
-              hint: "6",
-              text: "",
+              hint: "10",
+              text: controller.breakTime?.toString(),
               function:
-                  Get.find<RoutineManagementController>().textChangeHandler,
+                  controller.textChangeHandler,
               line: 1,
               widthSize: 0.2,
               type: "breakTime",
