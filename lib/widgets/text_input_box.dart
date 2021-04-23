@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 class TextInputBox extends StatelessWidget {
   final String hint, text, type;
   final int line;
+  final double widthSize;
   final Function function;
 
-  TextInputBox(this.hint, this.text, this.line, this.function, this.type);
+  TextInputBox({this.hint, this.text, this.line, this.widthSize, this.function, this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +31,11 @@ class TextInputBox extends StatelessWidget {
               TextStyle(fontSize: 0.02 * height, color: Colors.black26),
             ),
             initialValue: text,   // 처음 채우는 값
-            textAlignVertical: TextAlignVertical.center,
+            textAlignVertical: TextAlignVertical.bottom,
             onChanged: (newText) => function(type, newText),
           ),
           height: 0.06 * height + 0.025 * (line - 1) * height,
-          width: 0.8 * width,
+          width: widthSize * width,
         ),
         SizedBox(height: 0.025 * height),
       ],

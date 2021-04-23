@@ -87,6 +87,7 @@ class RoutineManagementPage extends StatelessWidget {
               icon: Icon(
                 Icons.arrow_back_ios,
                 color: Colors.grey,
+                size: 0.04 * height,
               ),
               onPressed: () => controller.back(),
             ),

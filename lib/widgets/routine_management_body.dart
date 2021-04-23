@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_management_controller.dart';
-import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
+import 'package:mytin/widgets/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 
 import 'button_box.dart';
@@ -56,45 +56,8 @@ class RoutineManagementBody extends StatelessWidget {
           ),
           margin: EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.02 * height),
         ),
-        buildReorderAbleListBox(height),
+        MotionReorderAbleListBox(),
       ],
-    );
-  }
-
-  Container buildReorderAbleListBox(double height) {
-    return Container(
-      child: SizedBox(
-        height: 0.4 * height,
-        child: GetBuilder<RoutineManagementController>(
-          builder: (controller) => ReorderableListView(
-            children: [
-              for (int i = 0; i < controller.motionList.length; i++)
-                buildMotionTile(i, controller.motionList[i]),
-            ],
-            onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
-          ),
-        ),
-      ),
-      padding: EdgeInsets.all(0.01 * height),
-      decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
-    );
-  }
-
-  Container buildMotionTile(int i, MotionElement motion) {
-    return Container(
-      key: ValueKey(i),
-      child: ListTile(
-        leading: ImageCircular(url: motion.imageUrl, diameter: 0.06 * height),
-        title: Text(motion.name),
-        subtitle: Text(motion.part),
-        trailing: Text(motion.count.toString() + "회"),
-      ),
-      margin: EdgeInsets.all(0.005 * height),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
     );
   }
 
@@ -104,7 +67,8 @@ class RoutineManagementBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () => Get.find<RoutineManagementController>().moveTo(3),
+              onPressed: () =>
+                  Get.find<RoutineManagementController>().moveTo(3),
               child: Text("2")),
         )
       ],
@@ -132,12 +96,12 @@ class RoutineManagementBody extends StatelessWidget {
               Text(
                 "동작 시간",
                 style:
-                TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
               ),
               Text(
                 "동작 횟수",
                 style:
-                TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
               ),
             ],
           ),
@@ -145,8 +109,32 @@ class RoutineManagementBody extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              buildTimeInputBox("10", "초"),
-              buildTimeInputBox("5", "회"),
+              Row(
+                children: [
+                  TextInputBox(
+                    hint: "6",
+                    text: "",
+                    function: controller.textChangeHandler,
+                    widthSize: 0.2,
+                    line: 1,
+                    type: "time",
+                  ),
+                  Text("  (초)", style: TextStyle(color: Colors.black54)),
+                ],
+              ),
+              Row(
+                children: [
+                  TextInputBox(
+                    hint: "6",
+                    text: "",
+                    function: controller.textChangeHandler,
+                    widthSize: 0.2,
+                    line: 1,
+                    type: "count",
+                  ),
+                  Text("  (회)", style: TextStyle(color: Colors.black54)),
+                ],
+              )
             ],
           ),
           SizedBox(height: 0.05 * height)
@@ -155,59 +143,38 @@ class RoutineManagementBody extends StatelessWidget {
     );
   }
 
-  Row buildTimeInputBox(String text, String unit) {
-    return Row(
-      children: [
-        SizedBox(
-          child: TextField(
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.end,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: text,
-                hintStyle:
-                TextStyle(fontSize: 0.026 * height, color: Colors.black26)),
-            textAlignVertical: TextAlignVertical.bottom,
-          ),
-          height: 0.05 * height,
-          width: 0.2 * width,
-        ),
-        Text(
-          " ($unit)",
-          style: TextStyle(color: Colors.black54),
-        ),
-      ],
-    );
-  }
-
   Column buildFourthBody() {
-    RoutineManagementController controller = Get.find<RoutineManagementController>();
+    RoutineManagementController controller =
+        Get.find<RoutineManagementController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("루틴 명", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
-          "ex) 키크기 운동",
-          controller.routineName,
-          1,
-          controller.textChangeHandler,
-          "name",
+          hint: "ex) 키크기 운동",
+          text: controller.routineName,
+          function: controller.textChangeHandler,
+          widthSize: 0.8,
+          line: 1,
+          type: "name",
         ),
         Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
-          "ex) 고무밴드, 우유",
-          controller.routineMaterials,
-          1,
-          controller.textChangeHandler,
-          "materials",
+          hint: "ex) 고무밴드, 우유",
+          text: controller.routineMaterials,
+          function: controller.textChangeHandler,
+          widthSize: 0.8,
+          line: 1,
+          type: "materials",
         ),
         Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
-          "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
-          controller.routineDescription,
-          5,
-          controller.textChangeHandler,
-          "description",
+          hint: "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
+          text: controller.routineDescription,
+          function: controller.textChangeHandler,
+          widthSize: 0.8,
+          line: 5,
+          type: "description",
         ),
       ],
     );
@@ -265,7 +232,19 @@ class RoutineManagementBody extends StatelessWidget {
             ),
           ],
         ),
-        buildTimeInputBox("10", "초"),
+        Row(
+          children: [
+            TextInputBox(
+              hint: "6",
+              text: "",
+              function: Get.find<RoutineManagementController>().textChangeHandler,
+              line: 1,
+              widthSize: 0.2,
+              type: "breakTime",
+            ),
+            Text("  (초)", style: TextStyle(color: Colors.black54)),
+          ],
+        ),
       ],
     );
   }
