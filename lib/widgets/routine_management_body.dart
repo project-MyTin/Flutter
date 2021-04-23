@@ -24,7 +24,7 @@ class RoutineManagementBody extends StatelessWidget {
                 buildThirdBody(),
                 buildFourthBody(),
                 buildFifthBody()
-              ][controller.part]),
+              ][controller.part-1]),
     );
   }
 
