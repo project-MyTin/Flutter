@@ -6,11 +6,11 @@ class RoutineManagementController extends GetxController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
-  List<String> currentType = [];
-  String currentDifficulty = "";
-  String routineName = "";
-  String routineMaterials = "";
-  String routineDescription = "";
+  String currentType;
+  String currentDifficulty;
+  String routineName;
+  String routineMaterials;
+  String routineDescription;
   int breakTime;
   int motionTime;
   int motionCount;
@@ -62,8 +62,9 @@ class RoutineManagementController extends GetxController {
   }
 
   void printObject() {
-    print("currentDifficulty: $currentDifficulty / currentType: $currentType /" +
-        "name: $routineName / materials: $routineMaterials / description: $routineDescription");
+    print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
+        "name: $routineName / materials: $routineMaterials / description: $routineDescription / " +
+    "time: $motionTime / count: $motionCount / breakTime: $breakTime");
   }
 
   void difficultyToggle(String difficulty) {
@@ -73,10 +74,7 @@ class RoutineManagementController extends GetxController {
   }
 
   void typeToggle(String type) {
-    if (currentType.contains(type))
-      currentType.remove(type);
-    else
-      currentType.add(type);
+    currentType = type;
     update();
     printObject();
   }
@@ -91,10 +89,9 @@ class RoutineManagementController extends GetxController {
     else if (type == "time")
       motionTime = int.parse(text);
     else if (type == "count")
-      motionTime = int.parse(text);
+      motionCount = int.parse(text);
     else if (type == "breakTime")
-      motionTime = int.parse(text);
-
+      breakTime = int.parse(text);
 
     update();
     printObject();

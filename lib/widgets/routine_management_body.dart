@@ -144,7 +144,7 @@ class RoutineManagementBody extends StatelessWidget {
         Text("루틴 명", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
           hint: "ex) 키크기 운동",
-          text: controller.routineName,
+          text: controller.routineName ?? "",
           function: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
@@ -153,7 +153,7 @@ class RoutineManagementBody extends StatelessWidget {
         Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
           hint: "ex) 고무밴드, 우유",
-          text: controller.routineMaterials,
+          text: controller.routineMaterials ?? "",
           function: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
@@ -162,7 +162,7 @@ class RoutineManagementBody extends StatelessWidget {
         Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
           hint: "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
-          text: controller.routineDescription,
+          text: controller.routineDescription ?? "",
           function: controller.textChangeHandler,
           widthSize: 0.8,
           line: 5,
@@ -184,7 +184,7 @@ class RoutineManagementBody extends StatelessWidget {
               for (String name in controller.type)
                 ButtonBox(
                   name,
-                  controller.currentType.contains(name),
+                  controller.currentType == name,
                   controller.typeToggle,
                 ),
               // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
