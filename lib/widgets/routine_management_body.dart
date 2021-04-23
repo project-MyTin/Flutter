@@ -17,22 +17,14 @@ class RoutineManagementBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
-      child: GetBuilder<RoutineManagementController>(builder: (controller) {
-        switch (controller.part) {
-          case 1:
-            return buildFirstBody(height, width);
-          case 2:
-            return buildSecondBody();
-          case 3:
-            return buildThirdBody();
-          case 4:
-            return buildFourthBody();
-          case 5:
-            return buildFifthBody();
-          default:
-            return Container();
-        }
-      }),
+      child: GetBuilder<RoutineManagementController>(
+          builder: (controller) => [
+                buildFirstBody(height, width),
+                buildSecondBody(),
+                buildThirdBody(),
+                buildFourthBody(),
+                buildFifthBody()
+              ][controller.part]),
     );
   }
 
@@ -237,7 +229,8 @@ class RoutineManagementBody extends StatelessWidget {
             TextInputBox(
               hint: "6",
               text: "",
-              function: Get.find<RoutineManagementController>().textChangeHandler,
+              function:
+                  Get.find<RoutineManagementController>().textChangeHandler,
               line: 1,
               widthSize: 0.2,
               type: "breakTime",
