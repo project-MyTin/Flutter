@@ -4,8 +4,7 @@ class RoutineListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width,
-        height = screenSize.height;
+    double width = screenSize.width, height = screenSize.height;
 
     return SafeArea(
       child: Scaffold(
@@ -14,14 +13,17 @@ class RoutineListPage extends StatelessWidget {
         // ),
         body: Column(
           children: <Widget>[
+            ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text("$index"),
 
-            Container(
-              child: Text(""),
-            ),
+                  );
+                }),
           ],
         ),
       ),
     );
   }
 }
-

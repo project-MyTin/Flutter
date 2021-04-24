@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/widgets/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
   @override
@@ -92,7 +93,7 @@ class RoutineDetailPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
           for (int i = 0; i < routine.motions.length; i++)
-            MotionTile(i, routine.motions[i]) // 위젯에서 반복문 쓰기!
+            MotionListTile(i, routine.motions[i], height) // 위젯에서 반복문 쓰기!
         ],
       ),
     );
@@ -140,34 +141,3 @@ class RoutineDetailPage extends StatelessWidget {
   }
 }
 
-class MotionTile extends StatelessWidget {
-  MotionTile(this.index, this.motion);
-
-  final int index;
-  final MotionElement motion;
-
-  @override
-  Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
-    return Container(
-      key: ValueKey(index),
-      margin: EdgeInsets.all(0.005 * height),
-      decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
-          borderRadius: BorderRadius.all(Radius.circular(15))),
-      child: ListTile(
-        leading: Image.network(
-          motion.imageUrl,
-          fit: BoxFit.cover,
-          width: 0.12 * width,
-          height: 0.12 * width,
-        ),
-        title: Text(motion.name),
-        subtitle: Text(motion.part),
-        trailing: Text(motion.count.toString() + "회"),
-      ),
-    );
-  }
-}
