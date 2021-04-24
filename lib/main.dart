@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
-import 'package:mytin/screens/screen_routine_add.dart';
-import 'package:mytin/screens/screen_routine_list.dart';
-import 'package:mytin/screens/screen_routine_run.dart';
-import 'package:mytin/screens/screens_routine_detail.dart';
+import 'package:mytin/screens/routine/screen_routine_add.dart';
+import 'package:mytin/screens/routine/screen_routine_list.dart';
+import 'package:mytin/screens/routine/screen_routine_run.dart';
+import 'package:mytin/screens/routine/screens_routine_detail.dart';
 
 
 void main() {

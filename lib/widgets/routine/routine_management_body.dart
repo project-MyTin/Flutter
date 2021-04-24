@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_management_controller.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
-import 'package:mytin/widgets/motion_reorder_able_list_box.dart';
+import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 
-import 'button_box.dart';
+import '../button_box.dart';
 
 class RoutineManagementBody extends StatelessWidget {
   final double height, width;

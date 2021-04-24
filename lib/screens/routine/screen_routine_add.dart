@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mytin/screens/screen_routine_management.dart';
+import 'file:///C:/Users/user/Documents/mytin/lib/screens/routine/screen_routine_management.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override

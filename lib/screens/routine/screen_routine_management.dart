@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_management_controller.dart';
 import 'package:mytin/widgets/progress_page_icon.dart';
-import 'package:mytin/widgets/routine_management_body.dart';
+import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/routine_management_body.dart';
 
 enum Mode { add, edit }
 

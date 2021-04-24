@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_management_controller.dart';
-import 'package:mytin/widgets/motion_list_tile.dart';
+import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/motion_list_tile.dart';
 
 class MotionReorderAbleListBox extends StatelessWidget {
   @override
