@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mytin/dummies/routine_list_dummy.dart';
+import 'package:mytin/widgets/routine/routine_list_tile.dart';
 
 class RoutineListPage extends StatelessWidget {
   @override
@@ -11,17 +13,9 @@ class RoutineListPage extends StatelessWidget {
         // appBar: AppBar(
         //   title: Text("루틴 리스트 페이지"),
         // ),
-        body: Column(
-          children: <Widget>[
-            ListView.builder(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text("$index"),
-
-                  );
-                }),
-          ],
+        body: ListView.builder(
+                itemCount: routineList.length,
+                itemBuilder: (context, index) => RoutineListTile(routineList[index])
         ),
       ),
     );
