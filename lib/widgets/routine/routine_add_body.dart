@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/routine_management_controller.dart';
+import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
 import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/motion_reorder_able_list_box.dart';
@@ -8,16 +8,16 @@ import 'package:mytin/widgets/text_input_box.dart';
 
 import '../button_box.dart';
 
-class RoutineManagementBody extends StatelessWidget {
+class RoutineAddBody extends StatelessWidget {
   final double height, width;
 
-  RoutineManagementBody({this.height, this.width});
+  RoutineAddBody({this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
-      child: GetBuilder<RoutineManagementController>(
+      child: GetBuilder<RoutineAddController>(
           builder: (controller) => [
                 buildFirstBody(height, width),
                 buildSecondBody(),
@@ -34,7 +34,7 @@ class RoutineManagementBody extends StatelessWidget {
         Container(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-            onPressed: () => Get.find<RoutineManagementController>().moveTo(2),
+            onPressed: () => Get.find<RoutineAddController>().moveTo(2),
             child: Text(
               "  동작 추가하기  ",
               style: TextStyle(fontSize: 0.015 * height),
@@ -60,7 +60,7 @@ class RoutineManagementBody extends StatelessWidget {
           alignment: Alignment.topRight,
           child: OutlinedButton(
               onPressed: () =>
-                  Get.find<RoutineManagementController>().moveTo(3),
+                  Get.find<RoutineAddController>().moveTo(3),
               child: Text("2")),
         )
       ],
@@ -68,7 +68,7 @@ class RoutineManagementBody extends StatelessWidget {
   }
 
   GetBuilder buildThirdBody() {
-    return GetBuilder<RoutineManagementController>(
+    return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         children: [
           ImageCircular(
@@ -136,8 +136,8 @@ class RoutineManagementBody extends StatelessWidget {
   }
 
   Column buildFourthBody() {
-    RoutineManagementController controller =
-        Get.find<RoutineManagementController>();
+    RoutineAddController controller =
+        Get.find<RoutineAddController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -173,7 +173,7 @@ class RoutineManagementBody extends StatelessWidget {
   }
 
   GetBuilder buildFifthBody() {
-    return GetBuilder<RoutineManagementController>(
+    return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -211,7 +211,7 @@ class RoutineManagementBody extends StatelessWidget {
   }
 
   Row buildBreakTimeInputBox() {
-    RoutineManagementController controller = Get.find<RoutineManagementController>();
+    RoutineAddController controller = Get.find<RoutineAddController>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
