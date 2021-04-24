@@ -18,6 +18,7 @@ class TextInputBox extends StatelessWidget {
         SizedBox(height: 0.01 * height),
         SizedBox(
           child: TextFormField(
+            keyboardType: (["time", "count", "breakTime"].contains(type))? TextInputType.number : TextInputType.text,
             maxLines: line,
             decoration: InputDecoration(
               hintText: hint,

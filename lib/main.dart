@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
       ),
       // home: RoutineRunPage(),
-      // home: RoutineDetailPage(),
+      home: RoutineDetailPage(),
       // home: RoutineListPage(),
-      home: RoutineAddPage(),
+      // home: RoutineAddPage(),
     );
   }
 }
