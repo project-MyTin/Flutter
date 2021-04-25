@@ -18,8 +18,6 @@ class MotionGridTile extends StatelessWidget {
           Text(motion.name),
         ],
       ),
-      height: 100,
-      width: 100,
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
