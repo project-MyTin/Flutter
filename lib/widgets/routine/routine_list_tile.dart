@@ -35,10 +35,10 @@ class RoutineListTile extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    buildInfoColumn("소요시간", "10분", width),
-                    buildInfoColumn("난이도", "상급", width),
-                    buildInfoColumn("권한", "공식", width),
-                    buildInfoColumn("유형", "다이어트", width),
+                    buildInfoColumn("소요시간", routine.time.toString() + "분", width),
+                    buildInfoColumn("난이도", routine.difficulty, width),
+                    buildInfoColumn("권한", (routine.authority == Authority.admin)? "공식" : "비공식", width),
+                    buildInfoColumn("유형", routine.type, width),
                   ],
                 ),
               ],
