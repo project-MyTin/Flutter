@@ -21,7 +21,7 @@ class RoutineListPage extends StatelessWidget {
                 ? ContentListHeader("Routine", "Share your routine with people", () {})
                 : RoutineListTile(routineList[index - 1]),
           ),
-          color: Colors.black.withOpacity(0.04),
+          color: Colors.black.withOpacity(0.02),
         ),
       ),
     );

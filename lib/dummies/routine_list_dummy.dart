@@ -9,7 +9,7 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
   RoutineTile.fromMap({
     "id": 2,
@@ -19,7 +19,7 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
   RoutineTile.fromMap({
     "id": 3,
@@ -29,7 +29,7 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
   RoutineTile.fromMap({
     "id": 4,
@@ -39,7 +39,7 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
   RoutineTile.fromMap({
     "id": 5,
@@ -49,7 +49,7 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
   RoutineTile.fromMap({
     "id": 6,
@@ -59,6 +59,6 @@ List<RoutineTile> routineList = [
     "authority": Authority.admin,
     "difficulty": "상급",
     "type": "헬스",
-    "imageUrl": "https://lh3.googleusercontent.com/proxy/gEeGN-YhczQXlB3E-K05MFlg6o3RO7yqQXsHrXDXZUs1lDsE6yxd2Etyw_4GiZlIOXcqGTLCXjUYpD0qAOzMjcCsbk8kwrTpgG5P4QkkM3Q6BQv72IfZ6S0DLHgldYBmwfChOz2ay32Gj-H69-0WB_Nw2Bs96OWFQw",
+    "imageUrl": "https://user-images.githubusercontent.com/48408417/115976876-4924b600-a5ad-11eb-9b56-ae2ff3c28f6b.png",
   }),
 ];
