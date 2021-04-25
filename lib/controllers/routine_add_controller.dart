@@ -14,12 +14,16 @@ class RoutineAddController extends GetxController {
   int breakTime;
   int motionTime;
   int motionCount;
+  List<MotionElement> motionList = [];
+  MotionElement newMotion;
 
-  // List<MotionElement> motionList = [];
-  List<MotionElement> motionList = routine.motions;
+  RoutineAddController() {
+    // dummy 값으로 초기화
+    motionList = routine.motions;
+    newMotion = routine.motions[0];
 
-  // MotionElement newMotion;
-  MotionElement newMotion = routine.motions[0];
+    // TODO 서버 response 값으로 초기화
+  }
 
   void moveTo(int page) {
     part = page;
@@ -70,13 +74,11 @@ class RoutineAddController extends GetxController {
   void difficultyToggle(String difficulty) {
     currentDifficulty = difficulty;
     update();
-    printObject();
   }
 
   void typeToggle(String type) {
     currentType = type;
     update();
-    printObject();
   }
 
   void textChangeHandler(String type, String text) {
@@ -94,6 +96,5 @@ class RoutineAddController extends GetxController {
       breakTime = int.parse(text);
 
     update();
-    printObject();
   }
 }
