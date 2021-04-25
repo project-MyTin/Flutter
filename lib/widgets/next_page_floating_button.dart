@@ -1,3 +1,6 @@
+/*
+ 다음 페이지로 넘어가는 플로팅 버튼 위젯
+ */
 import 'package:flutter/material.dart';
 
 class NextPageFloatingButton extends StatelessWidget {
