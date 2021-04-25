@@ -3,8 +3,9 @@ import 'package:mytin/models/motion_tile.dart';
 
 class MotionGridTile extends StatelessWidget {
   final MotionTile motion;
+  final int index;
 
-  MotionGridTile(this.motion);
+  MotionGridTile(this.index, this.motion) : super(key: ValueKey(index));
 
   @override
   Widget build(BuildContext context) {
