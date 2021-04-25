@@ -13,12 +13,12 @@ class ProgressPageIcon extends StatelessWidget {
 
     return Padding(
       padding:
-          EdgeInsets.fromLTRB(rowPadding * width, 0.01 * height, rowPadding * width, 0.01 * height),
+          EdgeInsets.fromLTRB(rowPadding * width, 0.01 * height, rowPadding * width, 0.025 * height),
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0.0015 * height, 0, 0),
-            child: Divider(thickness: 0.003 * height, color: Colors.grey),
+            padding: EdgeInsets.fromLTRB(0, 0.0005 * height, 0, 0),
+            child: Divider(thickness: 0.002 * height, color: Colors.grey),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,9 +28,9 @@ class ProgressPageIcon extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: (i < currentPart) ? Colors.grey : Colors.white,
-                      border: Border.all(color: Colors.grey, width: 0.004 * height)),
-                  width: 0.045 * width,
-                  height: 0.045 * width,
+                      border: Border.all(color: Colors.grey, width: 0.002 * height)),
+                  width: 0.04 * width,
+                  height: 0.04 * width,
                 ),
             ],
           ),

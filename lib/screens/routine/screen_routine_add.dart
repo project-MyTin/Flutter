@@ -84,7 +84,7 @@ class RoutineAddPage extends StatelessWidget {
               onPressed: () => controller.back(),
             ),
           ),
-          ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.38),
+          ProgressPageIcon([1, 1, 1, 2, 3][controller.part - 1], 3, 0.41),
           Text(
             "루틴 등록하기",
             style: TextStyle(
