@@ -29,6 +29,7 @@ class RoutineAddPage extends StatelessWidget {
                   ][controller.part - 1],
                   part: controller.part - 1,
                   backPageFunc: Get.find<RoutineAddController>().back,
+                  pageNumbering: [1, 1, 1, 2, 3],
                 ),
                 RoutineAddBody(),
                 if (controller.part < 5)

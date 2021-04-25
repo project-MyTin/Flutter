@@ -5,8 +5,9 @@ class AddPageHeader extends StatelessWidget {
   final String title, subText;
   final int part;
   final Function backPageFunc;
+  final List<int> pageNumbering;
 
-  AddPageHeader({this.title, this.subText, this.part, this.backPageFunc});
+  AddPageHeader({this.title, this.subText, this.part, this.backPageFunc, this.pageNumbering});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class AddPageHeader extends StatelessWidget {
             onPressed: () => backPageFunc(),
           ),
         ),
-        ProgressPageIcon([1, 1, 1, 2, 3][part], 3, 0.41),
+        ProgressPageIcon(pageNumbering[part], 3, 0.41),
         Text(
           title,
           style: TextStyle(
