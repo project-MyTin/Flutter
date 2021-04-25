@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/screens/motion/screen_motion_list.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/screens/routine/screen_routine_list.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       // home: RoutineListPage(),
       // home: RoutineRunPage(),
       // home: RoutineDetailPage(),
-      home: RoutineAddPage(),
+      // home: RoutineAddPage(),
+      home: MotionAddPage(),
     );
   }
 }
