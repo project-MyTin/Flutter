@@ -1,12 +1,14 @@
+/*
+ 루틴 생성하기 페이지에서 단계별로 보여줄 위젯 본문(body)들을 만드는 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
-import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/motion_reorder_able_list_box.dart';
+import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
-
-import '../button_box.dart';
+import 'package:mytin/widgets/button_box.dart';
 
 class RoutineAddBody extends StatelessWidget {
   final double height, width;

@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       // home: MotionListPage(),
       // home: RoutineListPage(),
-      // home: RoutineRunPage(),
+      home: RoutineRunPage(),
       // home: RoutineDetailPage(),
-      home: RoutineAddPage(),
+      // home: RoutineAddPage(),
     );
   }
 }

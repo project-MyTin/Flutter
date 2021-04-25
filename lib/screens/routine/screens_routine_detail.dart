@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_detail.dart';
-import 'file:///C:/Users/user/Documents/mytin/lib/widgets/routine/motion_list_tile.dart';
+import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
   @override

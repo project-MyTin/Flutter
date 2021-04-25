@@ -1,3 +1,6 @@
+/*
+ 동작 & 루틴 조회하기 페이지에 들어가는 헤더 위젯
+ */
 import 'package:flutter/material.dart';
 
 class ListViewHeader extends StatelessWidget {

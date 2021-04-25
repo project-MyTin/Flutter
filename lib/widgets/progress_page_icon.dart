@@ -1,3 +1,7 @@
+/*
+ 전체 단계(allPart)과 현재 단계(currentPart)을 입력받아,
+ 현재 단계를 표시하는
+ */
 import 'package:flutter/material.dart';
 
 class ProgressPageIcon extends StatelessWidget {

@@ -1,3 +1,6 @@
+/*
+ 동작 조회하기 페이지(그리드 뷰)에 들어가는 커스텀 타일 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:mytin/models/motion_tile.dart';

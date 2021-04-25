@@ -1,3 +1,6 @@
+/*
+ 루틴 조회하기 페이지(리스트뷰)에 들어가는 커스텀 타일 위젯
+ */
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mytin/models/routine_tile.dart';

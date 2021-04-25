@@ -1,3 +1,6 @@
+/*
+ 루틴 생성하기 & 자세히 보기에서 루틴에 해당하는 동작들의 리스트 뷰에 들어가는 커스텀 타일 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/image_circular.dart';

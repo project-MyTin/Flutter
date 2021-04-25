@@ -1,3 +1,7 @@
+/*
+ 원형의 버튼 박스를 만드는 위젯
+ ex. 루틴 & 동작 생성하기 페이지에서 난이도 입력 버튼을 만들때 사용
+ */
 import 'package:flutter/material.dart';
 
 class CircleButtonBox extends StatelessWidget {
