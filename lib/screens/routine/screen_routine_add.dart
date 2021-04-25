@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
+import 'package:mytin/widgets/next_page_floating_button.dart';
 import 'package:mytin/widgets/progress_page_icon.dart';
 import 'package:mytin/widgets/routine/routine_add_body.dart';
 import 'package:mytin/widgets/submit_bottom_app_bar.dart';
@@ -10,7 +11,7 @@ class RoutineAddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
-    Get.put(RoutineAddController());
+    Get.put(RoutineAddController());    // FIXME 루틴 생성&수정 페이지로 이동하기 바로 전에 해주기
 
     return SafeArea(
       child: GetBuilder<RoutineAddController>(
@@ -20,9 +21,9 @@ class RoutineAddPage extends StatelessWidget {
             child: Column(
               children: [
                 buildRoutineAddHeader(height),
-                RoutineAddBody(height: height, width: width),
+                RoutineAddBody(),
                 if (controller.part < 5)
-                  buildRoutineAddNextPageButton(height, width),
+                  NextPageFloatingButton(Get.find<RoutineAddController>().next),
               ],
             ),
           ),
@@ -32,18 +33,6 @@ class RoutineAddPage extends StatelessWidget {
             isAdd: true,
           ),
         ),
-      ),
-    );
-  }
-
-  Container buildRoutineAddNextPageButton(double height, double width) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(0, 0.035 * height, 0.08 * width, 0),
-      alignment: Alignment.bottomRight,
-      child: FloatingActionButton(
-        onPressed: () => Get.find<RoutineAddController>().next(),
-        child: Icon(Icons.arrow_forward_ios),
-        foregroundColor: Colors.white,
       ),
     );
   }
