@@ -13,21 +13,20 @@ class MotionListPage extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              title: ContentListHeader("Routine", "다양한 운동 루틴을 수행하고 직접 만들어 공유해보세요!", () {}),
-              expandedHeight: 0.2 * height,
+            SliverToBoxAdapter(
+              child: ContentListHeader("Motion", "많은 운동 동작들을 찾아보고 직접 만들어 공유해보세요!", () {}),
             ),
             SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => MotionGridTile(index, motionList[index]),
-                  childCount: motionList.length,
-                ),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => MotionGridTile(index, motionList[index]),
+                childCount: motionList.length,
               ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+            ),
           ],
         ),
       ),
