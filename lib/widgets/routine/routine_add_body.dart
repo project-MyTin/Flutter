@@ -25,7 +25,7 @@ class RoutineAddBody extends StatelessWidget {
                 buildThirdBody(height),
                 buildFourthBody(height),
                 buildFifthBody(height)
-              ][controller.part-1]),
+              ][controller.part - 1]),
     );
   }
 
@@ -60,8 +60,7 @@ class RoutineAddBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () =>
-                  Get.find<RoutineAddController>().moveTo(3),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(3),
               child: Text("2")),
         )
       ],
@@ -107,7 +106,7 @@ class RoutineAddBody extends StatelessWidget {
                   TextInputBox(
                     hint: "4",
                     text: controller.motionTime?.toString(),
-                    function: controller.textChangeHandler,
+                    inputFunc: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
                     type: "time",
@@ -120,7 +119,7 @@ class RoutineAddBody extends StatelessWidget {
                   TextInputBox(
                     hint: "5",
                     text: controller.motionCount?.toString(),
-                    function: controller.textChangeHandler,
+                    inputFunc: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
                     type: "count",
@@ -137,8 +136,7 @@ class RoutineAddBody extends StatelessWidget {
   }
 
   Column buildFourthBody(double height) {
-    RoutineAddController controller =
-        Get.find<RoutineAddController>();
+    RoutineAddController controller = Get.find<RoutineAddController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -146,7 +144,7 @@ class RoutineAddBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 키크기 운동",
           text: controller.routineName ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
           type: "name",
@@ -155,7 +153,7 @@ class RoutineAddBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 고무밴드, 우유",
           text: controller.routineMaterials ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
           type: "materials",
@@ -164,7 +162,7 @@ class RoutineAddBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
           text: controller.routineDescription ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 5,
           type: "description",
@@ -231,8 +229,7 @@ class RoutineAddBody extends StatelessWidget {
             TextInputBox(
               hint: "10",
               text: controller.breakTime?.toString(),
-              function:
-                  controller.textChangeHandler,
+              inputFunc: controller.textChangeHandler,
               line: 1,
               widthSize: 0.2,
               type: "breakTime",

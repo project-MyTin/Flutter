@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class CircleButtonBox extends StatelessWidget {
   final String text;
   final bool isSelected;
-  final Function function;
+  final Function selectFunc;
 
-  CircleButtonBox(this.text, this.isSelected, this.function);
+  CircleButtonBox(this.text, this.isSelected, this.selectFunc);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class CircleButtonBox extends StatelessWidget {
               shape: BoxShape.circle,
               color: isSelected ? Colors.black54 : Colors.black12),
         ),
-      onTap: () => function(text),
+      onTap: () => selectFunc(text),
     );
   }
 }

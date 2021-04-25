@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 class ButtonBox extends StatelessWidget {
   final String name;
   final bool isSelected;
-  final Function function;
+  final Function selectFunc;
 
-  ButtonBox(this.name, this.isSelected, this.function);
+  ButtonBox(this.name, this.isSelected, this.selectFunc);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class ButtonBox extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () => function(name),
+        onTap: () => selectFunc(name),
     );
   }
 }
