@@ -4,7 +4,7 @@ import 'package:mytin/models/routine_detail.dart';
 
 import 'add_abstract_controller.dart';
 
-class RoutineAddController extends GetxController implements AddController {
+class MotionAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
@@ -19,7 +19,7 @@ class RoutineAddController extends GetxController implements AddController {
   List<MotionElement> motionList = [];
   MotionElement newMotion;
 
-  RoutineAddController() {
+  MotionAddController() {
     // dummy 값으로 초기화
     motionList = routine.motions;
     newMotion = routine.motions[0];
@@ -34,25 +34,15 @@ class RoutineAddController extends GetxController implements AddController {
 
   @override
   void next() {
-    if (part == 1)
-      part += 3;
-    else if (part == 3)
-      part = 1;
-    else
-      part++;
-
+    part++;
     update();
   }
 
   @override
   void back() {
-    if (part == 1)
-      return;   // FIXME 루틴 리스트 페이지로 돌아가기
-    else if (part == 4)
-      part = 1;
-    else
-      part--;
-
+    if(part == 1)
+      return;
+    part--;
     update();
   }
 
@@ -79,11 +69,13 @@ class RoutineAddController extends GetxController implements AddController {
   void difficultyToggle(String difficulty) {
     currentDifficulty = difficulty;
     update();
+    printObject();
   }
 
   void typeToggle(String type) {
     currentType = type;
     update();
+    printObject();
   }
 
   void textChangeHandler(String type, String text) {
@@ -101,5 +93,6 @@ class RoutineAddController extends GetxController implements AddController {
       breakTime = int.parse(text);
 
     update();
+    printObject();
   }
 }
