@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/progress_page_icon.dart';
 import 'package:mytin/widgets/routine/routine_add_body.dart';
+import 'package:mytin/widgets/submit_bottom_app_bar.dart';
 
 class RoutineAddPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -26,25 +26,12 @@ class RoutineAddPage extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: (controller.part > 4)
-              ? buildRoutineAddBottomAppBar(height, width)
-              : buildRoutineAddBottomAppBar(0, 0),
+          bottomNavigationBar: SubmitBottomAppBar(
+            submitFunc: Get.find<RoutineAddController>().submit,
+            isShow: controller.part > 4,
+            isAdd: true,
+          ),
         ),
-      ),
-    );
-  }
-
-  Container buildRoutineAddBottomAppBar(double height, double width) {
-    return Container(
-      width: width,
-      height: 0.065 * height,
-      color: Colors.grey,
-      child: TextButton(
-        child: Text(
-          "등록 하기",
-          style: TextStyle(color: Colors.white),
-        ),
-        onPressed: () => Get.find<RoutineAddController>().submit(),
       ),
     );
   }
