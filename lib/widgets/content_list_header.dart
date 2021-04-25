@@ -32,6 +32,7 @@ class ContentListHeader extends StatelessWidget {
       ),
       color: Colors.white,
       padding: EdgeInsets.all(0.03 * width),
+      // width: width,
     );
   }
 }

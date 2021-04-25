@@ -46,8 +46,6 @@ class RoutineListTile extends StatelessWidget {
           ),
         ],
       ),
-      // padding: EdgeInsets.fromLTRB(
-      //     0.035 * width, 0.02 * width, 0.035 * width, 0.02 * width),
       margin:
           EdgeInsets.fromLTRB(0.03 * width, 0.015 * height, 0.03 * width, 0),
       decoration: BoxDecoration(
@@ -57,8 +55,6 @@ class RoutineListTile extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 0.6,
-            blurRadius: 1,
             offset: Offset(0, 1),
           ),
         ],

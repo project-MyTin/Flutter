@@ -11,14 +11,11 @@ class RoutineListPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text("루틴 리스트 페이지"),
-        // ),
         body: Container(
           child: ListView.builder(
             itemCount: routineList.length + 1,
             itemBuilder: (context, index) => (index == 0)
-                ? ContentListHeader("Routine", "Share your routine with people", () {})
+                ? ContentListHeader("Routine", "다양한 운동 루틴을 수행하고 직접 만들어 공유해보세요!", () {})
                 : RoutineListTile(routineList[index - 1]),
           ),
           color: Colors.black.withOpacity(0.02),

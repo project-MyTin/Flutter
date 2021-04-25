@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mytin/dummies/routine_list_dummy.dart';
+import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/widgets/content_list_header.dart';
-import 'package:mytin/widgets/routine/routine_list_tile.dart';
+import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 
 class MotionListPage extends StatelessWidget {
   @override
@@ -11,17 +11,28 @@ class MotionListPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        // appBar: AppBar(
-        //   title: Text("루틴 리스트 페이지"),
-        // ),
-        body: Container(
-          child: ListView.builder(
-            itemCount: routineList.length + 1,
-            itemBuilder: (context, index) => (index == 0)
-                ? ContentListHeader("Routine", "Share your routine with people", () {})
-                : RoutineListTile(routineList[index - 1]),
-          ),
-          color: Colors.black.withOpacity(0.02),
+        body: Column(
+          children: [
+            Expanded(
+              child: Container(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2
+                  ),
+                  itemCount: motionList.length + 2,
+                  itemBuilder: (context, index) => (index == 0)
+                      ? ContentListHeader(
+                          "Motion", "다양한 운동 동작을 찾아보고 직접 만들어 공유해보세요!", () {})
+                      : (index == 1)
+                          ? Container()
+                          : MotionGridTile(motionList[index-2]),
+                ),
+                color: Colors.black.withOpacity(0.02),
+                padding: EdgeInsets.fromLTRB(
+                    0.03 * width, 0.015 * height, 0.03 * width, 0),
+              ),
+            ),
+          ],
         ),
       ),
     );
