@@ -23,7 +23,7 @@ class RoutineListTile extends StatelessWidget {
                   image: NetworkImage(routine.imageUrl), fit: BoxFit.cover),
             ),
             height: 0.3 * width,
-            width: 0.25 * width,
+            width: 0.26 * width,
           ),
           Container(
             width: 0.6 * width,
@@ -40,12 +40,14 @@ class RoutineListTile extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                SizedBox(height: 0.025 * width),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    SizedBox(height: 0.02 * height),
-                    Icon(Icons.signal_cellular_alt_rounded),
-                    Text("상급")
+                    buildInfoColumn("소요시간", "10분", width),
+                    buildInfoColumn("난이도", "상급", width),
+                    buildInfoColumn("권한", "공식", width),
+                    buildInfoColumn("유형", "다이어트", width),
                   ],
                 ),
               ],
@@ -55,7 +57,8 @@ class RoutineListTile extends StatelessWidget {
       ),
       // padding: EdgeInsets.fromLTRB(
       //     0.035 * width, 0.02 * width, 0.035 * width, 0.02 * width),
-      margin: EdgeInsets.fromLTRB(0.03 * width, 0.015 * height, 0.03 * width, 0),
+      margin:
+          EdgeInsets.fromLTRB(0.03 * width, 0.015 * height, 0.03 * width, 0),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
@@ -69,6 +72,15 @@ class RoutineListTile extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Column buildInfoColumn(String key, String value, double width) {
+    return Column(
+      children: [
+        Text(key, style: TextStyle(fontSize: 0.024 * width, color: Colors.grey)),
+        Text(value, style: TextStyle(color: Colors.grey)),
+      ],
     );
   }
 }
