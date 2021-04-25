@@ -10,7 +10,7 @@ class RoutineAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
+    double height = screenSize.height;
     Get.put(RoutineAddController());    // FIXME 루틴 생성&수정 페이지로 이동하기 바로 전에 해주기
 
     return SafeArea(

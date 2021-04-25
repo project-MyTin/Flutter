@@ -11,26 +11,25 @@ import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/button_box.dart';
 
 class RoutineAddBody extends StatelessWidget {
-  final double height, width;
-
-  RoutineAddBody({this.height, this.width});
-
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width, height = screenSize.height;
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
       child: GetBuilder<RoutineAddController>(
           builder: (controller) => [
-                buildFirstBody(height, width),
+                buildFirstBody(height),
                 buildSecondBody(),
-                buildThirdBody(),
-                buildFourthBody(),
-                buildFifthBody()
+                buildThirdBody(height),
+                buildFourthBody(height),
+                buildFifthBody(height)
               ][controller.part-1]),
     );
   }
 
-  Column buildFirstBody(double height, double width) {
+  Column buildFirstBody(double height) {
     return Column(
       children: [
         Container(
@@ -69,7 +68,7 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  GetBuilder buildThirdBody() {
+  GetBuilder buildThirdBody(double height) {
     return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         children: [
@@ -137,7 +136,7 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildFourthBody() {
+  Column buildFourthBody(double height) {
     RoutineAddController controller =
         Get.find<RoutineAddController>();
     return Column(
@@ -174,7 +173,7 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  GetBuilder buildFifthBody() {
+  GetBuilder buildFifthBody(double height) {
     return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,13 +205,13 @@ class RoutineAddBody extends StatelessWidget {
             ],
           ),
           SizedBox(height: 0.05 * height),
-          buildBreakTimeInputBox(),
+          buildBreakTimeInputBox(height),
         ],
       ),
     );
   }
 
-  Row buildBreakTimeInputBox() {
+  Row buildBreakTimeInputBox(double height) {
     RoutineAddController controller = Get.find<RoutineAddController>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
