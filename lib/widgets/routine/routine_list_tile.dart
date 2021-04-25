@@ -15,16 +15,7 @@ class RoutineListTile extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
-              image: DecorationImage(
-                  image: NetworkImage(routine.imageUrl), fit: BoxFit.cover),
-            ),
-            height: 0.3 * width,
-            width: 0.26 * width,
-          ),
+          buildImageBox(width),
           Container(
             width: 0.6 * width,
             padding: EdgeInsets.fromLTRB(0.03 * width, 0.02 * width, 0, 0),
@@ -73,6 +64,19 @@ class RoutineListTile extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Container buildImageBox(double width) {
+    return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
+            image: DecorationImage(
+                image: NetworkImage(routine.imageUrl), fit: BoxFit.cover),
+          ),
+          height: 0.3 * width,
+          width: 0.26 * width,
+        );
   }
 
   Column buildInfoColumn(String key, String value, double width) {
