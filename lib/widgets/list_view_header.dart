@@ -9,7 +9,7 @@ class SliverListHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double height = screenSize.height;
+    double height = screenSize.height, width = screenSize.width;
 
     return SliverToBoxAdapter(
       child: Container(
@@ -17,20 +17,20 @@ class SliverListHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             IconButton(icon: Icon(Icons.keyboard_backspace), onPressed: () {}),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: TextStyle(
-                        fontSize: 0.036 * height, fontWeight: FontWeight.bold)),
-                Text(subText),
-                SizedBox(height: 0.04 * height),
-              ],
+            Padding(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: TextStyle(fontSize: 0.036 * height, fontWeight: FontWeight.bold)),
+                  Text(subText),
+                ],
+              ),
+              padding: EdgeInsets.fromLTRB(0.03 * width, 0, 0, 0),
             ),
           ],
         ),
         color: Colors.white,
-        // width: width,
+        padding: EdgeInsets.all(0.03 * width),
       ),
     );
   }
