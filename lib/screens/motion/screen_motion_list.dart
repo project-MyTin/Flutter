@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
+import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/list_view_header.dart';
 
@@ -7,7 +8,7 @@ class MotionListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
+    double width = screenSize.width;
 
     return SafeArea(
       child: Scaffold(
@@ -38,6 +39,7 @@ class MotionListPage extends StatelessWidget {
             ],
           ),
         ),
+        floatingActionButton: AddFloatingButton(() {}),
       ),
     );
   }
