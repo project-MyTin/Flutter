@@ -9,7 +9,7 @@ import 'package:mytin/widgets/button_bottom_app_bar.dart';
 class MotionAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.put(MotionAddController());    // FIXME 동작 생성&수정 페이지로 이동하기 바로 전에 해주기
+    // Get.put(MotionAddController());    // FIXME 동작 생성&수정 페이지로 이동하기 바로 전에 해주기
 
     return SafeArea(
       child: GetBuilder<MotionAddController>(
@@ -19,7 +19,7 @@ class MotionAddPage extends StatelessWidget {
             child: Column(
               children: [
                 AddPageHeader(
-                  title: "동작 생성하기",
+                  title: controller.isCreate ? "동작 생성하기" : "동작 수정하기",
                   subText: [
                     "동작 이미지를 입력해주세요",
                     "동작명과 시간, 설명을 입력해주세요",
@@ -39,7 +39,7 @@ class MotionAddPage extends StatelessWidget {
             clickFunc: Get.find<MotionAddController>().submit,
             isShow: controller.part > 2,
             isDialog: false,
-            text: "생성하기",
+            text: controller.isCreate ? "생성하기" : "수정하기",
           ),
         ),
       ),

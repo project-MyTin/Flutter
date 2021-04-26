@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mytin/dummies/motion_detail_dummy.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -9,6 +10,7 @@ class MotionAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   List<String> motionPart = ["등", "어께", "복근", "하체", "전신", "가슴", "코어", "허리"];
+  bool isCreate;
   int part = 1;
   String currentType;
   String currentDifficulty;
@@ -17,10 +19,32 @@ class MotionAddController extends GetxController implements AddController {
   String motionDescription;
   String motionReferenceUrl;
   int motionTime;
-  File image;
+  var image;
 
-  MotionAddController() {
-    // TODO 서버 response 값으로 초기화
+  MotionAddController.create() {
+    this.isCreate = true;
+
+    update();
+    printObject();
+  }
+
+  MotionAddController.edit(int motionId) {
+    this.isCreate = false;
+
+    var motion = currentMotion;
+    // TODO motionId로 서버에 Get 요청 => motion 에 저장
+
+     this.currentType = motion.type;
+     this.currentDifficulty = motion.difficulty;
+     this.currentMotionPart = motion.part;
+     this.motionName = motion.name;
+     this.motionDescription = motion.description;
+     this.motionReferenceUrl = motion.referenceUrl;
+     this.motionTime = motion.time;
+     this.image = motion.imageUrl;
+
+     update();
+     printObject();
   }
 
   void moveTo(int page) {
@@ -36,9 +60,11 @@ class MotionAddController extends GetxController implements AddController {
 
   @override
   void back() {
-    if(part == 1)
-      return;
-    part--;
+    if(part == 1){
+      Get.back();
+    }
+    else
+      part--;
     update();
   }
 

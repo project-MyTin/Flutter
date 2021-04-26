@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/models/motion_detail.dart';
+import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class MotionDetailDialog extends StatelessWidget {
@@ -136,13 +138,19 @@ class MotionDetailDialog extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Padding(
-          padding: EdgeInsets.all(0.005 * height),
-          child: Icon(
-            Icons.edit,
-            color: Colors.white.withOpacity(0.5),
-            size: 0.026 * height,
+        GestureDetector(
+          child: Padding(
+            padding: EdgeInsets.all(0.005 * height),
+            child: Icon(
+              Icons.edit,
+              color: Colors.white.withOpacity(0.5),
+              size: 0.026 * height,
+            ),
           ),
+          onTap: () {
+            Get.put(MotionAddController.edit(motion.id));
+            Get.to(() => MotionAddPage());
+          },
         ),
         Padding(
           padding: EdgeInsets.all(0.005 * height),

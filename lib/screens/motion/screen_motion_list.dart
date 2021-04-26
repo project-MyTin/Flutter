@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
+import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/list_view_header.dart';
@@ -39,7 +42,10 @@ class MotionListPage extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: AddFloatingButton(() {}),
+        floatingActionButton: AddFloatingButton(() {
+          Get.put(MotionAddController.create());
+          Get.to(() => MotionAddPage(), transition: Transition.rightToLeft);
+        }),
       ),
     );
   }

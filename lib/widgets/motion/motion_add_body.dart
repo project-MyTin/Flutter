@@ -50,7 +50,7 @@ class MotionAddBody extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                          image: FileImage(controller.image),
+                          image: controller.image is String ? NetworkImage(controller.image) : FileImage(controller.image),
                           fit: BoxFit.cover),
                     ),
                     height: 0.8 * width,
