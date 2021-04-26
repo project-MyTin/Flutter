@@ -9,6 +9,7 @@ import 'package:mytin/widgets/image_circular.dart';
 import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/button_box.dart';
+import 'package:mytin/widgets/text_input_box_with_text.dart';
 
 class RoutineAddBody extends StatelessWidget {
   @override
@@ -203,41 +204,19 @@ class RoutineAddBody extends StatelessWidget {
             ],
           ),
           SizedBox(height: 0.05 * height),
-          buildBreakTimeInputBox(height),
-        ],
-      ),
-    );
-  }
-
-  Row buildBreakTimeInputBox(double height) {
-    RoutineAddController controller = Get.find<RoutineAddController>();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("동작 쉬는 시간", style: TextStyle(fontSize: 0.02 * height)),
-            Text(
-              "동작 사이마다 쉬는 시간을 입력하세요",
-              style: TextStyle(fontSize: 0.015 * height, color: Colors.grey),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            TextInputBox(
+          TextInputBoxWithText(
+              title: "동작 쉬는 시간",
+              subTitle: "동작 사이마다의 쉬는 시간을 입력하세요",
               hint: "10",
               text: controller.breakTime?.toString(),
-              inputFunc: controller.textChangeHandler,
-              line: 1,
-              widthSize: 0.2,
               type: "breakTime",
-            ),
-            Text("  (초)", style: TextStyle(color: Colors.black54)),
-          ],
-        ),
-      ],
+              line: 1,
+              widthSize: 0.14,
+              inputFunc: controller.textChangeHandler,
+              numberType: "초",
+          ),
+        ],
+      ),
     );
   }
 }

@@ -14,7 +14,13 @@ class TextInputBox extends StatelessWidget {
   final double widthSize;
   final Function inputFunc;
 
-  TextInputBox({this.hint, this.text, this.line, this.widthSize, this.inputFunc, this.type});
+  TextInputBox(
+      {this.hint,
+      this.text,
+      this.line,
+      this.widthSize,
+      this.inputFunc,
+      this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +32,9 @@ class TextInputBox extends StatelessWidget {
         SizedBox(height: 0.01 * height),
         SizedBox(
           child: TextFormField(
-            keyboardType: (["time", "count", "breakTime"].contains(type))? TextInputType.number : TextInputType.text,
+            keyboardType: (["time", "count", "breakTime"].contains(type))
+                ? TextInputType.number
+                : (type == "url") ? TextInputType.url : TextInputType.text,
             maxLines: line,
             decoration: InputDecoration(
               hintText: hint,
@@ -37,7 +45,7 @@ class TextInputBox extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.grey, width: 0.0),
               ),
               hintStyle:
-              TextStyle(fontSize: 0.02 * height, color: Colors.black26),
+                  TextStyle(fontSize: 0.02 * height, color: Colors.black26),
             ),
             initialValue: text,   // 처음 채우는 값
             textAlignVertical: TextAlignVertical.bottom,
