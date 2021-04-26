@@ -120,7 +120,7 @@ class MotionDetailDialog extends StatelessWidget {
       child: Column(
         children: [
           buildIconButtonRow(height),
-          Spacer(flex: 3),
+          Spacer(flex: 5),
           Text(motion.name,
               style: TextStyle(color: Colors.white, fontSize: 0.032 * height)),
           SizedBox(height: 0.005 * height),
@@ -140,11 +140,11 @@ class MotionDetailDialog extends StatelessWidget {
       children: [
         GestureDetector(
           child: Padding(
-            padding: EdgeInsets.all(0.005 * height),
+            padding: EdgeInsets.all(0.01 * height),
             child: Icon(
               Icons.edit,
               color: Colors.white.withOpacity(0.5),
-              size: 0.026 * height,
+              size: 0.03 * height,
             ),
           ),
           onTap: () {
@@ -153,11 +153,11 @@ class MotionDetailDialog extends StatelessWidget {
           },
         ),
         Padding(
-          padding: EdgeInsets.all(0.005 * height),
+          padding: EdgeInsets.all(0.01 * height),
           child: Icon(
             Icons.delete,
             color: Colors.white.withOpacity(0.5),
-            size: 0.026 * height,
+            size: 0.03 * height,
           ),
         ),
       ],

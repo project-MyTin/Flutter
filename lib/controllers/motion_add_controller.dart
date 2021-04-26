@@ -29,6 +29,7 @@ class MotionAddController extends GetxController implements AddController {
   }
 
   MotionAddController.edit(int motionId) {
+    // FIXME 수정하기에서 되돌아 올 때 GetXController 삭제가 안됨 + 페이지 못 들어감
     this.isCreate = false;
 
     var motion = currentMotion;
