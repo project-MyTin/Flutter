@@ -8,11 +8,28 @@ class MotionDetailDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width, height = screenSize.height;
+
     return AlertDialog(
-      title: Text(motion.name),
-      actions: [
-        ElevatedButton(onPressed: () {}, child: Text("닫기"))
-      ],
+      contentPadding: const EdgeInsets.all(0),
+      content: Container(
+        child: Column(
+          children: [
+            Container(
+              height: 0.26 * height,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(motion.imageUrl),
+                  fit: BoxFit.cover
+                )
+              ),
+            ),
+          ],
+        ),
+        height: 0.6 * height,
+        width: 0.8 * width,
+      ),
       elevation: 20,
     );
   }
