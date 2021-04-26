@@ -40,6 +40,7 @@ class RoutineAddPage extends StatelessWidget {
           bottomNavigationBar: ButtonBottomAppBar(
             clickFunc: Get.find<RoutineAddController>().submit,
             isShow: controller.part > 4,
+            isDialog: false,
             text: "생성하기",
           ),
         ),

@@ -38,6 +38,7 @@ class MotionAddPage extends StatelessWidget {
           bottomNavigationBar: ButtonBottomAppBar(
             clickFunc: Get.find<MotionAddController>().submit,
             isShow: controller.part > 2,
+            isDialog: false,
             text: "생성하기",
           ),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
@@ -25,9 +26,9 @@ class MotionDetailDialog extends StatelessWidget {
             ),
             buildMotionDetailBody(width, height),
             Spacer(),
-            Text("작성자 · " + motion.publisher, style: TextStyle(fontSize: 0.028 * width)),
-            SizedBox(height: 0.01 * height),
-            ButtonBottomAppBar(clickFunc: (){}, isShow: true, text: "닫기"),
+            Text("작성자 · " + motion.publisher, style: TextStyle(fontSize: 0.026 * width)),
+            SizedBox(height: 0.005 * height),
+            ButtonBottomAppBar(clickFunc: Get.back, isShow: true, isDialog: true, text: "닫기"),
           ],
         ),
         height: 0.65 * height,
