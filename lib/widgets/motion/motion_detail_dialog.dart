@@ -26,9 +26,11 @@ class MotionDetailDialog extends StatelessWidget {
             ),
             buildMotionDetailBody(width, height),
             Spacer(),
-            Text("작성자 · " + motion.publisher, style: TextStyle(fontSize: 0.026 * width)),
+            Text("작성자 · " + motion.publisher,
+                style: TextStyle(fontSize: 0.026 * width)),
             SizedBox(height: 0.005 * height),
-            ButtonBottomAppBar(clickFunc: Get.back, isShow: true, isDialog: true, text: "닫기"),
+            ButtonBottomAppBar(
+                clickFunc: Get.back, isShow: true, isDialog: true, text: "닫기"),
           ],
         ),
         height: 0.65 * height,
@@ -40,48 +42,45 @@ class MotionDetailDialog extends StatelessWidget {
 
   Padding buildMotionDetailIcon(double height, double width) {
     return Padding(
-                padding: EdgeInsets.fromLTRB(0, 0.225 * height, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildCircleBorderTextBox(motion.type, "유형", width),
-                    buildCircleBorderTextBox(motion.difficulty, "난이도", width),
-                    buildCircleBorderTextBox(
-                        motion.time.toString() + "초", "시간", width),
-                  ],
-                ),
-              );
+      padding: EdgeInsets.fromLTRB(0, 0.225 * height, 0, 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buildCircleBorderTextBox(motion.type, "유형", width),
+          buildCircleBorderTextBox(motion.difficulty, "난이도", width),
+          buildCircleBorderTextBox(motion.time.toString() + "초", "시간", width),
+        ],
+      ),
+    );
   }
 
   Padding buildMotionDetailBody(double width, double height) {
     return Padding(
-            padding: EdgeInsets.fromLTRB(0.06 * width, 0, 0.06 * width, 0),
-            child: Column(
-              children: [
-                SizedBox(height: 0.04 * height),
-                Text(motion.description,
-                    style: TextStyle(
-                        fontSize: 0.032 * width, color: Colors.grey)),
-                SizedBox(height: 0.02 * height),
-                Container(
-                  child: Text("참고 url : ",
-                      style: TextStyle(fontSize: 0.03 * width)),
-                  color: Colors.black.withOpacity(0.06),
-                  padding: EdgeInsets.all(0.01 * width),
-                  width: 0.65 * width,
-                ),
-                Container(
-                  child: Text(motion.referenceUrl,
-                      style: TextStyle(
-                          fontSize: 0.028 * width, color: Colors.blueGrey)),
-                  color: Colors.black.withOpacity(0.06),
-                  padding: EdgeInsets.fromLTRB(
-                      0.01 * width, 0, 0.01 * width, 0.01 * width),
-                  width: 0.65 * width,
-                ),
-              ],
-            ),
-          );
+      padding: EdgeInsets.fromLTRB(0.06 * width, 0, 0.06 * width, 0),
+      child: Column(
+        children: [
+          SizedBox(height: 0.04 * height),
+          Text(motion.description,
+              style: TextStyle(fontSize: 0.032 * width, color: Colors.grey)),
+          SizedBox(height: 0.02 * height),
+          Container(
+            child: Text("참고 url : ", style: TextStyle(fontSize: 0.03 * width)),
+            color: Colors.black.withOpacity(0.06),
+            padding: EdgeInsets.all(0.01 * width),
+            width: 0.65 * width,
+          ),
+          Container(
+            child: Text(motion.referenceUrl,
+                style:
+                    TextStyle(fontSize: 0.028 * width, color: Colors.blueGrey)),
+            color: Colors.black.withOpacity(0.06),
+            padding: EdgeInsets.fromLTRB(
+                0.01 * width, 0, 0.01 * width, 0.01 * width),
+            width: 0.65 * width,
+          ),
+        ],
+      ),
+    );
   }
 
   Column buildCircleBorderTextBox(String value, String key, double width) {
@@ -118,7 +117,8 @@ class MotionDetailDialog extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Spacer(flex: 5),
+          buildIconButtonRow(height),
+          Spacer(flex: 3),
           Text(motion.name,
               style: TextStyle(color: Colors.white, fontSize: 0.032 * height)),
           SizedBox(height: 0.005 * height),
@@ -129,6 +129,30 @@ class MotionDetailDialog extends StatelessWidget {
           Spacer(flex: 2),
         ],
       ),
+    );
+  }
+
+  Row buildIconButtonRow(double height) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Padding(
+          padding: EdgeInsets.all(0.005 * height),
+          child: Icon(
+            Icons.edit,
+            color: Colors.white.withOpacity(0.5),
+            size: 0.026 * height,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(0.005 * height),
+          child: Icon(
+            Icons.delete,
+            color: Colors.white.withOpacity(0.5),
+            size: 0.026 * height,
+          ),
+        ),
+      ],
     );
   }
 }
