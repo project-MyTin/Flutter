@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_add_controller.dart';
+import 'package:mytin/widgets/button_box.dart';
+import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/text_input_box_with_text.dart';
 
@@ -81,9 +83,51 @@ class MotionAddBody extends StatelessWidget {
   }
 
   Column buildThirdBody(double height) {
-    return Column(
-      children: [
+    MotionAddController controller = Get.find<MotionAddController>();
 
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("동작 유형", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.01 * height),
+        Wrap(
+          children: [
+            for (String name in controller.type)
+              ButtonBox(
+                name,
+                controller.currentType == name,
+                controller.typeToggle,
+              ),
+            // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
+          ],
+        ),
+        SizedBox(height: 0.05 * height),
+        Text("동작 부위", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.01 * height),
+        Wrap(
+          children: [
+            for (String name in controller.motionPart)
+              ButtonBox(
+                name,
+                controller.currentMotionPart == name,
+                controller.motionPartToggle,
+              ),
+            // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
+          ],
+        ),
+        SizedBox(height: 0.05 * height),
+        Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.01 * height),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            for (String difficulty in controller.difficulty)
+              CircleButtonBox(
+                  difficulty,
+                  difficulty == controller.currentDifficulty,
+                  controller.difficultyToggle),
+          ],
+        ),
       ],
     );
   }

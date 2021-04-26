@@ -54,13 +54,19 @@ class MotionAddController extends GetxController implements AddController {
   void difficultyToggle(String difficulty) {
     currentDifficulty = difficulty;
     update();
-    printObject();
+    // printObject();
   }
 
   void typeToggle(String type) {
     currentType = type;
     update();
-    printObject();
+    // printObject();
+  }
+
+  void motionPartToggle(String motionPart) {
+    currentMotionPart = motionPart;
+    update();
+    // printObject();
   }
 
   void textChangeHandler(String type, String text) {
@@ -70,8 +76,10 @@ class MotionAddController extends GetxController implements AddController {
       motionDescription = text;
     else if (type == "url")
       motionReferenceUrl = text;
+    else if (type == "time")
+      motionTime = int.parse(text);
 
     update();
-    printObject();
+    // printObject();
   }
 }
