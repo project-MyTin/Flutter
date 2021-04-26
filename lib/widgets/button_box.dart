@@ -1,11 +1,15 @@
+/*
+ 둥근 모서리 직사각형의 버튼 박스를 만드는 위젯
+ ex. 루틴 & 동작 생성하기 페이지에서 운동 유형 & 부위 입력 버튼을 만들때 사용
+ */
 import 'package:flutter/material.dart';
 
 class ButtonBox extends StatelessWidget {
   final String name;
   final bool isSelected;
-  final Function function;
+  final Function selectFunc;
 
-  ButtonBox(this.name, this.isSelected, this.function);
+  ButtonBox(this.name, this.isSelected, this.selectFunc);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,7 @@ class ButtonBox extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () => function(name),
+        onTap: () => selectFunc(name),
     );
   }
 }

@@ -1,3 +1,6 @@
+/*
+ 루틴 실행시에, 중간 중간 표시되는 운동 휴식 페이지를 만드는 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_run_controller.dart';

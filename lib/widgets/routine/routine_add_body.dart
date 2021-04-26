@@ -1,40 +1,41 @@
+/*
+ 루틴 생성하기 페이지에서 단계별로 보여줄 위젯 본문(body)들을 만드는 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/routine_management_controller.dart';
+import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
-import 'package:mytin/widgets/motion_reorder_able_list_box.dart';
+import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
+import 'package:mytin/widgets/button_box.dart';
 
-import 'button_box.dart';
-
-class RoutineManagementBody extends StatelessWidget {
-  final double height, width;
-
-  RoutineManagementBody({this.height, this.width});
-
+class RoutineAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width, height = screenSize.height;
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
-      child: GetBuilder<RoutineManagementController>(
+      child: GetBuilder<RoutineAddController>(
           builder: (controller) => [
-                buildFirstBody(height, width),
+                buildFirstBody(height),
                 buildSecondBody(),
-                buildThirdBody(),
-                buildFourthBody(),
-                buildFifthBody()
-              ][controller.part-1]),
+                buildThirdBody(height),
+                buildFourthBody(height),
+                buildFifthBody(height)
+              ][controller.part - 1]),
     );
   }
 
-  Column buildFirstBody(double height, double width) {
+  Column buildFirstBody(double height) {
     return Column(
       children: [
         Container(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-            onPressed: () => Get.find<RoutineManagementController>().moveTo(2),
+            onPressed: () => Get.find<RoutineAddController>().moveTo(2),
             child: Text(
               "  동작 추가하기  ",
               style: TextStyle(fontSize: 0.015 * height),
@@ -59,16 +60,15 @@ class RoutineManagementBody extends StatelessWidget {
         Align(
           alignment: Alignment.topRight,
           child: OutlinedButton(
-              onPressed: () =>
-                  Get.find<RoutineManagementController>().moveTo(3),
+              onPressed: () => Get.find<RoutineAddController>().moveTo(3),
               child: Text("2")),
         )
       ],
     );
   }
 
-  GetBuilder buildThirdBody() {
-    return GetBuilder<RoutineManagementController>(
+  GetBuilder buildThirdBody(double height) {
+    return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         children: [
           ImageCircular(
@@ -106,7 +106,7 @@ class RoutineManagementBody extends StatelessWidget {
                   TextInputBox(
                     hint: "4",
                     text: controller.motionTime?.toString(),
-                    function: controller.textChangeHandler,
+                    inputFunc: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
                     type: "time",
@@ -119,7 +119,7 @@ class RoutineManagementBody extends StatelessWidget {
                   TextInputBox(
                     hint: "5",
                     text: controller.motionCount?.toString(),
-                    function: controller.textChangeHandler,
+                    inputFunc: controller.textChangeHandler,
                     widthSize: 0.2,
                     line: 1,
                     type: "count",
@@ -135,9 +135,8 @@ class RoutineManagementBody extends StatelessWidget {
     );
   }
 
-  Column buildFourthBody() {
-    RoutineManagementController controller =
-        Get.find<RoutineManagementController>();
+  Column buildFourthBody(double height) {
+    RoutineAddController controller = Get.find<RoutineAddController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -145,7 +144,7 @@ class RoutineManagementBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 키크기 운동",
           text: controller.routineName ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
           type: "name",
@@ -154,7 +153,7 @@ class RoutineManagementBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 고무밴드, 우유",
           text: controller.routineMaterials ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 1,
           type: "materials",
@@ -163,7 +162,7 @@ class RoutineManagementBody extends StatelessWidget {
         TextInputBox(
           hint: "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
           text: controller.routineDescription ?? "",
-          function: controller.textChangeHandler,
+          inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
           line: 5,
           type: "description",
@@ -172,8 +171,8 @@ class RoutineManagementBody extends StatelessWidget {
     );
   }
 
-  GetBuilder buildFifthBody() {
-    return GetBuilder<RoutineManagementController>(
+  GetBuilder buildFifthBody(double height) {
+    return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -204,14 +203,14 @@ class RoutineManagementBody extends StatelessWidget {
             ],
           ),
           SizedBox(height: 0.05 * height),
-          buildBreakTimeInputBox(),
+          buildBreakTimeInputBox(height),
         ],
       ),
     );
   }
 
-  Row buildBreakTimeInputBox() {
-    RoutineManagementController controller = Get.find<RoutineManagementController>();
+  Row buildBreakTimeInputBox(double height) {
+    RoutineAddController controller = Get.find<RoutineAddController>();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -230,8 +229,7 @@ class RoutineManagementBody extends StatelessWidget {
             TextInputBox(
               hint: "10",
               text: controller.breakTime?.toString(),
-              function:
-                  controller.textChangeHandler,
+              inputFunc: controller.textChangeHandler,
               line: 1,
               widthSize: 0.2,
               type: "breakTime",

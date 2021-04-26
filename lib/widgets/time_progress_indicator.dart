@@ -1,3 +1,7 @@
+/*
+ 전체 시간(allTime)과 현재 시간(currentTime)을 입력받아,
+ 현재 시간 / 전체 시간 => 퍼센트로 구하여 현재 진행도를 표시하는 원형 고리 위젯
+ */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_run_controller.dart';

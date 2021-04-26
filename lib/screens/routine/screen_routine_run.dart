@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_run_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
-import 'package:mytin/widgets/break_time_body.dart';
+import 'package:mytin/widgets/routine/break_time_body.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class RoutineRunPage extends StatefulWidget {
