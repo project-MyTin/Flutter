@@ -16,36 +16,49 @@ class MotionDetailDialog extends StatelessWidget {
       content: Container(
         child: Column(
           children: [
-            buildMotionDetailHeader(height, width),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Stack(
               children: [
-                buildCircleBorderTextBox(motion.type, width),
-                buildCircleBorderTextBox(motion.difficulty, width),
-                buildCircleBorderTextBox(motion.time.toString(), width),
+                buildMotionDetailHeader(height, width),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 0.225 * height, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildCircleBorderTextBox(motion.type, "유형", width),
+                      buildCircleBorderTextBox(motion.difficulty, "난이도", width),
+                      buildCircleBorderTextBox(motion.time.toString() + "초", "시간", width),
+                    ],
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
-        height: 0.6 * height,
+        height: 0.65 * height,
         width: 0.8 * width,
       ),
       elevation: 20,
     );
   }
 
-  Container buildCircleBorderTextBox(String text, double width) {
-    return Container(
-      alignment: Alignment.center,
-      child: Text(text, style: TextStyle(fontSize: 0.032 * width)),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        shape: BoxShape.circle,
-        border: Border.all(
-            color: Colors.grey.withOpacity(0.5), width: 0.01 * width),
-      ),
-      height: 0.16 * width,
-      width: 0.16 * width,
+  Column buildCircleBorderTextBox(String value, String key, double width) {
+    return Column(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: Text(value, style: TextStyle(fontSize: 0.032 * width)),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            border: Border.all(
+                color: Colors.grey.withOpacity(0.5), width: 0.01 * width),
+          ),
+          height: 0.17 * width,
+          width: 0.17 * width,
+        ),
+        SizedBox(height: 0.02 * width),
+        Text(key, style: TextStyle(fontSize: 0.035 * width))
+      ],
     );
   }
 
