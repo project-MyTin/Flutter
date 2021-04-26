@@ -2,6 +2,7 @@
     package="com.mytin.mytin">
    <application
         android:label="mytin"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
