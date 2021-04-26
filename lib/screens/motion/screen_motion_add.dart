@@ -4,7 +4,7 @@ import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/widgets/add_page_header.dart';
 import 'package:mytin/widgets/motion/motion_add_body.dart';
 import 'package:mytin/widgets/next_page_floating_button.dart';
-import 'package:mytin/widgets/submit_bottom_app_bar.dart';
+import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class MotionAddPage extends StatelessWidget {
   @override
@@ -35,10 +35,10 @@ class MotionAddPage extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: SubmitBottomAppBar(
-            submitFunc: Get.find<MotionAddController>().submit,
+          bottomNavigationBar: ButtonBottomAppBar(
+            clickFunc: Get.find<MotionAddController>().submit,
             isShow: controller.part > 2,
-            isAdd: true,
+            text: "생성하기",
           ),
         ),
       ),
