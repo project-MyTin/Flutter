@@ -7,6 +7,7 @@ class MotionDetail {
   int time; // 동작 시간
   String referenceUrl; // 동작 참고 url
   String publisher; // 작성자
+  String type; // 동작 부위
 
   MotionDetail.fromMap(Map<String, dynamic> map)
       : id = map['id'],
@@ -16,5 +17,6 @@ class MotionDetail {
         imageUrl = map['imageUrl'],
         time = map['time'],
         referenceUrl = map['referenceUrl'],
-        publisher = map['publisher'];
+        publisher = map['publisher'],
+        type = map['type'];
 }

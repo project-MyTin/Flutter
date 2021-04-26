@@ -9,4 +9,5 @@ MotionDetail currentMotion = MotionDetail.fromMap({
   "time": 2,
   "referenceUrl": "https://www.youtube.com/channel/UCdtRAcd3L_UpV4tMXCw63NQ",
   "publisher": "빡빡이",
+  "type": "헬스",
 });
