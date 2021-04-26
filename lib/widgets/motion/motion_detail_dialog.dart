@@ -18,11 +18,21 @@ class MotionDetailDialog extends StatelessWidget {
           children: [
             Container(
               height: 0.26 * height,
+              width: 0.8 * width,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(motion.imageUrl),
-                  fit: BoxFit.cover
-                )
+                    image: NetworkImage(motion.imageUrl),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.4), BlendMode.darken)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(motion.name, style: TextStyle(color: Colors.white, fontSize: 0.03 * height)),
+                  SizedBox(height: 0.02 * height),
+                  Text(motion.publisher, style: TextStyle(color: Colors.white, fontSize: 0.03 * height)),
+                ],
               ),
             ),
           ],

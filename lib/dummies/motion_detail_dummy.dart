@@ -7,5 +7,6 @@ MotionDetail currentMotion = MotionDetail.fromMap({
   "difficulty": "고급",
   "imageUrl": "https://0k-cal.com/wp-content/uploads/2020/10/sss.jpg",
   "time": 2,
-  "referenceUrl": "",
+  "referenceUrl": "https://www.youtube.com/channel/UCdtRAcd3L_UpV4tMXCw63NQ",
+  "publisher": "빡빡이",
 });
