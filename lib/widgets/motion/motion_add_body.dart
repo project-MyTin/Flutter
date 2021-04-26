@@ -16,17 +16,49 @@ class MotionAddBody extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
       child: GetBuilder<MotionAddController>(
           builder: (controller) => [
-            buildFirstBody(height),
-            buildSecondBody(height),
-            buildThirdBody(height),
-          ][controller.part - 1]),
+                buildFirstBody(height, width),
+                buildSecondBody(height),
+                buildThirdBody(height),
+              ][controller.part - 1]),
     );
   }
 
-  Column buildFirstBody(double height) {
+  Column buildFirstBody(double height, double width) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("동작 대표 이미지"),
+        Text("동작 대표 이미지", style: TextStyle(fontSize: 0.02 * height)),
+        SizedBox(height: 0.03 * height),
+        GetBuilder<MotionAddController>(
+          builder: (controller) => GestureDetector(
+            child: (controller.image == null)
+                ? Container(
+                    // 이미지 선택 전 뷰
+                    alignment: Alignment.center,
+                    child: Icon(Icons.add_rounded,
+                        size: 0.09 * height,
+                        color: Colors.black.withOpacity(0.1)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black.withOpacity(0.1)),
+                    ),
+                    height: 0.8 * width,
+                    width: 0.8 * width,
+                  )
+                : Container(
+                    // 이미지 선택 후 뷰
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: FileImage(controller.image),
+                          fit: BoxFit.cover),
+                    ),
+                    height: 0.8 * width,
+                    width: 0.8 * width,
+                   ),
+            onTap: () => controller.uploadImage(),
+          ),
+        ),
       ],
     );
   }
@@ -46,7 +78,6 @@ class MotionAddBody extends StatelessWidget {
           line: 1,
           type: "name",
         ),
-
         Text("동작 설명", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
           hint: "ex) 허경영을 따라해보세요 ^^7",
@@ -56,7 +87,6 @@ class MotionAddBody extends StatelessWidget {
           line: 5,
           type: "description",
         ),
-
         Text("동작 참고 자료 URL", style: TextStyle(fontSize: 0.02 * height)),
         TextInputBox(
           hint: "ex) http://",
@@ -66,7 +96,6 @@ class MotionAddBody extends StatelessWidget {
           line: 1,
           type: "url",
         ),
-
         TextInputBoxWithText(
           title: "동작 시간",
           subTitle: "동작 하나당 수행 시간을 입력하세요",

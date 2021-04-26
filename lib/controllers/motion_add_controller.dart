@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -14,6 +17,7 @@ class MotionAddController extends GetxController implements AddController {
   String motionDescription;
   String motionReferenceUrl;
   int motionTime;
+  File image;
 
   MotionAddController() {
     // TODO 서버 response 값으로 초기화
@@ -81,5 +85,12 @@ class MotionAddController extends GetxController implements AddController {
 
     update();
     // printObject();
+  }
+
+  Future<void> uploadImage() async {
+    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    image = File(pickedFile.path);
+
+    update();
   }
 }
