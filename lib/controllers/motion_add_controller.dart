@@ -1,29 +1,21 @@
 import 'package:get/get.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
-import 'package:mytin/models/routine_detail.dart';
 
 import 'add_abstract_controller.dart';
 
 class MotionAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
+  List<String> motionPart = ["등", "어께", "복근", "하체", "전신", "가슴", "코어", "허리"];
   int part = 1;
   String currentType;
   String currentDifficulty;
-  String routineName;
-  String routineMaterials;
-  String routineDescription;
-  int breakTime;
+  String currentMotionPart;
+  String motionName;
+  String motionDescription;
+  String motionReferenceUrl;
   int motionTime;
-  int motionCount;
-  List<MotionElement> motionList = [];
-  MotionElement newMotion;
 
   MotionAddController() {
-    // dummy 값으로 초기화
-    motionList = routine.motions;
-    newMotion = routine.motions[0];
-
     // TODO 서버 response 값으로 초기화
   }
 
@@ -53,17 +45,10 @@ class MotionAddController extends GetxController implements AddController {
     moveTo(1);
   }
 
-  void changeSequence(oldIndex, newIndex) {
-    if (oldIndex < newIndex) newIndex -= 1;
-    final MotionElement item = motionList.removeAt(oldIndex);
-    motionList.insert(newIndex, item);
-    update();
-  }
-
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
-        "name: $routineName / materials: $routineMaterials / description: $routineDescription / " +
-    "time: $motionTime / count: $motionCount / breakTime: $breakTime");
+        "currentMotionPart: $currentMotionPart / name: $motionName / description: $motionDescription / " +
+    "time: $motionTime / referenceUrl : $motionReferenceUrl");
   }
 
   void difficultyToggle(String difficulty) {
@@ -80,17 +65,11 @@ class MotionAddController extends GetxController implements AddController {
 
   void textChangeHandler(String type, String text) {
     if (type == "name")
-      routineName = text;
-    else if (type == "materials")
-      routineMaterials = text;
+      motionName = text;
     else if (type == "description")
-      routineDescription = text;
-    else if (type == "time")
-      motionTime = int.parse(text);
-    else if (type == "count")
-      motionCount = int.parse(text);
-    else if (type == "breakTime")
-      breakTime = int.parse(text);
+      motionDescription = text;
+    else if (type == "url")
+      motionReferenceUrl = text;
 
     update();
     printObject();

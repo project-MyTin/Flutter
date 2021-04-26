@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/widgets/add_page_header.dart';
+import 'package:mytin/widgets/motion/motion_add_body.dart';
 import 'package:mytin/widgets/next_page_floating_button.dart';
 import 'package:mytin/widgets/submit_bottom_app_bar.dart';
 
@@ -28,7 +29,7 @@ class MotionAddPage extends StatelessWidget {
                   backPageFunc: Get.find<MotionAddController>().back,
                   pageNumbering: [1, 2, 3],
                 ),
-                // RoutineAddBody(),
+                MotionAddBody(),
                 if (controller.part < 3)
                   NextPageFloatingButton(Get.find<MotionAddController>().next),
               ],
