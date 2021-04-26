@@ -10,4 +10,5 @@ MotionDetail currentMotion = MotionDetail.fromMap({
   "referenceUrl": "https://www.youtube.com/channel/UCdtRAcd3L_UpV4tMXCw63NQ",
   "publisher": "빡빡이",
   "type": "헬스",
+  "description": "스쿼트는 언제부터 시작한 운동일까요? 그걸 내가 어떻게 알아 ^^ 모르면 구글링 좀 해보세요 ㅎㅎ",
 });
