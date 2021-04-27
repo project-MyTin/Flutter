@@ -28,6 +28,7 @@ class MotionReorderAbleListBox extends StatelessWidget {
       ),
       padding: EdgeInsets.all(0.01 * height),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
     );
   }

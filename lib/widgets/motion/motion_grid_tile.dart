@@ -39,17 +39,17 @@ class MotionGridTile extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              blurRadius: 1,
-              spreadRadius: 1,
-              offset: Offset(0, 1),
+              color: Colors.black.withOpacity(0.6),
+              blurRadius: isClick ? 3 : 0,
+              spreadRadius: isClick ? 4 : 0,
+              offset: Offset(0, 2),
             ),
           ],
           image: DecorationImage(
               image: NetworkImage(motion.imageUrl),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                  isClick ? Colors.white.withOpacity(0.7) : Colors.black.withOpacity(0.3), BlendMode.darken)),
+                  isClick ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.4), BlendMode.darken)),
         ),
       ),
     );
