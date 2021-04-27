@@ -188,4 +188,9 @@ class RoutineAddController extends GetxController implements AddController {
 
     motionTime = motionCount = null;
   }
+
+  void deleteMotionToList(int index) {
+    routineMotionList.removeAt(index);
+    update();
+  }
 }

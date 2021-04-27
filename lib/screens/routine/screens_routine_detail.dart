@@ -103,7 +103,7 @@ class RoutineDetailPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
           for (int i = 0; i < routine.motions.length; i++)
-            MotionListTile(i, routine.motions[i], height) // 위젯에서 반복문 쓰기!
+            MotionListTile(i, routine.motions[i], height, null) // 위젯에서 반복문 쓰기!
         ],
       ),
     );
