@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/widgets/routine/routine_run_complete_dialog.dart';
 
 class RoutineRunController extends GetxController {
   int index = 0;
@@ -52,9 +53,13 @@ class RoutineRunController extends GetxController {
       currentTime = motionList[index].time * motionList[index].count;
       currentBreakTime = breakTime;
     } else {
-      // TODO 루틴 완성 페이지
+      completeRoutine();
     }
     update();
+  }
+
+  void completeRoutine() {
+    Get.dialog(RoutineRunCompleteDialog());
   }
 
   void addBreakTime(int time) {
