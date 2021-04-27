@@ -147,7 +147,7 @@ class MotionDetailDialog extends StatelessWidget {
               size: 0.03 * height,
             ),
           ),
-          onTap: () => Get.to(() => MotionAddPage(), transition: Transition.noTransition, arguments: motion.id),
+          onTap: () => Get.off(() => MotionAddPage(), transition: Transition.noTransition, arguments: motion.id),
         ),
         Padding(
           padding: EdgeInsets.all(0.01 * height),

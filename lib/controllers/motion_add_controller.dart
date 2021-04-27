@@ -64,8 +64,8 @@ class MotionAddController extends GetxController implements AddController {
   @override
   void back() {
     if (part == 1) {
-      Get.off(() => MotionListPage(), transition: Transition.noTransition);
-      // Get.back();
+      // Get.off(() => MotionListPage(), transition: Transition.noTransition);
+      Get.back();
       return;
     } else
       part--;
