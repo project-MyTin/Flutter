@@ -29,11 +29,16 @@ class MotionListPage extends StatelessWidget {
                 padding: EdgeInsets.all(0.04 * width),
                 sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
-                    (context, index) =>
-                        MotionGridTile(index, motionList[index], () {
-                          // TODO 더미데이터(currentMotion)가 아닌, 서버에서 받은 데이터로
-                          Get.dialog(MotionDetailDialog(currentMotion));
-                        }, false),
+                    (context, index) {
+                      // TODO 더미데이터(currentMotion)가 아닌, 서버에서 받은 데이터로
+                      return MotionGridTile(
+                        index,
+                        motionList[index],
+                        Get.dialog,
+                        MotionDetailDialog(currentMotion),
+                        false,
+                      );
+                    },
                     childCount: motionList.length,
                   ),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

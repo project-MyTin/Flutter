@@ -76,7 +76,9 @@ class RoutineAddBody extends StatelessWidget {
                 index,
                 controller.motionTileList[index],
                 controller.select,
-                controller.selectIndex == index),
+                index,
+                controller.selectIndex == index
+            ),
           ),
           height: 0.515 * height,
           padding: EdgeInsets.all(0.005 * height),
