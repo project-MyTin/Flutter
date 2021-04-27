@@ -1,6 +1,6 @@
 import 'package:mytin/models/routine_detail.dart';
 
-RoutineDetail routine = RoutineDetail.fromMap({
+RoutineDetail currentRoutine = RoutineDetail.fromMap({
   "id": 1,
   "name": "코딩하기",
   "description": "코딩은 고난이도 운동입니다. 물론 정신적 트레이닝이지요. "

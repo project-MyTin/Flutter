@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
@@ -147,10 +146,7 @@ class MotionDetailDialog extends StatelessWidget {
               size: 0.03 * height,
             ),
           ),
-          onTap: () {
-            Get.put(MotionAddController.edit(motion.id));
-            Get.to(() => MotionAddPage(), transition: Transition.noTransition);
-          },
+          onTap: () => Get.off(() => MotionAddPage(), transition: Transition.noTransition, arguments: motion.id),
         ),
         Padding(
           padding: EdgeInsets.all(0.01 * height),

@@ -8,6 +8,7 @@ class RoutineAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
+  bool isAdd;
   String currentType;
   String currentDifficulty;
   String routineName;
@@ -18,13 +19,29 @@ class RoutineAddController extends GetxController implements AddController {
   int motionCount;
   List<MotionElement> motionList = [];
   MotionElement newMotion;
+  RoutineDetail routine;
 
-  RoutineAddController() {
-    // dummy 값으로 초기화
-    motionList = routine.motions;
-    newMotion = routine.motions[0];
+  RoutineAddController.add() {
+    isAdd = true;
+    update();
+  }
 
-    // TODO 서버 response 값으로 초기화
+  RoutineAddController.edit(int routineId) {
+    isAdd = false;
+
+    this.routine = currentRoutine;
+    // TODO motionId로 서버에 Get 요청 => routine 에 저장
+
+    this.motionList = routine.motions;
+    this.newMotion = routine.motions[0];
+    this.currentType = routine.type;
+    this.currentDifficulty = routine.difficulty;
+    this.routineName = routine.name;
+    this.routineMaterials = routine.materials.toString();
+    this.routineDescription = routine.description;
+    this.breakTime = routine.breakTime;
+
+    update();
   }
 
   void moveTo(int page) {
@@ -46,9 +63,10 @@ class RoutineAddController extends GetxController implements AddController {
 
   @override
   void back() {
-    if (part == 1)
-      return;   // FIXME 루틴 리스트 페이지로 돌아가기
-    else if (part == 4)
+    if (part == 1){
+      Get.back();
+      return;
+    } else if (part == 4)
       part = 1;
     else
       part--;
@@ -73,7 +91,7 @@ class RoutineAddController extends GetxController implements AddController {
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
         "name: $routineName / materials: $routineMaterials / description: $routineDescription / " +
-    "time: $motionTime / count: $motionCount / breakTime: $breakTime");
+    "time: $motionTime / count: $motionCount / breakTime: $breakTime / isAdd : $isAdd");
   }
 
   void difficultyToggle(String difficulty) {

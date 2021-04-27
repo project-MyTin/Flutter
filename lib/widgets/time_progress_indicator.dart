@@ -24,7 +24,7 @@ class _TimeProgressIndicatorState extends State<TimeProgressIndicator> {
       child: Stack(
         children: [
           SizedBox(
-            child: GetBuilder<CountdownController>(
+            child: GetBuilder<RoutineRunController>(
               builder: (controller) => CircularProgressIndicator(
                 value: 1 - widget.currentTime / widget.allTime,
                 strokeWidth: 18,
@@ -42,7 +42,7 @@ class _TimeProgressIndicatorState extends State<TimeProgressIndicator> {
                   style: TextStyle(
                       fontSize: 0.024 * widget.height, color: widget.textColor),
                 ),
-                GetBuilder<CountdownController>(
+                GetBuilder<RoutineRunController>(
                   builder: (controller) => Text(
                     widget.currentTime.toString(),
                     style: TextStyle(

@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/widgets/routine/routine_run_complete_dialog.dart';
 
-class CountdownController extends GetxController {
+class RoutineRunController extends GetxController {
   int index = 0;
   bool isBreakTime = false;
   List<MotionElement> motionList;
@@ -13,7 +14,7 @@ class CountdownController extends GetxController {
   int currentTime;
   int currentBreakTime;
 
-  CountdownController(this.motionList, this.breakTime) {
+  RoutineRunController(this.motionList, this.breakTime) {
     motionCount = motionList.length;
     currentTime = motionList[index].time * motionList[index].count;
     currentBreakTime = breakTime;
@@ -26,10 +27,7 @@ class CountdownController extends GetxController {
           t.cancel();
         } else if (currentBreakTime < 1) {
           // 휴식 카운트도 끝난 경우 => 다음 동작으로
-          index++;
-          isBreakTime = false;
-          currentTime = motionList[index].time * motionList[index].count;
-          currentBreakTime = breakTime;
+          passMotion();
         } else {
           // 휴식 시간은 안 끝난 경우
           isBreakTime = true;
@@ -46,6 +44,22 @@ class CountdownController extends GetxController {
   void passBreakTime() {
     currentBreakTime = 0;
     update();
+  }
+
+  void passMotion() {
+    if (index < motionCount-1) {
+      index++;
+      isBreakTime = false;
+      currentTime = motionList[index].time * motionList[index].count;
+      currentBreakTime = breakTime;
+    } else {
+      completeRoutine();
+    }
+    update();
+  }
+
+  void completeRoutine() {
+    Get.dialog(RoutineRunCompleteDialog());
   }
 
   void addBreakTime(int time) {

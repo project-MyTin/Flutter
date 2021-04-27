@@ -1,10 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
+import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/screens/routine/screen_routine_add.dart';
+import 'package:mytin/screens/routine/screen_routine_run.dart';
+import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
+  final RoutineDetail routine;
+
+  RoutineDetailPage(this.routine);
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -77,7 +84,10 @@ class RoutineDetailPage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: buildRoutineDetailBottomBar(height),
+        bottomNavigationBar: ButtonBottomAppBar(
+            isDialog: false, isShow: true, text: "시작하기", clickFunc: () {
+              Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
+        }),
       ),
     );
   }
@@ -99,28 +109,12 @@ class RoutineDetailPage extends StatelessWidget {
     );
   }
 
-  Container buildRoutineDetailBottomBar(double height) {
-    return Container(
-      color: Colors.grey,
-      child: TextButton(
-        child: Text(
-          "시작하기",
-          style: TextStyle(color: Colors.white, fontSize: 0.023 * height),
-        ),
-        onPressed: () => print("시작좀 하자!"),
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.resolveWith((Set states) => Colors.grey)),
-      ),
-    );
-  }
-
   AppBar buildRoutineDetailAppBar() {
     return AppBar(
       title: Text(routine.name, style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
-        onPressed: () => print("나 나갈래!"),
+        onPressed: () => Get.back(),
       ),
       actions: [
         IconButton(
@@ -128,7 +122,7 @@ class RoutineDetailPage extends StatelessWidget {
             onPressed: () => print("지울래!")),
         IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () => print("수정할래!"))
+            onPressed: () => Get.to(() => RoutineAddPage(), arguments: routine.id))
       ],
     );
   }
@@ -140,4 +134,3 @@ class RoutineDetailPage extends StatelessWidget {
     );
   }
 }
-

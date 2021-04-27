@@ -7,10 +7,17 @@ import 'package:mytin/widgets/routine/routine_add_body.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class RoutineAddPage extends StatelessWidget {
+
+  RoutineAddPage() {
+    if(Get.arguments == null) {
+      Get.put(RoutineAddController.add());
+    } else {
+      Get.put(RoutineAddController.edit(Get.arguments));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Get.put(RoutineAddController());    // FIXME 루틴 생성&수정 페이지로 이동하기 바로 전에 해주기
-
     return SafeArea(
       child: GetBuilder<RoutineAddController>(
         builder: (controller) => Scaffold(
@@ -19,7 +26,7 @@ class RoutineAddPage extends StatelessWidget {
             child: Column(
               children: [
                 AddPageHeader(
-                  title: "루틴 생성하기",
+                  title: controller.isAdd ? "루틴 생성하기" : "루틴 수정하기",
                   subText: [
                     "원하는 동작을 추가해주세요",
                     "원하는 동작을 선택해주세요",
@@ -41,7 +48,7 @@ class RoutineAddPage extends StatelessWidget {
             clickFunc: Get.find<RoutineAddController>().submit,
             isShow: controller.part > 4,
             isDialog: false,
-            text: "생성하기",
+            text: controller.isAdd ? "생성하기" : "수정하기",
           ),
         ),
       ),
