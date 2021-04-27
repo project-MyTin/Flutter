@@ -3,7 +3,6 @@
  */
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/motion_select_controller.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
@@ -25,7 +24,8 @@ class RoutineAddBody extends StatelessWidget {
       builder: (controller) => Padding(
           padding: (controller.part != 2)
               ? EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0)
-              : EdgeInsets.fromLTRB(0.05 * width, 0.04 * height, 0.05 * width, 0),
+              : EdgeInsets.fromLTRB(
+                  0.05 * width, 0.04 * height, 0.05 * width, 0),
           child: [
             buildFirstBody(height),
             buildSecondBody(height),
@@ -62,24 +62,24 @@ class RoutineAddBody extends StatelessWidget {
   }
 
   Column buildSecondBody(double height) {
-    List<MotionTile> motions = motionList;
-    Get.put(MotionSelectController());
-    // TODO 서버에서 받아오기
-
+    RoutineAddController controller = Get.find<RoutineAddController>();
+    controller.getMotionTileList();
     return Column(
       children: [
         Container(
           child: GridView.builder(
-              itemCount: motions.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3 / 2,
-                  mainAxisSpacing: 12,
-                  crossAxisSpacing: 10
-              ),
-              itemBuilder: (_, index) => GetBuilder<MotionSelectController>(
-                builder: (controller) => MotionGridTile(index, motions[index], controller.select, controller.selectIndex == index),
-              )),
+            itemCount: controller.motionTileList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 10),
+            itemBuilder: (_, index) => MotionGridTile(
+                index,
+                controller.motionTileList[index],
+                controller.select,
+                controller.selectIndex == index),
+          ),
           height: 0.515 * height,
         ),
       ],

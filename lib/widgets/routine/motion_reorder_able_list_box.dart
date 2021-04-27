@@ -19,8 +19,8 @@ class MotionReorderAbleListBox extends StatelessWidget {
         child: GetBuilder<RoutineAddController>(
           builder: (controller) => ReorderableListView(
             children: [
-              for (int i = 0; i < controller.motionList.length; i++)
-                MotionListTile(i, controller.motionList[i], height),
+              for (int i = 0; i < controller.routineMotionList.length; i++)
+                MotionListTile(i, controller.routineMotionList[i], height),
             ],
             onReorder: (oldI, newI) => controller.changeSequence(oldI, newI),
           ),
