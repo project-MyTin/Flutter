@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
@@ -123,7 +124,7 @@ class RoutineDetailPage extends StatelessWidget {
       title: Text(routine.name, style: TextStyle(color: Colors.white)),
       leading: IconButton(
         icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
-        onPressed: () => print("나 나갈래!"),
+        onPressed: () => Get.back(),
       ),
       actions: [
         IconButton(

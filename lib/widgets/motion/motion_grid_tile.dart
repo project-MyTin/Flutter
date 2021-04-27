@@ -20,7 +20,10 @@ class MotionGridTile extends StatelessWidget {
     double width = screenSize.width;
 
     return GestureDetector(
-      onTap: () => Get.dialog(MotionDetailDialog(currentMotion)),
+      onTap: () {
+        // TODO 더미데이터(currentMotion)가 아닌, 서버에서 받은 데이터로
+        Get.dialog(MotionDetailDialog(currentMotion));
+      },
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
