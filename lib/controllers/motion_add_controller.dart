@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
+import 'package:mytin/models/motion_detail.dart';
+import 'package:mytin/screens/motion/screen_motion_list.dart';
+import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -20,6 +23,7 @@ class MotionAddController extends GetxController implements AddController {
   String motionReferenceUrl;
   int motionTime;
   var image;
+  MotionDetail motion;
 
   MotionAddController.create() {
     this.isCreate = true;
@@ -29,10 +33,9 @@ class MotionAddController extends GetxController implements AddController {
   }
 
   MotionAddController.edit(int motionId) {
-    // FIXME 수정하기에서 되돌아 올 때 GetXController 삭제가 안됨 + 페이지 못 들어감
     this.isCreate = false;
 
-    var motion = currentMotion;
+    motion = currentMotion;
     // TODO motionId로 서버에 Get 요청 => motion 에 저장
 
      this.currentType = motion.type;
@@ -62,7 +65,12 @@ class MotionAddController extends GetxController implements AddController {
   @override
   void back() {
     if(part == 1){
-      Get.back();
+      if(!isCreate) {
+        Get.off(MotionListPage(), transition: Transition.leftToRight);
+      } else {
+        Get.back();
+      }
+      return;
     }
     else
       part--;
@@ -120,4 +128,6 @@ class MotionAddController extends GetxController implements AddController {
 
     update();
   }
+
+
 }

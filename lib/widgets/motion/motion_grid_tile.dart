@@ -3,6 +3,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
@@ -19,7 +20,7 @@ class MotionGridTile extends StatelessWidget {
     double width = screenSize.width;
 
     return GestureDetector(
-      onTap: () => showDialog(context: context, builder: (_) => MotionDetailDialog(currentMotion)),
+      onTap: () => Get.dialog(MotionDetailDialog(currentMotion)),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
