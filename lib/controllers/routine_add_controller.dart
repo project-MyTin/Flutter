@@ -89,6 +89,7 @@ class RoutineAddController extends GetxController implements AddController {
   void back() {
     if (part == 1) {
       Get.back();
+      part = 1;
       return;
     } else if (part == 4)
       part = 1;
