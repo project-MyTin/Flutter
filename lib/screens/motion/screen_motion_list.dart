@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
+import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/list_view_header.dart';
 
@@ -27,7 +29,10 @@ class MotionListPage extends StatelessWidget {
                 sliver: SliverGrid(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) =>
-                        MotionGridTile(index, motionList[index]),
+                        MotionGridTile(index, motionList[index], () {
+                          // TODO 더미데이터(currentMotion)가 아닌, 서버에서 받은 데이터로
+                          Get.dialog(MotionDetailDialog(currentMotion));
+                        }),
                     childCount: motionList.length,
                   ),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

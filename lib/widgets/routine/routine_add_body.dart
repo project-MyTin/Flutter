@@ -4,9 +4,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
+import 'package:mytin/dummies/motion_list_dummy.dart';
+import 'package:mytin/screens/motion/screen_motion_list.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
+import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
+import 'package:mytin/widgets/routine/motion_select_grid_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/button_box.dart';
 import 'package:mytin/widgets/text_input_box_with_text.dart';
@@ -17,16 +21,18 @@ class RoutineAddBody extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
 
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
-      child: GetBuilder<RoutineAddController>(
-          builder: (controller) => [
-                buildFirstBody(height),
-                buildSecondBody(),
-                buildThirdBody(height),
-                buildFourthBody(height),
-                buildFifthBody(height)
-              ][controller.part - 1]),
+    return GetBuilder<RoutineAddController>(
+      builder: (controller) => Padding(
+          padding: (controller.part != 2)
+              ? EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0)
+              : EdgeInsets.fromLTRB(0.05 * width, 0.035 * height, 0.05 * width, 0),
+          child: [
+            buildFirstBody(height),
+            buildSecondBody(height),
+            buildThirdBody(height),
+            buildFourthBody(height),
+            buildFifthBody(height)
+          ][controller.part - 1]),
     );
   }
 
@@ -55,15 +61,13 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildSecondBody() {
+  Column buildSecondBody(double height) {
     return Column(
       children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: OutlinedButton(
-              onPressed: () => Get.find<RoutineAddController>().moveTo(3),
-              child: Text("2")),
-        )
+        Container(
+          child: MotionSelectGridBox(motionList),
+          height: 0.52 * height,
+        ),
       ],
     );
   }
@@ -205,15 +209,15 @@ class RoutineAddBody extends StatelessWidget {
           ),
           SizedBox(height: 0.05 * height),
           TextInputBoxWithText(
-              title: "동작 쉬는 시간",
-              subTitle: "동작 사이마다의 쉬는 시간을 입력하세요",
-              hint: "10",
-              text: controller.breakTime?.toString(),
-              type: "breakTime",
-              line: 1,
-              widthSize: 0.14,
-              inputFunc: controller.textChangeHandler,
-              numberType: "초",
+            title: "동작 쉬는 시간",
+            subTitle: "동작 사이마다의 쉬는 시간을 입력하세요",
+            hint: "10",
+            text: controller.breakTime?.toString(),
+            type: "breakTime",
+            line: 1,
+            widthSize: 0.14,
+            inputFunc: controller.textChangeHandler,
+            numberType: "초",
           ),
         ],
       ),
