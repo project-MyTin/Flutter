@@ -64,7 +64,7 @@ class MotionAddController extends GetxController implements AddController {
   @override
   void back() {
     if (part == 1) {
-      Get.off(MotionListPage(), transition: Transition.noTransition);
+      Get.off(() => MotionListPage(), transition: Transition.noTransition);
       // Get.back();
       return;
     } else
@@ -82,7 +82,7 @@ class MotionAddController extends GetxController implements AddController {
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
         "currentMotionPart: $currentMotionPart / name: $motionName / description: $motionDescription / " +
-        "time: $motionTime / referenceUrl : $motionReferenceUrl");
+        "time: $motionTime / referenceUrl : $motionReferenceUrl / isAdd : $isAdd");
   }
 
   void difficultyToggle(String difficulty) {

@@ -26,10 +26,7 @@ class RoutineRunController extends GetxController {
           t.cancel();
         } else if (currentBreakTime < 1) {
           // 휴식 카운트도 끝난 경우 => 다음 동작으로
-          index++;
-          isBreakTime = false;
-          currentTime = motionList[index].time * motionList[index].count;
-          currentBreakTime = breakTime;
+          passMotion();
         } else {
           // 휴식 시간은 안 끝난 경우
           isBreakTime = true;
@@ -45,6 +42,18 @@ class RoutineRunController extends GetxController {
 
   void passBreakTime() {
     currentBreakTime = 0;
+    update();
+  }
+
+  void passMotion() {
+    if (index < motionCount-1) {
+      index++;
+      isBreakTime = false;
+      currentTime = motionList[index].time * motionList[index].count;
+      currentBreakTime = breakTime;
+    } else {
+      // TODO 루틴 완성 페이지
+    }
     update();
   }
 

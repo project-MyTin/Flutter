@@ -85,7 +85,7 @@ class RoutineAddController extends GetxController implements AddController {
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
         "name: $routineName / materials: $routineMaterials / description: $routineDescription / " +
-    "time: $motionTime / count: $motionCount / breakTime: $breakTime");
+    "time: $motionTime / count: $motionCount / breakTime: $breakTime / isAdd : $isAdd");
   }
 
   void difficultyToggle(String difficulty) {

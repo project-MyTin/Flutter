@@ -16,8 +16,8 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
   @override
   void initState() {
     super.initState();
-    _controller =
-        Get.put(RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
+    _controller = Get.put(
+        RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
   }
 
   @override
@@ -121,7 +121,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           ),
           Spacer(flex: 3),
           IconButton(
-            onPressed: () => print("다음 파트로"),
+            onPressed: () => _controller.passMotion(),
             icon: Icon(
               Icons.arrow_forward_ios_outlined,
               size: 0.06 * width,
@@ -140,11 +140,12 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           title,
           style: TextStyle(fontSize: 0.024 * height, color: Colors.white),
         ),
+        leading: Container(),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.all(0.014 * height),
             child: TextButton(
-              onPressed: () => print("종료하기"),
+              onPressed: () => Get.back(),
               child: Text(
                 "   종료하기    ",
                 style: TextStyle(fontSize: 0.015 * height, color: Colors.white),
