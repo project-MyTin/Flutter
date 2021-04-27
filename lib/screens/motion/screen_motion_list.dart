@@ -7,6 +7,7 @@ import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/list_view_header.dart';
+import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
 class MotionListPage extends StatelessWidget {
   @override
@@ -49,6 +50,7 @@ class MotionListPage extends StatelessWidget {
         floatingActionButton: AddFloatingButton(() {
           Get.to(() => MotionAddPage(), transition: Transition.noTransition);
         }),
+        bottomNavigationBar: PageBottomNavigationBar(0),
       ),
     );
   }

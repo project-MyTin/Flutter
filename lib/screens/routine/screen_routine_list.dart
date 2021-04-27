@@ -4,6 +4,7 @@ import 'package:mytin/dummies/routine_list_dummy.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/list_view_header.dart';
+import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
 
 class RoutineListPage extends StatelessWidget {
@@ -24,6 +25,7 @@ class RoutineListPage extends StatelessWidget {
         floatingActionButton: AddFloatingButton(() => Get.to(
             () => RoutineAddPage(),
             transition: Transition.noTransition)),
+        bottomNavigationBar: PageBottomNavigationBar(2),
       ),
     );
   }
