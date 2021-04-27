@@ -95,6 +95,7 @@ class RoutineDetailPage extends StatelessWidget {
   Container buildMotionList(double height) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+      padding: EdgeInsets.all(0.005 * height),
       decoration: BoxDecoration(
           border: Border.all(color: Color.fromARGB(255, 200, 200, 200)),
           borderRadius: BorderRadius.all(Radius.circular(20))),

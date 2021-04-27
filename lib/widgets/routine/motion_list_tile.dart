@@ -23,6 +23,7 @@ class MotionListTile extends StatelessWidget {
           ImageCircular(url: motion.imageUrl, diameter: 0.08 * height),
           SizedBox(width: 0.012 * height),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(motion.name, style: TextStyle(fontSize: 0.022 * height)),
               SizedBox(height: 0.005 * height),
@@ -30,12 +31,19 @@ class MotionListTile extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Text(motion.time.toString() + "초", style: TextStyle(fontSize: 0.02 * height)),
-          Text(" X " + motion.count.toString() + "회", style: TextStyle(color: Colors.grey, fontSize: 0.014 * height)),
-          if(deleteFunc != null) GestureDetector(child: Padding(
-            padding: EdgeInsets.fromLTRB(0.01 * height, 0, 0.005 * height, 0),
-            child: Icon(Icons.delete, color: Colors.black.withOpacity(0.7)),
-          ), onTap: () => deleteFunc(index))
+          Text(motion.time.toString() + "초",
+              style: TextStyle(fontSize: 0.02 * height)),
+          Text(" X " + motion.count.toString() + "회",
+              style: TextStyle(color: Colors.grey, fontSize: 0.014 * height)),
+          if (deleteFunc != null)
+            GestureDetector(
+              child: Padding(
+                padding:
+                    EdgeInsets.fromLTRB(0.01 * height, 0, 0.005 * height, 0),
+                child: Icon(Icons.delete, color: Colors.black.withOpacity(0.7)),
+              ),
+              onTap: () => deleteFunc(index),
+            ),
         ],
       ),
       margin: EdgeInsets.all(0.005 * height),

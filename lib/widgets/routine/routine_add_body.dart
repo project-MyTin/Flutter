@@ -4,8 +4,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
-import 'package:mytin/dummies/motion_list_dummy.dart';
-import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
@@ -81,6 +79,10 @@ class RoutineAddBody extends StatelessWidget {
                 controller.selectIndex == index),
           ),
           height: 0.515 * height,
+          padding: EdgeInsets.all(0.005 * height),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
         ),
       ],
     );
