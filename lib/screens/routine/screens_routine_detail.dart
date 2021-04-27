@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
+import 'package:mytin/screens/routine/screen_routine_run.dart';
+import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
@@ -83,7 +85,10 @@ class RoutineDetailPage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: buildRoutineDetailBottomBar(height),
+        bottomNavigationBar: ButtonBottomAppBar(
+            isDialog: false, isShow: true, text: "시작하기", clickFunc: () {
+              Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
+        }),
       ),
     );
   }
@@ -101,22 +106,6 @@ class RoutineDetailPage extends StatelessWidget {
           for (int i = 0; i < routine.motions.length; i++)
             MotionListTile(i, routine.motions[i], height) // 위젯에서 반복문 쓰기!
         ],
-      ),
-    );
-  }
-
-  Container buildRoutineDetailBottomBar(double height) {
-    return Container(
-      color: Colors.grey,
-      child: TextButton(
-        child: Text(
-          "시작하기",
-          style: TextStyle(color: Colors.white, fontSize: 0.023 * height),
-        ),
-        onPressed: () => print("시작좀 하자!"),
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.resolveWith((Set states) => Colors.grey)),
       ),
     );
   }
@@ -149,4 +138,3 @@ class RoutineDetailPage extends StatelessWidget {
     );
   }
 }
-
