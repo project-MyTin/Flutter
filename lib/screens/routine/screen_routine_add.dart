@@ -17,7 +17,7 @@ class RoutineAddPage extends StatelessWidget {
             child: Column(
               children: [
                 AddPageHeader(
-                  title: "루틴 생성하기",
+                  title: controller.isAdd ? "루틴 생성하기" : "루틴 수정하기",
                   subText: [
                     "원하는 동작을 추가해주세요",
                     "원하는 동작을 선택해주세요",
@@ -39,7 +39,7 @@ class RoutineAddPage extends StatelessWidget {
             clickFunc: Get.find<RoutineAddController>().submit,
             isShow: controller.part > 4,
             isDialog: false,
-            text: "생성하기",
+            text: controller.isAdd ? "생성하기" : "수정하기",
           ),
         ),
       ),

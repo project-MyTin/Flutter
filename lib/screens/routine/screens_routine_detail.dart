@@ -124,7 +124,7 @@ class RoutineDetailPage extends StatelessWidget {
         IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
             onPressed: () {
-              Get.put(RoutineAddController.add());
+              Get.put(RoutineAddController.edit(routine.id));
               Get.to(() => RoutineAddPage());
             })
       ],
