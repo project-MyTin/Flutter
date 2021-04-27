@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
+import 'package:mytin/screens/routine/screen_routine_list.dart';
 import 'package:mytin/screens/routine/screen_routine_run.dart';
+import 'package:mytin/utils/open_delete_dialog.dart';
+import 'package:mytin/utils/show_snack_bar.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
@@ -85,9 +88,13 @@ class RoutineDetailPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: ButtonBottomAppBar(
-            isDialog: false, isShow: true, text: "시작하기", clickFunc: () {
-              Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
-        }),
+            isDialog: false,
+            isShow: true,
+            text: "시작하기",
+            clickFunc: () {
+              Get.to(() => RoutineRunPage(),
+                  transition: Transition.noTransition);
+            }),
       ),
     );
   }
@@ -120,10 +127,11 @@ class RoutineDetailPage extends StatelessWidget {
       actions: [
         IconButton(
             icon: Icon(Icons.delete, color: Colors.white),
-            onPressed: () => print("지울래!")),
+            onPressed: () => openDeleteDialog("루틴")),
         IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () => Get.to(() => RoutineAddPage(), arguments: routine.id))
+            onPressed: () =>
+                Get.to(() => RoutineAddPage(), arguments: routine.id))
       ],
     );
   }

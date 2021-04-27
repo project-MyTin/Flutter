@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
+import 'package:mytin/utils/open_delete_dialog.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class MotionDetailDialog extends StatelessWidget {
@@ -148,13 +149,16 @@ class MotionDetailDialog extends StatelessWidget {
           ),
           onTap: () => Get.off(() => MotionAddPage(), transition: Transition.noTransition, arguments: motion.id),
         ),
-        Padding(
-          padding: EdgeInsets.all(0.01 * height),
-          child: Icon(
-            Icons.delete,
-            color: Colors.white.withOpacity(0.5),
-            size: 0.03 * height,
+        GestureDetector(
+          child: Padding(
+            padding: EdgeInsets.all(0.01 * height),
+            child: Icon(
+              Icons.delete,
+              color: Colors.white.withOpacity(0.5),
+              size: 0.03 * height,
+            ),
           ),
+          onTap: () => openDeleteDialog("동작"),
         ),
       ],
     );
