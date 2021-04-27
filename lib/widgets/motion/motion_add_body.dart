@@ -84,7 +84,7 @@ class MotionAddBody extends StatelessWidget {
           text: controller.motionDescription ?? "",
           inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
-          line: 5,
+          line: 4,
           type: "description",
         ),
         Text("동작 참고 자료 URL", style: TextStyle(fontSize: 0.02 * height)),
@@ -93,7 +93,7 @@ class MotionAddBody extends StatelessWidget {
           text: controller.motionReferenceUrl ?? "",
           inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
-          line: 1,
+          line: 2,
           type: "url",
         ),
         TextInputBoxWithText(

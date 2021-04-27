@@ -34,6 +34,12 @@ class RoutineAddController extends GetxController implements AddController {
 
     this.motionList = routine.motions;
     this.newMotion = routine.motions[0];
+    this.currentType = routine.type;
+    this.currentDifficulty = routine.difficulty;
+    this.routineName = routine.name;
+    this.routineMaterials = routine.materials.toString();
+    this.routineDescription = routine.description;
+    this.breakTime = routine.breakTime;
 
     update();
   }

@@ -8,10 +8,10 @@ import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class MotionAddPage extends StatelessWidget {
   MotionAddPage() {
-    if (Get.arguments != null) {
-      Get.put(MotionAddController.edit(Get.arguments));
-    } else {
+    if (Get.arguments == null) {
       Get.put(MotionAddController.add());
+    } else {
+      Get.put(MotionAddController.edit(Get.arguments));
     }
   }
 

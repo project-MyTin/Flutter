@@ -156,7 +156,7 @@ class RoutineAddBody extends StatelessWidget {
           text: controller.routineMaterials ?? "",
           inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
-          line: 1,
+          line: 2,
           type: "materials",
         ),
         Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),

@@ -51,7 +51,7 @@ class TextInputBox extends StatelessWidget {
             textAlignVertical: TextAlignVertical.bottom,
             onChanged: (newText) => inputFunc(type, newText),
           ),
-          height: 0.06 * height + 0.025 * (line - 1) * height,
+          height: 0.06 * height + 0.03 * (line - 1) * height,
           width: widthSize * width,
         ),
         SizedBox(height: 0.025 * height),
