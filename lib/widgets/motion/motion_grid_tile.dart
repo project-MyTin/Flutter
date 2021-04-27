@@ -9,8 +9,9 @@ class MotionGridTile extends StatelessWidget {
   final MotionTile motion;
   final Function clickFunc;
   final int index;
+  final bool isClick;
 
-  MotionGridTile(this.index, this.motion, this.clickFunc) : super(key: ValueKey(index));
+  MotionGridTile(this.index, this.motion, this.clickFunc, this.isClick) : super(key: ValueKey(index));
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MotionGridTile extends StatelessWidget {
     double width = screenSize.width;
 
     return GestureDetector(
-      onTap: clickFunc,
+      onTap: () => clickFunc(index),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +49,7 @@ class MotionGridTile extends StatelessWidget {
               image: NetworkImage(motion.imageUrl),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.darken)),
+                  isClick ? Colors.white.withOpacity(0.7) : Colors.black.withOpacity(0.3), BlendMode.darken)),
         ),
       ),
     );
