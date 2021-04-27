@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/utils/show_snack_bar.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -65,10 +65,7 @@ class RoutineAddController extends GetxController implements AddController {
           createNewMotion();
           part++;
         } else {
-          showSnackBar(
-            "동작이 선택되지 않았습니다!",
-            "루틴에 추가할 동작을 선택해주세요",
-          );
+          showSnackBar("동작이 선택되지 않았습니다!", "루틴에 추가할 동작을 선택해주세요", "warning");
         }
         break;
       case 3:
@@ -76,7 +73,7 @@ class RoutineAddController extends GetxController implements AddController {
           addMotionToList();
           part = 1;
         } else {
-          showSnackBar("동작 시간과 횟수가 비여있습니다!", "동작 시간과 횟수를 입력해주세요");
+          showSnackBar("동작 시간과 횟수가 비여있습니다!", "동작 시간과 횟수를 입력해주세요", "warning");
         }
         break;
       default:
@@ -165,21 +162,6 @@ class RoutineAddController extends GetxController implements AddController {
       "time": null,
     });
     selectIndex = -1;
-  }
-
-  void showSnackBar(String title, String body) {
-    Get.snackbar(
-      title,
-      body,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.deepOrange,
-      colorText: Colors.white,
-      animationDuration: Duration(milliseconds: 600),
-      icon: Icon(
-        Icons.warning,
-        color: Colors.white,
-      ),
-    );
   }
 
   void addMotionToList() {
