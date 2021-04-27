@@ -6,7 +6,7 @@ import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
-import 'package:mytin/widgets/list_view_header.dart';
+import 'package:mytin/widgets/title_page_header.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
 class MotionListPage extends StatelessWidget {
@@ -22,7 +22,7 @@ class MotionListPage extends StatelessWidget {
           child: CustomScrollView(
             slivers: [
               SliverToBoxAdapter(
-                child: ListViewHeader(
+                child: TitlePageHeader(
                     "Motion", "많은 운동 동작들을 찾아보고 직접 만들어 공유해보세요!", () {}),
               ),
               SliverPadding(

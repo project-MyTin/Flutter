@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
-import 'package:mytin/widgets/list_view_header.dart';
+import 'package:mytin/widgets/title_page_header.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
 
@@ -16,7 +16,7 @@ class RoutineListPage extends StatelessWidget {
           child: ListView.builder(
             itemCount: routineList.length + 1,
             itemBuilder: (context, index) => (index == 0)
-                ? ListViewHeader(
+                ? TitlePageHeader(
                     "Routine", "다양한 운동 루틴을 수행하고 직접 만들어 공유해보세요!", () {})
                 : RoutineListTile(routineList[index - 1]),
           ),
