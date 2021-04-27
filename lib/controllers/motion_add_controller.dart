@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
-import 'package:mytin/screens/motion/screen_motion_list.dart';
 
 import 'add_abstract_controller.dart';
 
