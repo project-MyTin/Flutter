@@ -7,6 +7,15 @@ import 'package:mytin/widgets/routine/routine_add_body.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class RoutineAddPage extends StatelessWidget {
+
+  RoutineAddPage() {
+    if(Get.arguments == null) {
+      Get.put(RoutineAddController.add());
+    } else {
+      Get.put(RoutineAddController.edit(Get.arguments));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
