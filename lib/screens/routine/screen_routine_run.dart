@@ -11,13 +11,13 @@ class RoutineRunPage extends StatefulWidget {
 }
 
 class _RoutineRunPageState extends State<RoutineRunPage> {
-  CountdownController _controller;
+  RoutineRunController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller =
-        Get.put(CountdownController(routine.motions, routine.breakTime));
+        Get.put(RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
   }
 
   @override
@@ -32,7 +32,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     double width = screenSize.width, height = screenSize.height;
 
     return SafeArea(
-      child: GetBuilder<CountdownController>(
+      child: GetBuilder<RoutineRunController>(
         builder: (controller) => Scaffold(
           appBar: buildRoutineRunAppBar(
               controller.motionList[controller.index].name, height),
@@ -55,7 +55,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     );
   }
 
-  Column buildMotionInformation(CountdownController controller, double width) {
+  Column buildMotionInformation(RoutineRunController controller, double width) {
     return Column(
       children: [
         Text(
@@ -73,7 +73,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
   }
 
   SizedBox buildRoutineRunBody(
-      CountdownController controller, double width, double height) {
+      RoutineRunController controller, double width, double height) {
     return SizedBox(
       child: Stack(
         children: <Widget>[
@@ -105,7 +105,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
   }
 
   Container buildRoutineRunBottomAppBar(
-      CountdownController controller, double height, double width) {
+      RoutineRunController controller, double height, double width) {
     return Container(
       color: Colors.grey,
       height: 0.06 * height,

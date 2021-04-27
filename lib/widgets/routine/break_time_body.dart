@@ -14,7 +14,7 @@ class BreakTimeBody extends StatefulWidget {
 class _BreakTimeBodyState extends State<BreakTimeBody> {
   @override
   Widget build(BuildContext context) {
-    CountdownController _controller = Get.find<CountdownController>();
+    RoutineRunController _controller = Get.find<RoutineRunController>();
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
 
@@ -33,7 +33,7 @@ class _BreakTimeBodyState extends State<BreakTimeBody> {
               ),
             ),
             SizedBox(height: 0.03 * height),
-            GetBuilder<CountdownController>(
+            GetBuilder<RoutineRunController>(
               builder: (controller) => TimeProgressIndicator(
                 width: width * 1.1,
                 height: height * 1.1,

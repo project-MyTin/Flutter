@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
+  final RoutineDetail routine;
+
+  RoutineDetailPage(this.routine);
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;

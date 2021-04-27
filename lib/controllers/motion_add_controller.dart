@@ -12,7 +12,7 @@ class MotionAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   List<String> motionPart = ["등", "어께", "복근", "하체", "전신", "가슴", "코어", "허리"];
-  bool isCreate;
+  bool isAdd;
   int part = 1;
   String currentType;
   String currentDifficulty;
@@ -24,15 +24,15 @@ class MotionAddController extends GetxController implements AddController {
   var image;
   MotionDetail motion;
 
-  MotionAddController.create() {
-    this.isCreate = true;
+  MotionAddController.add() {
+    this.isAdd = true;
 
     update();
     printObject();
   }
 
   MotionAddController.edit(int motionId) {
-    this.isCreate = false;
+    this.isAdd = false;
 
     motion = currentMotion;
     // TODO motionId로 서버에 Get 요청 => motion 에 저장

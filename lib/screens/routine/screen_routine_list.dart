@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/list_view_header.dart';
@@ -18,7 +20,10 @@ class RoutineListPage extends StatelessWidget {
           ),
           color: Colors.black.withOpacity(0.02),
         ),
-        floatingActionButton: AddFloatingButton(() {}),
+        floatingActionButton: AddFloatingButton(() {
+          Get.put(RoutineAddController.add());
+          Get.to(() => RoutineListPage());
+        }),
       ),
     );
   }

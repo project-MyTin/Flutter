@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
 
-class CountdownController extends GetxController {
+class RoutineRunController extends GetxController {
   int index = 0;
   bool isBreakTime = false;
   List<MotionElement> motionList;
@@ -13,7 +13,7 @@ class CountdownController extends GetxController {
   int currentTime;
   int currentBreakTime;
 
-  CountdownController(this.motionList, this.breakTime) {
+  RoutineRunController(this.motionList, this.breakTime) {
     motionCount = motionList.length;
     currentTime = motionList[index].time * motionList[index].count;
     currentBreakTime = breakTime;

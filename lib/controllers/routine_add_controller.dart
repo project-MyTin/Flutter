@@ -8,6 +8,7 @@ class RoutineAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   int part = 1;
+  bool isAdd;
   String currentType;
   String currentDifficulty;
   String routineName;
@@ -18,13 +19,23 @@ class RoutineAddController extends GetxController implements AddController {
   int motionCount;
   List<MotionElement> motionList = [];
   MotionElement newMotion;
+  RoutineDetail routine;
 
-  RoutineAddController() {
-    // dummy 값으로 초기화
-    motionList = routine.motions;
-    newMotion = routine.motions[0];
+  RoutineAddController.add() {
+    isAdd = true;
+    update();
+  }
 
-    // TODO 서버 response 값으로 초기화
+  RoutineAddController.edit(int routineId) {
+    isAdd = false;
+
+    this.routine = currentRoutine;
+    // TODO motionId로 서버에 Get 요청 => routine 에 저장
+
+    this.motionList = routine.motions;
+    this.newMotion = routine.motions[0];
+
+    update();
   }
 
   void moveTo(int page) {

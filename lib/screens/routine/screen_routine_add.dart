@@ -9,8 +9,6 @@ import 'package:mytin/widgets/button_bottom_app_bar.dart';
 class RoutineAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.put(RoutineAddController());    // FIXME 루틴 생성&수정 페이지로 이동하기 바로 전에 해주기
-
     return SafeArea(
       child: GetBuilder<RoutineAddController>(
         builder: (controller) => Scaffold(

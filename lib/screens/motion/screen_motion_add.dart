@@ -17,7 +17,7 @@ class MotionAddPage extends StatelessWidget {
             child: Column(
               children: [
                 AddPageHeader(
-                  title: controller.isCreate ? "동작 생성하기" : "동작 수정하기",
+                  title: controller.isAdd ? "동작 생성하기" : "동작 수정하기",
                   subText: [
                     "동작 이미지를 입력해주세요",
                     "동작명과 시간, 설명을 입력해주세요",
@@ -37,7 +37,7 @@ class MotionAddPage extends StatelessWidget {
             clickFunc: Get.find<MotionAddController>().submit,
             isShow: controller.part > 2,
             isDialog: false,
-            text: controller.isCreate ? "생성하기" : "수정하기",
+            text: controller.isAdd ? "생성하기" : "수정하기",
           ),
         ),
       ),
