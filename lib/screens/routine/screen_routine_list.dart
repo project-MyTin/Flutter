@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
+import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/list_view_header.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
@@ -22,7 +23,7 @@ class RoutineListPage extends StatelessWidget {
         ),
         floatingActionButton: AddFloatingButton(() {
           Get.put(RoutineAddController.add());
-          Get.to(() => RoutineListPage());
+          Get.to(() => RoutineAddPage(), transition: Transition.noTransition);
         }),
       ),
     );

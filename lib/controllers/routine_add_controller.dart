@@ -57,9 +57,10 @@ class RoutineAddController extends GetxController implements AddController {
 
   @override
   void back() {
-    if (part == 1)
-      return;   // FIXME 루틴 리스트 페이지로 돌아가기
-    else if (part == 4)
+    if (part == 1){
+      Get.back();
+      return;
+    } else if (part == 4)
       part = 1;
     else
       part--;
