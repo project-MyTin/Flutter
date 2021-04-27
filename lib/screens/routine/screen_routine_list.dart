@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
+import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/list_view_header.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
 
 class RoutineListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -20,6 +18,7 @@ class RoutineListPage extends StatelessWidget {
           ),
           color: Colors.black.withOpacity(0.02),
         ),
+        floatingActionButton: AddFloatingButton(() {}),
       ),
     );
   }

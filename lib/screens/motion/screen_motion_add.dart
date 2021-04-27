@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/widgets/add_page_header.dart';
+import 'package:mytin/widgets/motion/motion_add_body.dart';
 import 'package:mytin/widgets/next_page_floating_button.dart';
-import 'package:mytin/widgets/submit_bottom_app_bar.dart';
+import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class MotionAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Get.put(MotionAddController());    // FIXME 동작 생성&수정 페이지로 이동하기 바로 전에 해주기
-
     return SafeArea(
       child: GetBuilder<MotionAddController>(
         builder: (controller) => Scaffold(
@@ -18,7 +17,7 @@ class MotionAddPage extends StatelessWidget {
             child: Column(
               children: [
                 AddPageHeader(
-                  title: "동작 생성하기",
+                  title: controller.isCreate ? "동작 생성하기" : "동작 수정하기",
                   subText: [
                     "동작 이미지를 입력해주세요",
                     "동작명과 시간, 설명을 입력해주세요",
@@ -28,16 +27,17 @@ class MotionAddPage extends StatelessWidget {
                   backPageFunc: Get.find<MotionAddController>().back,
                   pageNumbering: [1, 2, 3],
                 ),
-                // RoutineAddBody(),
+                MotionAddBody(),
                 if (controller.part < 3)
                   NextPageFloatingButton(Get.find<MotionAddController>().next),
               ],
             ),
           ),
-          bottomNavigationBar: SubmitBottomAppBar(
-            submitFunc: Get.find<MotionAddController>().submit,
+          bottomNavigationBar: ButtonBottomAppBar(
+            clickFunc: Get.find<MotionAddController>().submit,
             isShow: controller.part > 2,
-            isAdd: true,
+            isDialog: false,
+            text: controller.isCreate ? "생성하기" : "수정하기",
           ),
         ),
       ),

@@ -1,30 +1,53 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
-import 'package:mytin/models/routine_detail.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mytin/dummies/motion_detail_dummy.dart';
+import 'package:mytin/models/motion_detail.dart';
+import 'package:mytin/screens/motion/screen_motion_list.dart';
 
 import 'add_abstract_controller.dart';
 
 class MotionAddController extends GetxController implements AddController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
+  List<String> motionPart = ["등", "어께", "복근", "하체", "전신", "가슴", "코어", "허리"];
+  bool isCreate;
   int part = 1;
   String currentType;
   String currentDifficulty;
-  String routineName;
-  String routineMaterials;
-  String routineDescription;
-  int breakTime;
+  String currentMotionPart;
+  String motionName;
+  String motionDescription;
+  String motionReferenceUrl;
   int motionTime;
-  int motionCount;
-  List<MotionElement> motionList = [];
-  MotionElement newMotion;
+  var image;
+  MotionDetail motion;
 
-  MotionAddController() {
-    // dummy 값으로 초기화
-    motionList = routine.motions;
-    newMotion = routine.motions[0];
+  MotionAddController.create() {
+    this.isCreate = true;
 
-    // TODO 서버 response 값으로 초기화
+    update();
+    printObject();
+  }
+
+  MotionAddController.edit(int motionId) {
+    this.isCreate = false;
+
+    motion = currentMotion;
+    // TODO motionId로 서버에 Get 요청 => motion 에 저장
+
+    this.currentType = motion.type;
+    this.currentDifficulty = motion.difficulty;
+    this.currentMotionPart = motion.part;
+    this.motionName = motion.name;
+    this.motionDescription = motion.description;
+    this.motionReferenceUrl = motion.referenceUrl;
+    this.motionTime = motion.time;
+    this.image = motion.imageUrl;
+
+    update();
+    printObject();
   }
 
   void moveTo(int page) {
@@ -40,9 +63,12 @@ class MotionAddController extends GetxController implements AddController {
 
   @override
   void back() {
-    if(part == 1)
+    if (part == 1) {
+      Get.off(MotionListPage(), transition: Transition.noTransition);
+      // Get.back();
       return;
-    part--;
+    } else
+      part--;
     update();
   }
 
@@ -53,46 +79,48 @@ class MotionAddController extends GetxController implements AddController {
     moveTo(1);
   }
 
-  void changeSequence(oldIndex, newIndex) {
-    if (oldIndex < newIndex) newIndex -= 1;
-    final MotionElement item = motionList.removeAt(oldIndex);
-    motionList.insert(newIndex, item);
-    update();
-  }
-
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
-        "name: $routineName / materials: $routineMaterials / description: $routineDescription / " +
-    "time: $motionTime / count: $motionCount / breakTime: $breakTime");
+        "currentMotionPart: $currentMotionPart / name: $motionName / description: $motionDescription / " +
+        "time: $motionTime / referenceUrl : $motionReferenceUrl");
   }
 
   void difficultyToggle(String difficulty) {
     currentDifficulty = difficulty;
     update();
-    printObject();
+    // printObject();
   }
 
   void typeToggle(String type) {
     currentType = type;
     update();
-    printObject();
+    // printObject();
+  }
+
+  void motionPartToggle(String motionPart) {
+    currentMotionPart = motionPart;
+    update();
+    // printObject();
   }
 
   void textChangeHandler(String type, String text) {
     if (type == "name")
-      routineName = text;
-    else if (type == "materials")
-      routineMaterials = text;
+      motionName = text;
     else if (type == "description")
-      routineDescription = text;
-    else if (type == "time")
-      motionTime = int.parse(text);
-    else if (type == "count")
-      motionCount = int.parse(text);
-    else if (type == "breakTime")
-      breakTime = int.parse(text);
+      motionDescription = text;
+    else if (type == "url")
+      motionReferenceUrl = text;
+    else if (type == "time") motionTime = int.parse(text);
 
     update();
-    printObject();
+    // printObject();
+  }
+
+  Future<void> uploadImage() async {
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    image = File(pickedFile.path);
+
+    update();
   }
 }

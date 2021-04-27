@@ -4,7 +4,7 @@ import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/add_page_header.dart';
 import 'package:mytin/widgets/next_page_floating_button.dart';
 import 'package:mytin/widgets/routine/routine_add_body.dart';
-import 'package:mytin/widgets/submit_bottom_app_bar.dart';
+import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
 class RoutineAddPage extends StatelessWidget {
   @override
@@ -37,10 +37,11 @@ class RoutineAddPage extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: SubmitBottomAppBar(
-            submitFunc: Get.find<RoutineAddController>().submit,
+          bottomNavigationBar: ButtonBottomAppBar(
+            clickFunc: Get.find<RoutineAddController>().submit,
             isShow: controller.part > 4,
-            isAdd: true,
+            isDialog: false,
+            text: "생성하기",
           ),
         ),
       ),
