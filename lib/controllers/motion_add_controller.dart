@@ -5,7 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_list.dart';
-import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -38,17 +37,17 @@ class MotionAddController extends GetxController implements AddController {
     motion = currentMotion;
     // TODO motionId로 서버에 Get 요청 => motion 에 저장
 
-     this.currentType = motion.type;
-     this.currentDifficulty = motion.difficulty;
-     this.currentMotionPart = motion.part;
-     this.motionName = motion.name;
-     this.motionDescription = motion.description;
-     this.motionReferenceUrl = motion.referenceUrl;
-     this.motionTime = motion.time;
-     this.image = motion.imageUrl;
+    this.currentType = motion.type;
+    this.currentDifficulty = motion.difficulty;
+    this.currentMotionPart = motion.part;
+    this.motionName = motion.name;
+    this.motionDescription = motion.description;
+    this.motionReferenceUrl = motion.referenceUrl;
+    this.motionTime = motion.time;
+    this.image = motion.imageUrl;
 
-     update();
-     printObject();
+    update();
+    printObject();
   }
 
   void moveTo(int page) {
@@ -64,15 +63,11 @@ class MotionAddController extends GetxController implements AddController {
 
   @override
   void back() {
-    if(part == 1){
-      if(!isCreate) {
-        Get.off(MotionListPage(), transition: Transition.leftToRight);
-      } else {
-        Get.back();
-      }
+    if (part == 1) {
+      Get.off(MotionListPage(), transition: Transition.noTransition);
+      // Get.back();
       return;
-    }
-    else
+    } else
       part--;
     update();
   }
@@ -87,7 +82,7 @@ class MotionAddController extends GetxController implements AddController {
   void printObject() {
     print("currentDifficulty: $currentDifficulty / currentType: $currentType / " +
         "currentMotionPart: $currentMotionPart / name: $motionName / description: $motionDescription / " +
-    "time: $motionTime / referenceUrl : $motionReferenceUrl");
+        "time: $motionTime / referenceUrl : $motionReferenceUrl");
   }
 
   void difficultyToggle(String difficulty) {
@@ -115,19 +110,17 @@ class MotionAddController extends GetxController implements AddController {
       motionDescription = text;
     else if (type == "url")
       motionReferenceUrl = text;
-    else if (type == "time")
-      motionTime = int.parse(text);
+    else if (type == "time") motionTime = int.parse(text);
 
     update();
     // printObject();
   }
 
   Future<void> uploadImage() async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
     image = File(pickedFile.path);
 
     update();
   }
-
-
 }

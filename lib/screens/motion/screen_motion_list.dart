@@ -44,7 +44,7 @@ class MotionListPage extends StatelessWidget {
         ),
         floatingActionButton: AddFloatingButton(() {
           Get.put(MotionAddController.create());
-          Get.to(() => MotionAddPage(), transition: Transition.rightToLeft);
+          Get.to(() => MotionAddPage(), transition: Transition.noTransition);
         }),
       ),
     );
