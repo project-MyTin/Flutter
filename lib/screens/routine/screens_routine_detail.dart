@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
-import 'package:mytin/screens/routine/screen_routine_list.dart';
 import 'package:mytin/screens/routine/screen_routine_run.dart';
 import 'package:mytin/utils/open_delete_dialog.dart';
-import 'package:mytin/utils/show_snack_bar.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
