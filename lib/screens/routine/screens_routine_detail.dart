@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
 class RoutineDetailPage extends StatelessWidget {
@@ -132,7 +134,10 @@ class RoutineDetailPage extends StatelessWidget {
             onPressed: () => print("지울래!")),
         IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () => print("수정할래!"))
+            onPressed: () {
+              Get.put(RoutineAddController.add());
+              Get.to(() => RoutineAddPage());
+            })
       ],
     );
   }
