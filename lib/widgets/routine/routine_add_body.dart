@@ -4,13 +4,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
-import 'package:mytin/dummies/motion_list_dummy.dart';
-import 'package:mytin/screens/motion/screen_motion_list.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
-import 'package:mytin/widgets/routine/motion_select_grid_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/button_box.dart';
 import 'package:mytin/widgets/text_input_box_with_text.dart';
@@ -25,7 +22,8 @@ class RoutineAddBody extends StatelessWidget {
       builder: (controller) => Padding(
           padding: (controller.part != 2)
               ? EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0)
-              : EdgeInsets.fromLTRB(0.05 * width, 0.035 * height, 0.05 * width, 0),
+              : EdgeInsets.fromLTRB(
+                  0.05 * width, 0.04 * height, 0.05 * width, 0),
           child: [
             buildFirstBody(height),
             buildSecondBody(height),
@@ -45,7 +43,7 @@ class RoutineAddBody extends StatelessWidget {
             onPressed: () => Get.find<RoutineAddController>().moveTo(2),
             child: Text(
               "  동작 추가하기  ",
-              style: TextStyle(fontSize: 0.015 * height),
+              style: TextStyle(fontSize: 0.016 * height),
             ),
             style: ButtonStyle(
               shape: MaterialStateProperty.resolveWith((states) {
@@ -62,11 +60,31 @@ class RoutineAddBody extends StatelessWidget {
   }
 
   Column buildSecondBody(double height) {
+    RoutineAddController controller = Get.find<RoutineAddController>();
+    controller.getMotionTileList();
     return Column(
       children: [
         Container(
-          child: MotionSelectGridBox(motionList),
-          height: 0.52 * height,
+          child: GridView.builder(
+            itemCount: controller.motionTileList.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 3 / 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 10),
+            itemBuilder: (_, index) => MotionGridTile(
+                index,
+                controller.motionTileList[index],
+                controller.select,
+                index,
+                controller.selectIndex == index
+            ),
+          ),
+          height: 0.515 * height,
+          padding: EdgeInsets.all(0.005 * height),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
         ),
       ],
     );

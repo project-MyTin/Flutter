@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
@@ -121,5 +122,20 @@ class MotionAddController extends GetxController implements AddController {
     image = File(pickedFile.path);
 
     update();
+  }
+
+  void showSnackBar(String title, String body) {
+    Get.snackbar(
+      title,
+      body,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.deepOrange,
+      colorText: Colors.white,
+      animationDuration: Duration(milliseconds: 600),
+      icon: Icon(
+        Icons.warning,
+        color: Colors.white,
+      ),
+    );
   }
 }

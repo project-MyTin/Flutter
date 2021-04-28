@@ -8,9 +8,11 @@ import 'package:mytin/models/motion_tile.dart';
 class MotionGridTile extends StatelessWidget {
   final MotionTile motion;
   final Function clickFunc;
+  final funcArgument;
   final int index;
+  final bool isClick;
 
-  MotionGridTile(this.index, this.motion, this.clickFunc) : super(key: ValueKey(index));
+  MotionGridTile(this.index, this.motion, this.clickFunc, this.funcArgument, this.isClick) : super(key: ValueKey(index));
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class MotionGridTile extends StatelessWidget {
     double width = screenSize.width;
 
     return GestureDetector(
-      onTap: clickFunc,
+      onTap: () => clickFunc(funcArgument),
       child: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,17 +40,17 @@ class MotionGridTile extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(15)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              blurRadius: 1,
-              spreadRadius: 1,
-              offset: Offset(0, 1),
+              color: Colors.black.withOpacity(0.6),
+              blurRadius: isClick ? 3 : 0,
+              spreadRadius: isClick ? 4 : 0,
+              offset: Offset(0, 2),
             ),
           ],
           image: DecorationImage(
               image: NetworkImage(motion.imageUrl),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.darken)),
+                  isClick ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.4), BlendMode.darken)),
         ),
       ),
     );

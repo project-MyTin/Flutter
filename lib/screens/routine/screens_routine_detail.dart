@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/routine/screen_routine_add.dart';
 import 'package:mytin/screens/routine/screen_routine_run.dart';
+import 'package:mytin/utils/open_delete_dialog.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
 
@@ -85,9 +86,13 @@ class RoutineDetailPage extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: ButtonBottomAppBar(
-            isDialog: false, isShow: true, text: "시작하기", clickFunc: () {
-              Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
-        }),
+            isDialog: false,
+            isShow: true,
+            text: "시작하기",
+            clickFunc: () {
+              Get.to(() => RoutineRunPage(),
+                  transition: Transition.noTransition);
+            }),
       ),
     );
   }
@@ -95,6 +100,7 @@ class RoutineDetailPage extends StatelessWidget {
   Container buildMotionList(double height) {
     return Container(
       margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+      padding: EdgeInsets.all(0.005 * height),
       decoration: BoxDecoration(
           border: Border.all(color: Color.fromARGB(255, 200, 200, 200)),
           borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -103,7 +109,7 @@ class RoutineDetailPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: [
           for (int i = 0; i < routine.motions.length; i++)
-            MotionListTile(i, routine.motions[i], height) // 위젯에서 반복문 쓰기!
+            MotionListTile(i, routine.motions[i], height, null) // 위젯에서 반복문 쓰기!
         ],
       ),
     );
@@ -119,10 +125,11 @@ class RoutineDetailPage extends StatelessWidget {
       actions: [
         IconButton(
             icon: Icon(Icons.delete, color: Colors.white),
-            onPressed: () => print("지울래!")),
+            onPressed: () => openDeleteDialog("루틴")),
         IconButton(
             icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () => Get.to(() => RoutineAddPage(), arguments: routine.id))
+            onPressed: () =>
+                Get.to(() => RoutineAddPage(), arguments: routine.id))
       ],
     );
   }
