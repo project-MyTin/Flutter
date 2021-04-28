@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/screens/routine/screen_routine_list.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 void openDeleteDialog(String text) {
@@ -13,7 +12,8 @@ void openDeleteDialog(String text) {
     confirm: TextButton(
         onPressed: () {
           // TODO 삭제 요청
-          Get.off(RoutineListPage());
+          Get.back();
+          Get.back();
           showSnackBar("삭제 완료", "선택하신 $text이 정상적으로 삭제되었습니다.", "info");
         },
         child: Text("삭제", style: TextStyle(color: Colors.red))),
