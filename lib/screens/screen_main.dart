@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
+import 'package:mytin/widgets/wave_wrapper.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -14,7 +15,13 @@ class MainPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: [
-              buildMainPageHeader(height, width),
+              WaveWrapper(
+                child: buildMainPageHeader(height, width),
+                height: height,
+                width: width,
+                colorList: [Colors.cyanAccent, Colors.lightBlue],
+                opacityList: [0.3, 0.5, 0.8],
+              ),
             ],
           ),
         ),
@@ -30,7 +37,8 @@ class MainPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 0.05 * height),
-          SvgPicture.asset("images/undraw_fitness_tracker_3033.svg", height: 0.2 * height),
+          SvgPicture.asset("images/undraw_fitness_tracker_3033.svg",
+              height: 0.2 * height),
           SizedBox(height: 0.04 * height),
           Text("안녕하세요!",
               style: TextStyle(
@@ -56,12 +64,13 @@ class MainPage extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [
-              Colors.cyanAccent,
-              Colors.lightBlue,
-            ]),
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.cyanAccent,
+            Colors.lightBlue,
+          ],
+        ),
       ),
     );
   }
