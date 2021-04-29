@@ -24,7 +24,6 @@ class MainPage extends StatelessWidget {
 
   Container buildMainPageHeader(double height, double width) {
     return Container(
-      color: Colors.indigo,
       width: width,
       height: 0.4 * height,
       child: Column(
@@ -38,6 +37,16 @@ class MainPage extends StatelessWidget {
               Text("한번 활기차게 운동해볼까요?", style: TextStyle(color: Colors.white, fontSize: 0.024 * height)),
             ],
           ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [
+            Colors.indigo,
+            Colors.deepPurple
+          ]
+        ),
+      ),
     );
   }
 }
