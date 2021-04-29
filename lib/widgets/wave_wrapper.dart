@@ -16,35 +16,37 @@ class WaveWrapper extends StatelessWidget {
       children: [
         for (double opacity in opacityList)
           ClipPath(
-              clipper: WaveClipper([
-                [2/4 * width, height + 30],
-                [3/4 * width, height - 30],
-                [4/4 * width, height + 30],
-              ]),
+              clipper: WaveClipper([1 / 4, 2 / 4, 3 / 4, 1], 30),
               child: NullContainer(height, width, colorList, opacity)),
-        ClipPath(clipper: WaveClipper([
-          [2/4 * width, height - 30],
-          [3/4 * width, height + 30],
-          [4/4 * width, height - 30],
-        ]), child: child),
+        ClipPath(
+            clipper: WaveClipper([1 / 4, 2 / 4, 3 / 4, 1], 30),
+            child: child),
       ],
     );
   }
 }
 
 class WaveClipper extends CustomClipper<Path> {
-  final List<List<double>> points;
+  final List<double> widthPoints;
+  final int waveSize;
 
-  WaveClipper(this.points);
+  WaveClipper(this.widthPoints, this.waveSize);
 
   @override
   Path getClip(Size size) {
+    double width = size.width, height = size.height;
+
     Path path = Path();
-    path.lineTo(0, size.height);
-    for(int i = 0; i < points.length -1; i++) {
-      path.quadraticBezierTo(points[i][0], points[i][1], points[i+1][0], points[i+1][1]);
+    path.lineTo(0, height);
+    for (int i = 0; i < widthPoints.length - 1; i += 2) {
+      path.quadraticBezierTo(
+        widthPoints[i] * width,
+        height + waveSize,
+        widthPoints[i + 1] * width,
+        height - waveSize,
+      );
     }
-    path.lineTo(size.width, 0);
+    path.lineTo(width, 0);
     return path;
   }
 

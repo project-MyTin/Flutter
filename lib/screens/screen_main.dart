@@ -20,7 +20,7 @@ class MainPage extends StatelessWidget {
                 height: height,
                 width: width,
                 colorList: [Colors.cyanAccent, Colors.lightBlue],
-                opacityList: [0.3, 0.5, 0.8],
+                opacityList: [],
               ),
             ],
           ),
