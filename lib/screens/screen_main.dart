@@ -12,18 +12,20 @@ class MainPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              WaveWrapper(
-                child: buildMainPageHeader(height, width),
-                height: height,
-                width: width,
-                colorList: [Colors.cyanAccent, Colors.lightBlue],
-                opacityList: [],
-              ),
-            ],
-          ),
+        body: Column(
+          children: [
+            buildMainPageHeader(height, width),
+            Wave(
+              colorList: [Colors.cyanAccent, Colors.lightBlue],
+              widthPoints: [1/4, 2/4, 3/4, 4/4],
+              waveSize: 30,
+              height: 0.05 * height,
+              width: width,
+            ),
+            // Stack(
+            //   children: [],
+            // ),
+          ],
         ),
         bottomNavigationBar: PageBottomNavigationBar(1),
       ),
@@ -33,7 +35,7 @@ class MainPage extends StatelessWidget {
   Container buildMainPageHeader(double height, double width) {
     return Container(
       width: width,
-      height: 0.6 * height,
+      height: 0.53 * height,
       child: Column(
         children: [
           SizedBox(height: 0.05 * height),

@@ -1,34 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class WaveWrapper extends StatelessWidget {
-  final Container child;
-  final double width, height;
-  final List<double> opacityList;
+class Wave extends StatelessWidget {
   final List<Color> colorList;
+  final List<double> widthPoints;
+  final double height, width, waveSize;
 
-  WaveWrapper(
-      {this.child, this.height, this.width, this.opacityList, this.colorList});
+  Wave({this.colorList, this.widthPoints, this.waveSize, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        for (double opacity in opacityList)
-          ClipPath(
-              clipper: WaveClipper([1 / 4, 2 / 4, 3 / 4, 1], 30),
-              child: NullContainer(height, width, colorList, opacity)),
-        ClipPath(
-            clipper: WaveClipper([1 / 4, 2 / 4, 3 / 4, 1], 30),
-            child: child),
-      ],
+    return ClipPath(
+      clipper: WaveClipper(widthPoints, waveSize),
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+            colors: colorList,
+          ),
+        ),
+      ),
     );
   }
 }
 
 class WaveClipper extends CustomClipper<Path> {
   final List<double> widthPoints;
-  final int waveSize;
+  final double waveSize;
 
   WaveClipper(this.widthPoints, this.waveSize);
 
@@ -52,27 +52,4 @@ class WaveClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-}
-
-class NullContainer extends StatelessWidget {
-  final double width, height, opacity;
-  final List<Color> colorList;
-
-  NullContainer(this.width, this.height, this.colorList, this.opacity);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [
-            colorList[0].withOpacity(opacity),
-            colorList[1].withOpacity(opacity)
-          ],
-        ),
-      ),
-    );
-  }
 }
