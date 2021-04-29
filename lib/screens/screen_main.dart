@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
 class MainPage extends StatelessWidget {
