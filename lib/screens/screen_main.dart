@@ -9,38 +9,48 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
-    final List waveList = [
-      [1.0, 0.0, 1],
-      [0.5, 50.0, 3],
-      [0.3, 100.0, 3]
-    ];
 
     return SafeArea(
       child: Scaffold(
         body: Column(
           children: [
             buildMainPageHeader(height, width),
-            Stack(
-              children: [
-                for (List list in waveList)
-                  Wave(
-                    colorList: [
-                      Colors.cyanAccent.withOpacity(list[0]),
-                      Colors.lightBlue.withOpacity(list[0])
-                    ],
-                    startIndex: list[2],
-                    waveHeight: 40,
-                    waveWidth: 1,
-                    startWidth: list[1],
-                    height: 0.1 * height,
-                    width: width,
-                  ),
-              ],
-            ),
+            buildWaveStack(height, width),
           ],
         ),
         bottomNavigationBar: PageBottomNavigationBar(1),
       ),
+    );
+  }
+
+  Stack buildWaveStack(double height, double width) {
+    final List waveList = [
+      [0.3, -50.0, 1, true],
+      [0.2, -120.0, 3, true],
+      [0.4, width - 50.0, 3, false],
+      [1.0, 0.0, 1, true],
+    ];
+
+    return Stack(
+      children: [
+        for (List list in waveList)
+          Container(
+            child: Wave(
+              colorList: [
+                list[3]
+                    ? Colors.cyanAccent.withOpacity(list[0])
+                    : Colors.lightBlue.withOpacity(list[0]),
+                Colors.lightBlue.withOpacity(list[0])
+              ],
+              startIndex: list[2],
+              waveHeight: 40,
+              waveWidth: 1,
+              height: 0.08 * height,
+              width: width,
+            ),
+            transform: Matrix4.translationValues(list[1], 0, 0),
+          ),
+      ],
     );
   }
 

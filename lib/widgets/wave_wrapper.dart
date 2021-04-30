@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Wave extends StatelessWidget {
   final List<Color> colorList;
   final List<List<double>> points;
-  final double height, width, waveHeight, waveWidth, startWidth;
+  final double height, width, waveHeight, waveWidth;
   final int startIndex;
 
   Wave(
@@ -11,7 +11,6 @@ class Wave extends StatelessWidget {
       this.points,
       this.waveHeight,
       this.waveWidth,
-      this.startWidth,
       this.height,
       this.width,
       this.startIndex});
@@ -19,8 +18,7 @@ class Wave extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper:
-          WaveClipper(points, waveHeight, waveWidth, startWidth, startIndex),
+      clipper: WaveClipper(points, waveHeight, waveWidth, startIndex),
       child: Container(
         height: height,
         width: width,
@@ -38,11 +36,10 @@ class Wave extends StatelessWidget {
 
 class WaveClipper extends CustomClipper<Path> {
   final List<List<double>> points;
-  final double waveHeight, waveWidth, startWidth;
+  final double waveHeight, waveWidth;
   final int index;
 
-  WaveClipper(this.points, this.waveHeight, this.waveWidth, this.startWidth,
-      this.index);
+  WaveClipper(this.points, this.waveHeight, this.waveWidth, this.index);
 
   @override
   Path getClip(Size size) {
@@ -58,18 +55,11 @@ class WaveClipper extends CustomClipper<Path> {
     path.lineTo(0, waveHeights[index == 0 ? 3 : index - 1]);
     // path.quadraticBezierTo(width / 4, height - 80, width / 2, height - 40);
     // path.quadraticBezierTo(3 / 4 * width, height, width, height - 40);
-    print("width : " + width.toString() + " / height : " + height.toString());
-    for (int i = 0; i / (startWidth + 4 * waveWidth) < 1; i += 2) {
-      print(waveHeights[(i + index) % 4].toString() +
-          " ^^ " +
-          ((i + 1) / 4 * waveWidth * width).toString());
-      print(waveHeights[(i + 1 + index) % 4].toString() +
-          " ^^ " +
-          ((i + 2) / 4 * waveWidth * width).toString());
+    for (int i = 0; i / (4 * waveWidth) < 1; i += 2) {
       path.quadraticBezierTo(
-        startWidth + (i + 1) / 4 * waveWidth * width,
+        (i + 1) / 4 * waveWidth * width,
         waveHeights[(i + index) % 4],
-        startWidth + (i + 2) / 4 * waveWidth * width,
+        (i + 2) / 4 * waveWidth * width,
         waveHeights[(i + 1 + index) % 4],
       );
     }
