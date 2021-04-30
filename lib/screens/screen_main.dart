@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mytin/dummies/routine_list_dummy.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
+import 'package:mytin/widgets/routine/routine_list_tile.dart';
 import 'package:mytin/widgets/wave_wrapper.dart';
 
 class MainPage extends StatelessWidget {
@@ -12,11 +14,36 @@ class MainPage extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            buildMainPageHeader(height, width),
-            buildWaveStack(height, width),
-          ],
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                buildMainPageHeader(height, width),
+                buildWaveStack(height, width),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0.05 * width, 0.04 * height, 0.06 * width, 0.015 * height),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("새로운 루틴", style: TextStyle(fontSize: 0.022 * height)),
+                      Text("more +", style: TextStyle(color: Colors.blueGrey, fontSize: 0.02 * height, fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                ),
+                Container(
+                  child: ListView.builder(
+                    itemCount: routineList.length,
+                    itemBuilder: (context, index) => RoutineListTile(routineList[index]),
+                  ),
+                  height: 0.5 * height,
+                  width: 0.93 * width,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         bottomNavigationBar: PageBottomNavigationBar(1),
       ),
