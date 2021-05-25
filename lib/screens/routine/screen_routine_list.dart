@@ -25,7 +25,7 @@ class RoutineListPage extends StatelessWidget {
         floatingActionButton: AddFloatingButton(() => Get.to(
             () => RoutineAddPage(),
             transition: Transition.noTransition)),
-        bottomNavigationBar: PageBottomNavigationBar(2),
+        bottomNavigationBar: PageBottomNavigationBar(),
       ),
     );
   }

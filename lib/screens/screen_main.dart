@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:mytin/controllers/bottom_page_controller.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
 import 'package:mytin/screens/routine/screen_routine_list.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
@@ -13,6 +14,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
+    Get.put(BottomPageController());
 
     return SafeArea(
       child: Scaffold(
@@ -58,7 +60,7 @@ class MainPage extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: PageBottomNavigationBar(1),
+        bottomNavigationBar: PageBottomNavigationBar(),
       ),
     );
   }

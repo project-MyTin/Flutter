@@ -17,7 +17,7 @@ class RecordPage extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: PageBottomNavigationBar(3),
+      bottomNavigationBar: PageBottomNavigationBar(),
     ));
   }
 }

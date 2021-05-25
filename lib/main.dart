@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
       ),
+      defaultTransition: Transition.noTransition,
       home: MainPage(),
     );
   }
