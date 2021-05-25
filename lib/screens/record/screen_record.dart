@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
+import 'package:mytin/widgets/record/data_record_list.dart';
 import 'package:mytin/widgets/record/main_data_record.dart';
 
 class RecordPage extends StatelessWidget {
@@ -28,6 +30,8 @@ class RecordPage extends StatelessWidget {
               "countRoutine": 10,
               "countMotion": 10,
             }),
+            SizedBox(height: Get.height * 0.05),
+            DataRecordList(),
           ],
         ),
         bottomNavigationBar: PageBottomNavigationBar(),
