@@ -24,7 +24,12 @@ class RankPage extends StatelessWidget {
               ),
               SizedBox(height: Get.height * 0.03),
               for (int i = 3; i < rankTileList.length; i++)
-                LowRankBox(rankTileList[i], false)
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: Get.height * 0.003, bottom: Get.height * 0.003),
+                  child: LowRankBox(rankTileList[i], false),
+                ),
+              SizedBox(height: Get.height * 0.086)
             ],
           ),
         ),

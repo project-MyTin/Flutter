@@ -16,18 +16,28 @@ class LowRankBox extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(width: Get.width * 0.04),
-          Text(rankTile.rankNumber.toString()),
+          Text(rankTile.rankNumber.toString(),
+              style: TextStyle(
+                  color: isMe ? Colors.white : Colors.black,
+                  fontSize: Get.height * 0.022)),
+          SizedBox(width: Get.width * 0.02),
           Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(rankTile.imageUrl), fit: BoxFit.cover),
                 shape: BoxShape.circle),
-            height: Get.width * 0.03,
-            width: Get.width * 0.03,
+            height: Get.height * 0.08,
+            width: Get.height * 0.06,
           ),
-          Text(rankTile.name),
+          SizedBox(width: Get.width * 0.02),
+          Text(rankTile.name,
+              style: TextStyle(
+                  color: isMe ? Colors.white : Colors.black,
+                  fontSize: Get.height * 0.019)),
           Spacer(),
-          Text(rankTile.value.toString()),
+          Text(rankTile.value.toString() + " 분",
+              style: TextStyle(
+                  color: isMe ? Colors.white : Colors.black.withOpacity(0.4))),
           SizedBox(width: Get.width * 0.04),
         ],
       ),
