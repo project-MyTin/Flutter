@@ -13,15 +13,15 @@ class RecordPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+                IconButton(icon: Icon(Icons.arrow_back_ios_outlined), onPressed: () {}),
                 Text("5월"),
                 Text("2021년"),
                 IconButton(
-                    icon: Icon(Icons.arrow_forward_ios), onPressed: () {}),
+                    icon: Icon(Icons.arrow_forward_ios_outlined), onPressed: () {}),
                 Spacer(),
-                TextButton(onPressed: () {}, child: Text("D")),
-                TextButton(onPressed: () {}, child: Text("W")),
-                TextButton(onPressed: () {}, child: Text("M")),
+                TextButton(onPressed: () {}, child: Text("일")),
+                TextButton(onPressed: () {}, child: Text("주")),
+                TextButton(onPressed: () {}, child: Text("월")),
               ],
             ),
             MainDataRecord({

@@ -10,13 +10,13 @@ class MainDataRecord extends StatelessWidget {
     ["동작 횟수", "개"],
   ];
 
-  MainDataRecord(Map<String, int> map) :
-      dataList = [
-        map["totalTime"],
-        map["totalExp"],
-        map["countRoutine"],
-        map["countMotion"]
-      ];
+  MainDataRecord(Map<String, int> map)
+      : dataList = [
+          map["totalTime"],
+          map["totalExp"],
+          map["countRoutine"],
+          map["countMotion"]
+        ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +24,38 @@ class MainDataRecord extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(height: Get.height * 0.03),
+        Text(nameList[0][0]),
+        SizedBox(height: Get.height * 0.025),
         Stack(
           alignment: Alignment.center,
           children: [
             SizedBox(
               child: CircularProgressIndicator(
-                value: 0,
-                strokeWidth: 24,
-                backgroundColor: Color.fromRGBO(0x45, 0xAF, 0xBE, 1),
+                value: 0.8,
+                strokeWidth: 22,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
+                backgroundColor: Colors.grey.withOpacity(0.2),
               ),
               height: Get.width * 0.35,
               width: Get.width * 0.35,
             ),
-            Column(
-              children: [
-                Text(nameList[0][0]),
-                Text(dataList[0].toString()),
-                Text(nameList[0][1]),
-              ],
+            Padding(
+              padding: EdgeInsets.only(bottom: Get.height * 0.01),
+              child: Text(
+                dataList[0].toString(),
+                style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: Get.height * 0.06,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: Get.height * 0.062),
+              child: Text(nameList[0][1],
+                  style: TextStyle(
+                    color: Colors.lightBlue,
+                    fontSize: Get.height * 0.016,
+                  )),
             ),
           ],
         ),
@@ -53,7 +67,17 @@ class MainDataRecord extends StatelessWidget {
               Column(
                 children: [
                   Text(nameList[i][0]),
-                  Text(dataList[i].toString() + " " + nameList[i][1]),
+                  Row(children: [
+                    Text(
+                      dataList[i].toString(),
+                      style: TextStyle(
+                          color: Colors.lightBlue,
+                          fontSize: Get.height * 0.035),
+                    ),
+                    SizedBox(width: Get.width * 0.01),
+                    Text(nameList[i][1],
+                        style: TextStyle(color: Colors.lightBlue)),
+                  ]),
                 ],
               ),
           ],
