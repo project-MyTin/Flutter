@@ -29,8 +29,9 @@ class MainDataRecord extends StatelessWidget {
           children: [
             SizedBox(
               child: CircularProgressIndicator(
-                value: 1,
-                strokeWidth: 22,
+                value: 0,
+                strokeWidth: 24,
+                backgroundColor: Color.fromRGBO(0x45, 0xAF, 0xBE, 1),
               ),
               height: Get.width * 0.35,
               width: Get.width * 0.35,
