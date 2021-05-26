@@ -1,9 +1,11 @@
 class RecordData {
   final int totalTime, totalExp, countRoutine, countMotion;
   final List<RecordTile> motionList, routineList;
+  final String date;
 
   RecordData.fromMap(Map<String, dynamic> map)
-      : totalTime = map["totalTime"],
+      : date = map["date"],
+        totalTime = map["totalTime"],
         totalExp = map["totalExp"],
         countRoutine = map["countRoutine"],
         countMotion = map["countMotion"],
@@ -12,11 +14,12 @@ class RecordData {
 }
 
 class RecordTile {
-  final String date, contentName;
-  final List contentList;
+  final String name, imageUrl;
+  final int value, id;
 
   RecordTile.fromMap(Map<String, dynamic> map)
-      : date = map["date"],
-        contentName = map["contentName"],
-        contentList = map["contentList"];
+      : id = map["id"],
+        name = map["name"],
+        imageUrl = map["imageUrl"],
+        value = map["value"];
 }
