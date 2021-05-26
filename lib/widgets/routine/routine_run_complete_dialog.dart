@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:mytin/screens/routine/screen_routine_list.dart';
+import 'package:mytin/screens/screen_routine_and_motion.dart';
 
 class RoutineRunCompleteDialog extends StatelessWidget {
   @override
@@ -48,7 +48,7 @@ class RoutineRunCompleteDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-            onPressed: () => Get.offAll(RoutineListPage()),
+            onPressed: () => Get.offAll(RoutineAndMotionPage()),
             child: Text("루틴 종료", style: TextStyle(fontSize: 0.018 * height))),
       ],
       contentPadding: const EdgeInsets.all(0),
