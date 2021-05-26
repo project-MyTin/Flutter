@@ -31,6 +31,7 @@ dependencies:
   get:
   image_picker:
   flutter_svg:
+  material_design_icons_flutter: 4.0.5955
 
 dev_dependencies:
   flutter_test:

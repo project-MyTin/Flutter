@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mytin/screens/rank/screen_rank.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
@@ -9,9 +10,13 @@ class RankTabsPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.lightBlueAccent,
+          backgroundColor: Colors.white,
           title: TabBar(
-            labelColor: Colors.white,
+            labelColor: Colors.lightBlue,
+            labelStyle: TextStyle(fontSize: Get.height * 0.018),
+            indicatorColor: Colors.lightBlue,
+            indicatorWeight: Get.height * 0.005,
+            indicatorSize: TabBarIndicatorSize.label,
             tabs: [
               Tab(text: "시간 별"),
               Tab(text: "유형 별"),
