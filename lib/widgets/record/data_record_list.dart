@@ -2,18 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DataRecordList extends StatelessWidget {
+  final String date, contentName;
+  final List contentList;
+
+  DataRecordList({this.date, this.contentName, this.contentList});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          color: Color.fromRGBO(0x45, 0xAF, 0xBE, 1),
+          color: Colors.lightBlue,
           height: Get.height * 0.06,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("2021년 5월"),
-              Text("루틴"),
+              SizedBox(width: Get.width * 0.07),
+              Text(date, style: TextStyle(color: Colors.white)),
+              Spacer(),
+              Text(contentName, style: TextStyle(color: Colors.white, fontSize: Get.height * 0.02)),
+              SizedBox(width: Get.width * 0.06),
             ],
           ),
         )
@@ -21,3 +28,11 @@ class DataRecordList extends StatelessWidget {
     );
   }
 }
+
+class DataRecordTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
+

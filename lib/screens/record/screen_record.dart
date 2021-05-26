@@ -13,11 +13,14 @@ class RecordPage extends StatelessWidget {
           children: [
             Row(
               children: [
-                IconButton(icon: Icon(Icons.arrow_back_ios_outlined), onPressed: () {}),
+                IconButton(
+                    icon: Icon(Icons.arrow_back_ios_outlined),
+                    onPressed: () {}),
                 Text("5월"),
                 Text("2021년"),
                 IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined), onPressed: () {}),
+                    icon: Icon(Icons.arrow_forward_ios_outlined),
+                    onPressed: () {}),
                 Spacer(),
                 TextButton(onPressed: () {}, child: Text("일")),
                 TextButton(onPressed: () {}, child: Text("주")),
@@ -31,7 +34,8 @@ class RecordPage extends StatelessWidget {
               "countMotion": 10,
             }),
             SizedBox(height: Get.height * 0.05),
-            DataRecordList(),
+            DataRecordList(date: "5월 28일", contentName: "루틴", contentList: []),
+            DataRecordList(date: "5월 28일", contentName: "동작", contentList: []),
           ],
         ),
         bottomNavigationBar: PageBottomNavigationBar(),
