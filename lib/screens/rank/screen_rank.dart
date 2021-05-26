@@ -13,9 +13,10 @@ class RankPage extends StatelessWidget {
         SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: Get.height * 0.03),
+              SizedBox(height: Get.height * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   TopRankBox(rankTileList[1]),
                   TopRankBox(rankTileList[0]),
