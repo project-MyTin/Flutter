@@ -7,26 +7,17 @@ import 'package:mytin/screens/screen_routine_and_motion.dart';
 
 class BottomPageController extends GetxController {
   int index = 0;
+  final List list = [
+    MainPage(),
+    RoutineAndMotionPage(),
+    RecordPage(),
+    RankTabsPage(),
+    ProfileHomePage()
+  ];
 
   setIndex(int value) {
     index = value;
-    switch (index) {
-      case 0:
-        Get.offAll(MainPage());
-        break;
-      case 1:
-        Get.offAll(RoutineAndMotionPage());
-        break;
-      case 2:
-        Get.offAll(RecordPage());
-        break;
-      case 3:
-        Get.offAll(RankTabsPage());
-        break;
-      case 4:
-        Get.offAll(ProfileHomePage());
-        break;
-    }
+    Get.offAll(() => [index]);
     update();
   }
 }
