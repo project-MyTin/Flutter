@@ -43,12 +43,13 @@ class RecordPage extends StatelessWidget {
               builder: (controller) => ExpansionPanelList(
                 elevation: 0,
                 expandedHeaderPadding: EdgeInsets.zero,
-                dividerColor: Colors.white,
+                dividerColor: Get.theme.canvasColor,
                 expansionCallback: (i, isOpen) => controller.setPanelOpen(i, isOpen),
                 children: [
                   for (int i = 0; i < 2; i++)
                     ExpansionPanel(
                       canTapOnHeader: true,
+                      backgroundColor: Get.theme.canvasColor,
                       headerBuilder: (_, isOpen) => SubDataRecordHeader(
                           date: "5월 28일", contentName: ["루틴", "동작"][i]),
                       body: SubDataRecordBody(
