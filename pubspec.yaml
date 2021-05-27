@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   image_picker:
+  flutter_svg:
   material_design_icons_flutter: 4.0.5955
   date_util: ^0.1.4
 
