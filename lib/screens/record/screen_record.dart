@@ -33,7 +33,7 @@ class RecordPage extends StatelessWidget {
               "countRoutine": 10,
               "countMotion": 10,
             }),
-            SizedBox(height: Get.height * 0.05),
+            SizedBox(height: Get.height * 0.02),
             DataRecordList(date: "5월 28일", contentName: "루틴", contentList: []),
             DataRecordList(date: "5월 28일", contentName: "동작", contentList: []),
           ],

@@ -1,11 +1,9 @@
 class RecordData {
   final int totalTime, totalExp, countRoutine, countMotion;
   final List<RecordTile> motionList, routineList;
-  final String date;
 
   RecordData.fromMap(Map<String, dynamic> map)
-      : date = map["date"],
-        totalTime = map["totalTime"],
+      : totalTime = map["totalTime"],
         totalExp = map["totalExp"],
         countRoutine = map["countRoutine"],
         countMotion = map["countMotion"],
