@@ -13,11 +13,11 @@ class RecordData {
 
 class RecordTile {
   final String name, imageUrl;
-  final int value, id;
+  final int time, id;
 
   RecordTile.fromMap(Map<String, dynamic> map)
       : id = map["id"],
         name = map["name"],
         imageUrl = map["imageUrl"],
-        value = map["value"];
+        time = map["time"];
 }
