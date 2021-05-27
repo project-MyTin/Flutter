@@ -7,10 +7,11 @@ import 'package:mytin/widgets/record/main_data_record.dart';
 class RecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         body: Column(
           children: [
+            SizedBox(height: Get.height * 0.03),
+            // SafeArea 는 상단 표시줄을 없에기에, 사용하지 않는대신 맨 위에 여백을 줌
             Row(
               children: [
                 IconButton(
@@ -39,7 +40,6 @@ class RecordPage extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: PageBottomNavigationBar(),
-      ),
     );
   }
 }

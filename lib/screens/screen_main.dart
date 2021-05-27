@@ -16,41 +16,38 @@ class MainPage extends StatelessWidget {
     double width = screenSize.width, height = screenSize.height;
     Get.put(BottomPageController());
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                buildMainPageHeader(height, width),
-                buildWaveStack(height, width),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.05 * width, 0.04 * height,
-                      0.06 * width, 0.015 * height),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("새로운 루틴",
-                          style: TextStyle(fontSize: 0.023 * height)),
-                      GestureDetector(
-                        child: Text("more +",
-                            style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 0.021 * height,
-                                fontWeight: FontWeight.bold)),
-                        onTap: () => Get.to(RoutineAndMotionPage()),
-                      )
-                    ],
-                  ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              buildMainPageHeader(height, width),
+              buildWaveStack(height, width),
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                    0.05 * width, 0.04 * height, 0.06 * width, 0.015 * height),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("새로운 루틴", style: TextStyle(fontSize: 0.023 * height)),
+                    GestureDetector(
+                      child: Text("more +",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 0.021 * height,
+                              fontWeight: FontWeight.bold)),
+                      onTap: () => Get.to(RoutineAndMotionPage()),
+                    )
+                  ],
                 ),
-                for (int i = 0; i < routineList.length; i++)
-                  RoutineListTile(routineList[i]),
-              ],
-            ),
+              ),
+              for (int i = 0; i < routineList.length; i++)
+                RoutineListTile(routineList[i]),
+            ],
           ),
         ),
-        bottomNavigationBar: PageBottomNavigationBar(),
       ),
+      bottomNavigationBar: PageBottomNavigationBar(),
     );
   }
 
