@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/routine_tile.dart';
-import 'package:mytin/screens/routine/screens_routine_detail.dart';
+import 'package:mytin/screens/routine/screen_routine_detail.dart';
 
 class RoutineListTile extends StatelessWidget {
   final RoutineTile routine;
