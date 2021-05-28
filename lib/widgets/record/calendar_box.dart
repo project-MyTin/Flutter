@@ -38,21 +38,19 @@ class CalendarBox extends StatelessWidget {
           children: [
             if (ctr.mode == DateMode.day)
               TableRow(children: [
-                for (int i = 0; i < numOfColumns; i++)
-                  DayCell(text: dayName[i]),
+                for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
               ]),
             for (int i = beforeDays; i < numOfDays; i += numOfColumns)
               TableRow(children: [
                 for (int j = i; j < i + numOfColumns; j++)
-                  j >= 0 && j < numOfDays
-                      ? DayCell(
-                          text: "${j + 1}",
-                          backColor: valueColor.withOpacity(
-                              calendarData.valueList[j] > maxValue
-                                  ? 1
-                                  : calendarData.valueList[j] / maxValue),
-                        )
-                      : DayCell(text: "")
+                  DayCell(
+                    text: j >= 0 && j < numOfDays ? (j + 1).toString() : "",
+                    backColor: valueColor.withOpacity(j < 0 || j >= numOfDays
+                        ? 0
+                        : calendarData.valueList[j] > maxValue
+                            ? 1
+                            : calendarData.valueList[j] / maxValue),
+                  )
               ])
           ],
         ),
@@ -63,16 +61,17 @@ class CalendarBox extends StatelessWidget {
 
 class DayCell extends StatelessWidget {
   final String text;
+  final double height;
   final Color textColor, backColor;
 
-  DayCell({this.text, this.textColor, this.backColor});
+  DayCell({this.text, this.height, this.textColor, this.backColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(Get.width * 0.007, Get.width * 0.005,
           Get.width * 0.007, Get.width * 0.005),
-      height: Get.width * 0.105,
+      height: height ?? Get.width * 0.105,
       width: Get.width * 0.1,
       alignment: Alignment.center,
       child: Text(text, style: TextStyle(color: textColor ?? Colors.black)),
