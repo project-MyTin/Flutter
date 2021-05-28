@@ -10,12 +10,12 @@ void openDeleteDialog(String text, int id) {
     title: "정말 삭제하시나요?",
     middleText: "삭제하신 $text은 다시 복구할 수 없습니다.",
     middleTextStyle: TextStyle(color: Colors.grey, fontSize: 14),
-    cancel: TextButton(
-        onPressed: () => Get.back(), child: Text("취소")),
+    cancel: TextButton(onPressed: () => Get.back(), child: Text("취소")),
     confirm: TextButton(
-        onPressed: () {
-          if(text == "동작") {
-            deleteMotion(id);
+        onPressed: () async {
+          if (text == "동작") {
+            final res = await deleteMotion(id);
+            Get.put(MotionListController());
             Get.find<MotionListController>().loadMotions();
           }
           Get.offAll(() => RoutineAndMotionPage(index: text == "루틴" ? 0 : 1));

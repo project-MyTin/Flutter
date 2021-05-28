@@ -13,7 +13,6 @@ class MotionListController extends GetxController {
 
   Future<void> loadMotions() async {
     motionList = await loadMotionList();
-    motionList.forEach((element) => print(element.name + element.imageUrl));
     update();
   }
 }

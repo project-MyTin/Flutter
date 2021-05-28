@@ -69,8 +69,14 @@ class MotionAddController extends GetxController {
       Get.back();
   }
 
-  void submit() {
-    postMotion({
+  Future<void> submit() async {
+    /*
+     - 생성, 삭제 api로 서버와 통신하는 함수엔 await 를 걸어 동기로 처리해야함
+     - 생성 페이지, 다이얼로그로 넘어가서 그런지 컨트롤러가 onDelete() 됨
+          => 리스트 페이지를 들어갈 때 Get.put()으로 페이지의 컨트롤러를 수동으로 추가해야함
+     - 컨트롤러에서 리스트를 새로 불러오는 함수도 수동으로 호출해야함
+     */
+    final res = await postMotion({
       "name": motionName,
       "parts": [currentMotionPart],
       "difficulty": currentDifficulty,
@@ -80,6 +86,7 @@ class MotionAddController extends GetxController {
       "type": currentType,
       "description": motionDescription,
     });
+    Get.put(MotionListController());
     Get.find<MotionListController>().loadMotions();
     Get.offAll(() => RoutineAndMotionPage(index: 1));
     showSnackBar("생성 완료", "동작이 성공적으로 추가되었습니다", "info");
