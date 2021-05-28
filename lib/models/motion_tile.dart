@@ -7,7 +7,7 @@ class MotionTile {
 
   MotionTile(this.id, this.name, this.part, this.difficulty, this.imageUrl);
 
-  MotionTile.fromMap(Map<String, dynamic> map)
+  MotionTile.fromJson(Map<String, dynamic> map)
       : id = map['id'],
         name = map['name'],
         part = map['part'],
