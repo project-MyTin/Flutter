@@ -26,11 +26,13 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.lightBlueAccent,
+        elevation: 0,
+        backgroundColor: Colors.white,
         title: TabBar(
-          labelColor: Colors.white,
+          labelColor: Colors.lightBlue,
+          unselectedLabelColor: Colors.black,
           labelStyle: TextStyle(fontSize: Get.height * 0.018),
-          indicatorColor: Colors.white,
+          indicatorColor: Colors.lightBlue,
           indicatorWeight: Get.height * 0.006,
           tabs: [Tab(text: "루틴"), Tab(text: "동작")],
           controller: _controller,
