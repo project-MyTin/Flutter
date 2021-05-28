@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
+import 'package:mytin/services/post_motion.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 import 'add_abstract_controller.dart';
@@ -73,8 +74,17 @@ class MotionAddController extends GetxController implements AddController {
 
   @override
   void submit() {
-
-    Get.offAll(RoutineAndMotionPage(index: 1));
+    postMotion({
+      "name": motionName,
+      "parts": "[$currentMotionPart]",
+      "difficulty": currentDifficulty,
+      "file": image,
+      "time": motionTime,
+      "url": motionReferenceUrl,
+      "type": currentType,
+      "description": motionDescription,
+    });
+    Get.offAll(() => RoutineAndMotionPage(index: 1));
     showSnackBar("생성 완료", "동작이 성공적으로 추가되었습니다", "info");
   }
 
