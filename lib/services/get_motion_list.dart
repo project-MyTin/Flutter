@@ -20,6 +20,7 @@ Future<List<MotionTile>> loadMotionList() async {
       "part": motionsJson[i]["parts"][0],
       "difficulty": motionsJson[i]["difficulty"],
       // "imageUrl": s3Url + motionsJson[i]["file"],
+      // fixme : image 403 오류 해결
       "imageUrl": currentMotion.imageUrl,
     }));
   }

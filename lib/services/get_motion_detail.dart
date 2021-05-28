@@ -15,6 +15,7 @@ Future<MotionDetail> loadMotionDetail(int id) async {
     "part": motion["parts"][0],
     "difficulty": motion["difficulty"],
     // "imageUrl": s3Url + motion["file"],
+    // fixme : image 403 오류 해결
     "imageUrl": currentMotion.imageUrl,
     "time": motion["time"],
     "referenceUrl": motion["url"],
