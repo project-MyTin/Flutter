@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mytin/controllers/motion_list_controller.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
@@ -21,7 +22,7 @@ class MotionAddController extends GetxController {
   String motionDescription;
   String motionReferenceUrl;
   int motionTime;
-  var image;
+  var image;  // fixme : 고용량? 카메라로 찍은 사진 첨부시 413 에러 (용량때문이라 추측)
   MotionDetail motion;
 
   MotionAddController.add() {
@@ -55,13 +56,11 @@ class MotionAddController extends GetxController {
     update();
   }
 
-  @override
   void next() {
     part++;
     update();
   }
 
-  @override
   void back() {
     if (part > 1) {
       part--;
@@ -70,7 +69,6 @@ class MotionAddController extends GetxController {
       Get.back();
   }
 
-  @override
   void submit() {
     postMotion({
       "name": motionName,
@@ -82,6 +80,7 @@ class MotionAddController extends GetxController {
       "type": currentType,
       "description": motionDescription,
     });
+    Get.find<MotionListController>().loadMotions();
     Get.offAll(() => RoutineAndMotionPage(index: 1));
     showSnackBar("생성 완료", "동작이 성공적으로 추가되었습니다", "info");
   }

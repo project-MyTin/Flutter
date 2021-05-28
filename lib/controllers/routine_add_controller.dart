@@ -52,7 +52,6 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
   void next() {
     switch (part) {
       case 1:
@@ -80,7 +79,6 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
   void back() {
     if (part == 1) {
       Get.back();
@@ -94,7 +92,6 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
   void submit() {
     // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
     update();

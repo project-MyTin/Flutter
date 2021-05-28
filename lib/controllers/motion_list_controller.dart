@@ -7,11 +7,11 @@ class MotionListController extends GetxController {
 
   @override
   void onInit() {
-    _loadMotions();
+    loadMotions();
     super.onInit();
   }
 
-  Future<void> _loadMotions() async {
+  Future<void> loadMotions() async {
     motionList = await loadMotionList();
     motionList.forEach((element) => print(element.name + element.imageUrl));
     update();
