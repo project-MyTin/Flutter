@@ -18,14 +18,13 @@ class TitlePageHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: TextStyle(
-                  fontSize: 0.036 * height, fontWeight: FontWeight.bold)),
-          Text(subText),
+          Text(title, style: TextStyle(fontSize: 0.034 * height)),
+          Text(subText, style: TextStyle(color: Colors.black.withOpacity(0.3))),
         ],
       ),
       color: Colors.white,
-      padding: EdgeInsets.fromLTRB(0.05 * width, 0.04 * height, 0, 0.06 * height),
+      padding:
+          EdgeInsets.fromLTRB(0.04 * width, 0.03 * height, 0, 0.03 * height),
     );
   }
 }
