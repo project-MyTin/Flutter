@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
+import 'package:mytin/services/delete_motion.dart';
 import 'package:mytin/utils/open_delete_dialog.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 
@@ -158,7 +159,10 @@ class MotionDetailDialog extends StatelessWidget {
               size: 0.03 * height,
             ),
           ),
-          onTap: () => openDeleteDialog("동작"),
+          onTap: () {
+            deleteMotion(motion.id);
+            openDeleteDialog("동작");
+          },
         ),
       ],
     );
