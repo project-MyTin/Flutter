@@ -5,9 +5,7 @@ import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
-import 'add_abstract_controller.dart';
-
-class RoutineAddController extends GetxController implements AddController {
+class RoutineAddController extends GetxController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   List<MotionTile> motionTileList = [];

@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/bottom_page_controller.dart';
 import 'package:mytin/dummies/routine_list_dummy.dart';
-import 'package:mytin/screens/routine/screen_routine_list.dart';
+import 'package:mytin/screens/screen_routine_and_motion.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
 import 'package:mytin/widgets/wave_wrapper.dart';
@@ -16,52 +16,38 @@ class MainPage extends StatelessWidget {
     double width = screenSize.width, height = screenSize.height;
     Get.put(BottomPageController());
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                buildMainPageHeader(height, width),
-                buildWaveStack(height, width),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0.05 * width, 0.04 * height,
-                      0.06 * width, 0.015 * height),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("새로운 루틴",
-                          style: TextStyle(fontSize: 0.023 * height)),
-                      GestureDetector(
-                        child: Text("more +",
-                            style: TextStyle(
-                                color: Colors.blueGrey,
-                                fontSize: 0.021 * height,
-                                fontWeight: FontWeight.bold)),
-                        onTap: () => Get.to(RoutineListPage()),
-                      )
-                    ],
-                  ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              buildMainPageHeader(height, width),
+              buildWaveStack(height, width),
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                    0.05 * width, 0.04 * height, 0.06 * width, 0.015 * height),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("새로운 루틴", style: TextStyle(fontSize: 0.023 * height)),
+                    GestureDetector(
+                      child: Text("more +",
+                          style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 0.021 * height,
+                              fontWeight: FontWeight.bold)),
+                      onTap: () => Get.to(RoutineAndMotionPage()),
+                    )
+                  ],
                 ),
-                Container(
-                  child: ListView.builder(
-                    itemCount: routineList.length,
-                    itemBuilder: (context, index) =>
-                        RoutineListTile(routineList[index]),
-                  ),
-                  height: 0.5 * height,
-                  width: 0.93 * width,
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Color.fromARGB(255, 220, 220, 220)),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              for (int i = 0; i < routineList.length; i++)
+                RoutineListTile(routineList[i]),
+            ],
           ),
         ),
-        bottomNavigationBar: PageBottomNavigationBar(),
       ),
+      bottomNavigationBar: PageBottomNavigationBar(),
     );
   }
 

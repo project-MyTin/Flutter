@@ -13,6 +13,7 @@ class RankTabsPage extends StatelessWidget {
           backgroundColor: Colors.white,
           title: TabBar(
             labelColor: Colors.lightBlue,
+            unselectedLabelColor: Colors.black,
             labelStyle: TextStyle(fontSize: Get.height * 0.018),
             indicatorColor: Colors.lightBlue,
             indicatorWeight: Get.height * 0.005,

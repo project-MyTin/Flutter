@@ -10,7 +10,7 @@ class MotionDetail {
   String type; // 동작 부위
   String description; // 동작 설명
 
-  MotionDetail.fromMap(Map<String, dynamic> map)
+  MotionDetail.fromJson(Map<String, dynamic> map)
       : id = map['id'],
         name = map['name'],
         part = map['part'],

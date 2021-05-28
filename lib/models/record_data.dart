@@ -12,11 +12,12 @@ class RecordData {
 }
 
 class RecordTile {
-  final String date, contentName;
-  final List contentList;
+  final String name, imageUrl;
+  final int time, id;
 
   RecordTile.fromMap(Map<String, dynamic> map)
-      : date = map["date"],
-        contentName = map["contentName"],
-        contentList = map["contentList"];
+      : id = map["id"],
+        name = map["name"],
+        imageUrl = map["imageUrl"],
+        time = map["time"];
 }
