@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_list_controller.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
+import 'package:mytin/services/get_motion_detail.dart';
 import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/title_page_header.dart';
@@ -28,8 +29,11 @@ class MotionListPage extends StatelessWidget {
                           return MotionGridTile(
                             index,
                             ctr.motionList[index],
-                            Get.dialog,
-                            MotionDetailDialog(currentMotion),
+                            (int id) async {
+                              final motion = await loadMotionDetail(id);
+                              // MotionDetailDialog(motion);
+                            },
+                            ctr.motionList[index].id,
                             false,
                           );
                         },
