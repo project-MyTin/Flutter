@@ -7,6 +7,8 @@ Future<dynamic> loadMotionList() async {
   final String s3Url = "https://mytin-bucket.s3.ap-northeast-2.amazonaws.com/";
   final response = await get("http://3.34.209.123/motion?q=");
   final parsedRes = json.decode(response.body);
+
+  if (parsedRes["data"] == []) return [];
   final List motionsJson = parsedRes["data"]["result"];
   List<MotionTile> tileList = [];
 
