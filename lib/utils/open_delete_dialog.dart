@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/services/delete_motion.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
-void openDeleteDialog(String text) {
+void openDeleteDialog(String text, int id) {
   Get.defaultDialog(
     title: "정말 삭제하시나요?",
     middleText: "삭제하신 $text은 다시 복구할 수 없습니다.",
@@ -11,9 +12,7 @@ void openDeleteDialog(String text) {
         onPressed: () => Get.back(), child: Text("취소")),
     confirm: TextButton(
         onPressed: () {
-          // TODO 삭제 요청
-          Get.back();
-          Get.back();
+          if(text == "동작") deleteMotion(id);
           showSnackBar("삭제 완료", "선택하신 $text이 정상적으로 삭제되었습니다.", "info");
         },
         child: Text("삭제", style: TextStyle(color: Colors.red))),
