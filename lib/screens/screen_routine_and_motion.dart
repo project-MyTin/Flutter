@@ -8,6 +8,10 @@ import 'package:mytin/widgets/add_floating_button.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
 class RoutineAndMotionPage extends StatefulWidget {
+  final int index;
+
+  RoutineAndMotionPage({this.index});
+
   @override
   _RoutineAndMotionPageState createState() => _RoutineAndMotionPageState();
 }
@@ -19,7 +23,7 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this);
+    _controller = TabController(length: 2, vsync: this, initialIndex: widget.index ?? 0);
   }
 
   @override

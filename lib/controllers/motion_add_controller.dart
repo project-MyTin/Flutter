@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
+import 'package:mytin/screens/screen_routine_and_motion.dart';
 
 import 'add_abstract_controller.dart';
 
@@ -76,7 +76,7 @@ class MotionAddController extends GetxController implements AddController {
   void submit() {
     // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
     update();
-    moveTo(1);
+    Get.offAll(RoutineAndMotionPage(index: 1));
   }
 
   void printObject() {
@@ -122,20 +122,5 @@ class MotionAddController extends GetxController implements AddController {
     image = File(pickedFile.path);
 
     update();
-  }
-
-  void showSnackBar(String title, String body) {
-    Get.snackbar(
-      title,
-      body,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.deepOrange,
-      colorText: Colors.white,
-      animationDuration: Duration(milliseconds: 600),
-      icon: Icon(
-        Icons.warning,
-        color: Colors.white,
-      ),
-    );
   }
 }
