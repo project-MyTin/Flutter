@@ -73,7 +73,7 @@ class MotionAddController extends GetxController implements AddController {
 
   @override
   void submit() {
-    update();
+
     Get.offAll(RoutineAndMotionPage(index: 1));
     showSnackBar("생성 완료", "동작이 성공적으로 추가되었습니다", "info");
   }

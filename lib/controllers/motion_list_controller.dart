@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mytin/models/motion_tile.dart';
-import 'package:mytin/repository/motion_tile_repository.dart';
+import 'package:mytin/services/get_motion_list.dart';
 
 class MotionListController extends GetxController {
   List<MotionTile> motionList = [];
