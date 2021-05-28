@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:mytin/models/motion_tile.dart';
 
-Future<dynamic> loadMotionList() async {
+Future<List<MotionTile>> loadMotionList() async {
   final String s3Url = "https://mytin-bucket.s3.ap-northeast-2.amazonaws.com/";
-  final response = await get("http://3.34.209.123/motion?q=");
+  final response = await get(Uri.parse("http://3.34.209.123/motion?q="));
   final parsedRes = json.decode(response.body);
 
-  if (parsedRes["data"] == []) return [];
+  if (parsedRes["data"] == null) return [];
   final List motionsJson = parsedRes["data"]["result"];
   List<MotionTile> tileList = [];
 

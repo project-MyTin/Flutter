@@ -33,7 +33,8 @@ dependencies:
   flutter_svg:
   material_design_icons_flutter: 4.0.5955
   date_util: ^0.1.4
-  http: ^0.12.2
+  http:
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

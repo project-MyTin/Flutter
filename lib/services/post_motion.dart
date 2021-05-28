@@ -2,7 +2,7 @@ import 'package:http/http.dart';
 
 Future<bool> postMotion(var motion) async {
   final response = await post(
-    "http://3.34.209.123/motion",
+    Uri.parse("http://3.34.209.123/motion"),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
