@@ -31,7 +31,7 @@ class MotionListPage extends StatelessWidget {
                             ctr.motionList[index],
                             (int id) async {
                               final motion = await loadMotionDetail(id);
-                              // MotionDetailDialog(motion);
+                              Get.dialog(MotionDetailDialog(motion));
                             },
                             ctr.motionList[index].id,
                             false,

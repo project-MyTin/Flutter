@@ -1,6 +1,6 @@
 import 'package:mytin/models/motion_detail.dart';
 
-MotionDetail currentMotion = MotionDetail.fromMap({
+MotionDetail currentMotion = MotionDetail.fromJson({
   "id": 1,
   "name": "스쿼트",
   "part": "하체",
