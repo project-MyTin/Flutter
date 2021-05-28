@@ -76,9 +76,9 @@ class MotionAddController extends GetxController implements AddController {
   void submit() {
     postMotion({
       "name": motionName,
-      "parts": "[$currentMotionPart]",
+      "parts": [currentMotionPart],
       "difficulty": currentDifficulty,
-      "file": image,
+      "img": image,
       "time": motionTime,
       "url": motionReferenceUrl,
       "type": currentType,

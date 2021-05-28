@@ -1,35 +1,13 @@
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
-Future<bool> postMotion(var motion) async {
-  final response = await post(
-    Uri.parse("http://3.34.209.123/motion"),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: motion,
+Future<bool> postMotion(Map<String, dynamic> map) async {
+  final String filePath = map["img"].path;
+  final String fileName = filePath.split("/").last;
+  map["img"] = await MultipartFile.fromFile(filePath, filename: fileName);
+  final response = await Dio().post(
+      "http://3.34.209.123/motion",
+      data: FormData.fromMap(map)
   );
   print(response);
   return true;
-}
-
-
-class MotionPost {
-  String name;
-  List<String> parts;
-  String difficulty;
-  var file;
-  int time;
-  String url;
-  String type;
-  String description;
-
-  MotionPost.fromMap(Map<String, dynamic> map)
-      : name = map["name"],
-        parts = map["parts"],
-        difficulty = map["difficulty"],
-        file = map["file"],
-        time = map["time"],
-        url = map["url"],
-        type = map["type"],
-        description = map["description"];
 }
