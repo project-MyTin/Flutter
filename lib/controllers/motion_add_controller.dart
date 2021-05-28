@@ -8,9 +8,7 @@ import 'package:mytin/screens/screen_routine_and_motion.dart';
 import 'package:mytin/services/post_motion.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
-import 'add_abstract_controller.dart';
-
-class MotionAddController extends GetxController implements AddController {
+class MotionAddController extends GetxController {
   List<String> difficulty = ["초급", "중급", "고급"];
   List<String> type = ["다이어트", "홈 트레이닝", "건강", "헬스", "여가", "취미"];
   List<String> motionPart = ["등", "어께", "복근", "하체", "전신", "가슴", "코어", "허리"];
