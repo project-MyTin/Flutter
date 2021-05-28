@@ -23,6 +23,12 @@ class CalendarBox extends StatelessWidget {
     print(beforeDays.toString());
 
     return Container(
+      padding: EdgeInsets.fromLTRB(Get.width * 0.07, 0, Get.width * 0.07, Get.height * 0.01),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(40),
+        boxShadow: [BoxShadow(color: Colors.grey)]
+      ),
       child: GetBuilder<RecordController>(
         builder: (_) => Table(
           children: [
