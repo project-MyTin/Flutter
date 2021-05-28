@@ -8,6 +8,9 @@ class CalendarBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> dayName = ["일", "월", "화", "수", "목", "금", "토"];
+    final Color valueColor = Colors.lightBlue;
+    final int maxValue = 100;
+
     RecordController ctr = Get.find<RecordController>();
     DateUtil dateUtil = DateUtil();
     int numOfColumns = {
@@ -17,30 +20,38 @@ class CalendarBox extends StatelessWidget {
     }[ctr.mode];
     int numOfDays =
         dateUtil.daysInMonth(ctr.currentViewMonth, ctr.currentViewYear);
-    int beforeDays = -(DateTime(ctr.currentViewYear, ctr.currentViewMonth, 2).weekday -1);
+    int beforeDays =
+        -(DateTime(ctr.currentViewYear, ctr.currentViewMonth, 2).weekday - 1);
 
     print(numOfDays.toString());
     print(beforeDays.toString());
 
     return Container(
-      padding: EdgeInsets.fromLTRB(Get.width * 0.07, 0, Get.width * 0.07, Get.height * 0.01),
+      padding: EdgeInsets.fromLTRB(
+          Get.width * 0.07, 0, Get.width * 0.07, Get.height * 0.01),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(40),
-        boxShadow: [BoxShadow(color: Colors.grey)]
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(40),
+          boxShadow: [BoxShadow(color: Colors.grey)]),
       child: GetBuilder<RecordController>(
         builder: (_) => Table(
           children: [
             if (ctr.mode == DateMode.day)
               TableRow(children: [
-                for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i]),
+                for (int i = 0; i < numOfColumns; i++)
+                  DayCell(text: dayName[i]),
               ]),
             for (int i = beforeDays; i < numOfDays; i += numOfColumns)
               TableRow(children: [
                 for (int j = i; j < i + numOfColumns; j++)
                   j >= 0 && j < numOfDays
-                      ? DayCell(text: "${j+1}", value: calendarData.valueList[j])
+                      ? DayCell(
+                          text: "${j + 1}",
+                          backColor: valueColor.withOpacity(
+                              calendarData.valueList[j] > maxValue
+                                  ? 1
+                                  : calendarData.valueList[j] / maxValue),
+                        )
                       : DayCell(text: "")
               ])
           ],
@@ -52,17 +63,23 @@ class CalendarBox extends StatelessWidget {
 
 class DayCell extends StatelessWidget {
   final String text;
-  final int value;
+  final Color textColor, backColor;
 
-  DayCell({this.text, this.value});
+  DayCell({this.text, this.textColor, this.backColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.width * 0.12,
+      margin: EdgeInsets.fromLTRB(Get.width * 0.007, Get.width * 0.005,
+          Get.width * 0.007, Get.width * 0.005),
+      height: Get.width * 0.105,
       width: Get.width * 0.1,
       alignment: Alignment.center,
-      child: Text(text),
+      child: Text(text, style: TextStyle(color: textColor ?? Colors.black)),
+      decoration: BoxDecoration(
+        color: backColor ?? Colors.white,
+        borderRadius: BorderRadius.circular(4),
+      ),
     );
   }
 }
