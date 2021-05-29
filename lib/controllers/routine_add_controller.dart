@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
+import 'package:mytin/services/motion/get_motion_list.dart';
 import 'package:mytin/services/routine/post_routine.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
@@ -33,11 +33,13 @@ class RoutineAddController extends GetxController {
 
   RoutineAddController.add() {
     isAdd = true;
+    getMotionTileList();
     update();
   }
 
   RoutineAddController.edit(int routineId) {
     isAdd = false;
+    getMotionTileList();
 
     this.routine = currentRoutine;
     // TODO motionId로 서버에 Get 요청 => routine 에 저장
@@ -163,9 +165,9 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  void getMotionTileList() {
-    // TODO 서버에서 동작 타일 리스트를 가져오기 (GET)
-    motionTileList = motionList;
+  Future<void> getMotionTileList() async {
+    motionTileList = await loadMotionList();
+    print(motionTileList);
   }
 
   void select(int index) {

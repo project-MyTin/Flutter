@@ -55,22 +55,18 @@ class RoutineAddBody extends StatelessWidget {
 
   Container buildSecondBody() {
     RoutineAddController controller = Get.find<RoutineAddController>();
-    controller.getMotionTileList();
     return Container(
       child: Container(
         child: GridView.builder(
+          padding: EdgeInsets.all(Get.width * 0.01),
           itemCount: controller.motionTileList.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 6 / 7,
+              childAspectRatio: 3 / 4,
               mainAxisSpacing: 12,
               crossAxisSpacing: 10),
-          itemBuilder: (_, index) => MotionSelectTile(
-              index,
-              controller.motionTileList[index],
-              controller.select,
-              index,
-              controller.selectIndex == index),
+          itemBuilder: (_, index) =>
+              MotionSelectTile(index, controller.motionTileList[index]),
         ),
         height: 0.75 * Get.height,
         width: Get.width,
