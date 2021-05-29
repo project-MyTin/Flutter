@@ -15,26 +15,23 @@ import 'package:mytin/widgets/text_input_box_with_text.dart';
 class RoutineAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
-    return GetBuilder<RoutineAddController>(
+     return GetBuilder<RoutineAddController>(
       builder: (controller) => Padding(
           padding: (controller.part != 2)
-              ? EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0)
+              ? EdgeInsets.fromLTRB(0.1 * Get.width, 0.035 * Get.height, 0.1 * Get.width, 0)
               : EdgeInsets.fromLTRB(
-                  0.05 * width, 0.04 * height, 0.05 * width, 0),
+                  0.05 * Get.width, 0.04 * Get.height, 0.05 * Get.width, 0),
           child: [
-            buildFirstBody(height),
-            buildSecondBody(height),
-            buildThirdBody(height),
-            buildFourthBody(height),
-            buildFifthBody(height)
+            buildFirstBody(),
+            buildSecondBody(),
+            buildThirdBody(),
+            buildFourthBody(),
+            buildFifthBody()
           ][controller.part - 1]),
     );
   }
 
-  Column buildFirstBody(double height) {
+  Column buildFirstBody() {
     return Column(
       children: [
         Container(
@@ -43,7 +40,7 @@ class RoutineAddBody extends StatelessWidget {
             onPressed: () => Get.find<RoutineAddController>().moveTo(2),
             child: Text(
               "  동작 추가하기  ",
-              style: TextStyle(fontSize: 0.016 * height),
+              style: TextStyle(fontSize: 0.016 * Get.height),
             ),
             style: ButtonStyle(
               shape: MaterialStateProperty.resolveWith((states) {
@@ -52,14 +49,14 @@ class RoutineAddBody extends StatelessWidget {
               }),
             ),
           ),
-          margin: EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.02 * height),
+          margin: EdgeInsets.fromLTRB(0, 0.02 * Get.height, 0, 0.02 * Get.height),
         ),
         MotionReorderAbleListBox(),
       ],
     );
   }
 
-  Column buildSecondBody(double height) {
+  Column buildSecondBody() {
     RoutineAddController controller = Get.find<RoutineAddController>();
     controller.getMotionTileList();
     return Column(
@@ -80,8 +77,8 @@ class RoutineAddBody extends StatelessWidget {
                 controller.selectIndex == index
             ),
           ),
-          height: 0.515 * height,
-          padding: EdgeInsets.all(0.005 * height),
+          height: 0.515 * Get.height,
+          padding: EdgeInsets.all(0.005 * Get.height),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
@@ -90,19 +87,19 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  GetBuilder buildThirdBody(double height) {
+  GetBuilder buildThirdBody() {
     return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         children: [
           ImageCircular(
             url: controller.newMotion.imageUrl,
-            diameter: 0.24 * height,
+            diameter: 0.24 * Get.height,
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
+            padding: EdgeInsets.fromLTRB(0, 0.02 * Get.height, 0, 0.04 * Get.height),
             child: Text(
               controller.newMotion.name,
-              style: TextStyle(fontSize: 0.033 * height),
+              style: TextStyle(fontSize: 0.033 * Get.height),
             ),
           ),
           Row(
@@ -111,16 +108,16 @@ class RoutineAddBody extends StatelessWidget {
               Text(
                 "동작 시간",
                 style:
-                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+                    TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
               Text(
                 "동작 횟수",
                 style:
-                    TextStyle(fontSize: 0.02 * height, color: Colors.black54),
+                    TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
             ],
           ),
-          SizedBox(height: 0.008 * height),
+          SizedBox(height: 0.008 * Get.height),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -152,18 +149,18 @@ class RoutineAddBody extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 0.05 * height)
+          SizedBox(height: 0.05 * Get.height)
         ],
       ),
     );
   }
 
-  Column buildFourthBody(double height) {
+  Column buildFourthBody() {
     RoutineAddController controller = Get.find<RoutineAddController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("루틴 명", style: TextStyle(fontSize: 0.02 * height)),
+        Text("루틴 명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) 키크기 운동",
           text: controller.routineName ?? "",
@@ -172,7 +169,7 @@ class RoutineAddBody extends StatelessWidget {
           line: 1,
           type: "name",
         ),
-        Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * height)),
+        Text("루틴 준비물", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) 고무밴드, 우유",
           text: controller.routineMaterials ?? "",
@@ -181,7 +178,7 @@ class RoutineAddBody extends StatelessWidget {
           line: 2,
           type: "materials",
         ),
-        Text("루틴 설명", style: TextStyle(fontSize: 0.02 * height)),
+        Text("루틴 설명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) 유산소 운동과 줄넘기로, 성장판을 자극하고 키 성장도 유도하는 운동 루틴",
           text: controller.routineDescription ?? "",
@@ -194,13 +191,13 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  GetBuilder buildFifthBody(double height) {
+  GetBuilder buildFifthBody() {
     return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("루틴 유형", style: TextStyle(fontSize: 0.02 * height)),
-          SizedBox(height: 0.01 * height),
+          Text("루틴 유형", style: TextStyle(fontSize: 0.02 * Get.height)),
+          SizedBox(height: 0.01 * Get.height),
           Wrap(
             children: [
               for (String name in controller.type)
@@ -212,9 +209,9 @@ class RoutineAddBody extends StatelessWidget {
               // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
             ],
           ),
-          SizedBox(height: 0.05 * height),
-          Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
-          SizedBox(height: 0.01 * height),
+          SizedBox(height: 0.05 * Get.height),
+          Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * Get.height)),
+          SizedBox(height: 0.01 * Get.height),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -225,7 +222,7 @@ class RoutineAddBody extends StatelessWidget {
                     controller.difficultyToggle),
             ],
           ),
-          SizedBox(height: 0.05 * height),
+          SizedBox(height: 0.05 * Get.height),
           TextInputBoxWithText(
             title: "동작 쉬는 시간",
             subTitle: "동작 사이마다의 쉬는 시간을 입력하세요",
