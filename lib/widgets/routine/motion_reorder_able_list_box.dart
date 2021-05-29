@@ -11,8 +11,6 @@ class MotionReorderAbleListBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 0.6 * Get.height,
-      width: 0.85 * Get.width,
       child: GetBuilder<RoutineAddController>(
         builder: (controller) => (controller.routineMotionList.length > 0)
             ? ReorderableListView(
@@ -21,7 +19,6 @@ class MotionReorderAbleListBox extends StatelessWidget {
                     MotionListTile(i, controller.routineMotionList[i],
                         Get.height, controller.deleteMotionToList),
                 ],
-
                 onReorder: (oldI, newI) =>
                     controller.changeSequence(oldI, newI),
               )
@@ -39,9 +36,11 @@ class MotionReorderAbleListBox extends StatelessWidget {
                 ],
               ),
       ),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          border: Border.all(color: Colors.grey.withOpacity(0.3))),
+      height: 0.6 * Get.height,
+      width: Get.width,
+      padding: EdgeInsets.fromLTRB(Get.width * 0.08, Get.height * 0.006,
+          Get.width * 0.08, Get.height * 0.006),
+      color: Colors.grey.withOpacity(0.2),
     );
   }
 }

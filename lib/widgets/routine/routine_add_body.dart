@@ -16,8 +16,10 @@ class RoutineAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-          Get.width * 0.1, Get.height * 0.03, Get.width * 0.1, 0),
+      padding: Get.find<RoutineAddController>().part > 2
+          ? EdgeInsets.fromLTRB(
+              Get.width * 0.1, Get.height * 0.03, Get.width * 0.1, 0)
+          : EdgeInsets.only(top: Get.height * 0.03),
       child: [
         buildFirstBody(),
         buildSecondBody(),
@@ -37,7 +39,7 @@ class RoutineAddBody extends StatelessWidget {
         GestureDetector(
           onTap: () => Get.find<RoutineAddController>().moveTo(2),
           child: Container(
-            width: Get.width * 0.85,
+            width: Get.width * 0.8,
             height: Get.height * 0.06,
             alignment: Alignment.center,
             child: Text("동작 추가하기", style: TextStyle(color: Colors.white)),
@@ -51,33 +53,31 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildSecondBody() {
+  Container buildSecondBody() {
     RoutineAddController controller = Get.find<RoutineAddController>();
     controller.getMotionTileList();
-    return Column(
-      children: [
-        Container(
-          child: GridView.builder(
-            itemCount: controller.motionTileList.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                childAspectRatio: 6 / 7,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 10),
-            itemBuilder: (_, index) => MotionSelectTile(
-                index,
-                controller.motionTileList[index],
-                controller.select,
-                index,
-                controller.selectIndex == index),
-          ),
-          height: 0.515 * Get.height,
-          padding: EdgeInsets.all(0.005 * Get.height),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
+    return Container(
+      child: Container(
+        child: GridView.builder(
+          itemCount: controller.motionTileList.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 6 / 7,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 10),
+          itemBuilder: (_, index) => MotionSelectTile(
+              index,
+              controller.motionTileList[index],
+              controller.select,
+              index,
+              controller.selectIndex == index),
         ),
-      ],
+        height: 0.75 * Get.height,
+        width: Get.width,
+        padding: EdgeInsets.fromLTRB(
+            Get.width * 0.08, Get.height * 0.02, Get.width * 0.08, 0),
+        color: Colors.grey.withOpacity(0.2),
+      ),
     );
   }
 
