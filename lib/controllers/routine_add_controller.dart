@@ -3,6 +3,8 @@ import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/screens/screen_routine_and_motion.dart';
+import 'package:mytin/services/routine/post_routine.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 class RoutineAddController extends GetxController {
@@ -17,6 +19,7 @@ class RoutineAddController extends GetxController {
   String routineName;
   String routineMaterials;
   String routineDescription;
+  int routineTime;
   int breakTime;
   int motionTime;
   int motionCount;
@@ -92,10 +95,23 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  void submit() {
-    // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
-    update();
-    moveTo(1);
+  Future<void> submit() async {
+    final Map<String, dynamic> requestMap = {
+      "name": routineName,
+      "time": routineTime,
+      "description": routineDescription,
+      "type": currentType,
+      "parts": "열쩡(루틴에는 파트가 없어요)",
+      "difficulty": currentDifficulty,
+      "url": "열쯔엉(루틴에는 참고 링크가 없어요)",
+      "img": "아...",
+      // fixme : 루틴 이미지 넣는게 없었네...
+    };
+    final response = await postRoutine(requestMap);
+    // Get.put(RoutineListController());
+    // Get.find<RoutineListController>().loadRoutines();
+    Get.offAll(() => RoutineAndMotionPage(index: 0));
+    showSnackBar("생성 완료", "루틴이 성공적으로 추가되었습니다", "info");
   }
 
   void changeSequence(oldIndex, newIndex) {
@@ -163,7 +179,7 @@ class RoutineAddController extends GetxController {
     newMotion.time = motionTime;
     newMotion.count = motionCount;
     routineMotionList.add(newMotion);
-
+    routineTime += motionTime;
     motionTime = motionCount = null;
   }
 
