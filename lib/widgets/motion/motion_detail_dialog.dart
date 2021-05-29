@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/utils/open_delete_dialog.dart';
@@ -139,17 +140,17 @@ class MotionDetailDialog extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
-          child: Padding(
-            padding: EdgeInsets.all(0.01 * height),
-            child: Icon(
-              Icons.edit,
-              color: Colors.white.withOpacity(0.5),
-              size: 0.03 * height,
+            child: Padding(
+              padding: EdgeInsets.all(0.01 * height),
+              child: Icon(
+                Icons.edit,
+                color: Colors.white.withOpacity(0.5),
+                size: 0.03 * height,
+              ),
             ),
-          ),
-          onTap: () => Get.off(() => MotionAddPage(),
-              transition: Transition.noTransition, arguments: motion.id),
-        ),
+            onTap: () {
+              Get.off(() => MotionAddPage(isAdd: false, motionId: motion.id));
+            }),
         GestureDetector(
           child: Padding(
             padding: EdgeInsets.all(0.01 * height),

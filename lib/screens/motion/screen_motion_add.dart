@@ -12,14 +12,13 @@ class MotionAddPage extends StatelessWidget {
     "동작명과 시간, 설명을 입력해주세요",
     "동작의 유형과 난이도, 운동 부위를 입력해주세요",
   ];
-  MotionAddPage() {
-    Get.arguments == null
-        ? Get.put(MotionAddController.add())
-        : Get.put(MotionAddController.edit(Get.arguments));
-  }
+  final bool isAdd;
+  final int motionId;
+  MotionAddPage({this.isAdd, this.motionId});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MotionAddController(isAdd: isAdd, motionId: motionId));
     return SafeArea(
       child: GetBuilder<MotionAddController>(
         builder: (ctr) => Scaffold(
@@ -35,8 +34,7 @@ class MotionAddPage extends StatelessWidget {
                   pageNumbering: [1, 2, 3],
                 ),
                 MotionAddBody(),
-                if (ctr.part < 3)
-                  NextPageFloatingButton(ctr.next),
+                if (ctr.part < 3) NextPageFloatingButton(ctr.next),
               ],
             ),
           ),
