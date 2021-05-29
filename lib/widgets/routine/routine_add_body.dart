@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_add_controller.dart';
 import 'package:mytin/widgets/circle_button_box.dart';
 import 'package:mytin/widgets/image_circular.dart';
-import 'package:mytin/widgets/motion/motion_grid_tile.dart';
+import 'package:mytin/widgets/routine/motion_select_tile.dart';
 import 'package:mytin/widgets/routine/motion_reorder_able_list_box.dart';
 import 'package:mytin/widgets/text_input_box.dart';
 import 'package:mytin/widgets/button_box.dart';
@@ -72,7 +72,7 @@ class RoutineAddBody extends StatelessWidget {
                 childAspectRatio: 3 / 2,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 10),
-            itemBuilder: (_, index) => MotionGridTile(
+            itemBuilder: (_, index) => MotionSelectTile(
                 index,
                 controller.motionTileList[index],
                 controller.select,
