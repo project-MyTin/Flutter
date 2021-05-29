@@ -10,20 +10,18 @@ import 'package:mytin/widgets/routine/motion_list_tile.dart';
 class MotionReorderAbleListBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double height = screenSize.height, width = screenSize.width;
-
     return Container(
-      height: 0.4 * height,
-      width: 0.8 * width,
+      height: 0.6 * Get.height,
+      width: 0.85 * Get.width,
       child: GetBuilder<RoutineAddController>(
         builder: (controller) => (controller.routineMotionList.length > 0)
             ? ReorderableListView(
                 children: [
                   for (int i = 0; i < controller.routineMotionList.length; i++)
-                    MotionListTile(i, controller.routineMotionList[i], height,
-                        controller.deleteMotionToList),
+                    MotionListTile(i, controller.routineMotionList[i],
+                        Get.height, controller.deleteMotionToList),
                 ],
+
                 onReorder: (oldI, newI) =>
                     controller.changeSequence(oldI, newI),
               )
@@ -31,18 +29,19 @@ class MotionReorderAbleListBox extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("읎어요", style: TextStyle(fontSize: 0.04 * height)),
-                  SizedBox(height: 0.01 * height),
-                  Text("오른쪽 상단의 '동작 추가하기' 버튼을 눌러 원하는 동작을 추가하세요",
+                  Text("루틴 안에 포함되는 동작이 없습니다!",
                       style: TextStyle(
-                          fontSize: 0.012 * height, color: Colors.grey)),
+                          fontSize: 0.022 * Get.height, color: Colors.grey)),
+                  SizedBox(height: 0.005 * Get.height),
+                  Text("'동작 추가하기' 를 눌러 원하는 동작을 추가하세요",
+                      style: TextStyle(
+                          fontSize: 0.016 * Get.height, color: Colors.grey)),
                 ],
               ),
       ),
-      padding: EdgeInsets.all(0.01 * height),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          border: Border.all(color: Color.fromARGB(255, 210, 210, 210))),
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          border: Border.all(color: Colors.grey.withOpacity(0.3))),
     );
   }
 }

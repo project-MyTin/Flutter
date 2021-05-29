@@ -46,12 +46,13 @@ class MotionListTile extends StatelessWidget {
             ),
         ],
       ),
-      margin: EdgeInsets.all(0.005 * height),
+      margin: EdgeInsets.fromLTRB(0, 0, 0, 0.005 * height),
       padding: EdgeInsets.all(0.01 * height),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+        color: Colors.white,
+        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+        borderRadius: BorderRadius.all(Radius.circular(15))
+      ),
     );
   }
 }

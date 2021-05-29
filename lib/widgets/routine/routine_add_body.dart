@@ -15,44 +15,38 @@ import 'package:mytin/widgets/text_input_box_with_text.dart';
 class RoutineAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     return GetBuilder<RoutineAddController>(
-      builder: (controller) => Padding(
-          padding: (controller.part != 2)
-              ? EdgeInsets.fromLTRB(0.1 * Get.width, 0.035 * Get.height, 0.1 * Get.width, 0)
-              : EdgeInsets.fromLTRB(
-                  0.05 * Get.width, 0.04 * Get.height, 0.05 * Get.width, 0),
-          child: [
-            buildFirstBody(),
-            buildSecondBody(),
-            buildThirdBody(),
-            buildFourthBody(),
-            buildFifthBody(),
-            buildSixthBody(),
-          ][controller.part - 1]),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+          Get.width * 0.1, Get.height * 0.03, Get.width * 0.1, 0),
+      child: [
+        buildFirstBody(),
+        buildSecondBody(),
+        buildThirdBody(),
+        buildFourthBody(),
+        buildFifthBody(),
+        buildSixthBody(),
+      ][Get.find<RoutineAddController>().part - 1],
     );
   }
 
   Column buildFirstBody() {
     return Column(
       children: [
-        Container(
-          alignment: Alignment.topRight,
-          child: OutlinedButton(
-            onPressed: () => Get.find<RoutineAddController>().moveTo(2),
-            child: Text(
-              "  동작 추가하기  ",
-              style: TextStyle(fontSize: 0.016 * Get.height),
-            ),
-            style: ButtonStyle(
-              shape: MaterialStateProperty.resolveWith((states) {
-                return RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20));
-              }),
+        MotionReorderAbleListBox(),
+        SizedBox(height: Get.height * 0.01),
+        GestureDetector(
+          onTap: () => Get.find<RoutineAddController>().moveTo(2),
+          child: Container(
+            width: Get.width * 0.85,
+            height: Get.height * 0.06,
+            alignment: Alignment.center,
+            child: Text("동작 추가하기", style: TextStyle(color: Colors.white)),
+            decoration: BoxDecoration(
+              color: Colors.lightBlue,
+              borderRadius: BorderRadius.all(Radius.circular(5)),
             ),
           ),
-          margin: EdgeInsets.fromLTRB(0, 0.02 * Get.height, 0, 0.02 * Get.height),
         ),
-        MotionReorderAbleListBox(),
       ],
     );
   }
@@ -75,8 +69,7 @@ class RoutineAddBody extends StatelessWidget {
                 controller.motionTileList[index],
                 controller.select,
                 index,
-                controller.selectIndex == index
-            ),
+                controller.selectIndex == index),
           ),
           height: 0.515 * Get.height,
           padding: EdgeInsets.all(0.005 * Get.height),
@@ -97,7 +90,8 @@ class RoutineAddBody extends StatelessWidget {
             diameter: 0.24 * Get.height,
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0.02 * Get.height, 0, 0.04 * Get.height),
+            padding:
+                EdgeInsets.fromLTRB(0, 0.02 * Get.height, 0, 0.04 * Get.height),
             child: Text(
               controller.newMotion.name,
               style: TextStyle(fontSize: 0.033 * Get.height),
@@ -108,13 +102,13 @@ class RoutineAddBody extends StatelessWidget {
             children: [
               Text(
                 "동작 시간",
-                style:
-                TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
+                style: TextStyle(
+                    fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
               Text(
                 "동작 횟수",
-                style:
-                TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
+                style: TextStyle(
+                    fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
             ],
           ),
@@ -166,29 +160,31 @@ class RoutineAddBody extends StatelessWidget {
           builder: (controller) => GestureDetector(
             child: (controller.image == null)
                 ? Container(
-              // 이미지 선택 전 뷰
-              alignment: Alignment.center,
-              child: Icon(Icons.add_rounded,
-                  size: 0.09 * Get.height,
-                  color: Colors.black.withOpacity(0.1)),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.black.withOpacity(0.1)),
-              ),
-              height: 0.8 * Get.width,
-              width: 0.8 * Get.width,
-            )
+                    // 이미지 선택 전 뷰
+                    alignment: Alignment.center,
+                    child: Icon(Icons.add_rounded,
+                        size: 0.09 * Get.height,
+                        color: Colors.black.withOpacity(0.1)),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.black.withOpacity(0.1)),
+                    ),
+                    height: 0.8 * Get.width,
+                    width: 0.8 * Get.width,
+                  )
                 : Container(
-              // 이미지 선택 후 뷰
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: controller.image is String ? NetworkImage(controller.image) : FileImage(controller.image),
-                    fit: BoxFit.cover),
-              ),
-              height: 0.8 * Get.width,
-              width: 0.8 * Get.width,
-            ),
+                    // 이미지 선택 후 뷰
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: controller.image is String
+                              ? NetworkImage(controller.image)
+                              : FileImage(controller.image),
+                          fit: BoxFit.cover),
+                    ),
+                    height: 0.8 * Get.width,
+                    width: 0.8 * Get.width,
+                  ),
             onTap: () => controller.uploadImage(),
           ),
         ),
