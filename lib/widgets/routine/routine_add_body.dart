@@ -68,8 +68,8 @@ class RoutineAddBody extends StatelessWidget {
           child: GridView.builder(
             itemCount: controller.motionTileList.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
+                crossAxisCount: 3,
+                childAspectRatio: 6 / 7,
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 10),
             itemBuilder: (_, index) => MotionSelectTile(

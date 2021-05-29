@@ -16,7 +16,7 @@ class RoutineListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
+    double width = screenSize.width;
 
     return GestureDetector(
       onTap: () {
@@ -62,16 +62,9 @@ class RoutineListTile extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.fromLTRB(0, 0, 0, 0.015 * height),
+        margin: EdgeInsets.only(top: Get.height * 0.007),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(color: Color.fromARGB(255, 220, 220, 220)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              offset: Offset(0, 1),
-            ),
-          ],
         ),
       ),
     );
