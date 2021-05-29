@@ -38,7 +38,7 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
           unselectedLabelColor: Colors.black,
           labelStyle: TextStyle(fontSize: Get.height * 0.018),
           indicatorColor: Colors.lightBlue,
-          indicatorWeight: Get.height * 0.006,
+          indicatorWeight: Get.height * 0.004,
           tabs: [Tab(text: "루틴"), Tab(text: "동작")],
           controller: _controller,
         ),
