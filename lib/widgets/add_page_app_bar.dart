@@ -34,7 +34,7 @@ class AddPageAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading:
           IconButton(icon: Icon(Icons.arrow_back), onPressed: () => ctr.back()),
       actions: [
-        ctr.part < (isMotion ? 3 : 5)
+        ctr.part < (isMotion ? 3 : 6)
             ? TextButton(onPressed: () => ctr.next(), child: Text("다음"))
             : TextButton(
                 onPressed: () => ctr.submit(),

@@ -6,9 +6,9 @@ import 'package:mytin/widgets/motion/motion_add_body.dart';
 
 class MotionAddPage extends StatelessWidget {
   final List<String> subTexts = [
-    "동작 이미지를 입력해주세요",
-    "동작명과 시간, 설명을 입력해주세요",
-    "동작의 유형과 난이도, 운동 부위를 입력해주세요",
+    "동작 이미지를 입력하세요",
+    "동작명과 시간, 설명을 입력하세요",
+    "동작의 유형과 난이도, 운동 부위를 입력하세요",
   ];
   final bool isAdd;
   final int motionId;

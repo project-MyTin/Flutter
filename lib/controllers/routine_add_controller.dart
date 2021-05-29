@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mytin/dummies/motion_list_dummy.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
@@ -26,6 +29,7 @@ class RoutineAddController extends GetxController {
   List<MotionElement> routineMotionList = [];
   MotionElement newMotion;
   RoutineDetail routine;
+  var image;
 
   RoutineAddController.add() {
     isAdd = true;
@@ -191,6 +195,14 @@ class RoutineAddController extends GetxController {
 
   void deleteMotionToList(int index) {
     routineMotionList.removeAt(index);
+    update();
+  }
+
+  Future<void> uploadImage() async {
+    final pickedFile =
+    await ImagePicker().getImage(source: ImageSource.gallery);
+    image = File(pickedFile.path);
+
     update();
   }
 }

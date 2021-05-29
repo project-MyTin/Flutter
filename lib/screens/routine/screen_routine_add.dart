@@ -6,11 +6,12 @@ import 'package:mytin/widgets/routine/routine_add_body.dart';
 
 class RoutineAddPage extends StatelessWidget {
   final List<String> subTexts = [
-    "원하는 동작을 추가해주세요",
-    "원하는 동작을 선택해주세요",
-    "동작과 관련된 세부정보를 입력해주세요",
-    "루틴명과 준비물, 설명을 입력해주세요",
-    "루틴의 유형과 난이도, 쉬는 시간을 입력해주세요",
+    "원하는 동작을 추가하세요",
+    "원하는 동작을 선택하세요",
+    "동작과 관련된 세부정보를 입력하세요",
+    "루틴 이미지를 입력하세요",
+    "루틴명과 준비물, 설명을 입력하세요",
+    "루틴의 유형과 난이도, 쉬는 시간을 입력하세요",
   ];
 
   RoutineAddPage() {
@@ -34,7 +35,7 @@ class RoutineAddPage extends StatelessWidget {
           child: Column(
             children: [
               LinearProgressIndicator(
-                value: ctr.part / 5,
+                value: ctr.part / 6,
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
                 minHeight: Get.height * 0.008,
               ),
