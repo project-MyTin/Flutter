@@ -13,7 +13,7 @@ class AddPageAppBar extends StatelessWidget implements PreferredSizeWidget {
         super(key: key);
 
   @override
-  PreferredSizeWidget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
       backgroundColor: Colors.white,

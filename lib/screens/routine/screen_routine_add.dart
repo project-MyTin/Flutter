@@ -23,26 +23,24 @@ class RoutineAddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetBuilder<RoutineAddController>(
-        builder: (ctr) => Scaffold(
-          appBar: AddPageAppBar(
-              subTexts: subTexts,
-              ctr: Get.find<RoutineAddController>(),
-              isMotion: false),
-          body: SingleChildScrollView(
-            // SingleChildScrollView 로 키보드 열 때 overflow 제거!
-            child: Column(
-              children: [
-                LinearProgressIndicator(
-                  value: ctr.part / 5,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
-                  minHeight: Get.height * 0.008,
-                ),
-                SizedBox(height: Get.height * 0.03),
-                RoutineAddBody(),
-              ],
-            ),
+    return GetBuilder<RoutineAddController>(
+      builder: (ctr) => Scaffold(
+        appBar: AddPageAppBar(
+            subTexts: subTexts,
+            ctr: Get.find<RoutineAddController>(),
+            isMotion: false),
+        body: SingleChildScrollView(
+          // SingleChildScrollView 로 키보드 열 때 overflow 제거!
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: ctr.part / 5,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
+                minHeight: Get.height * 0.008,
+              ),
+              SizedBox(height: Get.height * 0.03),
+              RoutineAddBody(),
+            ],
           ),
         ),
       ),

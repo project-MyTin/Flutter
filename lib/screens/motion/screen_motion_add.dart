@@ -18,26 +18,24 @@ class MotionAddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(MotionAddController(isAdd: isAdd, motionId: motionId));
-    return SafeArea(
-      child: GetBuilder<MotionAddController>(
-        builder: (ctr) => Scaffold(
-          appBar: AddPageAppBar(
-              subTexts: subTexts,
-              ctr: Get.find<MotionAddController>(),
-              isMotion: true),
-          body: SingleChildScrollView(
-            // == 키보드 열때 overflow 제거
-            child: Column(
-              children: [
-                LinearProgressIndicator(
-                  value: ctr.part / 3,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
-                  minHeight: Get.height * 0.008,
-                ),
-                SizedBox(height: 0.03 * Get.height),
-                MotionAddBody(),
-              ],
-            ),
+    return GetBuilder<MotionAddController>(
+      builder: (ctr) => Scaffold(
+        appBar: AddPageAppBar(
+            subTexts: subTexts,
+            ctr: Get.find<MotionAddController>(),
+            isMotion: true),
+        body: SingleChildScrollView(
+          // == 키보드 열때 overflow 제거
+          child: Column(
+            children: [
+              LinearProgressIndicator(
+                value: ctr.part / 3,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.cyan),
+                minHeight: Get.height * 0.008,
+              ),
+              SizedBox(height: 0.03 * Get.height),
+              MotionAddBody(),
+            ],
           ),
         ),
       ),

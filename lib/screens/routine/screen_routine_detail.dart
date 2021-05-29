@@ -18,82 +18,76 @@ class RoutineDetailPage extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: buildRoutineDetailAppBar(),
-        body: Center(
-          child: SizedBox(
-            width: 0.8 * width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Image.network(routine.imageUrl, fit: BoxFit.cover),
-                  height: 0.2 * height,
-                  width: 1 * width,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0.01 * height),
+    return Scaffold(
+      appBar: buildRoutineDetailAppBar(),
+      body: Center(
+        child: SizedBox(
+          width: 0.8 * width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                child: Image.network(routine.imageUrl, fit: BoxFit.cover),
+                height: 0.2 * height,
+                width: 1 * width,
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0.01 * height),
+              ),
+              buildTextWithStyle(routine.publisher, Colors.grey, 0.02 * height),
+              buildTextWithStyle(routine.name, Colors.black, 0.04 * height),
+              buildTextWithStyle("루틴 난이도 : " + routine.difficulty, Colors.black,
+                  0.02 * height),
+              Padding(
+                padding:
+                    EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
+                child: Text(
+                  routine.description,
+                  style:
+                      TextStyle(color: Colors.grey, fontSize: 0.018 * height),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                buildTextWithStyle(
-                    routine.publisher, Colors.grey, 0.02 * height),
-                buildTextWithStyle(routine.name, Colors.black, 0.04 * height),
-                buildTextWithStyle("루틴 난이도 : " + routine.difficulty,
-                    Colors.black, 0.02 * height),
-                Padding(
-                  padding:
-                      EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
-                  child: Text(
-                    routine.description,
-                    style:
-                        TextStyle(color: Colors.grey, fontSize: 0.018 * height),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
+              ),
+              Row(
+                children: [
+                  Icon(Icons.access_time, size: 0.016 * height),
+                  buildTextWithStyle(routine.time.toString() + "분", Colors.grey,
+                      0.016 * height),
+                  SizedBox(width: 0.05 * width),
+                  buildTextWithStyle(
+                      "준비물 : " + routine.materials[0].toString() + " 등",
+                      Colors.grey,
+                      0.016 * height),
+                  // TODO : 준비물에서 넘치는 글자 해결해주기!
+                ],
+              ),
+              buildMotionList(height),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildTextWithStyle(
+                      "루틴 유형 : " + routine.type, Colors.black, 0.016 * height),
+                  Row(
+                    children: [
+                      buildTextWithStyle(
+                          (routine.authority == Authority.admin ? "공식" : "비공식"),
+                          Colors.blue,
+                          0.016 * height),
+                      buildTextWithStyle(" 루틴", Colors.grey, 0.016 * height)
+                    ],
                   ),
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.access_time, size: 0.016 * height),
-                    buildTextWithStyle(routine.time.toString() + "분",
-                        Colors.grey, 0.016 * height),
-                    SizedBox(width: 0.05 * width),
-                    buildTextWithStyle(
-                        "준비물 : " + routine.materials[0].toString() + " 등",
-                        Colors.grey,
-                        0.016 * height),
-                    // TODO : 준비물에서 넘치는 글자 해결해주기!
-                  ],
-                ),
-                buildMotionList(height),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    buildTextWithStyle("루틴 유형 : " + routine.type, Colors.black,
-                        0.016 * height),
-                    Row(
-                      children: [
-                        buildTextWithStyle(
-                            (routine.authority == Authority.admin
-                                ? "공식"
-                                : "비공식"),
-                            Colors.blue,
-                            0.016 * height),
-                        buildTextWithStyle(" 루틴", Colors.grey, 0.016 * height)
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
-        bottomNavigationBar: ButtonBottomAppBar(
-            isDialog: false,
-            isShow: true,
-            text: "시작하기",
-            clickFunc: () {
-              Get.to(() => RoutineRunPage(),
-                  transition: Transition.noTransition);
-            }),
       ),
+      bottomNavigationBar: ButtonBottomAppBar(
+          isDialog: false,
+          isShow: true,
+          text: "시작하기",
+          clickFunc: () {
+            Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
+          }),
     );
   }
 
