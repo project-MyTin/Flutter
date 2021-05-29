@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mytin/controllers/motion_list_controller.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
-import 'package:mytin/services/get_motion_detail.dart';
-import 'package:mytin/services/post_motion.dart';
-import 'package:mytin/services/put_motion.dart';
+import 'package:mytin/services/motion/get_motion_detail.dart';
+import 'package:mytin/services/motion/post_motion.dart';
+import '../services/motion/put_motion.dart';
 import 'package:mytin/utils/convert_image_url_to_file.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 

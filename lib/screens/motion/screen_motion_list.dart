@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_list_controller.dart';
-import 'package:mytin/services/get_motion_detail.dart';
+import 'package:mytin/services/motion/get_motion_detail.dart';
 import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 import 'package:mytin/widgets/motion/motion_grid_tile.dart';
 import 'package:mytin/widgets/title_page_header.dart';

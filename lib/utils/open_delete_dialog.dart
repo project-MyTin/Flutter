@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_list_controller.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
-import 'package:mytin/services/delete_motion.dart';
+import '../services/motion/delete_motion.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 void openDeleteDialog(String text, int id) {
