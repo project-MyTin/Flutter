@@ -27,8 +27,9 @@ class MotionSelectTile extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.teal,
-                        spreadRadius: ctr.selectIndex == index ? 2 : 0)
+                        color: Colors.teal
+                            .withOpacity(ctr.selectIndex == index ? 1 : 0),
+                        spreadRadius: 2)
                   ],
                   image: DecorationImage(
                     image: NetworkImage(motion.imageUrl),

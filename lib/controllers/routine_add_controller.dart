@@ -112,12 +112,12 @@ class RoutineAddController extends GetxController {
       "motions": [
         for (MotionElement motion in routineMotionList)
           {
-            "motion_id": 10, // fixme : 동작 id 넣을꺼냐 말꺼냐
+            "motion_id": motion.id,   // todo : id 값으로 불러온다고? (수정, 삭제 이상 발생)
             "motion_time": motion.time,
             "numOfMotion": motion.count,
           }
       ],
-      "img": "아...", // fixme : 루틴 이미지 넣는게 없었네...
+      "img": image,
     };
     final response = await postRoutine(requestMap);
     // Get.put(RoutineListController());
@@ -183,6 +183,7 @@ class RoutineAddController extends GetxController {
       "count": null,
       "imageUrl": motion.imageUrl,
       "time": null,
+      "id": motion.id,
     });
     selectIndex = -1;
   }
