@@ -88,47 +88,7 @@ class RoutineAddBody extends StatelessWidget {
     );
   }
 
-  Column buildThirdBody() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("루틴 대표 이미지", style: TextStyle(fontSize: 0.02 * Get.height)),
-        SizedBox(height: 0.03 * Get.height),
-        GetBuilder<RoutineAddController>(
-          builder: (controller) => GestureDetector(
-            child: (controller.image == null)
-                ? Container(
-              // 이미지 선택 전 뷰
-              alignment: Alignment.center,
-              child: Icon(Icons.add_rounded,
-                  size: 0.09 * Get.height,
-                  color: Colors.black.withOpacity(0.1)),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.black.withOpacity(0.1)),
-              ),
-              height: 0.8 * Get.width,
-              width: 0.8 * Get.width,
-            )
-                : Container(
-              // 이미지 선택 후 뷰
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: controller.image is String ? NetworkImage(controller.image) : FileImage(controller.image),
-                    fit: BoxFit.cover),
-              ),
-              height: 0.8 * Get.width,
-              width: 0.8 * Get.width,
-            ),
-            onTap: () => controller.uploadImage(),
-          ),
-        ),
-      ],
-    );
-  }
-
-  GetBuilder buildFourthBody() {
+  GetBuilder buildThirdBody() {
     return GetBuilder<RoutineAddController>(
       builder: (controller) => Column(
         children: [
@@ -149,12 +109,12 @@ class RoutineAddBody extends StatelessWidget {
               Text(
                 "동작 시간",
                 style:
-                    TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
+                TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
               Text(
                 "동작 횟수",
                 style:
-                    TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
+                TextStyle(fontSize: 0.02 * Get.height, color: Colors.black54),
               ),
             ],
           ),
@@ -193,6 +153,46 @@ class RoutineAddBody extends StatelessWidget {
           SizedBox(height: 0.05 * Get.height)
         ],
       ),
+    );
+  }
+
+  Column buildFourthBody() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("루틴 대표 이미지", style: TextStyle(fontSize: 0.02 * Get.height)),
+        SizedBox(height: 0.03 * Get.height),
+        GetBuilder<RoutineAddController>(
+          builder: (controller) => GestureDetector(
+            child: (controller.image == null)
+                ? Container(
+              // 이미지 선택 전 뷰
+              alignment: Alignment.center,
+              child: Icon(Icons.add_rounded,
+                  size: 0.09 * Get.height,
+                  color: Colors.black.withOpacity(0.1)),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black.withOpacity(0.1)),
+              ),
+              height: 0.8 * Get.width,
+              width: 0.8 * Get.width,
+            )
+                : Container(
+              // 이미지 선택 후 뷰
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: controller.image is String ? NetworkImage(controller.image) : FileImage(controller.image),
+                    fit: BoxFit.cover),
+              ),
+              height: 0.8 * Get.width,
+              width: 0.8 * Get.width,
+            ),
+            onTap: () => controller.uploadImage(),
+          ),
+        ),
+      ],
     );
   }
 
