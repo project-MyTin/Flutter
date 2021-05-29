@@ -8,6 +8,7 @@ import 'package:mytin/screens/screen_routine_and_motion.dart';
 import 'package:mytin/services/get_motion_detail.dart';
 import 'package:mytin/services/post_motion.dart';
 import 'package:mytin/services/put_motion.dart';
+import 'package:mytin/utils/convert_image_url_to_file.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 class MotionAddController extends GetxController {
@@ -43,7 +44,7 @@ class MotionAddController extends GetxController {
     this.motionDescription = motion.description;
     this.motionReferenceUrl = motion.referenceUrl;
     this.motionTime = motion.time;
-    this.image = motion.imageUrl;
+    this.image = await fileFromImageUrl(motion.imageUrl);
     update();
   }
 
