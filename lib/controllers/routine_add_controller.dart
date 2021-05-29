@@ -98,14 +98,20 @@ class RoutineAddController extends GetxController {
   Future<void> submit() async {
     final Map<String, dynamic> requestMap = {
       "name": routineName,
-      "time": routineTime,
+      "materials": routineMaterials,
       "description": routineDescription,
       "type": currentType,
-      "parts": "열쩡(루틴에는 파트가 없어요)",
       "difficulty": currentDifficulty,
-      "url": "열쯔엉(루틴에는 참고 링크가 없어요)",
-      "img": "아...",
-      // fixme : 루틴 이미지 넣는게 없었네...
+      "breakTime": breakTime,
+      "motions": [
+        for (MotionElement motion in routineMotionList)
+          {
+            "motion_id": 10, // fixme : 동작 id 넣을꺼냐 말꺼냐
+            "motion_time": motion.time,
+            "numOfMotion": motion.count,
+          }
+      ],
+      "img": "아...", // fixme : 루틴 이미지 넣는게 없었네...
     };
     final response = await postRoutine(requestMap);
     // Get.put(RoutineListController());
