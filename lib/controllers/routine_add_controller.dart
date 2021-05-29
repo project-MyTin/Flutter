@@ -22,7 +22,7 @@ class RoutineAddController extends GetxController {
   String routineName;
   String routineMaterials;
   String routineDescription;
-  int routineTime;
+  int routineTime = 0;
   int breakTime;
   int motionTime;
   int motionCount;
@@ -189,7 +189,7 @@ class RoutineAddController extends GetxController {
     newMotion.time = motionTime;
     newMotion.count = motionCount;
     routineMotionList.add(newMotion);
-    routineTime += motionTime;
+    routineTime += motionTime.toInt();
     motionTime = motionCount = null;
   }
 
