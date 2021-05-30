@@ -5,9 +5,7 @@ import 'package:mytin/models/routine_detail.dart';
 
 Future<RoutineDetail> loadRoutineDetail(int id) async {
   final String s3Url = "https://mytin-bucket.s3.ap-northeast-2.amazonaws.com/";
-  // final response = await get(Uri.parse("http://3.34.209.123/routine/detail/$id"));
-  final response = await get(Uri.parse("http://3.34.209.123/routine/detail/24"));
-  // fixme : 지대로 id 받아오세요
+  final response = await get(Uri.parse("http://3.34.209.123/routine/detail/$id"));
   final parsedRes = json.decode(response.body);
   final routine = parsedRes["data"]["detail"];
   int routineTime = 0;
@@ -15,8 +13,6 @@ Future<RoutineDetail> loadRoutineDetail(int id) async {
   for (var motion in routine["motions"]) {
     routineTime += motion["motion_time"] * motion["numOfMotion"];
   }
-
-  print(routine);
 
   return RoutineDetail.fromMap({
     "id": routine["id"],
@@ -31,7 +27,7 @@ Future<RoutineDetail> loadRoutineDetail(int id) async {
           "name": motion["motion_name"],
           "part": motion["motion_parts"][0],
           "count": motion["numOfMotion"],
-          "imageUrl": motion["motion_file"],
+          "imageUrl": s3Url + motion["motion_file"],
           "time": motion["motion_time"],
           // "id": motion["_id"] as int,
         }),

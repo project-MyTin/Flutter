@@ -28,7 +28,7 @@ class RoutineDetailPage extends StatelessWidget {
                     image: NetworkImage(routine.imageUrl), fit: BoxFit.cover)),
             alignment: Alignment.topCenter,
             child: Container(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withOpacity(0.3),
               child: Row(
                 children: [
                   IconButton(
@@ -93,19 +93,20 @@ class RoutineDetailPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: Get.height * 0.04),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(
-                        0, 0.005 * Get.height, 0, 0.005 * Get.height),
-                    color: Colors.grey.withOpacity(0.1),
-                    height: 0.31 * Get.height,
-                    child: ListView(
-                      padding: EdgeInsets.fromLTRB(Get.width * 0.1,
-                          Get.height * 0.01, Get.width * 0.1, 0),
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        for (int i = 0; i < routine.motions.length; i++)
-                          MotionListTile(i, routine.motions[i], Get.height, null)
-                      ],
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(
+                          0, 0.005 * Get.height, 0, 0.005 * Get.height),
+                      color: Colors.grey.withOpacity(0.1),
+                      child: ListView(
+                        padding: EdgeInsets.fromLTRB(Get.width * 0.1,
+                            Get.height * 0.01, Get.width * 0.1, 0),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          for (int i = 0; i < routine.motions.length; i++)
+                            MotionListTile(i, routine.motions[i], Get.height, null)
+                        ],
+                      ),
                     ),
                   ),
                 ],
