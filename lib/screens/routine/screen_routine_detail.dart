@@ -41,7 +41,7 @@ class RoutineDetailPage extends StatelessWidget {
                           arguments: routine.id)),
                   IconButton(
                       icon: Icon(Icons.delete, color: Colors.white),
-                      onPressed: () => openDeleteDialog("루틴", 0)),
+                      onPressed: () => openDeleteDialog("루틴", routine.id)),
                 ],
               ),
             ),

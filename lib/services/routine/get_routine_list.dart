@@ -11,7 +11,6 @@ Future<List<RoutineTile>> loadRoutineList() async {
 
   if (parsedRes["data"] == null) return [];
   final List routinesJson = parsedRes["data"]["result"];
-  print(routinesJson);
   List<RoutineTile> tileList = [];
 
   for (var routine in routinesJson) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/motion_list_controller.dart';
+import 'package:mytin/controllers/routine_list_controller.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
+import 'package:mytin/services/routine/delete_routine.dart';
 import '../services/motion/delete_motion.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
@@ -17,6 +19,10 @@ void openDeleteDialog(String text, int id) {
             final res = await deleteMotion(id);
             Get.put(MotionListController());
             Get.find<MotionListController>().loadMotions();
+          } else if (text == "루틴") {
+            final res = await deleteRoutine(id);
+            Get.put(RoutineListController());
+            Get.find<RoutineListController>().loadRoutines();
           }
           Get.offAll(() => RoutineAndMotionPage(index: text == "루틴" ? 0 : 1));
           showSnackBar("삭제 완료", "선택하신 $text이 정상적으로 삭제되었습니다.", "info");
