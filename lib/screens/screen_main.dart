@@ -13,7 +13,8 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(BottomPageController());
-    Get.put(MainPageController());
+    Get.put(MainPageController())
+      ..loadRoutines(); // MainPageController 왜 페이지 벗어나도 삭제가 안돼니 ㅠㅠ
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
