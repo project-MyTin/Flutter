@@ -10,6 +10,7 @@ import 'package:mytin/services/motion/get_motion_list.dart';
 import 'package:mytin/services/routine/get_routine_detail.dart';
 import 'package:mytin/services/routine/post_routine.dart';
 import 'package:mytin/services/routine/put_routine.dart';
+import 'package:mytin/utils/convert_image_url_to_file.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 class RoutineAddController extends GetxController {
@@ -51,6 +52,8 @@ class RoutineAddController extends GetxController {
     this.routineMaterials = routine.materials.toString();
     this.routineDescription = routine.description;
     this.breakTime = routine.breakTime;
+    this.image = await fileFromImageUrl(routine.imageUrl);
+    update();
   }
 
   void moveTo(int page) {
