@@ -31,25 +31,23 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
     Size screenSize = MediaQuery.of(context).size;
     double width = screenSize.width, height = screenSize.height;
 
-    return SafeArea(
-      child: GetBuilder<RoutineRunController>(
-        builder: (controller) => Scaffold(
-          appBar: buildRoutineRunAppBar(
-              controller.motionList[controller.index].name, height),
-          body: Stack(
-            children: [
-              Column(
-                children: <Widget>[
-                  buildRoutineRunBody(controller, width, height),
-                  SizedBox(height: 0.03 * height),
-                  buildMotionInformation(controller, width),
-                  Spacer(),
-                  buildRoutineRunBottomAppBar(controller, height, width),
-                ],
-              ),
-              if (controller.isBreakTime) BreakTimeBody(),
-            ],
-          ),
+    return GetBuilder<RoutineRunController>(
+      builder: (controller) => Scaffold(
+        appBar: buildRoutineRunAppBar(
+            controller.motionList[controller.index].name, height),
+        body: Stack(
+          children: [
+            Column(
+              children: <Widget>[
+                buildRoutineRunBody(controller, width, height),
+                SizedBox(height: 0.03 * height),
+                buildMotionInformation(controller, width),
+                Spacer(),
+                buildRoutineRunBottomAppBar(controller, height, width),
+              ],
+            ),
+            if (controller.isBreakTime) BreakTimeBody(),
+          ],
         ),
       ),
     );

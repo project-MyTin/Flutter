@@ -3,69 +3,72 @@
  */
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:get/get.dart';
 import 'package:mytin/models/motion_tile.dart';
+import 'package:mytin/services/motion/get_motion_detail.dart';
+import 'package:mytin/widgets/motion/motion_detail_dialog.dart';
 
 class MotionGridTile extends StatelessWidget {
   final MotionTile motion;
-  final Function clickFunc;
-  final funcArgument;
-  final int index;
-  final bool isClick;
 
-  MotionGridTile(this.index, this.motion, this.clickFunc, this.funcArgument, this.isClick) : super(key: ValueKey(index));
+  MotionGridTile(this.motion);
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width;
-
     return GestureDetector(
-      onTap: () => clickFunc(funcArgument),
+      onTap: () async {
+        final motion = await loadMotionDetail(this.motion.id);
+        Get.dialog(MotionDetailDialog(motion));
+      },
       child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(motion.name,
-                style: TextStyle(color: Colors.white, fontSize: 0.04 * width)),
-            Text(motion.part,
-                style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 0.03 * width)),
-            Expanded(child: Container()),
-            buildDifficultyBox(width),
-          ],
+        child: Container(
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Text(
+                      motion.name.length > 12
+                          ? motion.name.substring(0, 12) // 12자 이내
+                          : motion.name,
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 0.036 * Get.width)),
+                  Text(motion.part,
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(0.7),
+                          fontSize: 0.03 * Get.width)),
+                ],
+              ),
+              Spacer(),
+              Container(
+                child: Text(motion.difficulty,
+                    style: TextStyle(
+                        color: Colors.white, fontSize: 0.028 * Get.width)),
+                alignment: Alignment.center,
+                height: Get.width * 0.055,
+                padding: EdgeInsets.fromLTRB(Get.width * 0.02, Get.width * 0.01,
+                    Get.width * 0.02, Get.width * 0.01),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+              ),
+            ],
+          ),
+          padding: EdgeInsets.fromLTRB(Get.width * 0.02, Get.width * 0.018,
+              Get.width * 0.02, Get.width * 0.01),
+          height: Get.height * 0.057,
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.3),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+          ),
         ),
-        padding: EdgeInsets.all(0.02 * width),
+        alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.6),
-              blurRadius: isClick ? 3 : 0,
-              spreadRadius: isClick ? 4 : 0,
-              offset: Offset(0, 2),
-            ),
-          ],
-          image: DecorationImage(
-              image: NetworkImage(motion.imageUrl),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  isClick ? Colors.white.withOpacity(0.9) : Colors.black.withOpacity(0.4), BlendMode.darken)),
-        ),
-      ),
-    );
-  }
-
-  Container buildDifficultyBox(double width) {
-    return Container(
-      child: Text(motion.difficulty,
-          style: TextStyle(color: Colors.white, fontSize: 0.025 * width)),
-      alignment: Alignment.center,
-      height: 0.04 * width,
-      width: 0.07 * width,
-      decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
-        borderRadius: BorderRadius.all(Radius.circular(3)),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 3)],
+            color: Colors.black38,
+            image: DecorationImage(
+                image: NetworkImage(motion.imageUrl), fit: BoxFit.cover)),
       ),
     );
   }

@@ -1,8 +1,16 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
-import 'package:mytin/dummies/motion_list_dummy.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:mytin/controllers/routine_list_controller.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/screens/screen_routine_and_motion.dart';
+import 'package:mytin/services/motion/get_motion_list.dart';
+import 'package:mytin/services/routine/get_routine_detail.dart';
+import 'package:mytin/services/routine/post_routine.dart';
+import 'package:mytin/services/routine/put_routine.dart';
+import 'package:mytin/utils/convert_image_url_to_file.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 class RoutineAddController extends GetxController {
@@ -17,33 +25,35 @@ class RoutineAddController extends GetxController {
   String routineName;
   String routineMaterials;
   String routineDescription;
+  int routineTime = 0;
+  int routineId;
   int breakTime;
   int motionTime;
   int motionCount;
   List<MotionElement> routineMotionList = [];
   MotionElement newMotion;
   RoutineDetail routine;
+  var image;
 
-  RoutineAddController.add() {
-    isAdd = true;
+  RoutineAddController({bool isAdd, int routineId}) {
+    this.isAdd = isAdd;
+    this.routineId = routineId;
+    if (!isAdd) loadRoutine(routineId);
+    getMotionTileList();
     update();
   }
 
-  RoutineAddController.edit(int routineId) {
-    isAdd = false;
-
-    this.routine = currentRoutine;
-    // TODO motionId로 서버에 Get 요청 => routine 에 저장
-
+  Future<void> loadRoutine(int id) async {
+    routine = await loadRoutineDetail(id);
     this.routineMotionList = routine.motions;
     this.newMotion = routine.motions[0];
     this.currentType = routine.type;
     this.currentDifficulty = routine.difficulty;
     this.routineName = routine.name;
-    this.routineMaterials = routine.materials.toString();
+    this.routineMaterials = routine.materials[0];
     this.routineDescription = routine.description;
     this.breakTime = routine.breakTime;
-
+    this.image = await fileFromImageUrl(routine.imageUrl);
     update();
   }
 
@@ -52,7 +62,6 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
   void next() {
     switch (part) {
       case 1:
@@ -80,7 +89,6 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
   void back() {
     if (part == 1) {
       Get.back();
@@ -94,11 +102,31 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  @override
-  void submit() {
-    // TODO : 서버 http 통신 -> 이후 성공 다이얼로그 출력
-    update();
-    moveTo(1);
+  Future<void> submit() async {
+    final Map<String, dynamic> requestMap = {
+      "name": routineName,
+      "materials": routineMaterials,
+      "description": routineDescription,
+      "type": currentType,
+      "difficulty": currentDifficulty,
+      "breakTime": breakTime,
+      "motions": [
+        for (MotionElement motion in routineMotionList)
+          {
+            "motion_id": motion.id,
+            "motion_time": motion.time,
+            "numOfMotion": motion.count,
+          }
+      ],
+      "img": image,
+    };
+    final response = isAdd
+        ? await postRoutine(requestMap)
+        : putRoutine(routineId, requestMap);
+    Get.put(RoutineListController());
+    Get.find<RoutineListController>().loadRoutines();
+    Get.offAll(() => RoutineAndMotionPage(index: 0));
+    showSnackBar("생성 완료", "루틴이 성공적으로 추가되었습니다", "info");
   }
 
   void changeSequence(oldIndex, newIndex) {
@@ -140,9 +168,9 @@ class RoutineAddController extends GetxController {
     update();
   }
 
-  void getMotionTileList() {
-    // TODO 서버에서 동작 타일 리스트를 가져오기 (GET)
-    motionTileList = motionList;
+  Future<void> getMotionTileList() async {
+    motionTileList = await loadMotionList();
+    print(motionTileList);
   }
 
   void select(int index) {
@@ -158,6 +186,7 @@ class RoutineAddController extends GetxController {
       "count": null,
       "imageUrl": motion.imageUrl,
       "time": null,
+      "id": motion.id,
     });
     selectIndex = -1;
   }
@@ -166,12 +195,20 @@ class RoutineAddController extends GetxController {
     newMotion.time = motionTime;
     newMotion.count = motionCount;
     routineMotionList.add(newMotion);
-
+    routineTime += motionTime.toInt();
     motionTime = motionCount = null;
   }
 
   void deleteMotionToList(int index) {
     routineMotionList.removeAt(index);
+    update();
+  }
+
+  Future<void> uploadImage() async {
+    final pickedFile =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    image = File(pickedFile.path);
+
     update();
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_detail.dart';
 
 Future<MotionDetail> loadMotionDetail(int id) async {
@@ -14,9 +13,7 @@ Future<MotionDetail> loadMotionDetail(int id) async {
     "name": motion["name"],
     "part": motion["parts"][0],
     "difficulty": motion["difficulty"],
-    // "imageUrl": s3Url + motion["file"],
-    // fixme : image 403 오류 해결
-    "imageUrl": currentMotion.imageUrl,
+    "imageUrl": s3Url + motion["file"],
     "time": motion["time"],
     "referenceUrl": motion["url"],
     "type": motion["type"],

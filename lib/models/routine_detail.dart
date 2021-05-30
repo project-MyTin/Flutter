@@ -5,16 +5,18 @@ class MotionElement {
   String part; // 동작 부위
   int count; // 동작 횟수
   int time; // 동작 하나당 시간
+  int id; // 동작 id
   String imageUrl;  // 동작 이미지
 
-  MotionElement(this.name, this.part, this.count, this.time, this.imageUrl);
+  MotionElement(this.name, this.part, this.count, this.time, this.imageUrl, [this.id]);
 
   MotionElement.fromMap(Map<String, dynamic> map)
       : name = map['name'],
         part = map['part'],
         time = map['time'],
         count = map['count'],
-        imageUrl = map['imageUrl'];
+        imageUrl = map['imageUrl'],
+        id = map['id'];
 }
 
 class RoutineDetail {

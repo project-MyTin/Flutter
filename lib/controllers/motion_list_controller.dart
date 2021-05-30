@@ -1,19 +1,18 @@
 import 'package:get/get.dart';
 import 'package:mytin/models/motion_tile.dart';
-import 'package:mytin/services/get_motion_list.dart';
+import '../services/motion/get_motion_list.dart';
 
 class MotionListController extends GetxController {
   List<MotionTile> motionList = [];
 
   @override
   void onInit() {
-    _loadMotions();
+    loadMotions();
     super.onInit();
   }
 
-  Future<void> _loadMotions() async {
+  Future<void> loadMotions() async {
     motionList = await loadMotionList();
-    motionList.forEach((element) => print(element.name + element.imageUrl));
     update();
   }
 }

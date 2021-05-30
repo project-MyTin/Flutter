@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
-import 'package:mytin/dummies/motion_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 
 Future<List<MotionTile>> loadMotionList() async {
@@ -19,9 +18,7 @@ Future<List<MotionTile>> loadMotionList() async {
       "name": motionsJson[i]["name"],
       "part": motionsJson[i]["parts"][0],
       "difficulty": motionsJson[i]["difficulty"],
-      // "imageUrl": s3Url + motionsJson[i]["file"],
-      // fixme : image 403 오류 해결
-      "imageUrl": currentMotion.imageUrl,
+      "imageUrl": s3Url + motionsJson[i]["file"],
     }));
   }
   return tileList;

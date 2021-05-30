@@ -23,7 +23,8 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: 2, vsync: this, initialIndex: widget.index ?? 0);
+    _controller =
+        TabController(length: 2, vsync: this, initialIndex: widget.index ?? 0);
   }
 
   @override
@@ -37,18 +38,19 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
           unselectedLabelColor: Colors.black,
           labelStyle: TextStyle(fontSize: Get.height * 0.018),
           indicatorColor: Colors.lightBlue,
-          indicatorWeight: Get.height * 0.006,
+          indicatorWeight: Get.height * 0.004,
           tabs: [Tab(text: "루틴"), Tab(text: "동작")],
           controller: _controller,
-          onTap: (index) => print(index),
         ),
       ),
       body: TabBarView(
         children: [RoutineListPage(), MotionListPage()],
         controller: _controller,
       ),
-      floatingActionButton: AddFloatingButton(() => Get.to(
-          () => _controller.index == 0 ? RoutineAddPage() : MotionAddPage())),
+      floatingActionButton: AddFloatingButton(() => Get.to(() =>
+          _controller.index == 0
+              ? RoutineAddPage(isAdd: true)
+              : MotionAddPage(isAdd: true))),
       bottomNavigationBar: PageBottomNavigationBar(),
     );
   }

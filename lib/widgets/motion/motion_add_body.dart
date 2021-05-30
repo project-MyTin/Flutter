@@ -9,26 +9,23 @@ import 'package:mytin/widgets/text_input_box_with_text.dart';
 class MotionAddBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0.1 * width, 0.035 * height, 0.1 * width, 0),
+   return Padding(
+      padding: EdgeInsets.fromLTRB(0.1 * Get.width, 0.035 * Get.height, 0.1 * Get.width, 0),
       child: GetBuilder<MotionAddController>(
           builder: (controller) => [
-                buildFirstBody(height, width),
-                buildSecondBody(height),
-                buildThirdBody(height),
+                buildFirstBody(),
+                buildSecondBody(),
+                buildThirdBody(),
               ][controller.part - 1]),
     );
   }
 
-  Column buildFirstBody(double height, double width) {
+  Column buildFirstBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("동작 대표 이미지", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.03 * height),
+        Text("동작 대표 이미지", style: TextStyle(fontSize: 0.02 * Get.height)),
+        SizedBox(height: 0.03 * Get.height),
         GetBuilder<MotionAddController>(
           builder: (controller) => GestureDetector(
             child: (controller.image == null)
@@ -36,14 +33,14 @@ class MotionAddBody extends StatelessWidget {
                     // 이미지 선택 전 뷰
                     alignment: Alignment.center,
                     child: Icon(Icons.add_rounded,
-                        size: 0.09 * height,
+                        size: 0.09 * Get.height,
                         color: Colors.black.withOpacity(0.1)),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.black.withOpacity(0.1)),
                     ),
-                    height: 0.8 * width,
-                    width: 0.8 * width,
+                    height: 0.8 * Get.width,
+                    width: 0.8 * Get.width,
                   )
                 : Container(
                     // 이미지 선택 후 뷰
@@ -53,8 +50,8 @@ class MotionAddBody extends StatelessWidget {
                           image: controller.image is String ? NetworkImage(controller.image) : FileImage(controller.image),
                           fit: BoxFit.cover),
                     ),
-                    height: 0.8 * width,
-                    width: 0.8 * width,
+                    height: 0.8 * Get.width,
+                    width: 0.8 * Get.width,
                    ),
             onTap: () => controller.uploadImage(),
           ),
@@ -63,13 +60,13 @@ class MotionAddBody extends StatelessWidget {
     );
   }
 
-  Column buildSecondBody(double height) {
+  Column buildSecondBody() {
     MotionAddController controller = Get.find<MotionAddController>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("동작 명", style: TextStyle(fontSize: 0.02 * height)),
+        Text("동작 명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) 공중부양",
           text: controller.motionName ?? "",
@@ -78,7 +75,7 @@ class MotionAddBody extends StatelessWidget {
           line: 1,
           type: "name",
         ),
-        Text("동작 설명", style: TextStyle(fontSize: 0.02 * height)),
+        Text("동작 설명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) 허경영을 따라해보세요 ^^7",
           text: controller.motionDescription ?? "",
@@ -87,7 +84,7 @@ class MotionAddBody extends StatelessWidget {
           line: 4,
           type: "description",
         ),
-        Text("동작 참고 자료 URL", style: TextStyle(fontSize: 0.02 * height)),
+        Text("동작 참고 자료 URL", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
           hint: "ex) http://",
           text: controller.motionReferenceUrl ?? "",
@@ -111,14 +108,14 @@ class MotionAddBody extends StatelessWidget {
     );
   }
 
-  Column buildThirdBody(double height) {
+  Column buildThirdBody() {
     MotionAddController controller = Get.find<MotionAddController>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("동작 유형", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.01 * height),
+        Text("동작 유형", style: TextStyle(fontSize: 0.02 * Get.height)),
+        SizedBox(height: 0.01 * Get.height),
         Wrap(
           children: [
             for (String name in controller.type)
@@ -130,9 +127,9 @@ class MotionAddBody extends StatelessWidget {
             // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
           ],
         ),
-        SizedBox(height: 0.05 * height),
-        Text("동작 부위", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.01 * height),
+        SizedBox(height: 0.05 * Get.height),
+        Text("동작 부위", style: TextStyle(fontSize: 0.02 * Get.height)),
+        SizedBox(height: 0.01 * Get.height),
         Wrap(
           children: [
             for (String name in controller.motionPart)
@@ -144,9 +141,9 @@ class MotionAddBody extends StatelessWidget {
             // TODO : 기타 운동 유형 박스 + 사용자가 보조 텍스트를 입력 가능하게
           ],
         ),
-        SizedBox(height: 0.05 * height),
-        Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * height)),
-        SizedBox(height: 0.01 * height),
+        SizedBox(height: 0.05 * Get.height),
+        Text("루틴 난이도", style: TextStyle(fontSize: 0.02 * Get.height)),
+        SizedBox(height: 0.01 * Get.height),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
