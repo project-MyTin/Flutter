@@ -1,12 +1,12 @@
 /*
  루틴 조회하기 페이지(리스트뷰)에 들어가는 커스텀 타일 위젯
  */
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
+import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/models/routine_tile.dart';
 import 'package:mytin/screens/routine/screen_routine_detail.dart';
+import 'package:mytin/services/routine/get_routine_detail.dart';
 
 class RoutineListTile extends StatelessWidget {
   final RoutineTile routine;
@@ -16,10 +16,9 @@ class RoutineListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        // TODO 더미데이터(currentRoutine)가 아닌, 서버에서 받은 데이터로
-        Get.to(() => RoutineDetailPage(currentRoutine),
-            transition: Transition.noTransition);
+      onTap: () async {
+        final RoutineDetail routineDetail = await loadRoutineDetail(routine.id);
+        Get.to(() => RoutineDetailPage(routineDetail));
       },
       child: Container(
         child: Row(

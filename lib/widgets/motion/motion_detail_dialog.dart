@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/controllers/motion_add_controller.dart';
 import 'package:mytin/models/motion_detail.dart';
 import 'package:mytin/screens/motion/screen_motion_add.dart';
 import 'package:mytin/utils/open_delete_dialog.dart';

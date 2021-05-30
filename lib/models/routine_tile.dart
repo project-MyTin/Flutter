@@ -1,4 +1,4 @@
-enum Authority { admin, user }
+import 'package:mytin/models/routine_detail.dart';
 
 class RoutineTile {
   int id; // 루틴 아이디
