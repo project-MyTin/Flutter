@@ -112,7 +112,7 @@ class RoutineAddController extends GetxController {
       "motions": [
         for (MotionElement motion in routineMotionList)
           {
-            "motion_id": motion.id,   // todo : id 값으로 불러온다고? (수정, 삭제 이상 발생)
+            "motion_id": motion.id,
             "motion_time": motion.time,
             "numOfMotion": motion.count,
           }
