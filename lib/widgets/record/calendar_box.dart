@@ -13,11 +13,7 @@ class CalendarBox extends StatelessWidget {
 
     RecordController ctr = Get.find<RecordController>();
     DateUtil dateUtil = DateUtil();
-    int numOfColumns = {
-      DateMode.day: 7,
-      DateMode.week: 1,
-      DateMode.month: 4,
-    }[ctr.mode];
+    int numOfColumns = {"일": 7, "주": 1, "월": 4}[ctr.mode];
     int numOfDays =
         dateUtil.daysInMonth(ctr.currentViewMonth, ctr.currentViewYear);
     int beforeDays =
@@ -36,7 +32,7 @@ class CalendarBox extends StatelessWidget {
       child: GetBuilder<RecordController>(
         builder: (_) => Table(
           children: [
-            if (ctr.mode == DateMode.day)
+            if (ctr.mode == "일")
               TableRow(children: [
                 for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
               ]),
