@@ -58,50 +58,56 @@ class RoutineDetailPage extends StatelessWidget {
                   color: Colors.white,
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(30))),
-              padding: EdgeInsets.fromLTRB(
-                  Get.width * 0.1, Get.height * 0.03, Get.width * 0.1, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(routine.name,
-                          style: TextStyle(fontSize: Get.height * 0.03)),
-                      SizedBox(width: Get.width * 0.02),
-                      Text("made by " + routine.publisher,
-                          style:
-                              TextStyle(color: Colors.black.withOpacity(0.5))),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(Get.width * 0.08,
+                        Get.height * 0.03, Get.width * 0.08, 0),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(routine.name,
+                                style: TextStyle(fontSize: Get.height * 0.03)),
+                            SizedBox(width: Get.width * 0.02),
+                            Text("made by " + routine.publisher,
+                                style: TextStyle(
+                                    color: Colors.black.withOpacity(0.5))),
+                          ],
+                        ),
+                        SizedBox(height: Get.height * 0.014),
+                        Text(routine.description,
+                            style: TextStyle(
+                                color: Colors.black.withOpacity(0.3))),
+                        SizedBox(height: Get.height * 0.02),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            RoutineDataValueBox(
+                                "${routine.time}분", Icons.access_alarm),
+                            RoutineDataValueBox(
+                                routine.materials[0], Icons.local_mall),
+                            RoutineDataValueBox(routine.type, Icons.bookmark),
+                            RoutineDataValueBox(routine.difficulty, Icons.star),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: Get.height * 0.014),
-                  Text(routine.description,
-                      style: TextStyle(color: Colors.black.withOpacity(0.3))),
-                  SizedBox(height: Get.height * 0.02),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      RoutineDataValueBox(
-                          "${routine.time}분", Icons.access_alarm),
-                      RoutineDataValueBox(
-                          routine.materials[0], Icons.local_mall),
-                      RoutineDataValueBox(routine.type, Icons.bookmark),
-                      RoutineDataValueBox(routine.difficulty, Icons.star),
-                    ],
-                  ),
+                  SizedBox(height: Get.height * 0.04),
                   Container(
-                    margin:
-                        EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
-                    padding: EdgeInsets.all(0.005 * height),
-                    color: Colors.grey.withOpacity(0.2),
-                    height: 0.2 * height,
+                    padding: EdgeInsets.fromLTRB(
+                        0, 0.005 * height, 0, 0.005 * height),
+                    color: Colors.grey.withOpacity(0.1),
+                    height: 0.31 * height,
                     child: ListView(
                       padding: EdgeInsets.fromLTRB(Get.width * 0.1,
-                          Get.height * 0.03, Get.width * 0.1, 0),
+                          Get.height * 0.01, Get.width * 0.1, 0),
                       scrollDirection: Axis.vertical,
                       children: [
                         for (int i = 0; i < routine.motions.length; i++)
                           MotionListTile(i, routine.motions[i], height, null)
-                        // 위젯에서 반복문 쓰기!
                       ],
                     ),
                   ),
