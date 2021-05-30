@@ -17,7 +17,6 @@ class RoutineListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        routine.id = 25;
         final RoutineDetail routineDetail = await loadRoutineDetail(routine.id);
         Get.to(() => RoutineDetailPage(routineDetail));
       },

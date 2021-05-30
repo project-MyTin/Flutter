@@ -3,7 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/bottom_page_controller.dart';
-import 'package:mytin/dummies/routine_list_dummy.dart';
+import 'package:mytin/controllers/main_page_controller.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/routine/routine_list_tile.dart';
@@ -13,6 +13,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(BottomPageController());
+    Get.put(MainPageController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -21,12 +22,13 @@ class MainPage extends StatelessWidget {
               buildMainPageHeader(Get.height, Get.width),
               buildWaveStack(Get.height, Get.width),
               Padding(
-                padding: EdgeInsets.fromLTRB(
-                    0.05 * Get.width, 0.04 * Get.height, 0.06 * Get.width, 0.015 * Get.height),
+                padding: EdgeInsets.fromLTRB(0.05 * Get.width,
+                    0.04 * Get.height, 0.06 * Get.width, 0.015 * Get.height),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("새로운 루틴", style: TextStyle(fontSize: 0.023 * Get.height)),
+                    Text("새로운 루틴",
+                        style: TextStyle(fontSize: 0.023 * Get.height)),
                     GestureDetector(
                       child: Text("more +",
                           style: TextStyle(
@@ -38,8 +40,14 @@ class MainPage extends StatelessWidget {
                   ],
                 ),
               ),
-              for (int i = 0; i < routineList.length; i++)
-                RoutineListTile(routineList[i]),
+              GetBuilder<MainPageController>(
+                builder: (ctr) => Column(
+                  children: [
+                    for (var routine in ctr.routineList)
+                      RoutineListTile(routine),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
