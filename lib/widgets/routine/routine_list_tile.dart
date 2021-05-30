@@ -15,9 +15,6 @@ class RoutineListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width;
-
     return GestureDetector(
       onTap: () {
         // TODO 더미데이터(currentRoutine)가 아닌, 서버에서 받은 데이터로
@@ -27,34 +24,39 @@ class RoutineListTile extends StatelessWidget {
       child: Container(
         child: Row(
           children: [
-            buildImageBox(width),
+            buildImageBox(Get.width),
+            SizedBox(width: Get.width * 0.005),
             Container(
-              width: 0.65 * width,
-              padding: EdgeInsets.fromLTRB(0.02 * width, 0.02 * width, 0, 0),
+              width: 0.6 * Get.width,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(routine.name,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 0.04 * width)),
-                  Text(
-                    routine.description,
-                    style: TextStyle(fontSize: 0.028 * width),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 0.044 * Get.width)),
+                  SizedBox(height: Get.height * 0.002),
+                  SizedBox(
+                    width: Get.width * 0.57,
+                    child: Text(
+                      routine.description,
+                      style: TextStyle(fontSize: 0.028 * Get.width),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  SizedBox(height: 0.025 * width),
+                  SizedBox(height: 0.04 * Get.width),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       buildInfoColumn(
-                          "소요시간", routine.time.toString() + "분", width),
-                      buildInfoColumn("난이도", routine.difficulty, width),
+                          "소요시간", routine.time.toString() + "분", Get.width),
+                      buildInfoColumn("난이도", routine.difficulty, Get.width),
                       buildInfoColumn(
                           "권한",
                           (routine.authority == Authority.admin) ? "공식" : "비공식",
-                          width),
-                      buildInfoColumn("유형", routine.type, width),
+                          Get.width),
+                      buildInfoColumn("유형", routine.type, Get.width),
                     ],
                   ),
                 ],
@@ -62,10 +64,11 @@ class RoutineListTile extends StatelessWidget {
             ),
           ],
         ),
-        margin: EdgeInsets.only(top: Get.height * 0.007),
+        margin: EdgeInsets.fromLTRB(
+            Get.height * 0.02, Get.height * 0.008, Get.height * 0.02, 0),
         decoration: BoxDecoration(
-          color: Colors.white,
-        ),
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20))),
       ),
     );
   }
@@ -74,11 +77,12 @@ class RoutineListTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        // borderRadius: BorderRadius.horizontal(left: Radius.circular(15)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
         image: DecorationImage(
             image: NetworkImage(routine.imageUrl), fit: BoxFit.cover),
       ),
-      height: 0.3 * width,
+      margin: EdgeInsets.all(0.022 * width),
+      height: 0.26 * width,
       width: 0.26 * width,
     );
   }
@@ -86,8 +90,7 @@ class RoutineListTile extends StatelessWidget {
   Column buildInfoColumn(String key, String value, double width) {
     return Column(
       children: [
-        Text(key,
-            style: TextStyle(fontSize: 0.024 * width, color: Colors.grey)),
+        Text(key, style: TextStyle(fontSize: 0.022 * width, color: Colors.grey)),
         Text(value, style: TextStyle(color: Colors.grey)),
       ],
     );
