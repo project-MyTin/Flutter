@@ -12,29 +12,26 @@ import 'package:mytin/widgets/wave_wrapper.dart';
 class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
     Get.put(BottomPageController());
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
-              buildMainPageHeader(height, width),
-              buildWaveStack(height, width),
+              buildMainPageHeader(Get.height, Get.width),
+              buildWaveStack(Get.height, Get.width),
               Padding(
                 padding: EdgeInsets.fromLTRB(
-                    0.05 * width, 0.04 * height, 0.06 * width, 0.015 * height),
+                    0.05 * Get.width, 0.04 * Get.height, 0.06 * Get.width, 0.015 * Get.height),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("새로운 루틴", style: TextStyle(fontSize: 0.023 * height)),
+                    Text("새로운 루틴", style: TextStyle(fontSize: 0.023 * Get.height)),
                     GestureDetector(
                       child: Text("more +",
                           style: TextStyle(
                               color: Colors.blueGrey,
-                              fontSize: 0.021 * height,
+                              fontSize: 0.021 * Get.height,
                               fontWeight: FontWeight.bold)),
                       onTap: () => Get.to(RoutineAndMotionPage()),
                     )

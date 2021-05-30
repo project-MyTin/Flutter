@@ -27,43 +27,47 @@ class RoutineListTile extends StatelessWidget {
             buildImageBox(Get.width),
             SizedBox(width: Get.width * 0.005),
             Container(
-              width: 0.6 * Get.width,
+              padding: EdgeInsets.only(
+                  top: Get.height * 0.005, left: Get.width * 0.02),
+              width: 0.64 * Get.width,
+              height: 0.12 * Get.height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(routine.name,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 0.044 * Get.width)),
-                  SizedBox(height: Get.height * 0.002),
+                  Row(
+                    children: [
+                      Text(routine.name,
+                          style: TextStyle(fontSize: 0.02 * Get.height)),
+                      Spacer(),
+                      Icon(Icons.star,
+                          color: Colors.yellow, size: Get.width * 0.04),
+                      Text(routine.difficulty),
+                      SizedBox(width: Get.width * 0.03),
+                      Text(
+                        routine.type,
+                        style: TextStyle(
+                            fontSize: 0.016 * Get.height,
+                            color: Colors.grey.withOpacity(0.6)),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: Get.height * 0.004),
                   SizedBox(
                     width: Get.width * 0.57,
                     child: Text(
                       routine.description,
-                      style: TextStyle(fontSize: 0.028 * Get.width),
+                      style: TextStyle(
+                          fontSize: 0.016 * Get.height, color: Colors.grey),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  SizedBox(height: 0.04 * Get.width),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      buildInfoColumn(
-                          "소요시간", routine.time.toString() + "분", Get.width),
-                      buildInfoColumn("난이도", routine.difficulty, Get.width),
-                      buildInfoColumn(
-                          "권한",
-                          (routine.authority == Authority.admin) ? "공식" : "비공식",
-                          Get.width),
-                      buildInfoColumn("유형", routine.type, Get.width),
-                    ],
                   ),
                 ],
               ),
             ),
           ],
         ),
+        padding: EdgeInsets.all(0.022 * Get.width),
         margin: EdgeInsets.fromLTRB(
             Get.height * 0.02, Get.height * 0.008, Get.height * 0.02, 0),
         decoration: BoxDecoration(
@@ -77,22 +81,16 @@ class RoutineListTile extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(15)),
         image: DecorationImage(
-            image: NetworkImage(routine.imageUrl), fit: BoxFit.cover),
+            image: NetworkImage(routine.imageUrl !=
+                    "https://mytin-bucket.s3.ap-northeast-2.amazonaws.com/test_image_path"
+                ? routine.imageUrl
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIb3xwXMfx9yqNX1blthyTmMJgPZT-gk1ptSnQH2mLESyhz5tmdihQJqi2kDsgp8cfQQM&usqp=CAU"),
+            fit: BoxFit.cover),
       ),
-      margin: EdgeInsets.all(0.022 * width),
-      height: 0.26 * width,
-      width: 0.26 * width,
-    );
-  }
-
-  Column buildInfoColumn(String key, String value, double width) {
-    return Column(
-      children: [
-        Text(key, style: TextStyle(fontSize: 0.022 * width, color: Colors.grey)),
-        Text(value, style: TextStyle(color: Colors.grey)),
-      ],
+      height: 0.22 * width,
+      width: 0.22 * width,
     );
   }
 }
