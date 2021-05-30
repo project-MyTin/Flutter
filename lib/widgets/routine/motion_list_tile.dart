@@ -50,8 +50,8 @@ class MotionListTile extends StatelessWidget {
       padding: EdgeInsets.all(0.01 * height),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(color: Colors.grey.withOpacity(0.2)),
-        borderRadius: BorderRadius.all(Radius.circular(15))
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        boxShadow: [BoxShadow(spreadRadius: 0.5, offset: Offset(0, 2), color: Colors.grey.withOpacity(0.5))],
       ),
     );
   }
