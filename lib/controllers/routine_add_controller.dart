@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mytin/controllers/routine_list_controller.dart';
 import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
@@ -120,8 +121,8 @@ class RoutineAddController extends GetxController {
       "img": image,
     };
     final response = await postRoutine(requestMap);
-    // Get.put(RoutineListController());
-    // Get.find<RoutineListController>().loadRoutines();
+    Get.put(RoutineListController());
+    Get.find<RoutineListController>().loadRoutines();
     Get.offAll(() => RoutineAndMotionPage(index: 0));
     showSnackBar("생성 완료", "루틴이 성공적으로 추가되었습니다", "info");
   }
