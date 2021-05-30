@@ -37,7 +37,9 @@ class RoutineDetailPage extends StatelessWidget {
                   Spacer(),
                   IconButton(
                       icon: Icon(Icons.mode_edit, color: Colors.white),
-                      onPressed: () => Get.to(() => RoutineAddPage(),
+                      onPressed: () => Get.to(
+                          () => RoutineAddPage(
+                              isAdd: false, routineId: routine.id),
                           arguments: routine.id)),
                   IconButton(
                       icon: Icon(Icons.delete, color: Colors.white),
@@ -104,7 +106,8 @@ class RoutineDetailPage extends StatelessWidget {
                         scrollDirection: Axis.vertical,
                         children: [
                           for (int i = 0; i < routine.motions.length; i++)
-                            MotionListTile(i, routine.motions[i], Get.height, null)
+                            MotionListTile(
+                                i, routine.motions[i], Get.height, null)
                         ],
                       ),
                     ),

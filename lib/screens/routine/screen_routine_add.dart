@@ -13,17 +13,14 @@ class RoutineAddPage extends StatelessWidget {
     "루틴명과 준비물, 설명을 입력하세요",
     "루틴의 유형과 난이도, 쉬는 시간을 입력하세요",
   ];
+  final bool isAdd;
+  final int routineId;
 
-  RoutineAddPage() {
-    if (Get.arguments == null) {
-      Get.put(RoutineAddController.add());
-    } else {
-      Get.put(RoutineAddController.edit(Get.arguments));
-    }
-  }
+  RoutineAddPage({this.isAdd, this.routineId});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(RoutineAddController(isAdd: isAdd, routineId: routineId));
     return GetBuilder<RoutineAddController>(
       builder: (ctr) => Scaffold(
         appBar: AddPageAppBar(

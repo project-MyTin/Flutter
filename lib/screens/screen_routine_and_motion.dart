@@ -49,7 +49,7 @@ class _RoutineAndMotionPageState extends State<RoutineAndMotionPage>
       ),
       floatingActionButton: AddFloatingButton(() => Get.to(() =>
           _controller.index == 0
-              ? RoutineAddPage()
+              ? RoutineAddPage(isAdd: true)
               : MotionAddPage(isAdd: true))),
       bottomNavigationBar: PageBottomNavigationBar(),
     );

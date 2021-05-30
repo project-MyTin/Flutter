@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mytin/controllers/routine_list_controller.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:mytin/models/motion_tile.dart';
 import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/screens/screen_routine_and_motion.dart';
 import 'package:mytin/services/motion/get_motion_list.dart';
+import 'package:mytin/services/routine/get_routine_detail.dart';
 import 'package:mytin/services/routine/post_routine.dart';
+import 'package:mytin/services/routine/put_routine.dart';
 import 'package:mytin/utils/show_snack_bar.dart';
 
 class RoutineAddController extends GetxController {
@@ -24,6 +25,7 @@ class RoutineAddController extends GetxController {
   String routineMaterials;
   String routineDescription;
   int routineTime = 0;
+  int routineId;
   int breakTime;
   int motionTime;
   int motionCount;
@@ -32,19 +34,15 @@ class RoutineAddController extends GetxController {
   RoutineDetail routine;
   var image;
 
-  RoutineAddController.add() {
-    isAdd = true;
-    getMotionTileList();
+  RoutineAddController({bool isAdd, int routineId}) {
+    this.isAdd = isAdd;
+    this.routineId = routineId;
+    if (!isAdd) loadRoutine(routineId);
     update();
   }
 
-  RoutineAddController.edit(int routineId) {
-    isAdd = false;
-    getMotionTileList();
-
-    this.routine = currentRoutine;
-    // TODO motionId로 서버에 Get 요청 => routine 에 저장
-
+  Future<void> loadRoutine(int id) async {
+    routine = await loadRoutineDetail(id);
     this.routineMotionList = routine.motions;
     this.newMotion = routine.motions[0];
     this.currentType = routine.type;
@@ -53,8 +51,6 @@ class RoutineAddController extends GetxController {
     this.routineMaterials = routine.materials.toString();
     this.routineDescription = routine.description;
     this.breakTime = routine.breakTime;
-
-    update();
   }
 
   void moveTo(int page) {
@@ -120,7 +116,9 @@ class RoutineAddController extends GetxController {
       ],
       "img": image,
     };
-    final response = await postRoutine(requestMap);
+    final response = isAdd
+        ? await postRoutine(requestMap)
+        : putRoutine(routineId, requestMap);
     Get.put(RoutineListController());
     Get.find<RoutineListController>().loadRoutines();
     Get.offAll(() => RoutineAndMotionPage(index: 0));
@@ -204,7 +202,7 @@ class RoutineAddController extends GetxController {
 
   Future<void> uploadImage() async {
     final pickedFile =
-    await ImagePicker().getImage(source: ImageSource.gallery);
+        await ImagePicker().getImage(source: ImageSource.gallery);
     image = File(pickedFile.path);
 
     update();
