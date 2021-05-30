@@ -39,6 +39,7 @@ class RoutineAddController extends GetxController {
     this.isAdd = isAdd;
     this.routineId = routineId;
     if (!isAdd) loadRoutine(routineId);
+    getMotionTileList();
     update();
   }
 
@@ -49,7 +50,7 @@ class RoutineAddController extends GetxController {
     this.currentType = routine.type;
     this.currentDifficulty = routine.difficulty;
     this.routineName = routine.name;
-    this.routineMaterials = routine.materials.toString();
+    this.routineMaterials = routine.materials[0];
     this.routineDescription = routine.description;
     this.breakTime = routine.breakTime;
     this.image = await fileFromImageUrl(routine.imageUrl);
