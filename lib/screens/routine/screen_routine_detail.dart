@@ -104,7 +104,7 @@ class RoutineDetailPage extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       children: [
                         for (int i = 0; i < routine.motions.length; i++)
-                          MotionListTile(i, routine.motions[i], height, null)
+                          MotionListTile(i, routine.motions[i], Get.height, null)
                       ],
                     ),
                   ),
