@@ -3,7 +3,6 @@
  */
 import 'package:flutter/material.dart';
 import 'package:mytin/models/routine_detail.dart';
-import 'package:mytin/widgets/image_circular.dart';
 
 class MotionListTile extends StatelessWidget {
   MotionListTile(this.index, this.motion, this.height, this.deleteFunc)
@@ -20,7 +19,14 @@ class MotionListTile extends StatelessWidget {
       key: ValueKey(index),
       child: Row(
         children: [
-          ImageCircular(url: motion.imageUrl, diameter: 0.08 * height),
+          Container(
+            height: height * 0.08,
+            width: height * 0.08,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+                image: DecorationImage(
+                    image: NetworkImage(motion.imageUrl), fit: BoxFit.cover)),
+          ),
           SizedBox(width: 0.012 * height),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,12 +52,17 @@ class MotionListTile extends StatelessWidget {
             ),
         ],
       ),
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0.005 * height),
+      margin: EdgeInsets.only(bottom: height * 0.01),
       padding: EdgeInsets.all(0.01 * height),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(15)),
-        boxShadow: [BoxShadow(spreadRadius: 0.5, offset: Offset(0, 2), color: Colors.grey.withOpacity(0.5))],
+        boxShadow: [
+          BoxShadow(
+              spreadRadius: 0.5,
+              offset: Offset(0, 2),
+              color: Colors.grey.withOpacity(0.5))
+        ],
       ),
     );
   }
