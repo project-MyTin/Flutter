@@ -7,6 +7,7 @@ import 'package:mytin/screens/routine/screen_routine_run.dart';
 import 'package:mytin/utils/open_delete_dialog.dart';
 import 'package:mytin/widgets/button_bottom_app_bar.dart';
 import 'package:mytin/widgets/routine/motion_list_tile.dart';
+import 'package:mytin/widgets/routine/routine_data_value_box.dart';
 
 class RoutineDetailPage extends StatelessWidget {
   final RoutineDetail routine;
@@ -19,119 +20,103 @@ class RoutineDetailPage extends StatelessWidget {
     double width = screenSize.width, height = screenSize.height;
 
     return Scaffold(
-      appBar: buildRoutineDetailAppBar(),
-      body: Center(
-        child: SizedBox(
-          width: 0.8 * width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: Image.network(routine.imageUrl, fit: BoxFit.cover),
-                height: 0.2 * height,
-                width: 1 * width,
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0.01 * height),
-              ),
-              buildTextWithStyle(routine.publisher, Colors.grey, 0.02 * height),
-              buildTextWithStyle(routine.name, Colors.black, 0.04 * height),
-              buildTextWithStyle("루틴 난이도 : " + routine.difficulty, Colors.black,
-                  0.02 * height),
-              Padding(
-                padding:
-                    EdgeInsets.fromLTRB(0, 0.02 * height, 0, 0.04 * height),
-                child: Text(
-                  routine.description,
-                  style:
-                      TextStyle(color: Colors.grey, fontSize: 0.018 * height),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              Row(
+      body: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: Get.height * 0.028),
+            height: Get.height * 0.31,
+            width: Get.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(routine.imageUrl), fit: BoxFit.cover)),
+            alignment: Alignment.topCenter,
+            child: Container(
+              color: Colors.black.withOpacity(0.1),
+              child: Row(
                 children: [
-                  Icon(Icons.access_time, size: 0.016 * height),
-                  buildTextWithStyle(routine.time.toString() + "분", Colors.grey,
-                      0.016 * height),
-                  SizedBox(width: 0.05 * width),
-                  buildTextWithStyle(
-                      "준비물 : " + routine.materials[0].toString() + " 등",
-                      Colors.grey,
-                      0.016 * height),
-                  // TODO : 준비물에서 넘치는 글자 해결해주기!
+                  IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () => Get.back()),
+                  Spacer(),
+                  IconButton(
+                      icon: Icon(Icons.mode_edit, color: Colors.white),
+                      onPressed: () => Get.to(() => RoutineAddPage(),
+                          arguments: routine.id)),
+                  IconButton(
+                      icon: Icon(Icons.delete, color: Colors.white),
+                      onPressed: () => openDeleteDialog("루틴", 0)),
                 ],
               ),
-              buildMotionList(height),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: Get.height * 0.62,
+              width: Get.width,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(30))),
+              padding: EdgeInsets.fromLTRB(
+                  Get.width * 0.1, Get.height * 0.03, Get.width * 0.1, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildTextWithStyle(
-                      "루틴 유형 : " + routine.type, Colors.black, 0.016 * height),
                   Row(
                     children: [
-                      buildTextWithStyle(
-                          (routine.authority == Authority.admin ? "공식" : "비공식"),
-                          Colors.blue,
-                          0.016 * height),
-                      buildTextWithStyle(" 루틴", Colors.grey, 0.016 * height)
+                      Text(routine.name,
+                          style: TextStyle(fontSize: Get.height * 0.03)),
+                      SizedBox(width: Get.width * 0.02),
+                      Text("made by " + routine.publisher,
+                          style:
+                              TextStyle(color: Colors.black.withOpacity(0.5))),
                     ],
+                  ),
+                  SizedBox(height: Get.height * 0.014),
+                  Text(routine.description,
+                      style: TextStyle(color: Colors.black.withOpacity(0.3))),
+                  SizedBox(height: Get.height * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      RoutineDataValueBox(
+                          "${routine.time}분", Icons.access_alarm),
+                      RoutineDataValueBox(
+                          routine.materials[0], Icons.local_mall),
+                      RoutineDataValueBox(routine.type, Icons.bookmark),
+                      RoutineDataValueBox(routine.difficulty, Icons.star),
+                    ],
+                  ),
+                  Container(
+                    margin:
+                        EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
+                    padding: EdgeInsets.all(0.005 * height),
+                    color: Colors.grey.withOpacity(0.2),
+                    height: 0.2 * height,
+                    child: ListView(
+                      padding: EdgeInsets.fromLTRB(Get.width * 0.1,
+                          Get.height * 0.03, Get.width * 0.1, 0),
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        for (int i = 0; i < routine.motions.length; i++)
+                          MotionListTile(i, routine.motions[i], height, null)
+                        // 위젯에서 반복문 쓰기!
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-      bottomNavigationBar: ButtonBottomAppBar(
-          isDialog: false,
-          isShow: true,
-          text: "시작하기",
-          clickFunc: () {
-            Get.to(() => RoutineRunPage(), transition: Transition.noTransition);
-          }),
-    );
-  }
-
-  Container buildMotionList(double height) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 0.01 * height, 0, 0.01 * height),
-      padding: EdgeInsets.all(0.005 * height),
-      decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 200, 200, 200)),
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      height: 0.2 * height,
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: [
-          for (int i = 0; i < routine.motions.length; i++)
-            MotionListTile(i, routine.motions[i], height, null) // 위젯에서 반복문 쓰기!
         ],
       ),
-    );
-  }
-
-  AppBar buildRoutineDetailAppBar() {
-    return AppBar(
-      title: Text(routine.name, style: TextStyle(color: Colors.white)),
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
-        onPressed: () => Get.back(),
+      bottomNavigationBar: ButtonBottomAppBar(
+        isDialog: false,
+        isShow: true,
+        text: "시작하기",
+        clickFunc: () => Get.to(() => RoutineRunPage()),
       ),
-      actions: [
-        IconButton(
-            icon: Icon(Icons.delete, color: Colors.white),
-            onPressed: () => openDeleteDialog("루틴", 0)),
-        IconButton(
-            icon: Icon(Icons.edit, color: Colors.white),
-            onPressed: () =>
-                Get.to(() => RoutineAddPage(), arguments: routine.id))
-      ],
-    );
-  }
-
-  Text buildTextWithStyle(String text, Color textColor, double size) {
-    return Text(
-      text,
-      style: TextStyle(color: textColor, fontSize: size),
     );
   }
 }

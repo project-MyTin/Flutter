@@ -1,3 +1,4 @@
+import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/models/routine_tile.dart';
 
 List<RoutineTile> routineList = [

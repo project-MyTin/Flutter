@@ -7,7 +7,7 @@ RoutineDetail currentRoutine = RoutineDetail.fromMap({
       "무엇보다 중요한 것은, 스프린트가 많이 밀렸다는 것입니다. 하지만 걱정하지 마십쇼! "
       "악과 깡으로 우리는 결국 프로젝트를 완수할 것입니다! (with 각성제, 커피)",
   "publisher": "운영자",
-  "materials": ["컴퓨터(또는 노트북)", "인터넷(구글링이 가능한)", "커피"],
+  "materials": ["컴퓨터", "인터넷", "커피"],
   "motions": [
     MotionElement.fromMap({
       "name": "삽질하기",
@@ -33,7 +33,7 @@ RoutineDetail currentRoutine = RoutineDetail.fromMap({
   ],
   "time": 108,
   "authority": Authority.admin,
-  "difficulty": "상",
+  "difficulty": "고급",
   "type": "홈트레이닝",
   "breakTime": 10,
   "imageUrl": "https://miro.medium.com/max/773/0*7pYNAASjwKSNuhQM.",
