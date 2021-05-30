@@ -18,7 +18,7 @@ class ButtonBottomAppBar extends StatelessWidget {
     return Container(
       width: isShow ? width : 0,
       height: !isShow ? 0 : (isDialog ? 0.055 * height : 0.07 * height),
-      color: Colors.grey,
+      color: Colors.lightBlueAccent,
       child: TextButton(
         child: Text(text,
             style: TextStyle(color: Colors.white, fontSize: 0.02 * height)),
