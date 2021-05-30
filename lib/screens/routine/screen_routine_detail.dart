@@ -16,9 +16,6 @@ class RoutineDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
     return Scaffold(
       body: Stack(
         children: [
@@ -98,9 +95,9 @@ class RoutineDetailPage extends StatelessWidget {
                   SizedBox(height: Get.height * 0.04),
                   Container(
                     padding: EdgeInsets.fromLTRB(
-                        0, 0.005 * height, 0, 0.005 * height),
+                        0, 0.005 * Get.height, 0, 0.005 * Get.height),
                     color: Colors.grey.withOpacity(0.1),
-                    height: 0.31 * height,
+                    height: 0.31 * Get.height,
                     child: ListView(
                       padding: EdgeInsets.fromLTRB(Get.width * 0.1,
                           Get.height * 0.01, Get.width * 0.1, 0),
