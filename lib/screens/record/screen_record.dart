@@ -16,29 +16,34 @@ class RecordPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: Get.height * 0.03),
-            // SafeArea 는 상단 표시줄을 없에기에, 사용하지 않는대신 맨 위에 여백을 줌
+            SizedBox(height: Get.height * 0.04),
             GetBuilder<RecordController>(
               builder: (ctr) => Row(
                 children: [
-                  IconButton(
-                      icon: Icon(Icons.arrow_back_ios_outlined),
-                      onPressed: () {}),
-                  Text("5월"),
-                  Text("2021년"),
-                  IconButton(
-                      icon: Icon(Icons.arrow_forward_ios_outlined),
-                      onPressed: () {}),
+                  SizedBox(width: Get.width * 0.06),
+                  Text("${ctr.currentViewMonth}월",
+                      style: TextStyle(fontSize: Get.height * 0.036)),
+                  SizedBox(width: Get.width * 0.02),
+                  Text("${ctr.currentViewYear}년",
+                      style: TextStyle(fontSize: Get.height * 0.024)),
                 ],
               ),
             ),
+            SizedBox(height: Get.height * 0.01),
             SizedBox(
-              height: Get.height * 0.41,
-              child: PageView.builder(
-                itemBuilder: (_, int index) {
-                  return CalendarBox();
-                },
-                controller: PageController(initialPage: 10),
+              height: Get.height * 0.4,
+              child: PageView(
+                children: [
+                  for (int number = 202105;
+                      number < 203005;
+                      number = (number % 100 > 11)
+                          ? (number ~/ 100 +1) * 100 +2
+                          : number + 1)
+                    CalendarBox(number, MODE.DAY)
+                ],
+                onPageChanged: (int index) =>
+                    Get.find<RecordController>().changeMonth(index),
+                controller: PageController(initialPage: 0),
               ),
             ),
             MainDataRecord({
@@ -47,14 +52,13 @@ class RecordPage extends StatelessWidget {
               "countRoutine": recordData.countRoutine,
               "countMotion": recordData.countMotion,
             }),
-            SizedBox(height: Get.height * 0.02),
+            SizedBox(height: Get.height * 0.03),
             GetBuilder<RecordController>(
-              builder: (controller) => ExpansionPanelList(
+              builder: (ctr) => ExpansionPanelList(
                 elevation: 0,
                 expandedHeaderPadding: EdgeInsets.zero,
                 dividerColor: Get.theme.canvasColor,
-                expansionCallback: (i, isOpen) =>
-                    controller.setPanelOpen(i, isOpen),
+                expansionCallback: (i, isOpen) => ctr.setPanelOpen(i, isOpen),
                 children: [
                   for (int i = 0; i < 2; i++)
                     ExpansionPanel(
@@ -64,10 +68,10 @@ class RecordPage extends StatelessWidget {
                             date: "5월 28일", contentName: ["루틴", "동작"][i]),
                         body: SubDataRecordBody(
                             [recordData.routineList, recordData.motionList][i]),
-                        isExpanded: controller.isPanelsOpen[i]),
+                        isExpanded: ctr.isPanelsOpen[i]),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

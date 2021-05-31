@@ -5,22 +5,25 @@ import 'package:mytin/controllers/record_controller.dart';
 import 'package:mytin/dummies/calendar_data_dummy.dart';
 
 class CalendarBox extends StatelessWidget {
+  final int monthYear;
+  final MODE mode;
+
+  CalendarBox(this.monthYear, this.mode);
+
   @override
   Widget build(BuildContext context) {
+    final int month = monthYear % 100;
+    final int year = monthYear ~/ 100;
     final List<String> dayName = ["일", "월", "화", "수", "목", "금", "토"];
     final Color valueColor = Colors.lightBlue;
     final int maxValue = 100;
 
-    RecordController ctr = Get.find<RecordController>();
     DateUtil dateUtil = DateUtil();
-    int numOfColumns = {MODE.DAY: 7, MODE.WEEK: 1, MODE.MONTH: 4}[ctr.mode];
+    int numOfColumns = {MODE.DAY: 7, MODE.WEEK: 1, MODE.MONTH: 4}[mode];
     int numOfDays =
-        dateUtil.daysInMonth(ctr.currentViewMonth, ctr.currentViewYear);
+        dateUtil.daysInMonth(month, year);
     int beforeDays =
-        -(DateTime(ctr.currentViewYear, ctr.currentViewMonth, 2).weekday - 1);
-
-    print(numOfDays.toString());
-    print(beforeDays.toString());
+        -(DateTime(year, month, 2).weekday - 1);
 
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -32,7 +35,7 @@ class CalendarBox extends StatelessWidget {
       child: GetBuilder<RecordController>(
         builder: (_) => Table(
           children: [
-            if (ctr.mode == MODE.DAY)
+            if (mode == MODE.DAY)
               TableRow(children: [
                 for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
               ]),
