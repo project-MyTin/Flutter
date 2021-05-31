@@ -29,20 +29,18 @@ class RecordPage extends StatelessWidget {
                   IconButton(
                       icon: Icon(Icons.arrow_forward_ios_outlined),
                       onPressed: () {}),
-                  Spacer(),
-                  DropdownButton(
-                    value: ctr.mode,
-                    items: [
-                      DropdownMenuItem(child: Text("일"), value: 0),
-                      DropdownMenuItem(child: Text("주"), value: 1),
-                      DropdownMenuItem(child: Text("월"), value: 2),
-                    ],
-                    onChanged: (int newValue) => ctr.changeMode(newValue),
-                  ),
                 ],
               ),
             ),
-            CalendarBox(),
+            SizedBox(
+              height: Get.height * 0.41,
+              child: PageView.builder(
+                itemBuilder: (_, int index) {
+                  return CalendarBox();
+                },
+                controller: PageController(initialPage: 10),
+              ),
+            ),
             MainDataRecord({
               "totalTime": recordData.totalTime,
               "totalExp": recordData.totalExp,
