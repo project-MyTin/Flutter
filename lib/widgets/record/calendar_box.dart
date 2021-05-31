@@ -13,7 +13,7 @@ class CalendarBox extends StatelessWidget {
 
     RecordController ctr = Get.find<RecordController>();
     DateUtil dateUtil = DateUtil();
-    int numOfColumns = {"일": 7, "주": 1, "월": 4}[ctr.mode];
+    int numOfColumns = {MODE.DAY: 7, MODE.WEEK: 1, MODE.MONTH: 4}[ctr.mode];
     int numOfDays =
         dateUtil.daysInMonth(ctr.currentViewMonth, ctr.currentViewYear);
     int beforeDays =
@@ -28,11 +28,11 @@ class CalendarBox extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(40),
-          boxShadow: [BoxShadow(color: Colors.grey)]),
+          border: Border.all(color: Colors.grey.withOpacity(0.15))),
       child: GetBuilder<RecordController>(
         builder: (_) => Table(
           children: [
-            if (ctr.mode == "일")
+            if (ctr.mode == MODE.DAY)
               TableRow(children: [
                 for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
               ]),
@@ -73,7 +73,7 @@ class DayCell extends StatelessWidget {
       child: Text(text, style: TextStyle(color: textColor ?? Colors.black)),
       decoration: BoxDecoration(
         color: backColor ?? Colors.white,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
