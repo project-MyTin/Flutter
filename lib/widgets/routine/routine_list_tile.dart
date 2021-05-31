@@ -54,7 +54,7 @@ class RoutineListTile extends StatelessWidget {
                   SizedBox(
                     width: Get.width * 0.57,
                     child: Text(
-                      routine.description,
+                      routine.description?? "",
                       style: TextStyle(
                           fontSize: 0.016 * Get.height, color: Colors.grey),
                       maxLines: 2,
