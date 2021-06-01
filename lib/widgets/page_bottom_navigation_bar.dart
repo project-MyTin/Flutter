@@ -14,7 +14,6 @@ class PageBottomNavigationBar extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.directions_run), label: "운동"),
           BottomNavigationBarItem(icon: Icon(Icons.library_books), label: "기록"),
           BottomNavigationBarItem(icon: Icon(Icons.assessment), label: "랭킹"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "프로필"),
         ],
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
