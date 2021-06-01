@@ -13,7 +13,7 @@ class RecordController extends GetxController {
   final int rightmostMotionYear = 203005;
   final int startIndex =
       (DateTime.now().year - 2021) * 12 + DateTime.now().month - 5;
-  Map<int, Map<String, dynamic>> calendarValueMap = {};
+  Map<int, List> calendarValueMap = {};
   MODE mode = MODE.DAY;
   int currentViewYear = DateTime.now().year;
   int currentViewMonth = DateTime.now().month;
@@ -77,6 +77,5 @@ class RecordController extends GetxController {
     calendarValueMap[currentViewYear * 100 + currentViewMonth] =
         await loadCalendarData(currentViewYear, currentViewMonth);
     update();
-    print(calendarValueMap);
   }
 }

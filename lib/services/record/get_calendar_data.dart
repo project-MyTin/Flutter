@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-Future<Map<String, dynamic>> loadCalendarData(int year, int month) async {
-  final response = await get(
-      Uri.parse("http://3.34.209.123/calendar?y=$year&m=$month"));
+Future<List> loadCalendarData(int year, int month) async {
+  final response =
+      await get(Uri.parse("http://3.34.209.123/calendar?y=$year&m=$month"));
   final parsedRes = json.decode(response.body);
-  return {
-    "list": parsedRes["data"]["result"]["total_list"],
-    "maxValue": parsedRes["data"]["result"]["max"],
-  };
+  final maxValue = parsedRes["data"]["result"]["max"];
+  final List values = parsedRes["data"]["result"]["total_list"];
+  return maxValue > 0
+      ? values.map((item) => item / maxValue).toList()
+      : values.map((_) => 0.0).toList();
 }

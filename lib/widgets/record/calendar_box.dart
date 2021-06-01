@@ -38,22 +38,14 @@ class CalendarBox extends StatelessWidget {
             TableRow(children: [
               for (int j = i; j < i + numOfColumns; j++)
                 GetBuilder<RecordController>(
-                  builder: (ctr) =>
-                      DayCell(
-                        // text: ctr.calendarValueMap.containsKey(monthYear)
-                        //     ? ctr.calendarValueMap[monthYear]["maxValue"].toString()
-                        //     : "아니",
-                        text: j >= 0 && j < numOfDays ? (j + 1).toString() : "",
-                        backColor: valueColor.withOpacity(j < 0 ||
-                            j >= numOfDays
-                            ? 0
-                            : ctr.calendarValueMap.containsKey(monthYear) ?
-    (ctr.calendarValueMap[monthYear]["list"][j] >
-        ctr.calendarValueMap[monthYear]["maxValue"]
-        ? 1
-        : ctr.calendarValueMap[monthYear]["list"][j] /
-        ctr.calendarValueMap[monthYear]["maxValue"]) : 0),
-                      ),
+                  builder: (ctr) => DayCell(
+                    text: j >= 0 && j < numOfDays ? (j + 1).toString() : "",
+                    backColor: valueColor.withOpacity(j < 0 || j >= numOfDays
+                        ? 0
+                        : ctr.calendarValueMap.containsKey(monthYear)
+                            ? ctr.calendarValueMap[monthYear][j]
+                            : 0),
+                  ),
                 ),
             ]),
         ],
@@ -72,8 +64,7 @@ class DayCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-      int.tryParse(text) != null
+      onTap: () => int.tryParse(text) != null
           ? Get.find<RecordController>().setDay(int.parse(text))
           : {},
       child: Container(
