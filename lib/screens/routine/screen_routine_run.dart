@@ -5,29 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:mytin/widgets/routine/break_time_body.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
-class RoutineRunPage extends StatefulWidget {
-  @override
-  _RoutineRunPageState createState() => _RoutineRunPageState();
-}
-
-class _RoutineRunPageState extends State<RoutineRunPage> {
-  RoutineRunController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = Get.put(
-        RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.shutdownCountdown();
-  }
-
+class RoutineRunPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
     return GetBuilder<RoutineRunController>(
       builder: (controller) => Scaffold(
         appBar: buildRoutineRunAppBar(
@@ -108,7 +89,7 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
           ),
           Spacer(flex: 3),
           IconButton(
-            onPressed: () => _controller.passMotion(),
+            onPressed: () => Get.find<RoutineRunController>().passMotion(),
             icon: Icon(
               Icons.arrow_forward_ios_outlined,
               size: 0.06 * width,
