@@ -62,7 +62,7 @@ class MotionDetailDialog extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 0.04 * height),
-          Text(motion.description,
+          Text(motion.description ?? "",
               style: TextStyle(fontSize: 0.032 * width, color: Colors.grey)),
           SizedBox(height: 0.02 * height),
           Container(
@@ -72,7 +72,7 @@ class MotionDetailDialog extends StatelessWidget {
             width: 0.65 * width,
           ),
           Container(
-            child: Text(motion.referenceUrl,
+            child: Text(motion.referenceUrl ?? "",
                 style:
                     TextStyle(fontSize: 0.028 * width, color: Colors.blueGrey)),
             color: Colors.black.withOpacity(0.06),

@@ -32,7 +32,9 @@ class RoutineRunController extends GetxController {
           isBreakTime = true;
           currentBreakTime--;
         }
-      } else currentTime--;
+      } else {
+        currentTime--;
+      }
       update();
     });
   }
