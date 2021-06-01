@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainDataRecord extends StatelessWidget {
+  final routineGoalTime = 120;
   final List<int> dataList;
   final List<List<String>> nameList = [
     ["루틴 수행시간", "분"],
@@ -31,7 +32,7 @@ class MainDataRecord extends StatelessWidget {
           children: [
             SizedBox(
               child: CircularProgressIndicator(
-                value: 0.8,
+                value: dataList[0] / routineGoalTime,
                 strokeWidth: 22,
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.lightBlue),
                 backgroundColor: Colors.grey.withOpacity(0.2),
