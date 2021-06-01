@@ -67,16 +67,19 @@ class DayCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.fromLTRB(Get.width * 0.007, Get.width * 0.005,
-          Get.width * 0.007, Get.width * 0.005),
-      height: height ?? Get.width * 0.105,
-      width: Get.width * 0.1,
-      alignment: Alignment.center,
-      child: Text(text, style: TextStyle(color: textColor ?? Colors.black)),
-      decoration: BoxDecoration(
-        color: backColor ?? Colors.white,
-        borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: () => int.tryParse(text) != null ? Get.find<RecordController>().setDay(int.parse(text)) : {},
+      child: Container(
+        margin: EdgeInsets.fromLTRB(Get.width * 0.007, Get.width * 0.005,
+            Get.width * 0.007, Get.width * 0.005),
+        height: height ?? Get.width * 0.105,
+        width: Get.width * 0.1,
+        alignment: Alignment.center,
+        child: Text(text, style: TextStyle(color: textColor ?? Colors.black)),
+        decoration: BoxDecoration(
+          color: backColor ?? Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
