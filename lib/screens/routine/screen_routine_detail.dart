@@ -122,7 +122,7 @@ class RoutineDetailPage extends StatelessWidget {
         isDialog: false,
         isShow: true,
         text: "시작하기",
-        clickFunc: () => Get.to(() => RoutineRunPage(routine.motions, routine.breakTime)),
+        clickFunc: () => Get.to(() => RoutineRunPage(routine.motions, routine.breakTime, routine.id)),
       ),
     );
   }

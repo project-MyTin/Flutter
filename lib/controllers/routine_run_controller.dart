@@ -14,11 +14,13 @@ class RoutineRunController extends GetxController {
   Timer timer;
   int currentTime;
   int currentBreakTime;
+  int routineId;
 
-  RoutineRunController(this.motionList, this.breakTime) {
-    motionCount = motionList.length;
-    currentTime = motionList[index].time * motionList[index].count;
-    currentBreakTime = breakTime;
+  RoutineRunController(this.motionList, this.breakTime, this.routineId) {
+    this.routineId = routineId;
+    this.motionCount = motionList.length;
+    this.currentTime = motionList[index].time * motionList[index].count;
+    this.currentBreakTime = breakTime;
 
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       if (currentTime < 1) {
@@ -53,7 +55,8 @@ class RoutineRunController extends GetxController {
   }
 
   void completeRoutine() {
-    postRecord(31, 20);
+    final totalTime = motionList.map((e) => e.time * e.count).reduce((v, e) => v * e);
+    postRecord(routineId, totalTime);
     Get.dialog(RoutineRunCompleteDialog());
   }
 

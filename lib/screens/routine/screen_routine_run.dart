@@ -8,12 +8,13 @@ import 'package:mytin/widgets/time_progress_indicator.dart';
 class RoutineRunPage extends StatelessWidget {
   final List<MotionElement> motions;
   final int breakTime;
+  final int id;
 
-  RoutineRunPage(this.motions, this.breakTime);
+  RoutineRunPage(this.motions, this.breakTime, this.id);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(RoutineRunController(motions, breakTime));
+    Get.put(RoutineRunController(motions, breakTime, id));
     return GetBuilder<RoutineRunController>(
       builder: (ctr) => Scaffold(
         body: Stack(
