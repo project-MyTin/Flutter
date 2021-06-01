@@ -23,7 +23,7 @@ class MainDataRecord extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(height: Get.height * 0.03),
+        SizedBox(height: Get.height * 0.02),
         Text(nameList[0][0]),
         SizedBox(height: Get.height * 0.025),
         Stack(
