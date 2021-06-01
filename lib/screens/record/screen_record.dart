@@ -82,11 +82,11 @@ class RecordPage extends StatelessWidget {
                                   backgroundColor: Get.theme.canvasColor,
                                   headerBuilder: (_, isOpen) =>
                                       SubDataRecordHeader(
-                                          date: "5월 28일",
+                                          date: "${ctr.currentMonth}월 ${ctr.currentDay}일",
                                           contentName: ["루틴", "동작"][i]),
                                   body: SubDataRecordBody([
-                                    recordData.routineList,
-                                    recordData.motionList
+                                    ctr.recordDetail.routineList,
+                                    ctr.recordDetail.motionList
                                   ][i]),
                                   isExpanded: ctr.isPanelsOpen[i]),
                           ],
