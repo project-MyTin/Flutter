@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:mytin/models/record_data.dart';
 import 'package:mytin/services/record/get_calendar_data.dart';
@@ -9,7 +11,9 @@ class RecordController extends GetxController {
   final int leftmostIndex = (2021 * 12) + 5;
   final int leftmostMotionYear = 202105;
   final int rightmostMotionYear = 203005;
-  final int startIndex = DateTime.now().year * 100 + DateTime.now().month - 202105;
+  final int startIndex =
+      (DateTime.now().year - 2021) * 12 + DateTime.now().month - 5;
+  Map<int, Map<String, dynamic>> calendarValueMap = {};
   MODE mode = MODE.DAY;
   int currentViewYear = DateTime.now().year;
   int currentViewMonth = DateTime.now().month;
@@ -25,6 +29,7 @@ class RecordController extends GetxController {
     monthIndex = (currentViewYear * 12) + currentViewMonth - leftmostIndex;
     update();
     loadCurrentDayData();
+    loadCalendarValues();
     super.onInit();
   }
 
@@ -34,15 +39,15 @@ class RecordController extends GetxController {
   }
 
   void changeMonth(int newIndex) {
-    if(newIndex > monthIndex) {
-      if(currentViewMonth > 11) {
+    if (newIndex > monthIndex) {
+      if (currentViewMonth > 11) {
         currentViewYear++;
         currentViewMonth = 1;
       } else {
         currentViewMonth++;
       }
-    }else {
-      if(currentViewMonth < 2) {
+    } else {
+      if (currentViewMonth < 2) {
         currentViewYear--;
         currentViewMonth = 12;
       } else {
@@ -63,11 +68,15 @@ class RecordController extends GetxController {
   }
 
   Future<void> loadCurrentDayData() async {
-    recordDetail = await loadRecordDetail(currentYear, currentMonth, currentDay);
+    recordDetail =
+        await loadRecordDetail(currentYear, currentMonth, currentDay);
     update();
   }
 
-  void loadCalendarValues() {
-    loadCalendarData(currentViewYear, currentViewMonth);
+  Future<void> loadCalendarValues() async {
+    calendarValueMap[currentViewYear * 100 + currentViewMonth] =
+        await loadCalendarData(currentViewYear, currentViewMonth);
+    update();
+    print(calendarValueMap);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/record_controller.dart';
-import 'package:mytin/dummies/record_data_dummy.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/record/calendar_box.dart';
 import 'package:mytin/widgets/record/main_data_record.dart';

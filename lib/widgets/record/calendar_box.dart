@@ -2,7 +2,6 @@ import 'package:date_util/date_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/record_controller.dart';
-import 'package:mytin/dummies/calendar_data_dummy.dart';
 
 class CalendarBox extends StatelessWidget {
   final int monthYear;
@@ -16,14 +15,11 @@ class CalendarBox extends StatelessWidget {
     final int year = monthYear ~/ 100;
     final List<String> dayName = ["일", "월", "화", "수", "목", "금", "토"];
     final Color valueColor = Colors.lightBlue;
-    final int maxValue = 100;
 
     DateUtil dateUtil = DateUtil();
     int numOfColumns = {MODE.DAY: 7, MODE.WEEK: 1, MODE.MONTH: 4}[mode];
-    int numOfDays =
-        dateUtil.daysInMonth(month, year);
-    int beforeDays =
-        -(DateTime(year, month, 2).weekday - 1);
+    int numOfDays = dateUtil.daysInMonth(month, year);
+    int beforeDays = -(DateTime(year, month, 2).weekday - 1);
 
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -32,27 +28,35 @@ class CalendarBox extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(40),
           border: Border.all(color: Colors.grey.withOpacity(0.15))),
-      child: GetBuilder<RecordController>(
-        builder: (_) => Table(
-          children: [
-            if (mode == MODE.DAY)
-              TableRow(children: [
-                for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
-              ]),
-            for (int i = beforeDays; i < numOfDays; i += numOfColumns)
-              TableRow(children: [
-                for (int j = i; j < i + numOfColumns; j++)
-                  DayCell(
-                    text: j >= 0 && j < numOfDays ? (j + 1).toString() : "",
-                    backColor: valueColor.withOpacity(j < 0 || j >= numOfDays
-                        ? 0
-                        : calendarData.valueList[j] > maxValue
-                            ? 1
-                            : calendarData.valueList[j] / maxValue),
-                  )
-              ])
-          ],
-        ),
+      child: Table(
+        children: [
+          if (mode == MODE.DAY)
+            TableRow(children: [
+              for (int i = 0; i < numOfColumns; i++) DayCell(text: dayName[i])
+            ]),
+          for (int i = beforeDays; i < numOfDays; i += numOfColumns)
+            TableRow(children: [
+              for (int j = i; j < i + numOfColumns; j++)
+                GetBuilder<RecordController>(
+                  builder: (ctr) =>
+                      DayCell(
+                        // text: ctr.calendarValueMap.containsKey(monthYear)
+                        //     ? ctr.calendarValueMap[monthYear]["maxValue"].toString()
+                        //     : "아니",
+                        text: j >= 0 && j < numOfDays ? (j + 1).toString() : "",
+                        backColor: valueColor.withOpacity(j < 0 ||
+                            j >= numOfDays
+                            ? 0
+                            : ctr.calendarValueMap.containsKey(monthYear) ?
+    (ctr.calendarValueMap[monthYear]["list"][j] >
+        ctr.calendarValueMap[monthYear]["maxValue"]
+        ? 1
+        : ctr.calendarValueMap[monthYear]["list"][j] /
+        ctr.calendarValueMap[monthYear]["maxValue"]) : 0),
+                      ),
+                ),
+            ]),
+        ],
       ),
     );
   }
@@ -68,7 +72,10 @@ class DayCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => int.tryParse(text) != null ? Get.find<RecordController>().setDay(int.parse(text)) : {},
+      onTap: () =>
+      int.tryParse(text) != null
+          ? Get.find<RecordController>().setDay(int.parse(text))
+          : {},
       child: Container(
         margin: EdgeInsets.fromLTRB(Get.width * 0.007, Get.width * 0.005,
             Get.width * 0.007, Get.width * 0.005),

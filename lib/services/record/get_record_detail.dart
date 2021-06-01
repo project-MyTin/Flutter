@@ -9,7 +9,6 @@ Future<RecordData> loadRecordDetail(int year, int month, int day) async {
       Uri.parse("http://3.34.209.123/calendar/detail?y=$year&m=$month&d=$day"));
   final parsedRes = json.decode(response.body);
 
-  print(parsedRes);
   if(parsedRes["statusCode"] == "10000") {
     final record = parsedRes["data"];
     return RecordData.fromMap({
