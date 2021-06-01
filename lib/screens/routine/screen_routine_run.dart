@@ -28,45 +28,34 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
     return GetBuilder<RoutineRunController>(
       builder: (controller) => Scaffold(
         appBar: buildRoutineRunAppBar(
-            controller.motionList[controller.index].name, height),
+            controller.motionList[controller.index].name, Get.height),
         body: Stack(
           children: [
             Column(
               children: <Widget>[
-                buildRoutineRunBody(controller, width, height),
-                SizedBox(height: 0.03 * height),
-                buildMotionInformation(controller, width),
+                buildRoutineRunBody(controller, Get.width, Get.height),
+                SizedBox(height: 0.03 * Get.height),
+                Text(
+                  controller.motionList[controller.index].name,
+                  style: TextStyle(fontSize: 0.06 * Get.width),
+                ),
+                Text(
+                  controller.motionList[controller.index].count.toString() + "회",
+                  style: TextStyle(
+                      fontSize: 0.05 * Get.width,
+                      color: Color.fromARGB(255, 100, 100, 100)),
+                ),
                 Spacer(),
-                buildRoutineRunBottomAppBar(controller, height, width),
+                buildRoutineRunBottomAppBar(controller, Get.height, Get.width),
               ],
             ),
             if (controller.isBreakTime) BreakTimeBody(),
           ],
         ),
       ),
-    );
-  }
-
-  Column buildMotionInformation(RoutineRunController controller, double width) {
-    return Column(
-      children: [
-        Text(
-          controller.motionList[controller.index].name,
-          style: TextStyle(fontSize: 0.06 * width),
-        ),
-        Text(
-          controller.motionList[controller.index].count.toString() + "회",
-          style: TextStyle(
-              fontSize: 0.05 * width,
-              color: Color.fromARGB(255, 100, 100, 100)),
-        ),
-      ],
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 import 'package:mytin/models/routine_detail.dart';
+import 'package:mytin/services/record/post_record.dart';
 import 'package:mytin/widgets/routine/routine_run_complete_dialog.dart';
 
 class RoutineRunController extends GetxController {
@@ -59,6 +60,7 @@ class RoutineRunController extends GetxController {
   }
 
   void completeRoutine() {
+    postRecord(31, 20);
     Get.dialog(RoutineRunCompleteDialog());
   }
 
