@@ -1,14 +1,19 @@
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_run_controller.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
+import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/routine/break_time_body.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
 class RoutineRunPage extends StatelessWidget {
+  final List<MotionElement> motions;
+  final int breakTime;
+
+  RoutineRunPage(this.motions, this.breakTime);
+
   @override
   Widget build(BuildContext context) {
-    Get.put(RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
+    Get.put(RoutineRunController(motions, breakTime));
     return GetBuilder<RoutineRunController>(
       builder: (controller) => Scaffold(
         appBar: buildRoutineRunAppBar(
