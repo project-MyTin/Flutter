@@ -22,22 +22,15 @@ class RoutineRunController extends GetxController {
 
     timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
       if (currentTime < 1) {
-        // 동작 카운트가 끝났을 경우
         if (index == motionCount - 1) {
-          // 마지막 동작 카운트가 끝난 경우 => 타이머 종료
           t.cancel();
         } else if (currentBreakTime < 1) {
-          // 휴식 카운트도 끝난 경우 => 다음 동작으로
           passMotion();
         } else {
-          // 휴식 시간은 안 끝난 경우
           isBreakTime = true;
           currentBreakTime--;
         }
-      } else {
-        // 루틴 시간이 안 끝난 경우
-        currentTime--;
-      }
+      } else currentTime--;
       update();
     });
   }
@@ -67,9 +60,5 @@ class RoutineRunController extends GetxController {
   void addBreakTime(int time) {
     currentBreakTime += time;
     update();
-  }
-
-  void shutdownCountdown() {
-    timer.cancel();
   }
 }

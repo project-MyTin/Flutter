@@ -22,7 +22,7 @@ class RoutineRunPage extends StatelessWidget {
               children: [
                 SizedBox(height: Get.height * 0.0285),
                 LinearProgressIndicator(
-                  value: (ctr.index + 1) / (ctr.motionCount + 1),
+                  value: (ctr.index + 1) / ctr.motionCount,
                   backgroundColor: Colors.white,
                   valueColor: AlwaysStoppedAnimation(Colors.blueAccent),
                   minHeight: Get.height * 0.006,
@@ -34,7 +34,7 @@ class RoutineRunPage extends StatelessWidget {
                       Container(
                         color: Colors.blueAccent.withOpacity(0.1),
                         width:
-                            Get.width * (ctr.index + 1) / (ctr.motionCount + 1),
+                            Get.width * (ctr.index + 1) / ctr.motionCount,
                       ),
                       Container(
                         alignment: Alignment.center,
@@ -50,13 +50,17 @@ class RoutineRunPage extends StatelessWidget {
                             Text("${ctr.motionList.length}",
                                 style: TextStyle(fontSize: Get.height * 0.02)),
                             Spacer(),
-                            Container(
-                              height: Get.height * 0.04,
-                              child: Text("종료하기"),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(10)),
-                                color: Colors.grey.withOpacity(0.2),
+                            GestureDetector(
+                              onTap: () => Get.back(),
+                              child: Container(
+                                height: Get.height * 0.05,
+                                padding: EdgeInsets.fromLTRB(Get.height * 0.02, Get.height * 0.006, Get.height * 0.02, Get.height * 0.006),
+                                child: Text("종료하기", style: TextStyle(fontSize: Get.height * 0.018, color: Colors.grey)),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  color: Colors.grey.withOpacity(0.14),
+                                ),
                               ),
                             ),
                             SizedBox(width: Get.width * 0.04),
