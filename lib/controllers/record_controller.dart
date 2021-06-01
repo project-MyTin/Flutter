@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:mytin/models/record_data.dart';
+import 'package:mytin/services/record/get_record_detail.dart';
 
 enum MODE { DAY, WEEK, MONTH }
 
@@ -6,15 +8,22 @@ class RecordController extends GetxController {
   final int leftmostIndex = (2021 * 12) + 5;
   final int leftmostMotionYear = 202105;
   final int rightmostMotionYear = 203005;
+  final int startIndex = DateTime.now().year * 100 + DateTime.now().month - 202105;
   MODE mode = MODE.DAY;
-  int currentViewMonth = DateTime.now().month;
   int currentViewYear = DateTime.now().year;
+  int currentViewMonth = DateTime.now().month;
+  int currentYear = DateTime.now().year;
+  int currentMonth = DateTime.now().month;
+  int currentDay = DateTime.now().day;
   int monthIndex;
   List<bool> isPanelsOpen = [false, false];
+  RecordData recordDetail;
 
   @override
   void onInit() {
     monthIndex = (currentViewYear * 12) + currentViewMonth - leftmostIndex;
+    update();
+    loadCurrentDayData();
     super.onInit();
   }
 
@@ -40,6 +49,19 @@ class RecordController extends GetxController {
       }
     }
     monthIndex = newIndex;
+    update();
+  }
+
+  void setDay(int day) {
+    currentMonth = currentViewMonth;
+    currentYear = currentYear;
+    currentDay = day;
+    update();
+    loadCurrentDayData();
+  }
+
+  Future<void> loadCurrentDayData() async {
+    recordDetail = await loadRecordDetail(currentYear, currentMonth, currentDay);
     update();
   }
 }
