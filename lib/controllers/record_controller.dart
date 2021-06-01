@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:mytin/models/record_data.dart';
+import 'package:mytin/services/record/get_calendar_data.dart';
 import 'package:mytin/services/record/get_record_detail.dart';
 
 enum MODE { DAY, WEEK, MONTH }
@@ -50,6 +51,7 @@ class RecordController extends GetxController {
     }
     monthIndex = newIndex;
     update();
+    loadCalendarValues();
   }
 
   void setDay(int day) {
@@ -63,5 +65,9 @@ class RecordController extends GetxController {
   Future<void> loadCurrentDayData() async {
     recordDetail = await loadRecordDetail(currentYear, currentMonth, currentDay);
     update();
+  }
+
+  void loadCalendarValues() {
+    loadCalendarData(currentViewYear, currentViewMonth);
   }
 }
