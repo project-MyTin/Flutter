@@ -2,7 +2,7 @@ import 'package:mytin/models/rank_tile.dart';
 
 final RankTile noneUser = RankTile.fromMap({
   "name": "없습니다",
-  "imageUrl": "",
+  "imageUrl": "https://mblogthumb-phinf.pstatic.net/20161008_248/sasa9508_1475929220263OMzsO_JPEG/2.jpg?type=w2",
   "value": 0,
 });
 

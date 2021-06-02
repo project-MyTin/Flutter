@@ -7,6 +7,7 @@ import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 class RankTabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.put(RankController());
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -20,9 +21,9 @@ class RankTabsPage extends StatelessWidget {
             indicatorWeight: Get.height * 0.005,
             indicatorSize: TabBarIndicatorSize.label,
             tabs: [
-              Tab(text: "시간 별"),
-              Tab(text: "유형 별"),
-              Tab(text: "부위 별"),
+              Tab(text: "오늘의 랭킹"),
+              Tab(text: "이번주 랭킹"),
+              Tab(text: "이번달 랭킹"),
             ],
           ),
         ),
@@ -30,8 +31,8 @@ class RankTabsPage extends StatelessWidget {
           builder: (ctr) => TabBarView(
             children: [
               RankPage(ctr.todayUserList),
-              RankPage(ctr.userList),
-              RankPage(ctr.userList),
+              RankPage(ctr.weekUserList),
+              RankPage(ctr.monthUserList),
             ],
           ),
         ),
