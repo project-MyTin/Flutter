@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mytin/controllers/rank_controller.dart';
 import 'package:mytin/screens/rank/screen_rank.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 
@@ -25,12 +26,14 @@ class RankTabsPage extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-            RankPage(),
-            RankPage(),
-            RankPage(),
-          ],
+        body: GetBuilder<RankController>(
+          builder: (ctr) => TabBarView(
+            children: [
+              RankPage(ctr.todayUserList),
+              RankPage(ctr.userList),
+              RankPage(ctr.userList),
+            ],
+          ),
         ),
         bottomNavigationBar: PageBottomNavigationBar(),
       ),

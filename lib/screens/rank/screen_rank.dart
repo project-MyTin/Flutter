@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mytin/dummies/rank_list_dummy.dart';
+import 'package:mytin/models/rank_tile.dart';
 import 'package:mytin/widgets/rank/low_rank_box.dart';
 import 'package:mytin/widgets/rank/top_rank_box.dart';
 
 class RankPage extends StatelessWidget {
+  final List<RankTile> userList;
+
+  RankPage(this.userList);
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -18,23 +22,23 @@ class RankPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  TopRankBox(rankTileList[1]),
-                  TopRankBox(rankTileList[0]),
-                  TopRankBox(rankTileList[2]),
+                  TopRankBox(userList.length > 1 ? userList[1] : , 2),
+                  TopRankBox(userList.length > 0 ? userList[0] : , 1),
+                  TopRankBox(userList.length > 2 ? userList[2] : , 3),
                 ],
               ),
               SizedBox(height: Get.height * 0.03),
-              for (int i = 3; i < rankTileList.length; i++)
+              for (int i = 3; i < userList.length; i++)
                 Padding(
                   padding: EdgeInsets.only(
                       top: Get.height * 0.003, bottom: Get.height * 0.003),
-                  child: LowRankBox(rankTileList[i], false),
+                  child: LowRankBox(userList[i], false),
                 ),
               SizedBox(height: Get.height * 0.086)
             ],
           ),
         ),
-        LowRankBox(rankTileList[1], true)
+        LowRankBox(userList[1], true)
       ],
     );
   }

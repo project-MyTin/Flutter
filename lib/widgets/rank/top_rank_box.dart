@@ -5,8 +5,9 @@ import 'package:mytin/models/rank_tile.dart';
 
 class TopRankBox extends StatelessWidget {
   final RankTile rankTile;
+  final int rankNumber;
 
-  TopRankBox(this.rankTile);
+  TopRankBox(this.rankTile, this.rankNumber);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +16,9 @@ class TopRankBox extends StatelessWidget {
         Icon(
           MdiIcons.crown,
           size: Get.height * 0.04,
-          color: rankTile.rankNumber == 1
+          color: rankNumber == 1
               ? Color.fromRGBO(0xF8, 0xA5, 0x00, 1)
-              : rankTile.rankNumber == 2
+              : rankNumber == 2
                   ? Colors.grey.withOpacity(0.4)
                   : Color.fromRGBO(0x70, 0x37, 0x37, 1),
         ),
@@ -40,7 +41,7 @@ class TopRankBox extends StatelessWidget {
               decoration:
                   BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
               alignment: Alignment.center,
-              child: Text(rankTile.rankNumber.toString(),
+              child: Text(rankNumber.toString(),
                   style: TextStyle(color: Colors.white)),
             ),
           ],
@@ -50,7 +51,7 @@ class TopRankBox extends StatelessWidget {
         SizedBox(height: Get.height * 0.005),
         Text(rankTile.value.toString() + " 분",
             style: TextStyle(color: Colors.black.withOpacity(0.4))),
-        if (rankTile.rankNumber == 1) SizedBox(height: Get.height * 0.05),
+        if (rankNumber == 1) SizedBox(height: Get.height * 0.05),
       ],
     );
   }
