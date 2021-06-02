@@ -5,11 +5,11 @@ void showSnackBar(String title, String body, String type) {
   Get.snackbar(
     title,
     body,
-    snackPosition: SnackPosition.TOP,
+    snackPosition: {"warning": SnackPosition.BOTTOM, "info": SnackPosition.TOP}[type],
     backgroundColor: type == "warning" ? Colors.redAccent : Colors.lightBlueAccent,
     colorText: Colors.white,
     onTap: (snack) => Get.back(),
-    animationDuration: Duration(milliseconds: 700),
+    // animationDuration: Duration(milliseconds: 700),
     icon: Icon(
       {"warning": Icons.warning, "info": Icons.info}[type],
       color: Colors.white,
