@@ -18,4 +18,3 @@ samples, guidance on mobile development, and a full API reference.
 
 - 루틴 & 동작 값 채워졌을시에만 버튼 활성화
 - 랭킹 실시간 반영
-- 기록 추가할 때 시간 단위 이상

@@ -57,8 +57,8 @@ class RoutineRunController extends GetxController {
   }
 
   void completeRoutine() {
-    final totalTime = motionList.map((e) => e.time * e.count).reduce((v, e) => v * e);
-    postRecord(routineId, totalTime);
+    final totalTime = motionList.map((e) => e.time * e.count).reduce((v, e) => v + e);
+    postRecord(routineId, totalTime ~/ 60);
     Get.dialog(RoutineRunCompleteDialog());
   }
 
