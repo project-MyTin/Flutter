@@ -26,7 +26,7 @@ class RoutineRunCompleteDialog extends StatelessWidget {
             SizedBox(height: 0.035 * height),
             Text("이번 루틴 획득 경험치", style: TextStyle(fontSize: 0.022 * height)),
             Text(
-              16.toString() + "EX",
+              "${19}EX",
               style: TextStyle(
                   fontSize: 0.026 * height,
                   color: Colors.blue,
