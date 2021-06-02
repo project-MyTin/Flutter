@@ -76,7 +76,7 @@ class RoutineDetailPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: Get.height * 0.014),
-                        Text(routine.description,
+                        Text(routine.description ?? "설명이 없습니다",
                             style: TextStyle(
                                 color: Colors.black.withOpacity(0.3))),
                         SizedBox(height: Get.height * 0.02),
@@ -86,7 +86,7 @@ class RoutineDetailPage extends StatelessWidget {
                             RoutineDataValueBox(
                                 "${routine.time}분", Icons.access_alarm),
                             RoutineDataValueBox(
-                                routine.materials[0], Icons.local_mall),
+                                routine.materials[0] == null ? "없음" : routine.materials[0], Icons.local_mall),
                             RoutineDataValueBox(routine.type, Icons.bookmark),
                             RoutineDataValueBox(routine.difficulty, Icons.star),
                           ],

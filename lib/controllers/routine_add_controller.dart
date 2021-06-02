@@ -121,8 +121,9 @@ class RoutineAddController extends GetxController {
   }
 
   Future<void> submit() async {
-    if (currentType == null || currentDifficulty == null || breakTime == null) {
+    if (currentType == null || currentDifficulty == null || breakTime == null || breakTime < 1) {
       showSnackBar("선택하지 않은 항목이 있습니다!", "루틴의 종류와 입력란을 채워주세요", "warning");
+      return;
     }
     final Map<String, dynamic> requestMap = {
       "name": routineName,
