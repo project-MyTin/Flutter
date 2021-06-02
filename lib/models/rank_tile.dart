@@ -1,6 +1,6 @@
 class RankTile {
   final String name, imageUrl;
-  final int value;
+  int value;
 
   RankTile.fromMap(Map<String, dynamic> map)
       : name = map["name"],

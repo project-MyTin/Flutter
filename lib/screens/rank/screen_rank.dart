@@ -35,12 +35,13 @@ class RankPage extends StatelessWidget {
                       top: Get.height * 0.003, bottom: Get.height * 0.003),
                   child: LowRankBox(userList[i], false, i),
                 ),
-              SizedBox(height: Get.height * 0.036),
-              if(userList.length < 7) SizedBox(height: Get.height * (0.086 * (7 - userList.length))),
+              SizedBox(height: Get.height * 0.086),
+              if (userList.length < 10)
+                SizedBox(height: Get.height * (0.086 * (9 - userList.length))),
             ],
           ),
         ),
-        LowRankBox(userList[0], true, 0),
+        if(userList.length > 0) LowRankBox(userList[0], true, 0),
       ],
     );
   }
