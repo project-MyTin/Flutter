@@ -68,7 +68,7 @@ class MotionAddBody extends StatelessWidget {
       children: [
         Text("동작 명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
-          hint: "ex) 공중부양",
+          hint: "ex) 스쿼트",
           text: controller.motionName ?? "",
           inputFunc: controller.textChangeHandler,
           widthSize: 0.8,
@@ -77,7 +77,7 @@ class MotionAddBody extends StatelessWidget {
         ),
         Text("동작 설명", style: TextStyle(fontSize: 0.02 * Get.height)),
         TextInputBox(
-          hint: "ex) 허경영을 따라해보세요 ^^7",
+          hint: "ex) 스쿼트는 상체를 고정한 상태에서 하체 힘으로 기마자세를 유지하고, 다시 바르게 선 자세를 유지하는 동작입니다.",
           text: controller.motionDescription ?? "",
           inputFunc: controller.textChangeHandler,
           widthSize: 0.8,

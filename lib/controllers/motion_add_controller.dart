@@ -54,7 +54,25 @@ class MotionAddController extends GetxController {
   }
 
   void next() {
-    part++;
+    switch (part) {
+      case 1:
+        if (image != null) {
+          part++;
+        } else {
+          showSnackBar("대표 이미지가 없습니다!", "동작을 대표할 이미지를 추가해주세요", "warning");
+        }
+        break;
+      case 2:
+        if (motionName != null && motionTime != null && motionTime > 0) {
+          part++;
+        } else {
+          showSnackBar("이름과 시간이 없습니다!", "동작의 이름과 시간은 필수로 입력해주세요", "warning");
+        }
+        break;
+      default:
+        part++;
+        break;
+    }
     update();
   }
 
@@ -67,6 +85,10 @@ class MotionAddController extends GetxController {
   }
 
   Future<void> submit() async {
+    if (currentType == null || currentDifficulty == null || currentMotionPart == null) {
+      showSnackBar("선택하지 않은 항목이 있습니다!", "항목을 모두 선택해주세요", "warning");
+      return;
+    }
     Map<String, dynamic> requestMap = {
       "name": motionName,
       "parts": [currentMotionPart],
