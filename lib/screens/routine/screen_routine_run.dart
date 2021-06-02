@@ -137,6 +137,7 @@ class RoutineRunPage extends StatelessWidget {
                   controller.motionList[controller.index].count,
               textColor: Color.fromARGB(255, 100, 100, 100),
               backgroundColor: Colors.white,
+              valueColor: Colors.blue,
             ),
           ),
         ],

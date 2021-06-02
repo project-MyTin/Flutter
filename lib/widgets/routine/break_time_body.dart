@@ -41,6 +41,7 @@ class _BreakTimeBodyState extends State<BreakTimeBody> {
                 allTime: controller.breakTime,
                 textColor: Colors.white,
                 backgroundColor: Color.fromARGB(255, 40, 40, 40),
+                valueColor: Colors.blue,
               ),
             ),
             SizedBox(height: 0.04 * height),
