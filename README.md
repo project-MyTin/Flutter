@@ -16,7 +16,6 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-- 루틴 & 동작 생성시 에러처리
 - 루틴 & 동작 값 채워졌을시에만 버튼 활성화ㅏ
 - 루틴 실행시 원 진행바 파란색으로
 - 랭킹 실시간 반영

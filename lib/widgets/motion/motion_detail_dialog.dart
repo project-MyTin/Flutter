@@ -62,7 +62,7 @@ class MotionDetailDialog extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 0.04 * height),
-          Text(motion.description ?? "",
+          Text(motion.description ?? "설명이 없습니다",
               style: TextStyle(fontSize: 0.032 * width, color: Colors.grey)),
           SizedBox(height: 0.02 * height),
           Container(
@@ -72,7 +72,7 @@ class MotionDetailDialog extends StatelessWidget {
             width: 0.65 * width,
           ),
           Container(
-            child: Text(motion.referenceUrl ?? "",
+            child: Text(motion.referenceUrl ?? "참고 링크 없음",
                 style:
                     TextStyle(fontSize: 0.028 * width, color: Colors.blueGrey)),
             color: Colors.black.withOpacity(0.06),
@@ -95,7 +95,7 @@ class MotionDetailDialog extends StatelessWidget {
             color: Colors.white,
             shape: BoxShape.circle,
             border: Border.all(
-                color: Colors.grey.withOpacity(0.5), width: 0.01 * width),
+                color: Colors.lightBlue.withOpacity(0.5), width: 0.015 * width),
           ),
           height: 0.17 * width,
           width: 0.17 * width,
