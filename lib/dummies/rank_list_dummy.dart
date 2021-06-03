@@ -99,7 +99,7 @@ final List<RankTile> weekUsers = [
   RankTile.fromMap({
     "name": "쌩초보",
     "imageUrl": "https://www.sciencetimes.co.kr/wp-content/uploads/2014/04/0000057311_008.jpg",
-    "value": 110,
+    "value": 40,
   }),
 ];
 

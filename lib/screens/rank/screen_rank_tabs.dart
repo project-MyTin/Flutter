@@ -30,9 +30,9 @@ class RankTabsPage extends StatelessWidget {
         body: GetBuilder<RankController>(
           builder: (ctr) => TabBarView(
             children: [
-              RankPage(ctr.todayUserList),
-              RankPage(ctr.weekUserList),
-              RankPage(ctr.monthUserList),
+              RankPage(ctr.todayUserList, 0),
+              RankPage(ctr.weekUserList, 1),
+              RankPage(ctr.monthUserList, 2),
             ],
           ),
         ),

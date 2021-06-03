@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:date_util/date_util.dart';
 import 'package:get/get.dart';
 import 'package:mytin/dummies/rank_list_dummy.dart';
 import 'package:mytin/models/rank_tile.dart';
@@ -11,6 +8,7 @@ class RankController extends GetxController {
   List<RankTile> todayUserList = [];
   List<RankTile> weekUserList = [];
   List<RankTile> monthUserList = [];
+  List<int> userIndexList = [];
   RankTile userInfo = RankTile.fromMap({
     "name": "나",
     "imageUrl":
@@ -31,17 +29,20 @@ class RankController extends GetxController {
     weekUserList = insertAndSort(weekUsers, weekValues.reduce((a, b) => a + b));
     monthUserList = insertAndSort(monthUsers, values.reduce((a, b) => a + b));
     update();
+    print(userIndexList);
     super.onInit();
   }
 
   List<RankTile> insertAndSort(List<RankTile> outList, int userValue) {
     List<RankTile> tempList = List<RankTile>.from(outList);
-    tempList.add(RankTile.fromMap({
+    final user = RankTile.fromMap({
       "name": userInfo.name,
       "imageUrl": userInfo.imageUrl,
       "value": userValue,
-    }));
+    });
+    tempList.add(user);
     tempList.sort((a, b) => b.value.compareTo(a.value));
+    userIndexList.add(tempList.indexOf(user));
     return tempList;
   }
 }
