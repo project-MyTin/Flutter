@@ -12,7 +12,7 @@ class RankController extends GetxController {
   RankTile userInfo = RankTile.fromMap({
     "name": "나",
     "imageUrl":
-        "https://cdn.crowdpic.net/list-thumb/thumb_l_6397644C272DE552A4269960FFA7EEB4.jpg",
+        "https://user-images.githubusercontent.com/48408417/120622923-351c8000-c49a-11eb-9a1c-60032de68cd4.jpg",
     "value": 0,
   });
 
