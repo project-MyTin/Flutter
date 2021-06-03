@@ -28,7 +28,7 @@ class MotionListPage extends StatelessWidget {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 5 / 4,
-                        mainAxisSpacing: 0.03 * Get.width,
+                        mainAxisSpacing: 0.04 * Get.width,
                         crossAxisSpacing: 0.03 * Get.width,
                       ),
                     ),

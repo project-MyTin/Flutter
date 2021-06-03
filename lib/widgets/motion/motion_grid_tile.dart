@@ -54,9 +54,9 @@ class MotionGridTile extends StatelessWidget {
               ),
             ],
           ),
-          padding: EdgeInsets.fromLTRB(Get.width * 0.02, Get.width * 0.018,
-              Get.width * 0.02, Get.width * 0.01),
-          height: Get.height * 0.057,
+          padding: EdgeInsets.fromLTRB(Get.width * 0.02, Get.height * 0.005,
+              Get.width * 0.02, Get.height * 0.005),
+          height: Get.height * 0.06,
           decoration: BoxDecoration(
             color: Colors.black.withOpacity(0.3),
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
