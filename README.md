@@ -1,19 +1,11 @@
-# mytin
+# 마이틴(mytin), 운동 가이드 및 기록 어플리케이션
 
-A new Flutter application.
+![preview](https://user-images.githubusercontent.com/48408417/120633814-8aaa5a00-c4a5-11eb-860d-6eb7bf2c5114.gif)
 
-## Getting Started
+![image](https://user-images.githubusercontent.com/48408417/120623650-e15e6680-c49a-11eb-819d-3d8c12164308.png)
+![image](https://user-images.githubusercontent.com/48408417/120623729-f1764600-c49a-11eb-9808-19541e26a542.png)
+![image](https://user-images.githubusercontent.com/48408417/120623824-0a7ef700-c49b-11eb-99ea-b8f3db863398.png)
+![image](https://user-images.githubusercontent.com/48408417/120623857-136fc880-c49b-11eb-9cbf-a342ba6a9d57.png)
+![image](https://user-images.githubusercontent.com/48408417/120623895-1bc80380-c49b-11eb-8098-e3243aeb5251.png)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
-
-- 루틴 & 동작 값 채워졌을시에만 버튼 활성화
+~~설명은 나중에 정리해야겠다...~~
