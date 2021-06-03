@@ -2,7 +2,7 @@
     package="com.mytin.mytin">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="mytin"
+        android:label="마이틴"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
