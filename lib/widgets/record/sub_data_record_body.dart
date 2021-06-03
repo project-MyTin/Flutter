@@ -30,8 +30,8 @@ class SubDataRecordBody extends StatelessWidget {
               SizedBox(width: Get.width * 0.03),
               Text(list[i].name, style: TextStyle(fontSize: Get.height * 0.018)),
               Spacer(),
-              Text("${list[i].time ~/ 60} 초", style: TextStyle(fontSize: Get.height * 0.018, color: Colors.grey)),
-              SizedBox(width: Get.width * 0.07),
+              Text("${list[i].time} 초 / 회", style: TextStyle(fontSize: Get.height * 0.017, color: Colors.grey)),
+              SizedBox(width: Get.width * 0.06),
             ],
           ),
         )

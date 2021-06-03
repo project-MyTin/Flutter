@@ -4,9 +4,10 @@ import 'package:mytin/models/rank_tile.dart';
 
 class LowRankBox extends StatelessWidget {
   final RankTile rankTile;
+  final int rankNumber;
   final bool isMe;
 
-  LowRankBox(this.rankTile, this.isMe);
+  LowRankBox(this.rankTile, this.isMe, this.rankNumber);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class LowRankBox extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(width: Get.width * 0.04),
-          Text(rankTile.rankNumber.toString(),
+          Text(rankNumber.toString(),
               style: TextStyle(
                   color: isMe ? Colors.white : Colors.black,
                   fontSize: Get.height * 0.022)),

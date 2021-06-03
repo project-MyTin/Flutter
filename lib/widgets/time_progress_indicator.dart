@@ -9,9 +9,9 @@ import 'package:mytin/controllers/routine_run_controller.dart';
 class TimeProgressIndicator extends StatefulWidget {
   final double width, height;
   final int currentTime, allTime;
-  final Color textColor, backgroundColor;
+  final Color textColor, backgroundColor, valueColor;
 
-  TimeProgressIndicator({this.width, this.height, this.textColor, this.backgroundColor, this.currentTime, this.allTime});
+  TimeProgressIndicator({this.width, this.height, this.textColor, this.backgroundColor, this.currentTime, this.allTime, this.valueColor});
 
   @override
   _TimeProgressIndicatorState createState() => _TimeProgressIndicatorState();
@@ -27,6 +27,7 @@ class _TimeProgressIndicatorState extends State<TimeProgressIndicator> {
             child: GetBuilder<RoutineRunController>(
               builder: (controller) => CircularProgressIndicator(
                 value: 1 - widget.currentTime / widget.allTime,
+                valueColor: AlwaysStoppedAnimation(widget.valueColor),
                 strokeWidth: 18,
               ),
             ),

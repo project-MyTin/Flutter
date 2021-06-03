@@ -26,7 +26,7 @@ class RoutineRunCompleteDialog extends StatelessWidget {
             SizedBox(height: 0.035 * height),
             Text("이번 루틴 획득 경험치", style: TextStyle(fontSize: 0.022 * height)),
             Text(
-              16.toString() + "EX",
+              "${19}EX",
               style: TextStyle(
                   fontSize: 0.026 * height,
                   color: Colors.blue,
@@ -36,7 +36,7 @@ class RoutineRunCompleteDialog extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(
                   0.06 * width, 0.015 * height, 0.06 * width, 0),
               child: Text(
-                "※ 자세한 경험치는 사이드 메뉴 > 어디어디 또는 하단의 확인하기 버튼을  통에서  확인하실 수 있습니다.",
+                "※ 자세한 경험치는 사이드 메뉴 > 어디어디 또는 하단의 확인하기 버튼을 통해서 확인하실 수 있습니다.",
                 maxLines: 5,
                 style: TextStyle(fontSize: 0.014 * height, color: Colors.grey),
               ),

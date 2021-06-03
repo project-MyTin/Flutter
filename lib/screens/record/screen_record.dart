@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mytin/controllers/record_controller.dart';
-import 'package:mytin/dummies/record_data_dummy.dart';
 import 'package:mytin/widgets/page_bottom_navigation_bar.dart';
 import 'package:mytin/widgets/record/calendar_box.dart';
 import 'package:mytin/widgets/record/main_data_record.dart';
@@ -16,51 +15,92 @@ class RecordPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: Get.height * 0.03),
-            // SafeArea 는 상단 표시줄을 없에기에, 사용하지 않는대신 맨 위에 여백을 줌
-            Row(
-              children: [
-                IconButton(
-                    icon: Icon(Icons.arrow_back_ios_outlined), onPressed: () {}),
-                Text("5월"),
-                Text("2021년"),
-                IconButton(
-                    icon: Icon(Icons.arrow_forward_ios_outlined),
-                    onPressed: () {}),
-                Spacer(),
-                TextButton(onPressed: () {}, child: Text("일")),
-                TextButton(onPressed: () {}, child: Text("주")),
-                TextButton(onPressed: () {}, child: Text("월")),
-              ],
-            ),
-            CalendarBox(),
-            MainDataRecord({
-              "totalTime": recordData.totalTime,
-              "totalExp": recordData.totalExp,
-              "countRoutine": recordData.countRoutine,
-              "countMotion": recordData.countMotion,
-            }),
-            SizedBox(height: Get.height * 0.02),
+            SizedBox(height: Get.height * 0.04),
             GetBuilder<RecordController>(
-              builder: (controller) => ExpansionPanelList(
-                elevation: 0,
-                expandedHeaderPadding: EdgeInsets.zero,
-                dividerColor: Get.theme.canvasColor,
-                expansionCallback: (i, isOpen) => controller.setPanelOpen(i, isOpen),
+              builder: (ctr) => Row(
                 children: [
-                  for (int i = 0; i < 2; i++)
-                    ExpansionPanel(
-                      canTapOnHeader: true,
-                      backgroundColor: Get.theme.canvasColor,
-                      headerBuilder: (_, isOpen) => SubDataRecordHeader(
-                          date: "5월 28일", contentName: ["루틴", "동작"][i]),
-                      body: SubDataRecordBody(
-                          [recordData.routineList, recordData.motionList][i]),
-                      isExpanded: controller.isPanelsOpen[i]
+                  SizedBox(width: Get.width * 0.06),
+                  Text("${ctr.currentViewMonth}월",
+                      style: TextStyle(fontSize: Get.height * 0.034)),
+                  SizedBox(width: Get.width * 0.02),
+                  Text("${ctr.currentViewYear}년",
+                      style: TextStyle(fontSize: Get.height * 0.02)),
+                ],
+              ),
+            ),
+            SizedBox(height: Get.height * 0.01),
+            SizedBox(
+              height: Get.height * 0.4,
+              child: PageView(
+                children: [
+                  for (int number =
+                          Get.find<RecordController>().leftmostMotionYear;
+                      number < Get.find<RecordController>().rightmostMotionYear;
+                      number = (number % 100 > 11)
+                          ? (number ~/ 100 + 1) * 100 + 2
+                          : number + 1)
+                    CalendarBox(number, MODE.DAY)
+                ],
+                onPageChanged: (int index) =>
+                    Get.find<RecordController>().changeMonth(index),
+                controller: PageController(
+                    initialPage: Get.find<RecordController>().startIndex),
+              ),
+            ),
+            SizedBox(height: Get.height * 0.014),
+            GetBuilder<RecordController>(
+              builder: (ctr) => Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: Get.width * 0.6),
+                    child: Text(
+                      "${ctr.currentYear}년 ${ctr.currentMonth}월 ${ctr.currentDay}일",
+                      style: TextStyle(fontSize: Get.height * 0.019),
+                    ),
+                  ),
+                  if (ctr.recordDetail != null)
+                    Column(
+                      children: [
+                        MainDataRecord({
+                          "totalTime": ctr.recordDetail.totalTime,
+                          "totalExp": ctr.recordDetail.totalExp,
+                          "countRoutine": ctr.recordDetail.countRoutine,
+                          "countMotion": ctr.recordDetail.countMotion,
+                        }),
+                        SizedBox(height: Get.height * 0.03),
+                        ExpansionPanelList(
+                          elevation: 0,
+                          expandedHeaderPadding: EdgeInsets.zero,
+                          dividerColor: Get.theme.canvasColor,
+                          expansionCallback: (i, isOpen) =>
+                              ctr.setPanelOpen(i, isOpen),
+                          children: [
+                            for (int i = 0; i < 2; i++)
+                              ExpansionPanel(
+                                  canTapOnHeader: true,
+                                  backgroundColor: Get.theme.canvasColor,
+                                  headerBuilder: (_, isOpen) =>
+                                      SubDataRecordHeader(
+                                          date: "${ctr.currentMonth}월 ${ctr.currentDay}일",
+                                          contentName: ["루틴", "동작"][i]),
+                                  body: SubDataRecordBody([
+                                    ctr.recordDetail.routineList,
+                                    ctr.recordDetail.motionList
+                                  ][i]),
+                                  isExpanded: ctr.isPanelsOpen[i]),
+                          ],
+                        ),
+                      ],
+                    ),
+                  if (ctr.recordDetail == null)
+                    Container(
+                      height: Get.height * 0.3,
+                      alignment: Alignment.center,
+                      child: Text("운동기록이 없습니다.. 분발하세요!", style: TextStyle(color: Colors.grey, fontSize: Get.height * 0.02)),
                     ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

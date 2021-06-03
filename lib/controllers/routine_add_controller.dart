@@ -65,14 +65,18 @@ class RoutineAddController extends GetxController {
   void next() {
     switch (part) {
       case 1:
-        part += 3;
+        if (routineMotionList.length > 0) {
+          part += 3;
+        } else {
+          showSnackBar("루틴에 추가된 동작이 없습니다!", "루틴에 최소 1개 이상의 동작을 추가해주세요", "warning");
+        }
         break;
       case 2:
         if (selectIndex != -1) {
           createNewMotion();
           part++;
         } else {
-          showSnackBar("동작이 선택되지 않았습니다!", "루틴에 추가할 동작을 선택해주세요", "warning");
+          showSnackBar("동작 목록이 비여있습니다!", "루틴에 추가할 동작을 최소 1개 이상 선택해주세요", "warning");
         }
         break;
       case 3:
@@ -80,7 +84,21 @@ class RoutineAddController extends GetxController {
           addMotionToList();
           part = 1;
         } else {
-          showSnackBar("동작 시간과 횟수가 비여있습니다!", "동작 시간과 횟수를 입력해주세요", "warning");
+          showSnackBar("입력란이 비여있습니다!", "추가할 동작의 시간과 횟수를 입력해주세요", "warning");
+        }
+        break;
+      case 4:
+        if (image != null) {
+          part++;
+        } else {
+          showSnackBar("대표 이미지가 없습니다!", "루틴을 대표할 이미지를 선택해주세요", "warning");
+        }
+        break;
+      case 5:
+        if (routineName != null) {
+          part++;
+        } else {
+          showSnackBar("이름이 없습니다!", "루틴의 이름을 입력해주세요", "warning");
         }
         break;
       default:
@@ -103,6 +121,10 @@ class RoutineAddController extends GetxController {
   }
 
   Future<void> submit() async {
+    if (currentType == null || currentDifficulty == null || breakTime == null || breakTime < 1) {
+      showSnackBar("선택하지 않은 항목이 있습니다!", "항목을 모두 선택해주세요", "warning");
+      return;
+    }
     final Map<String, dynamic> requestMap = {
       "name": routineName,
       "materials": routineMaterials,

@@ -1,72 +1,114 @@
 import 'package:get/get.dart';
 import 'package:mytin/controllers/routine_run_controller.dart';
-import 'package:mytin/dummies/routine_detail_dummy.dart';
 import 'package:flutter/material.dart';
+import 'package:mytin/models/routine_detail.dart';
 import 'package:mytin/widgets/routine/break_time_body.dart';
 import 'package:mytin/widgets/time_progress_indicator.dart';
 
-class RoutineRunPage extends StatefulWidget {
-  @override
-  _RoutineRunPageState createState() => _RoutineRunPageState();
-}
+class RoutineRunPage extends StatelessWidget {
+  final List<MotionElement> motions;
+  final int breakTime;
+  final int id;
 
-class _RoutineRunPageState extends State<RoutineRunPage> {
-  RoutineRunController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = Get.put(
-        RoutineRunController(currentRoutine.motions, currentRoutine.breakTime));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.shutdownCountdown();
-  }
+  RoutineRunPage(this.motions, this.breakTime, this.id);
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double width = screenSize.width, height = screenSize.height;
-
+    Get.put(RoutineRunController(motions, breakTime, id));
     return GetBuilder<RoutineRunController>(
-      builder: (controller) => Scaffold(
-        appBar: buildRoutineRunAppBar(
-            controller.motionList[controller.index].name, height),
+      builder: (ctr) => Scaffold(
         body: Stack(
           children: [
             Column(
-              children: <Widget>[
-                buildRoutineRunBody(controller, width, height),
-                SizedBox(height: 0.03 * height),
-                buildMotionInformation(controller, width),
+              children: [
+                SizedBox(height: Get.height * 0.0285),
+                LinearProgressIndicator(
+                  value: (ctr.index + 1) / ctr.motionCount,
+                  backgroundColor: Colors.white,
+                  valueColor: AlwaysStoppedAnimation(Colors.blueAccent),
+                  minHeight: Get.height * 0.006,
+                ),
+                SizedBox(
+                  height: Get.height * 0.08,
+                  child: Stack(
+                    children: [
+                      Container(
+                        color: Colors.blueAccent.withOpacity(0.1),
+                        width:
+                            Get.width * (ctr.index + 1) / ctr.motionCount,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Row(
+                          children: [
+                            SizedBox(width: Get.width * 0.06),
+                            Text("${ctr.index + 1}",
+                                style: TextStyle(fontSize: Get.height * 0.034)),
+                            SizedBox(width: Get.width * 0.01),
+                            Text("/",
+                                style: TextStyle(fontSize: Get.height * 0.02)),
+                            SizedBox(width: Get.width * 0.01),
+                            Text("${ctr.motionList.length}",
+                                style: TextStyle(fontSize: Get.height * 0.02)),
+                            Spacer(),
+                            GestureDetector(
+                              onTap: () => Get.back(),
+                              child: Container(
+                                height: Get.height * 0.05,
+                                padding: EdgeInsets.fromLTRB(Get.height * 0.02, Get.height * 0.006, Get.height * 0.02, Get.height * 0.006),
+                                child: Text("종료하기", style: TextStyle(fontSize: Get.height * 0.018, color: Colors.grey)),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  color: Colors.grey.withOpacity(0.14),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: Get.width * 0.04),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                buildRoutineRunBody(ctr, Get.width, Get.height),
+                SizedBox(height: 0.04 * Get.height),
+                Text(ctr.motionList[ctr.index].name,
+                    style: TextStyle(fontSize: Get.height * 0.031)),
+                SizedBox(height: Get.height * 0.012),
+                Text("${ctr.motionList[ctr.index].count}회",
+                    style: TextStyle(
+                        fontSize: Get.height * 0.0223, color: Colors.grey)),
                 Spacer(),
-                buildRoutineRunBottomAppBar(controller, height, width),
+                GestureDetector(
+                  onTap: () => ctr.passMotion(),
+                  child: Container(
+                    height: Get.height * 0.066,
+                    width: Get.width * 0.86,
+                    alignment: Alignment.center,
+                    child: ctr.index == ctr.motionCount - 1 ? Row(
+                      children: [
+                        SizedBox(width: Get.width * 0.02),
+                        Spacer(flex: 5),
+                        Text("루틴 종료", style: TextStyle(color: Colors.white)),
+                        Spacer(flex: 4),
+                        Icon(Icons.arrow_forward, color: Colors.white),
+                        SizedBox(width: Get.width * 0.02),
+                      ],
+                    ) : Text("다음 동작", style: TextStyle(color: Colors.white)),
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlueAccent,
+                      borderRadius: BorderRadius.all(Radius.circular(10))
+                    ),
+                  ),
+                ),
+                SizedBox(height: 0.03 * Get.height),
               ],
             ),
-            if (controller.isBreakTime) BreakTimeBody(),
+            if (ctr.isBreakTime) BreakTimeBody(),
           ],
         ),
       ),
-    );
-  }
-
-  Column buildMotionInformation(RoutineRunController controller, double width) {
-    return Column(
-      children: [
-        Text(
-          controller.motionList[controller.index].name,
-          style: TextStyle(fontSize: 0.06 * width),
-        ),
-        Text(
-          controller.motionList[controller.index].count.toString() + "회",
-          style: TextStyle(
-              fontSize: 0.05 * width,
-              color: Color.fromARGB(255, 100, 100, 100)),
-        ),
-      ],
     );
   }
 
@@ -77,11 +119,13 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
         children: <Widget>[
           Container(
             alignment: Alignment.topCenter,
-            child: Image.network(
+            child: Container(
+              height: Get.height * 0.475,
+              child: Image.network(
                 controller.motionList[controller.index].imageUrl,
                 fit: BoxFit.cover,
-                width: 1 * width,
-                height: 0.55 * height),
+              ),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -93,73 +137,13 @@ class _RoutineRunPageState extends State<RoutineRunPage> {
                   controller.motionList[controller.index].count,
               textColor: Color.fromARGB(255, 100, 100, 100),
               backgroundColor: Colors.white,
+              valueColor: Colors.blue,
             ),
           ),
         ],
       ),
       width: width,
-      height: 0.64 * height,
-    );
-  }
-
-  Container buildRoutineRunBottomAppBar(
-      RoutineRunController controller, double height, double width) {
-    return Container(
-      color: Colors.grey,
-      height: 0.06 * height,
-      child: Row(
-        children: <Widget>[
-          Spacer(flex: 4),
-          Text(
-            (controller.index + 1).toString() +
-                "/" +
-                controller.motionList.length.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 0.023 * height),
-          ),
-          Spacer(flex: 3),
-          IconButton(
-            onPressed: () => _controller.passMotion(),
-            icon: Icon(
-              Icons.arrow_forward_ios_outlined,
-              size: 0.06 * width,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  PreferredSize buildRoutineRunAppBar(String title, double height) {
-    return PreferredSize(
-      preferredSize: Size.fromHeight(0.07 * height),
-      child: AppBar(
-        title: Text(
-          title,
-          style: TextStyle(fontSize: 0.024 * height, color: Colors.white),
-        ),
-        leading: Container(),
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(0.014 * height),
-            child: TextButton(
-              onPressed: () => Get.back(),
-              child: Text(
-                "   종료하기    ",
-                style: TextStyle(fontSize: 0.015 * height, color: Colors.white),
-              ),
-              style: ButtonStyle(
-                shape: MaterialStateProperty.resolveWith((states) {
-                  return RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: Colors.white),
-                  );
-                }),
-              ),
-            ),
-          ),
-        ],
-      ),
+      height: 0.57 * height,
     );
   }
 }
