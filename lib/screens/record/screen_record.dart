@@ -47,7 +47,7 @@ class RecordPage extends StatelessWidget {
                     initialPage: Get.find<RecordController>().startIndex),
               ),
             ),
-            SizedBox(height: Get.height * 0.012),
+            SizedBox(height: Get.height * 0.014),
             GetBuilder<RecordController>(
               builder: (ctr) => Column(
                 children: [
